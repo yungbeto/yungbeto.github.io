@@ -310,6 +310,7 @@ textarea {
 .button:hover, .button:active, .button:focus {
   background: #df00cc;
   color: #fff;
+  border: 1px solid #df00cc;
 }
 
 @media screen and (max-width: 600px) {
