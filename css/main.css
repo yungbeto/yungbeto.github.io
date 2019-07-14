@@ -11,7 +11,7 @@
    ========================================================================== */
 
 html {
-    color: #fff;
+    color: #444;
     font-size: 1em;
     line-height: 1.4;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -23,24 +23,39 @@ body {
     margin: 0;
     place-items: center;
     padding: 0;
-    background-image: linear-gradient(-134deg, #FF80CC 0%, #C86DD7 100%)
+    background-image: linear-gradient(-134deg, #df00cc 0%, #df00cc 100%)
 }
 
 body * {
     grid-area: 1 / 1;
 }
 
+
+h1 {
+  font-size: 20px;
+  line-height: 40px;
+  display: block;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
 a, a:visited {
     text-decoration: none;
-    color: #fff;
-    text-shadow: 1px 1px 1px #FF80CC, 3px 3px 5px #222;
+    color: #444;
     transition: all;
     transition-duration: .3s;
 }
 
 a:hover, a:focus, a:active {
-    text-shadow: 1px 1px 20px #fff, 1px 1px 2px #fff, 3px 3px 5px #222;
-    color: #FF80CC;
+    color: #df00cc;
 }
 /*
  * Remove text-shadow in selection highlight:
@@ -131,7 +146,7 @@ textarea {
     overflow: hidden;
     z-index: -100;
   }
-  
+
   .fullscreen-bg__video {
     position: absolute;
     top: 0;
@@ -139,14 +154,14 @@ textarea {
     width: 100%;
     height: 100%;
   }
-  
+
   @media (min-aspect-ratio: 16/9) {
     .fullscreen-bg__video {
       height: 300%;
       top: -100%;
     }
   }
-  
+
   @media (max-aspect-ratio: 16/9) {
     .fullscreen-bg__video {
       width: 300%;
@@ -158,7 +173,7 @@ textarea {
     .fullscreen-bg {
       background: url('../img/videoframe.jpg') center center / cover no-repeat;
     }
-  
+
     .fullscreen-bg__video {
       display: none;
     }
@@ -167,50 +182,40 @@ textarea {
 
   .message {
       text-align: left;
-      margin: auto;
-      max-width: 560px;
-      padding: 0 24px;
-  }
-
-  .message p {
-    text-shadow: 1px 1px 1px #FF80CC, 3px 3px 5px #222;
+      margin:  auto auto 8px 8px;
+      max-width: 320px;
+      padding: 8px 24px;
+      background: #fff;
+      border-radius: 0 12px 0 0;
   }
 
   .message .name {
       padding: 4px;
       background: none;
-      color: #ffa3d7;
-      text-shadow: 2px 2px 2px #222; 
+      color: #df00cc;
       border-radius: 8px;
       transform: background;
       transition-duration: .3s;
-      margin-top: -4px; 
+      margin-top: -4px;
   }
 
   .message .name:hover {
       color:#fff;
-
   }
 
   .message .title {
-      color:#FFA3D7;
-      text-shadow: 2px 2px 2px #222; 
+      color:#df00cc;
   }
 
-  h3 {
-    text-shadow: 1px 1px 1px #357EDD, 2px 2px 2px #222;
-    text-transform: uppercase;
-    letter-spacing: 0.9px;
-    font-size: 1rem;
-    line-height: 1.6rem;
-    color: #fff;
+  .message .blue {
+    color: #357EDD;
   }
 
   @-webkit-keyframes hvr-bob {
     0% {
       -webkit-transform: translateY(-8px);
       transform: translateY(-8px);
-      background: #ffa3d7;
+      background: #df00cc;
     }
     50% {
       -webkit-transform: translateY(-4px);
@@ -220,14 +225,14 @@ textarea {
     100% {
       -webkit-transform: translateY(-8px);
       transform: translateY(-8px);
-      background: #ffa3d7;
+      background: #df00cc;
     }
   }
   @keyframes hvr-bob {
     0% {
       -webkit-transform: translateY(-8px);
       transform: translateY(-8px);
-      background: #ffa3d7;
+      background: #df00cc;
     }
     50% {
       -webkit-transform: translateY(-4px);
@@ -237,7 +242,7 @@ textarea {
     100% {
       -webkit-transform: translateY(-8px);
       transform: translateY(-8px);
-      background: #ffa3d7;
+      background: #df00cc;
     }
   }
   @-webkit-keyframes hvr-bob-float {
@@ -292,7 +297,27 @@ textarea {
     transform: translateX(8px);
   }
 
+.button {
+  padding: 8px;
+  display: block;
+  border: 1px solid #444;
+  margin: auto;
+  text-align: center;
+  border-radius: 4px;
+  background: #ffeefe;
+}
 
+.button:hover, .button:active, .button:focus {
+  background: #df00cc;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+.message {
+  margin: auto auto 0px auto;
+  border-radius: 12px 12px 0 0;
+}
+}
 
 
 /* ==========================================================================
@@ -406,7 +431,6 @@ textarea {
         color: #000 !important; /* Black prints faster */
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
-        text-shadow: none !important;
     }
 
     a,
