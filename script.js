@@ -30,8 +30,8 @@ class Letter {
             ctx.fillStyle = "#fff"; // When clicked, color is white
             ctx.strokeStyle = "#Fff";
         } else {
-            ctx.fillStyle = "#000"; // When not clicked, color is gray
-            ctx.strokeStyle = "#000";
+            ctx.fillStyle = "#012840"; // When not clicked, color is gray
+            ctx.strokeStyle = "#012840";
         }
     
         ctx.lineWidth = 1;

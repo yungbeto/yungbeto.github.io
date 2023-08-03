@@ -10,7 +10,7 @@ body {
   background-position: center;
   background-size: 300%;
   background-blend-mode: color-burn;
-  background-color: #000;
+  background-color: #012840;
   color: #fff;
   font-family: "Inter", sans-serif;
   font-weight: 800;
@@ -37,7 +37,7 @@ button {
 }
 
 button:hover {
-    color:#000;
+    color:#012840;
     background:#F2CE1B;
 }
 
