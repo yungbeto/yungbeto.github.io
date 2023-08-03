@@ -1,49 +1,41 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Floating Letters</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Roby's CV</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-
-<body>
-  <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
-
-  <!-- Add your site or application content here -->
-  <div class="fullscreen-bg">
-    <video loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video">
-        <source src="video/001.webm" type="video/webm">
-    </video>
-</div>
-<div class="message">
-    <h3>I'm <a href="https://www.prblmslvng.net" class="name hvr-bob hvr-bob-float" target="_blank">Roby Saavedra</a><br> I'm a product designer living in NYC</h3>
-    <a href="./saavedra_CV.pdf" target="_blank" class="button"> 👀 Look at my Curriculum Vitae </a>
-    <h3>or keep watching this cute vid of my dog frolicking in the snow.</h3>
-</div>
-  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-</body>
-
+    <div class="about-box draggable">
+      <div class="about-header">
+        <p>About</p>
+      </div>
+      <div class="about-body">
+        <p>
+          <a href="https://read.cv/roby" target="_blank">Roby Saavedra</a> is a
+          product designer who is currently taking a break.
+        </p>
+        <p>
+          Most recently he was employed as a Senior Product Designer working for
+          the autonomous vehicle startup
+          <a href="https://cavnue.com" target="_blank">Cavnue</a>. Before that
+          he was the founding designer at the electric mobility company
+          <a href="https://gorevel.com/" target="_blank">Revel</a>. Prior to
+          that he did a bunch of other work he'd be happy to chat about.
+        </p>
+        <p>
+          He lives and works in beautiful Philadelphia, USA though he’d love to
+          try living overseas one day.
+        </p>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="script.js"></script>
+  </body>
 </html>

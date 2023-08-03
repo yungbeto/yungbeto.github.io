@@ -1,0 +1,107 @@
+*{
+    transition: all .33s ease-in-out;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-image: url(./bg.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 300%;
+  background-blend-mode: color-burn;
+  background-color: #012840;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  user-select: none;
+}
+p {
+  font-weight: 400;
+  margin: 1rem 0rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+button {
+    background: transparent;
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    line-height: 1.5rem;
+    padding: 0rem 1rem;
+    color:#F2CE1B;
+    border-radius: 0rem 3rem 3rem 0rem;
+}
+
+button:hover {
+    color:#012840;
+    background:#F2CE1B;
+}
+
+a {
+    color:#fff;
+    cursor: pointer;
+}
+a:hover {
+    color:#012840;
+    background-color: #F2CE1B;
+}
+
+#canvas {
+  z-index: -1;
+}
+.moodpalace {
+    border: 1px solid #fff;
+    padding: 0rem 0rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    width: fit-content;
+    min-width: 293px;
+    max-width: 294px;
+    cursor: move;
+  }
+  .moodpalace-left {
+    border-right: 1px solid #fff;
+    margin: 0rem;
+    height: 100%;
+    padding: 0rem 1rem;
+  }
+.about-box {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0px;
+  height:fit-content;
+  cursor:move;
+}
+.about-header {
+  padding: 0rem 1rem;
+  border-bottom: 1px solid #fff;
+  }
+.about-body {
+  padding: 1rem;
+}
+
+@media (max-width: 720px) {
+  .about-box {
+    width: calc(100vw - 2rem);
+    margin: auto auto;
+  }
+}
+
+@media (min-width: 720px) {
+  .about-box {
+    z-index: 10;
+    width: 320px;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+}
+
