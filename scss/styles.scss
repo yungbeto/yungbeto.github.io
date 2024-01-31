@@ -121,9 +121,9 @@ header {
 
 .blurb {
   max-width: 560px;
-  padding: 40px 0 80px 0;
+  padding: 0 0 40px 0;
   @include for-phone-only {
-    padding: 40px 16px;
+    padding: 0 16px 40px 16px;
   }
 }
 
@@ -224,4 +224,8 @@ footer {
   @include for-phone-only {
     padding: 16px;
   }
+}
+
+.altBG {
+  background-color: $gray-800;
 }
