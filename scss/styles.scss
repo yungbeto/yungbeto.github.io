@@ -123,7 +123,7 @@ header {
   max-width: 560px;
   padding: 0 0 40px 0;
   @include for-phone-only {
-    padding: 0 16px 40px 16px;
+    padding: 24px 16px 40px 16px;
   }
 }
 
@@ -204,7 +204,7 @@ footer {
     }
   }
   @include for-phone-only {
-    padding: 0px;
+    padding: 8px 0 0 0;
   }
 }
 
@@ -228,4 +228,5 @@ footer {
 
 .altBG {
   background-color: $gray-800;
+  padding-top: 9px;
 }
