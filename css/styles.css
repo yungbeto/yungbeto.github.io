@@ -111,7 +111,7 @@ header {
   padding: 0 0 40px 0; }
   @media (max-width: 599px) {
     .blurb {
-      padding: 0 16px 40px 16px; } }
+      padding: 24px 16px 40px 16px; } }
 
 section,
 footer {
@@ -189,7 +189,7 @@ footer {
   @media (max-width: 599px) {
     section,
     footer {
-      padding: 0px; } }
+      padding: 8px 0 0 0; } }
 
 .sectionTitle {
   margin-bottom: 24px; }
@@ -208,4 +208,5 @@ footer {
       padding: 16px; } }
 
 .altBG {
-  background-color: #262626; }
+  background-color: #262626;
+  padding-top: 8px; }
