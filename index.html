@@ -1,41 +1,328 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Roby Saavedra</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roby Saavedra | Software Designer / Developer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Roby Saavedra's charming portfolio showcasing his accumen in software design and development."
+    />
+    <meta
+      name="keywords"
+      content="Software Design, Software Development, Web Development, UI/UX, Portfolio, Roby Saavedra, Product Design, Product Designer, Full Stack Developer, Creative Technologist, Front-end Development, Back-end Development, Interactive Design, Digital Portfolio, Web App Development, Mobile App Design, User Experience Design, User Interface Design, Tech Industry Portfolio, Freelance Software Engineer, Web Design and Development, Software Engineering Projects, Innovative Web Solutions, Technology Consulting, Coding Portfolio, Professional Web Developer, Custom Software Solutions, Tech Project Management"
+    />
+
+    <meta name="author" content="Roby Saavedra" />
+
+    <!-- Social Media Meta Tags -->
+    <meta
+      property="og:title"
+      content="Roby Saavedra | Software Designer / Developer"
+    />
+    <meta
+      property="og:description"
+      content="Roby Saavedra's charming portfolio showcasing his accumen in software design and development."
+    />
+    <meta property="og:image" content="/ogimage.png" />
+    <meta property="og:url" content="http://www.robysaavedra.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <script src="script.js" defer></script>
   </head>
-  <body>
 
-    <div class="about-box draggable">
-      <div class="about-header">
-        <p>About</p>
+  <body>
+    <header>
+      <div class="fullTitle">
+        <img
+          src="/media/a9c8f4af-352b-4618-b5a0-577a5ea3ba73 (1).jpg"
+          class="avatar"
+        />
+        <div class="titleCluster">
+          <h3 class="pageTitle"> Roby Saavedra </h3>
+          <p class="subTitle"> Software designer / developer </p>
+        </div>
       </div>
-      <div class="about-body">
-        <p>
-          <a href="https://read.cv/roby" target="_blank">Roby Saavedra</a> is a
-          product designer who is taking a break between jobs ✌️.
-        </p>
-        <p>
-          Most recently he was employed as a Senior Product Designer working for
-          the autonomous vehicle startup
-          <a href="https://cavnue.com" target="_blank">Cavnue</a>. Before that
-          he was the founding designer at the electric mobility company
-          <a href="https://gorevel.com/" target="_blank">Revel</a>. Prior to
-          that he did a bunch of other work he'd be happy to chat about.
-        </p>
-        <p>
-          He lives and works in beautiful Philadelphia, USA though he’d love to
-          try living overseas one day.
-        </p>
+      <div class="contactCluster">
+        <a href="https://read.cv/roby" target="_blank"> CV </a>
+        <a href="mailto:robysaavedra@pm.me"
+          ><img src="/media/mail.svg" width="24px" height="24px"
+        /></a>
       </div>
-    </div>
-    <canvas id="canvas"></canvas>
-    <script src="script.js"></script>
+    </header>
+
+    <section id="experienceSection" class="experienceSection">
+      <p class="blurb">
+        👋 Hello I'm Roby. I'm a Product Designer with over 10 years of
+        experience spanning tech companies, nimble startups, and wide-ranging
+        agencies. Industries I've worked in include autonomous vehicles,
+        mobility, logistics, ed-tech & more. Skilled in front-end development
+        and proficient in building software from 0 to 1. I’m open to contract
+        collaborations and full-time opportunities.
+      </p>
+      <h6 class="sectionTitle">Recent Experience</h6>
+      <!-- Good Song Club -->
+      <div class="entry" id="GoodSongClub">
+        <img class="entryImage" src="/media/goodSongClub.png" />
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2023 - Present</h6>
+            <a href="https://goodsong.club" target="_blank">
+              <h4>Good Song Club</h4>
+            </a>
+          </div>
+          <div class="entryBody">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Founder / Designer / Developer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Good Song Club is a small social media web app that I built and
+                currently maintain that is focused around sharing good songs you
+                find on YouTube
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mood Palace -->
+      <div class="entry" id="MoodPalace">
+        <img class="entryImage" src="/media/moodPalace.png" />
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2023 - Present</h6>
+            <a href="https://moodpalace.net" target="_blank">
+              <h4>Mood Palace</h4>
+            </a>
+          </div>
+          <div class="entryBody">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Designer / Developer / Music producer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Mood Palace is a web app I designed and developed to serve as a
+                repository of ambient songs I’ve produced over the years that
+                allows anyone to stream in their browser.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Cavnue -->
+      <div class="entry" id="Cavnue">
+        <img class="entryImage" src="/media/Cavnue.png" />
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2022 - 2023</h6>
+            <a href="https://cavnue.com" target="_blank">
+              <h4>Cavnue</h4>
+            </a>
+          </div>
+          <div class="entryBody">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Senior Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Lead design on various features within our software suite which
+                facilitated the elevated function of autonomous vehicles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Revel -->
+      <div class="entry" id="Revel">
+        <img class="entryImage" src="/media/revel.png" />
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2019 - 2022</h6>
+            <a href="https://gorevel.com" target="_blank">
+              <h4>Revel</h4>
+            </a>
+          </div>
+          <div class="entryBody">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Senior Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Founding designer at electric mobility startup. Lead design on a
+                multitude of projects both internal and external.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Flocabulary -->
+      <div class="entry" id="Flocabulary">
+        <img class="entryImage" src="/media/flocab.png" />
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2017 - 2019</h6>
+            <a href="https://flocabulary.com" target="_blank">
+              <h4>Flocabulary</h4>
+            </a>
+          </div>
+          <div class="entryBody">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Founder / Designer / Developer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Lead design of software, instructional tools, and educational
+                games for students and teachers. Developed internal brand and
+                product style guide.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="olderWork">
+      <h6 class="sectionTitle">Older Work</h6>
+      <div class="olderWork__row">
+        <!-- Propel -->
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2017</h6>
+            <a href="https://github.com/propelml/propel" target="_blank">
+              <h4>Propel ML</h4>
+            </a>
+          </div>
+          <div class="entryBody__small">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Lead Product Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Led design on now-defunct Javascript-based machine learning
+                in-browser notebook.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Diligent -->
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2016 - 2017</h6>
+            <a href="https://diligent.com" target="_blank">
+              <h4>Diligent</h4>
+            </a>
+          </div>
+          <div class="entryBody__small">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Product Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Designed SaaS B2B products that facilitated secure document
+                sharing among board meeting members.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Frank Collective -->
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2016</h6>
+            <a href="https://www.frankcollective.com/" target="_blank">
+              <h4>Frank Collective</h4>
+            </a>
+          </div>
+          <div class="entryBody__small">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Freelance Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Collaborated with a variety of clients on illustration, brand
+                strategy, to marketing sites.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Qubit -->
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2014 — 2015</h6>
+            <a href="https://www.coveo.com/en/qubit" target="_blank">
+              <h4>Qubit</h4>
+            </a>
+          </div>
+          <div class="entryBody__small">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Freelance Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Worked with clients to implement an e-commerce strategy
+                generated by Qubit's platform.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- City Eventions -->
+        <div class="entryInfo">
+          <div class="entryTitle">
+            <h6>2014 - 2016</h6>
+            <a href="https://cityeventions.com/" target="_blank">
+              <h4>City Eventions</h4>
+            </a>
+          </div>
+          <div class="entryBody__small">
+            <div class="entryBlock">
+              <h6>Role</h6>
+              <p>Freelance Designer</p>
+            </div>
+            <div class="entryBlock">
+              <h6>Summary</h6>
+              <p>
+                Worked directly with clients to craft exciting and engaging
+                experiential marketing campaigns
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <h6>Roby Saavedra</h6>
+      <h6>2024</h6>
+    </footer>
   </body>
 </html>

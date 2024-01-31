@@ -28,10 +28,10 @@ class Letter {
        
         if (clicked) {
             ctx.fillStyle = "#fff"; // When clicked, color is white
-            ctx.strokeStyle = "#Fff";
+            ctx.strokeStyle = "#02304D";
         } else {
-            ctx.fillStyle = "#012840"; // When not clicked, color is gray
-            ctx.strokeStyle = "#012840";
+            ctx.fillStyle = "#02304D"; // When not clicked, color is gray
+            ctx.strokeStyle = "#02304D";
         }
     
         ctx.lineWidth = 1;
@@ -117,24 +117,35 @@ animate();
 
 //---DraggableBoxes
 
-var draggableElements = document.getElementsByClassName('draggable');
+let draggable = document.getElementById('draggable');
+let dragHandle = document.getElementById('drag-handle');
 
-for(let i = 0; i < draggableElements.length; i++) {
-    let isDragging = false;
-    let currentElement = draggableElements[i];
+dragHandle.addEventListener('mousedown', function(e) {
+    draggable.style.position = 'absolute';
+    let shiftX = e.clientX - draggable.getBoundingClientRect().left;
+    let shiftY = e.clientY - draggable.getBoundingClientRect().top;
 
-    currentElement.addEventListener('mousedown', function(e) {
-        isDragging = true;
-    });
+    draggable.style.left = e.pageX - shiftX + 'px';
+    draggable.style.top = e.pageY - shiftY + 'px';
 
-    window.addEventListener('mouseup', function() {
-        isDragging = false;
-    });
+    function onMouseMove(event) {
+        draggable.style.left = event.pageX - shiftX + 'px';
+        draggable.style.top = event.pageY - shiftY + 'px';
+    }
 
-    window.addEventListener('mousemove', function(e) {
-        if(isDragging) {
-            currentElement.style.left = (e.clientX - currentElement.offsetWidth / 2) + 'px';
-            currentElement.style.top = (e.clientY - currentElement.offsetHeight / 2) + 'px';
-        }
-    });
-}
+    // move the draggable on mousemove
+    document.addEventListener('mousemove', onMouseMove);
+
+    // drop the draggable, remove unneeded handlers
+    document.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.onmouseup = null;
+    };
+
+});
+
+// prevent default drag handler
+dragHandle.ondragstart = function() {
+    return false;
+};
+

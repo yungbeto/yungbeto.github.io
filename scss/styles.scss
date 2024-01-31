@@ -1,0 +1,227 @@
+@import '_colors.scss';
+@import '_breakpoints.scss';
+body,
+html {
+  color: $gray-200;
+  background: $gray-900;
+  letter-spacing: -0.5px;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+}
+a {
+  color: $gray-100;
+  text-decoration: none;
+
+  transition: all 0.2s ease-in-out;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+h4 {
+  display: inline-block; // Or 'inline', depending on your layout needs
+  margin: 0;
+  &:after {
+    content: '';
+    background-image: url('/media/externalLink.svg');
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    margin-left: 4px; // Space between the text and the icon
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+h6 {
+  color: $gray-500;
+  margin: 0;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 184.615% */
+}
+
+header {
+  border-bottom: 1px solid $gray-800;
+  display: flex;
+  max-width: 100%;
+  padding: 16px 40px;
+  justify-content: space-between;
+  align-items: center;
+  .fullTitle {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    .avatar {
+      border-radius: 40px;
+      height: 40px;
+      width: 40px;
+    }
+  }
+  .titleCluster {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pageTitle {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 133.333% */
+    margin: 0;
+    @include for-phone-only {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+  .subTitle {
+    /* Body */
+    margin: 0;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 150% */
+    color: $gray-400;
+  }
+  .contactCluster {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    a {
+      width: 40px;
+      height: 40px;
+      font-size: 13px;
+      line-height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      border-radius: 8px;
+      &:hover {
+        background-color: $gray-800;
+      }
+      @include for-phone-only {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+  @include for-phone-only {
+    padding: 24px 16px;
+  }
+}
+
+.blurb {
+  max-width: 560px;
+  padding: 40px 0 80px 0;
+  @include for-phone-only {
+    padding: 40px 16px;
+  }
+}
+
+section,
+footer {
+  padding: 40px;
+  max-width: 100%;
+  border-bottom: 1px solid $gray-800;
+  .entry {
+    padding: 56px 0;
+    &:first-of-type {
+      padding-top: 0px;
+    }
+    @include for-phone-only {
+      padding: 40px 0;
+      border-bottom: none;
+    }
+  }
+  .entryImage {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 16px 0;
+    border-radius: 16px;
+    @include for-phone-only {
+      border-radius: 0px;
+    }
+  }
+  .entryBody {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    @include for-phone-only {
+      flex-direction: column;
+    }
+  }
+
+  .entryBody__small {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .entryInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    @include for-phone-only {
+      padding: 0 16px;
+    }
+  }
+
+  .entryBlock {
+    width: 256px;
+    @include for-phone-only {
+      width: 320px;
+    }
+  }
+
+  .olderWork__row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    @include for-phone-only {
+      flex-direction: column;
+
+      .entryInfo {
+        padding-bottom: 24px;
+      }
+      padding-bottom: 24px;
+    }
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  @include for-phone-only {
+    padding: 0px;
+  }
+}
+
+.sectionTitle {
+  margin-bottom: 24px;
+  @include for-phone-only {
+    margin: 16px;
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: $gray-500;
+  @include for-phone-only {
+    padding: 16px;
+  }
+}
