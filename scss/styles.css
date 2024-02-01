@@ -261,5 +261,10 @@ footer {
 
 .altBG {
   background-color: #262626;
-  padding-top: 8px;
+  padding-top: 40px;
+}
+@media (max-width: 599px) {
+  .altBG {
+    padding-top: 8px;
+  }
 }/*# sourceMappingURL=styles.css.map */
