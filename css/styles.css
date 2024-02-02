@@ -287,7 +287,8 @@ footer {
   width: 256px;
   padding: 0 0 16px 0;
   border-radius: 16px;
-  border: 1px solid #262626; }
+  border: 1px solid #262626;
+  height: 100%; }
   .caseStudy .title {
     font-weight: 400;
     margin: 8px 0 0 0; }
