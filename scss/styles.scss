@@ -163,6 +163,7 @@ footer {
 
   .caseStudyEntry {
     padding: 80px 0;
+    border-bottom: 1px solid $gray-700;
   }
   .entry {
     padding: 56px 0;
@@ -377,6 +378,7 @@ footer {
   flex-direction: column;
   gap: 32px;
   padding-bottom: 80px;
+  background: linear-gradient(180deg, #171717 0%, #262626 99.97%);
   @include for-phone-only {
     padding: 0 0 40px 0;
   }
@@ -409,6 +411,8 @@ footer {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  padding: 80px 0;
+  background: linear-gradient(0deg, #171717 0.03%, #262626 100.03%);
   @include for-phone-only {
     flex-direction: column;
     gap: 16px;
@@ -448,12 +452,13 @@ footer {
   }
 }
 .overviewCards {
-  border-top: 1px solid $gray-700;
+  border-bottom: 1px solid $gray-700;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 120px 0;
+  background: linear-gradient(180deg, #171717 -0.08%, #262626 99.92%);
   @include for-phone-only {
     padding: 60px 0;
   }
@@ -519,6 +524,7 @@ footer {
   flex-direction: row;
   gap: 40px;
   justify-content: center;
+
   @include for-phone-only {
     flex-direction: column;
     gap: 0;
@@ -526,7 +532,7 @@ footer {
   }
 }
 .entryImagesm {
-  max-width: 600px;
+  max-width: 560px;
   height: auto;
   margin: 0 0 16px 0;
   border-radius: 16px;
@@ -546,10 +552,13 @@ footer {
   }
 }
 .musicPlayers {
+  border-bottom: 1px solid $gray-700;
+  border-top: 1px solid $gray-700;
   padding: 80px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(180deg, #262626 0%, #171717 50%, #262626 100%);
 }
 .musicPlayersEntrySection {
   display: flex;
@@ -669,4 +678,19 @@ canvas#backgroundCanvas {
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+.gradient01 {
+  background: linear-gradient(180deg, #171717 -0.08%, #262626 99.92%);
+}
+
+.gradient02 {
+  background: linear-gradient(0deg, #171717 0.03%, #262626 100.03%);
+}
+
+.borderTop {
+  border-top: 1px solid $gray-700;
+}
+.borderBottom {
+  border-bottom: 1px solid $gray-700;
 }
