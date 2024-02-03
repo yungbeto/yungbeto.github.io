@@ -350,9 +350,6 @@ footer {
 }
 
 .caseStudy {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   width: 256px;
   padding: 0 0 16px 0;
   border-radius: 16px;
@@ -361,7 +358,7 @@ footer {
 }
 .caseStudy .title {
   font-weight: 400;
-  margin: 8px 0 0 0;
+  margin: 8px 0 16px 0;
 }
 .caseStudy .title:after {
   display: none;
