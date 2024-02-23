@@ -1,82 +1,103 @@
+//SHOWCASE 01 - Music Player Showcase
 document.addEventListener('DOMContentLoaded', function () {
-  const imageContainer = document.querySelector('.imageContainer');
+  const musicPlayerContainer = document.getElementById('musicPlayerShowcase');
 
-  // Dynamically create and append images
+  // Dynamically create and append images to the music player showcase
   for (let i = 1; i <= 12; i++) {
     const img = document.createElement('img');
-    const imgNumber = i.toString().padStart(2, '0'); // Ensures the format is "01", "02", etc.
+    const imgNumber = i.toString().padStart(2, '0');
     img.src = `media/tablet/musicPlayers/musicPlayer${imgNumber}.png`;
     img.alt = `Music Player ${imgNumber}`;
-    imageContainer.appendChild(img);
+    musicPlayerContainer.appendChild(img);
   }
 
   // Clone the images for infinite scroll effect without empty space
-  const images = [...imageContainer.children];
-  images.forEach((img) => {
+  [...musicPlayerContainer.children].forEach((img) => {
     const clone = img.cloneNode(true);
-    imageContainer.appendChild(clone);
+    musicPlayerContainer.appendChild(clone);
   });
 });
 
-// ------ Canvas
+document.addEventListener('DOMContentLoaded', function () {
+  function loadImagesAndEnsureContinuousScroll(containerId, imagePaths) {
+    const container = document.getElementById(containerId);
+    let imagesLoaded = 0;
+    let imagesToLoad = imagePaths.length; // Counter for images loading
 
-// Helper function to generate an "organic" polygon
-function createOrganicPolygon(x, y, sides, radius, options) {
-  let vertices = [];
-  for (let i = 0; i < sides; i++) {
-    const angle = ((Math.PI * 2) / sides) * i;
-    const length = radius * (0.95 + Math.random() * 0.1); // Randomize the radius slightly for each vertex
-    vertices.push({
-      x: x + length * Math.cos(angle),
-      y: y + length * Math.sin(angle),
+    imagePaths.forEach((path) => {
+      const img = document.createElement('img');
+      img.onload = function () {
+        imagesLoaded++;
+        if (imagesLoaded === imagesToLoad) {
+          // Only clone images after all have loaded
+          cloneImagesForContinuousScroll();
+        }
+      };
+      img.src = path;
+      img.alt = '';
+      container.appendChild(img);
     });
-  }
-  return Bodies.fromVertices(x, y, [vertices], options, true);
-}
 
-// Initially create the octagon
-let octagon = createOrganicPolygon(
-  window.innerWidth / 2,
-  window.innerHeight / 2,
-  8,
-  80,
-  {
-    isStatic: true,
-    render: {
-      fillStyle: '#F0F0F0',
-      strokeStyle: 'blue',
-      lineWidth: 3,
+    function cloneImagesForContinuousScroll() {
+      // Assuming each image has a rough width, calculate how many clones you need
+      const estimatedImageWidth = 200; // This should be adjusted based on your actual images
+      const screenWidth = window.innerWidth;
+      const totalImages =
+        Math.ceil((screenWidth * 2) / estimatedImageWidth) / imagePaths.length;
+
+      for (let i = 0; i < totalImages; i++) {
+        imagePaths.forEach((path) => {
+          const clone = document.createElement('img');
+          clone.src = path;
+          clone.alt = '';
+          container.appendChild(clone);
+        });
+      }
+    }
+  }
+
+  // Define image paths for both showcases
+  const diagramPaths = [
+    'media/cavnue/diagrams/diagram-01.png',
+    'media/cavnue/diagrams/diagram-02.png',
+    'media/cavnue/diagrams/diagram-03.png',
+    'media/cavnue/diagrams/diagram-04.png',
+  ];
+
+  const sketchPaths = [
+    'media/cavnue/sketches/Sketch-01.png',
+    'media/cavnue/sketches/Sketch-02.png',
+    'media/cavnue/sketches/Sketch-03.png',
+    'media/cavnue/sketches/Sketch-04.png',
+    'media/cavnue/sketches/Sketch-05.png',
+    'media/cavnue/sketches/Sketch-06.png',
+  ];
+
+  // Load images into their respective containers
+  loadImagesAndEnsureContinuousScroll('researchShowcase01', diagramPaths);
+  loadImagesAndEnsureContinuousScroll('researchShowcase02', sketchPaths);
+});
+
+// FADE UP
+document.addEventListener('DOMContentLoaded', function () {
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          // Optional: Unobserve the target if you only want the animation to play once
+          observer.unobserve(entry.target);
+        }
+      });
     },
-  }
-);
-World.add(engine.world, [octagon]);
-
-function updateShape() {
-  // Remove the old shape
-  World.remove(engine.world, octagon);
-
-  // Create a new "organic" shape
-  octagon = createOrganicPolygon(
-    window.innerWidth / 2,
-    window.innerHeight / 2,
-    8,
-    80,
     {
-      isStatic: true,
-      render: {
-        fillStyle: '#F0F0F0',
-        strokeStyle: 'blue',
-        lineWidth: 3,
-      },
+      rootMargin: '0px',
+      threshold: 0.1, // Adjust based on when you want the animation to start
     }
   );
 
-  // Add the new shape to the world
-  World.add(engine.world, [octagon]);
-
-  // Programmatically rotate the shape slightly
-  Body.rotate(octagon, Math.PI / 180);
-}
-
-// Update the shape every second
-setInterval(updateShape, 1000);
+  // Select and observe each .overviewCard
+  document.querySelectorAll('.overviewCard').forEach((card) => {
+    observer.observe(card);
+  });
+});

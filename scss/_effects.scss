@@ -1,0 +1,41 @@
+//FLOAT UP
+@keyframes floatUpwards {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+//CAV SCROLL
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-38%);
+  }
+}
+
+@keyframes scrollRight {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(38%);
+  }
+}
+
+//TABLET SCROLL
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+  }
+}

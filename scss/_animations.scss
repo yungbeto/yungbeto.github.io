@@ -1,0 +1,44 @@
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.researchImageContainer#scroll-left {
+  animation: scrollLeft 20s linear infinite;
+}
+
+.researchImageContainer#scroll-right {
+  animation: scrollRight 20s linear infinite;
+}
+
+.researchImageContainer {
+  display: flex;
+  overflow: hidden;
+}
+
+.researchImageContainer img {
+  width: 50%; /* Adjust based on your actual image sizes and how many you want visible at once */
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

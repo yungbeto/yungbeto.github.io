@@ -8,8 +8,15 @@
     @content;
   }
 }
+
 @mixin md {
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin md-lg {
+  @media (max-width: 1200px) {
     @content;
   }
 }
@@ -20,6 +27,11 @@
 }
 @mixin xl {
   @media (min-width: 1800px) {
+    @content;
+  }
+}
+@mixin below-xl {
+  @media (max-width: 1799px) {
     @content;
   }
 }
