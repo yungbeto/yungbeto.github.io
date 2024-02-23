@@ -339,6 +339,7 @@ footer {
   border-radius: 16px;
   border: 1px solid $gray-800;
   height: 100%;
+  overflow: hidden;
 
   .title {
     font-weight: 400;
@@ -346,6 +347,9 @@ footer {
     &:after {
       display: none;
     }
+  }
+  .thumbContainer {
+    overflow: hidden;
   }
   .thumb {
     height: 200px;
@@ -358,9 +362,10 @@ footer {
     cursor: pointer;
     .thumb {
       mix-blend-mode: exclusion;
-    }
-    .title {
-      text-decoration: underline;
+      -ms-transform: scale(1.01); /* IE 9 */
+      -webkit-transform: scale(1.01); /* Safari 3-8 */
+      transform: scale(1.01);
+      transition: transform 0.25s ease-in-out;
     }
   }
 }

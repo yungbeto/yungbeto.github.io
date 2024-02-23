@@ -414,6 +414,7 @@ footer {
   border-radius: 16px;
   border: 1px solid #262626;
   height: 100%;
+  overflow: hidden;
 }
 .caseStudy .title {
   font-weight: 400;
@@ -421,6 +422,9 @@ footer {
 }
 .caseStudy .title:after {
   display: none;
+}
+.caseStudy .thumbContainer {
+  overflow: hidden;
 }
 .caseStudy .thumb {
   height: 200px;
@@ -433,10 +437,9 @@ footer {
   cursor: pointer;
 }
 .caseStudy:hover .thumb {
-  mix-blend-mode: exclusion;
-}
-.caseStudy:hover .title {
-  text-decoration: underline;
+  mix-blend-mode: exclusion; /* IE 9 */ /* Safari 3-8 */
+  transform: scale(1.01);
+  transition: transform 0.25s ease-in-out;
 }
 
 .experienceSection {
