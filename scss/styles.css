@@ -851,7 +851,7 @@ footer {
   justify-content: center;
   padding: 40px 0;
   gap: 16px;
-  animation: scroll 30s linear infinite;
+  animation: scroll 60s linear infinite;
 }
 @media (max-width: 599px) {
   .scrollShowcase .imageContainer {
@@ -911,6 +911,48 @@ footer {
   }
 }
 
+.hardLight {
+  mix-blend-mode: soft-light;
+}
+
+.videoResize {
+  width: 100%;
+  height: auto !important;
+}
+
+.cavFinal {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #ff710a;
+}
+@media (max-width: 1799px) {
+  .cavFinal {
+    height: 100%;
+  }
+}
+@media (max-width: 599px) {
+  .cavFinal {
+    height: 100%;
+    padding: 16px;
+  }
+}
+.cavFinal .videoContainer {
+  border-radius: 16px;
+  border: 1px solid #262626;
+  overflow: hidden;
+  height: 100%;
+  width: auto;
+  background-color: #171717;
+}
+@media (max-width: 599px) {
+  .cavFinal .videoContainer {
+    border: none;
+  }
+}
+
 .tabletFinal video {
   position: absolute;
   top: 0;
@@ -919,7 +961,8 @@ footer {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover; /* Cover the container without losing aspect ratio */
-  mix-blend-mode: soft-light;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .overviewCopyFinal {
@@ -1023,6 +1066,13 @@ canvas#backgroundCanvas {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     gap: 24px;
+    border: 1px solid #404040;
+    border-radius: 16px;
+  }
+}
+@media (max-width: 599px) {
+  .twoblockinner {
+    border: none;
   }
 }
 
@@ -1046,6 +1096,13 @@ canvas#backgroundCanvas {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     gap: 24px;
+    border: 1px solid #404040;
+    border-radius: 16px;
+  }
+}
+@media (max-width: 599px) {
+  .twoblockinner-alt {
+    border: none;
   }
 }
 
@@ -1057,6 +1114,13 @@ canvas#backgroundCanvas {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+@media (max-width: 1000px) {
+  .twoblocktext {
+    border-radius: 0;
+    border: none;
+    padding: 24px;
+  }
 }
 .twoblocktext > p {
   color: #d4d4d4;
@@ -1084,13 +1148,6 @@ canvas#backgroundCanvas {
     max-width: 100%;
   }
 }
-@media (max-width: 1000px) {
-  .twoblocktext {
-    border-radius: 0;
-    border: none;
-    padding: 24px 16px;
-  }
-}
 
 .imgfordesktop {
   display: inline-block;
@@ -1110,7 +1167,6 @@ canvas#backgroundCanvas {
 }
 @media (max-width: 1000px) {
   .imgformobile {
-    margin-bottom: 24px;
     display: block;
   }
 }
@@ -1174,5 +1230,5 @@ canvas#backgroundCanvas {
 }
 
 .outlined {
-  border: 1px solid #404040;
+  border: 1px solid #262626;
 }/*# sourceMappingURL=styles.css.map */
