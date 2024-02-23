@@ -42,6 +42,45 @@
       rel="stylesheet"
     />
     <script src="script.js" defer></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var mySwiper = new Swiper('.mySwiper', {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          direction: 'horizontal',
+          loop: true,
+          autoplay: {
+            delay: 250,
+            disableOnInteraction: false,
+          },
+
+          breakpoints: {
+            // when window width is >= 320px
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            // when window width is >= 480px
+            480: {
+              slidesPerView: 1,
+              spaceBetween: 30,
+            },
+            // when window width is >= 640px
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 40,
+            },
+          },
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -192,7 +231,47 @@
         </div>
         <div class="scrollShowcase">
           <div class="scrollShowcase hideScroll">
-            <div class="imageContainer" id="musicPlayerShowcase"></div>
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer01.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer02.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer03.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer04.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer05.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer06.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer07.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer08.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer09.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer10.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer11.png"
+                /></div>
+                <div class="swiper-slide"
+                  ><img src="/media/tablet/musicPlayers/musicPlayer12.png"
+                /></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

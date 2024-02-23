@@ -176,6 +176,8 @@ header {
   height: calc(100vh - 320px);
   @include for-phone-only {
     padding: 24px 16px 40px 16px;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
   }
 }
 
@@ -403,7 +405,6 @@ footer {
   @include for-phone-only {
     padding: 16px 16px 40px 16px;
     gap: 24px;
-    height: 75vh;
     justify-content: space-between;
   }
 }
@@ -709,6 +710,38 @@ footer {
   align-items: center;
 }
 
+.cavScrollShowcase {
+  max-width: 100%; /* Ensures the carousel doesn't overflow the screen width */
+  position: relative;
+}
+
+.carousel-images img {
+  width: 100%; /* Make images responsive */
+  display: none; /* Hide images by default */
+}
+
+.carousel-images img.active {
+  display: block; /* Show active image */
+}
+
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button.prev {
+  left: 0;
+}
+button.next {
+  right: 0;
+}
+
 .hideScroll {
   &::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -725,9 +758,12 @@ footer {
   justify-content: center;
   padding: 40px 0;
   gap: 16px;
-  animation: scroll 60s linear infinite;
+  animation: scroll 30s linear infinite;
+  -webkit-animation: scroll 30s linear infinite; /* For Safari and Chrome */
+  -moz-animation: scroll 30s linear infinite; /* For Firefox */
+  -o-animation: scroll 30s linear infinite; /* For Opera */
   @include for-phone-only {
-    animation: 60s;
+    animation-duration: 10s;
   }
 }
 
@@ -863,7 +899,7 @@ footer {
     line-height: 2rem; /* 150% */
 
     @include md {
-      max-width: 100%;
+      width: 100%;
       font-size: 1.2rem;
       line-height: 1.8rem;
     }
@@ -1056,6 +1092,12 @@ canvas#backgroundCanvas {
   border-radius: 16px;
   overflow: hidden;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+  @include md {
+    flex-direction: column;
+  }
+
   & > .textBlock {
     margin: 24px;
     @include xl {
@@ -1066,9 +1108,9 @@ canvas#backgroundCanvas {
 
 .research img {
   object-fit: cover;
-  max-height: 16rem;
-  width: auto;
+  margin-right: 16px;
   border-radius: 16px;
+  max-height: 100%;
   @include for-phone-only {
     max-height: 12rem;
   }
@@ -1076,4 +1118,21 @@ canvas#backgroundCanvas {
 
 .outlined {
   border: 1px solid $gray-800;
+}
+.swiper-slide img {
+  width: 80%; /* Adjust image width to be within the slide */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Optional: Cover the slide area without distorting the image */
+}
+
+.swiper-wrapper {
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.swiper-slide {
+  width: 600px !important; /* Example fixed width for testing */
+  margin-right: 30px;
 }
