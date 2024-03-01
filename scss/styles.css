@@ -216,7 +216,6 @@ header .contactCluster a:hover {
   padding: 0 0 40px 0;
   font-size: 1.5rem;
   line-height: 2rem;
-  height: calc(100vh - 320px);
 }
 @media (max-width: 599px) {
   .blurb {

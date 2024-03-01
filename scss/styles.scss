@@ -173,7 +173,7 @@ header {
   padding: 0 0 40px 0;
   font-size: 1.5rem;
   line-height: 2rem;
-  height: calc(100vh - 320px);
+
   @include for-phone-only {
     padding: 24px 16px 40px 16px;
     font-size: 1.2rem;
