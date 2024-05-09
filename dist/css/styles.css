@@ -74,6 +74,9 @@ ul {
 .gray-text {
   color: #71717a; }
 
+.light-text {
+  color: #d4d4d8; }
+
 .job {
   padding: 24px;
   display: flex;
@@ -208,3 +211,64 @@ footer {
   justify-content: center;
   align-items: center;
   color: #f4f4f5; }
+
+.sideProjects {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; }
+
+.sideProjectList {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  max-width: 100%; }
+  .sideProjectList a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit; }
+  .sideProjectList .project {
+    user-select: none;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease-in-out, box-shadow 0.3s ease-in-out; }
+    .sideProjectList .project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06); }
+      .sideProjectList .project:hover .project-title {
+        margin-left: 2px; }
+    .sideProjectList .project .project-head {
+      max-width: 100%;
+      height: 160px;
+      min-height: 160px;
+      position: relative; }
+      .sideProjectList .project .project-head .project-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
+    .sideProjectList .project .project-body {
+      padding: 16px;
+      background-color: #f4f4f5;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%; }
+      .sideProjectList .project .project-body .project-title {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        transition: margin-left 0.35s ease-in-out; }
+        .sideProjectList .project .project-body .project-title h4 {
+          margin: 0;
+          padding: 0; }
+  @media (max-width: 599px) {
+    .sideProjectList {
+      flex-direction: column; } }
