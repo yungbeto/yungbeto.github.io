@@ -1,0 +1,58 @@
+[
+  {
+    "Company": "Cavnue",
+    "DateRange": "2022 - 2023",
+    "JobRole": "Staff Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_cavnue.png",
+    "JobDescription": "Responsible for leading the development team and overseeing all phases of the software development lifecycle. Implemented best practices and significantly improved the deployment process.",
+    "Images": ["path/to/image1.jpg", "path/to/image2.jpg"]
+  },
+  {
+    "Company": "Revel",
+    "DateRange": "2019 - 2022",
+    "JobRole": "Senior Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_revel.png",
+    "JobDescription": "Managed a team of software developers and projects focusing on consumer applications. Successfully delivered multiple large-scale projects on time and within budget.",
+    "Images": ["path/to/image3.jpg", "path/to/image4.jpg"]
+  },
+  {
+    "Company": "Nearpod (Acquisition)",
+    "DateRange": "2019",
+    "JobRole": "Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_nearpod.png",
+    "JobDescription": "Developed and maintained high-traffic web applications, focusing on improving user experience and performance.",
+    "Images": ["path/to/image5.jpg", "path/to/image6.jpg"]
+  },
+  {
+    "Company": "Flocabulary",
+    "DateRange": "2018-2019",
+    "JobRole": "Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_flocabulary.png",
+    "JobDescription": "Designed responsive websites and web applications with a focus on mobile-first design and usability.",
+    "Images": ["path/to/image7.jpg", "path/to/image8.jpg"]
+  },
+  {
+    "Company": "Propel ML (Startup)",
+    "DateRange": "2018",
+    "JobRole": "Lead Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_propel.png",
+    "JobDescription": "Assisted in the development and testing of new software features as part of a collaborative development team.",
+    "Images": ["path/to/image9.jpg", "path/to/image10.jpg"]
+  },
+  {
+    "Company": "Diligent",
+    "DateRange": "2016-2018",
+    "JobRole": "Product Designer",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_diligent.png",
+    "JobDescription": "Provided freelance coding and consulting services for various clients, focusing on web development and system optimization.",
+    "Images": ["path/to/image11.jpg", "path/to/image12.jpg"]
+  },
+  {
+    "Company": "Google [x]",
+    "DateRange": "2013-2014",
+    "JobRole": "Mapping Designer (contract)",
+    "CompanyIcon": "src/img/companyIcons/companyIcon_google.png",
+    "JobDescription": "Provided freelance coding and consulting services for various clients, focusing on web development and system optimization.",
+    "Images": ["path/to/image11.jpg", "path/to/image12.jpg"]
+  }
+]

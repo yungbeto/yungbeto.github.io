@@ -2,486 +2,157 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roby Saavedra | Software Designer / Developer</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="Roby Saavedra's charming portfolio showcasing his accumen in software design and development." />
-  <meta name="keywords"
-    content="Software Design, Software Development, Web Development, UI/UX, Portfolio, Roby Saavedra, Product Design, Product Designer, Full Stack Developer, Creative Technologist, Front-end Development, Back-end Development, Interactive Design, Digital Portfolio, Web App Development, Mobile App Design, User Experience Design, User Interface Design, Tech Industry Portfolio, Freelance Software Engineer, Web Design and Development, Software Engineering Projects, Innovative Web Solutions, Technology Consulting, Coding Portfolio, Professional Web Developer, Custom Software Solutions, Tech Project Management" />
-
-  <meta name="author" content="Roby Saavedra" />
-
-  <!-- Social Media Meta Tags -->
-  <meta property="og:title" content="Roby Saavedra | Software Designer / Developer" />
-  <meta property="og:description"
-    content="Roby Saavedra's charming portfolio showcasing his accumen in software design and development." />
-  <meta property="og:image" content="/ogimage.png" />
-  <meta property="og:url" content="http://www.robysaavedra.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <link rel="stylesheet" href="scss/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@400;600&display=swap"
-    rel="stylesheet" />
-  <script src="script.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.16.0/build/matter.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roby Saavedra</title>
+    <link rel="stylesheet" href="dist/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <div class="fullTitle">
-      <img src="/media/a9c8f4af-352b-4618-b5a0-577a5ea3ba73 (1).jpg" class="avatar" />
-      <div class="titleCluster">
-        <h3 class="pageTitle"> Roby Saavedra </h3>
-        <p class="subTitle"> Software designer / developer </p>
-      </div>
-    </div>
-    <div class="contactCluster">
-      <a href="https://read.cv/roby" target="_blank"> CV </a>
-      <a href="mailto:robysaavedra@pm.me"><img src="/media/mail.svg" width="24px" height="24px" /></a>
-    </div>
-  </header>
-  <!-- Blurb -->
-  <section id="blurb">
-    <h6 class="sectionTitle">About Me</h6>
-    <p class="blurb copyLarge">
-      👋 Hello I'm Roby. I'm a Product Designer and UX Developer with over 10
-      years of experience spanning tech companies, nimble startups, and
-      wide-ranging agencies. Industries I've worked in include autonomous
-      vehicles, mobility, logistics, ed-tech & more. Skilled in front-end
-      development and proficient in building software from 0 to 1. I’m open to
-      contract collaborations and full-time opportunities.
-    </p>
-  </section>
-  <!-- Case Studies -->
-  <section id="caseStudies" class="caseStudySection">
-    <span class="caseStudyTitle">
-      <h6 class="sectionTitle">Case Studies</h6>
-    </span>
-    <div class="caseStudyRow hideScroll">
-      <!-- 1 -->
-      <a href="/tablet.html">
-        <div id="CS1" class="caseStudy">
-          <div class="thumbContainer">
-            <img src="/media/tabletThumb.png" class="thumb" />
-          </div>
+    <div class="container">
+        <div class="inner-container">
+            <header class="header">
+                <div class="title">
 
-          <h4 class="title smallBlock">Revel Rideshare Tablet</h4>
-          <div class="entryBlock smallBlock">
-            <h6>Summary</h6>
-            <p>
-              A feature-rich tablet installed in the backseat of a Tesla
-              rideshare vehicle that offers a passenger a more premium trip
-              experience.
-            </p>
-          </div>
+                    <h3>Roby Saavedra</h3>
+                    <p class="gray-text">Software designer / developer</p>
+                </div>
+                <div class="header-copy">
+                    <p>I'm a <strong>designer</strong> and <strong>developer</strong> with over 10 years of experience
+                        spanning tech companies, nimble
+                        startups, and wide-ranging agencies. Industries in which I've worked include autonomous
+                        vehicles, mobility, enterprise SaaS software, ed-tech & more.</p>
+                    <p>I’m skilled in front-end development and proficient in building software from 0 to 1. Currently
+                        I’m open to contract collaborations and full-time opportunities.</p>
+                    <p>Here are some companies I've worked for:</p>
+                </div>
+                <div class="job-listings">
+                    <ul class="jobs">
+                        <!-- Jobs will be loaded here by JavaScript -->
+                    </ul>
+                </div>
+            </header>
         </div>
-      </a>
-      <!-- 2 -->
-      <a href="/cavnue.html">
-        <div id="CS2" class="caseStudy">
-          <div class="thumbContainer">
+    </div>
+    <!---Job Entries-->
+    <main>
+        <!--Cavnue-->
+        <div class="container cavsection">
+            <section class="inner-container">
+                <header class="section-header">
+                    <div class="title">
+                        <img src="src/img/companyIcons/companyIcon_cavnue.png" class="company-icon">
+                        <h3>Cavnue</h3>
+                        <p class="gray-text">2022-2023</p>
+                        <p class="gray-text">Staff Product Designer</p>
+                    </div>
+                    <div class="header-copy-container">
 
-            <img src="/media/cavnueThumb.png" class="thumb" />
-          </div>
-          <h4 class="title smallBlock">Cavnue Dashboard</h4>
-          <div class="entryBlock smallBlock">
-            <h6>Summary</h6>
-            <p>
-              A web-based dashboard that provides insight into a mesh network
-              of autonomous vehicle sensors.
-            </p>
-          </div>
-        </div>
-      </a>
+                        <div class="header-copy">
+                            <p>Cavnue is on a mission to bridge the gap between current autonomous vehicle capabilities
+                                and
+                                the promised future of full self-driving.</p>
+                            <p>When I was brought on to the product team, our main goal was to take the overwhelming
+                                amount
+                                of data generated by Cavnue's hardware system and surface it in a way that was valuable
+                                to
+                                our end user.</p>
 
-      <!-- 3 -->
-      <a href="#">
-        <div id="CS3" class="caseStudy">
-          <div class="thumbContainer">
+                        </div>
+                    </div>
+                </header>
+                <div class="imageBox cavbox">
+                    <img class="entryImage" src="/src/img/cav/cav1.png">
+                </div>
+                <div class="imageBox cavbox">
+                    <img class="entryImage" src="/src/img/cav/cav2.png">
+                </div>
+                <div class="imageBox cavbox">
+                    <video class="entryVideo" loop autoplay muted>
+                        <source src="src/img/cav/desktopvid.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
 
-            <img src="/media/eBikeThumb.png" class="thumb" />
-          </div>
-          <h4 class="title smallBlock">Revel eBikes Program</h4>
-          <div class="entryBlock smallBlock">
-            <h6>Summary</h6>
-            <p>
-              Revel rolled out a pilot electric bike subscription program and
-              for my part I designed the onboarding, purchase funnel, and
-              dashboard for Revel’s mobile app.
-            </p>
-          </div>
-        </div>
-      </a>
-      <!-- 4 -->
-      <a href="#">
-        <div id="CS4" class="caseStudy">
-          <div class="thumbContainer">
+                <div class="imageBox cavbox">
+                    <video class="entryVideo" loop autoplay muted>
+                        <source src="src/img/cav/mobilevid.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </section>
 
-            <img src="/media/FieldOpsThumb.png" class="thumb" />
-          </div>
-          <h4 class="title smallBlock">Revel Field Operations</h4>
-          <div class="entryBlock smallBlock">
-            <h6>Summary</h6>
-            <p>
-              A crucial part of Revel's operation depends on the continuous
-              maintenance of its mopeds.
-            </p>
-          </div>
         </div>
-      </a>
-    </div>
-  </section>
+        <!--Revel-->
+        <div class="container revelcontainer">
+            <section class="inner-container">
+                <header class="section-header">
+                    <div class="title">
+                        <img src="/src/img/companyIcons/companyIcon_revel.png" class="company-icon">
+                        <h3>Revel</h3>
+                        <p class="gray-text">2022-2023</p>
+                        <p class="gray-text">Senior Product Designer</p>
+                    </div>
+                    <div class="header-copy-container">
+                        <div class="header-copy">
+                            <p>I joined Revel as their first designer in the Summer of 2019 - a pivotal time in the
+                                company's growth. </p>
+                            <p>I was tasked with designing a full suite of internal tools that would allow the company
+                                to
+                                bring all their operations and logistics in-house.</p>
+                            <p>I worked closely with nearly every department lead in the company to ensure that the
+                                tools we
+                                built met the needs of all who'd be using it. As a result, once we released the tools,
+                                we
+                                saw a huge spike productivity and financial efficiency.</p>
+                        </div>
+                        <div class="header-copy">
+                            <p>In addition to internal tools I was a key stakeholder on a number of key, user-facing,
+                                high-revenue initiatives.</p>
+                            <p>For the launch of Revel's rideshare service I led design on a unique, passenger facing
+                                tablet in an effort to rise above the existing players in the market, flexing our
+                                position as a car-service provider that owned the end to end experience. </p>
+                            <p>I also designed the sign-up, purchase funnel, and user dashboard experience for Revel's
+                            </p>
+                        </div>
+                    </div>
+                </header>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_07.png">
+                </div>
 
-  <!-- Work Experience -->
-  <section id="experienceSection" class="experienceSection">
-    <h6 class="sectionTitle">Recent Experience</h6>
-    <!-- Cavnue -->
-    <div class="entry" id="Cavnue">
-      <img class="entryImage" src="/media/Cavnue.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2022 - 2023</h6>
-          <a href="https://cavnue.com" target="_blank">
-            <h4>Cavnue</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Senior Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Lead design on various features within our software suite which
-              facilitated the elevated function of autonomous vehicles.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              SaaS, B2B, user testing, web development, front-end development,
-              user interviewing, design leadership, UI, UX
-            </p>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-    <!-- Revel -->
-    <div class="entry" id="Revel">
-      <img class="entryImage" src="/media/revel.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2019 - 2022</h6>
-          <a href="https://gorevel.com" target="_blank">
-            <h4>Revel</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Senior Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Founding designer at electric mobility startup. Lead design on a
-              multitude of projects both internal and external.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Design leadership, web development, front-end development (JS,
-              CSS, HTML), prototyping, user testing, user interviews, UI, UX,
-              developer tools, marketing, illustration
-            </p>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-    <!-- Flocabulary -->
-    <div class="entry" id="Flocabulary">
-      <img class="entryImage" src="/media/flocab.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2017 - 2019</h6>
-          <a href="https://flocabulary.com" target="_blank">
-            <h4>Flocabulary</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Lead Product Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Lead design of software, instructional tools, and educational
-              games for students and teachers. Developed internal brand and
-              product style guide.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Design direction, web development, front-end development (JS,
-              CSS, HTML), SaaS, B2B, user testing, user interviewing, design
-              leadership, UI, UX
-            </p>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-    <!-- Propel -->
-    <div class="entry" id="Flocabulary">
-      <img class="entryImage" src="/media/Propel.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2017</h6>
-          <a href="https://github.com/propelml/propel" target="_blank">
-            <h4>Propel</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Lead Product Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Led design on now-defunct browser-based, machine learning, SaaS
-              software. Also contributed to front-end development.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Design direction, web development, front-end development (JS,
-              CSS, HTML), SaaS, B2C, developer tooling, user testing, user
-              interviewing, design leadership, UI, UX
-            </p>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-    <!-- Diligent -->
-    <div class="entry" id="Flocabulary">
-      <img class="entryImage" src="/media/diligent.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2017 - 2019</h6>
-          <a href="https://diligent.com" target="_blank">
-            <h4>Diligent</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Product Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Designed SaaS / B2B products that facilitated secure document
-              sharing among board meeting members.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              SaaS, B2C, native mobile development, native desktop
-              development, user testing, user interviewing, UI, UX
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Side Projects -->
-  <section id="sideProjects" class="altBG extraBump">
-    <h6 class="sectionTitle">Side projects</h6>
-    <!-- Good Song Club -->
-    <div class="entry" id="GoodSongClub">
-      <img class="entryImage" src="/media/goodSongClub.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2023 - Present</h6>
-          <a href="https://goodsong.club" target="_blank">
-            <h4>Good Song Club</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Founder / Designer / Developer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Good Song Club is a small social media web app that I built and
-              currently maintain that is focused around sharing good songs you
-              find on YouTube
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Web development, front-end development (JS, CSS, HTML), back-end
-              development (Node.js), design direction, user interviews, UI, UX
-            </p>
-          </div>
-        </div>
-        <hr />
-      </div>
-    </div>
-    <!-- Mood Palace -->
-    <div class="entry" id="MoodPalace">
-      <img class="entryImage" src="/media/moodPalace.png" />
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2023 - Present</h6>
-          <a href="https://moodpalace.net" target="_blank">
-            <h4>Mood Palace</h4>
-          </a>
-        </div>
-        <div class="entryBody">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Designer / Developer / Music producer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Mood Palace is a web app I designed and developed to serve as a
-              repository of ambient songs I’ve produced over the years that
-              allows anyone to stream in their browser.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Web development, front-end development (JS, CSS, HTML), back-end
-              development (Node.js), sound design, design direction, user
-              interviews, UI, UX
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="olderWork">
-    <h6 class="sectionTitle">Older Experience</h6>
-    <div class="olderWork__row">
-      <!-- Frank Collective -->
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2016</h6>
-          <a href="https://www.frankcollective.com/" target="_blank">
-            <h4>Frank Collective</h4>
-          </a>
-        </div>
-        <div class="entryBody__small">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Freelance Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Collaborated with a variety of clients on illustration, brand
-              strategy, to marketing sites.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Branding, Marketing, Advertising, Video production,
-              illustration, web development
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- Qubit -->
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2014 — 2015</h6>
-          <a href="https://www.coveo.com/en/qubit" target="_blank">
-            <h4>Qubit</h4>
-          </a>
-        </div>
-        <div class="entryBody__small">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Freelance Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Worked with clients to implement an e-commerce strategy
-              generated by Qubit's platform.
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Branding, marketing, consulting, strategy, web development, UI,
-              UX
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- City Eventions -->
-      <div class="entryInfo">
-        <div class="entryTitle">
-          <h6>2014 - 2016</h6>
-          <a href="https://cityeventions.com/" target="_blank">
-            <h4>City Eventions</h4>
-          </a>
-        </div>
-        <div class="entryBody__small">
-          <div class="entryBlock">
-            <h6>Role</h6>
-            <p>Freelance Designer</p>
-          </div>
-          <div class="entryBlock">
-            <h6>Summary</h6>
-            <p>
-              Worked directly with clients to craft exciting and engaging
-              experiential marketing campaigns
-            </p>
-          </div>
-          <div class="entryBlock">
-            <h6>Skills</h6>
-            <p>
-              Branding, marketing, advertising, project management,
-              consulting, strategy, web development, UI, UX
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                <div class="imageBox revelbox">
+                    <video class="entryVideo" loop autoplay muted>
+                        <source src="src/img/revel/tablet.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_02.png">
+                </div>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_03.png">
+                </div>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_04.png">
+                </div>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_05.png">
+                </div>
+                <div class="imageBox revelbox">
+                    <img class="entryImage" src="/src/img/revel/revel_06.png">
+                </div>
+            </section>
 
-  <footer>
-    <h6>Roby Saavedra</h6>
-    <h6>2024</h6>
-  </footer>
+        </div>
+    </main>
+    <footer>
+        <p>Thanks for stopping by!</p>
+        <p>✌️</p>
+    </footer>
+
+    <script src="/src/scripts/jobs.js"></script> <!-- Link to the JavaScript file that handles job data -->
 </body>
 
 </html>
