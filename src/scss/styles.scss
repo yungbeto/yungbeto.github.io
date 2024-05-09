@@ -250,6 +250,7 @@ ul {
   }
   @include for-phone-only {
     flex-direction: column;
+    gap: 16px;
   }
 }
 footer {

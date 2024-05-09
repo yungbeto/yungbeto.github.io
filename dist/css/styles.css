@@ -180,7 +180,8 @@ ul {
       flex-direction: row; } }
   @media (max-width: 599px) {
     .header-copy-container {
-      flex-direction: column; } }
+      flex-direction: column;
+      gap: 16px; } }
 
 footer {
   height: 100vh;
