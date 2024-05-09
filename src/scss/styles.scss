@@ -167,6 +167,22 @@ ul {
   padding: 0;
 }
 
+.container.sizzle {
+  position: relative;
+  width: 100%; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport or adjust as necessary */
+  overflow: hidden; /* Hides anything outside the container */
+}
+
+.sizzle-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .inner-container {
   max-width: 56rem;
   margin: 0 auto;
