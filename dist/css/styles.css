@@ -16,7 +16,8 @@ a:visited,
 a:active,
 a:focus {
   text-decoration: none;
-  color: inherit; }
+  color: inherit;
+  cursor: pointer; }
 
 h3 {
   font-size: 24px;
@@ -290,3 +291,21 @@ footer {
     .sideProjectList {
       flex-direction: column;
       gap: 32px; } }
+
+.info-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1rem 0 0.5rem 0; }
+
+.info-link {
+  border: 1px solid #18181b;
+  border-radius: 64px;
+  padding: 8px 16px;
+  color: #18181b;
+  background-color: transparent;
+  transition: background-color 0.25s ease-in-out, color 0.3s ease-in-out; }
+  .info-link:hover {
+    background-color: #18181b;
+    color: #f4f4f5; }
