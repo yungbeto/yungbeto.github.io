@@ -309,3 +309,16 @@ footer {
   .info-link:hover {
     background-color: #18181b;
     color: #f4f4f5; }
+
+.cta {
+  background-color: #18181b;
+  color: #f4f4f5; }
+  .cta:focus, .cta:active, .cta:visited, .cta:focus-visible, .cta:focus-within {
+    background-color: #18181b;
+    color: #f4f4f5; }
+  .cta:hover {
+    background-color: #f4f4f5;
+    color: #18181b; }
+
+.no-line {
+  border-top: none; }

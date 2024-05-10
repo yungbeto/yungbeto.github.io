@@ -36,18 +36,12 @@
 
 <body>
     <div class="container">
-        <!-- <div class="container sizzle">
-            <video class="sizzle-video" autoplay loop muted playsinline preload="auto">
-                <source src="/src/img/video/sizzle.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div> -->
         <div class="inner-container">
             <header class="header">
                 <div class="title">
 
                     <h3>Roby Saavedra</h3>
-                    <p class="gray-text">Software designer / developer</p>
+                    <p class="gray-text">Staff product designer / front-end developer</p>
                 </div>
                 <div class="header-copy">
                     <p>I'm a <strong>designer</strong> and <strong>developer</strong> with over 10 years of experience
@@ -59,10 +53,11 @@
                         I’m open to contract collaborations and full-time opportunities.</p>
                     <div class="info-links">
 
+                        <a href="#work" class="info-link cta" target="_blank">See work 👇</a>
                         <a href="mailto:hello@roby.work" class="info-link" target="_blank">Email</a>
                         <a href="https://www.linkedin.com/in/roberto-saavedra/" class="info-link"
                             target="_blank">LinkedIn</a>
-                        <a href="https://signmyguestbook.net" class="info-link" target="_blank">Guestbook</a>
+
 
                     </div>
                     <p class="light-text">---</p>
@@ -148,17 +143,30 @@
             </header>
         </div>
     </div>
-    <!-- <div class="container sizzle">
-        <video class="sizzle-video" autoplay loop muted playsinline preload="auto">
-            <source src="/src/img/video/sizzle.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div> -->
+
 
     <!---Job Entries-->
-    <main>
+    <main id="work">
+        <div class="container">
+            <section class="inner-container">
+                <header class="section-header">
+                    <div class="title">
+
+                        <h3>Work</h3>
+                    </div>
+                    <div class="header-copy-container">
+
+                        <div class="header-copy">
+                            <p>Below is a selection of recent product design work examples across a variety interface
+                                types from desktop to mobile.</p>
+
+                        </div>
+                    </div>
+                </header>
+            </section>
+        </div>
         <!--Cavnue-->
-        <div class="container cavsection">
+        <div class="container cavsection no-line">
             <section class="inner-container">
                 <header class="section-header">
                     <div class="title">
@@ -274,6 +282,21 @@
     </footer>
 
     <script src="/src/scripts/jobs.js"></script> <!-- Link to the JavaScript file that handles job data -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // This function will run after the document is fully loaded
+            const workLink = document.querySelector('a[href="#work"]'); // Select the link
+
+            workLink.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default jump to section behavior
+                const workSection = document.querySelector('#work'); // Select the target section
+
+                // Scroll to the 'work' section smoothly
+                workSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
