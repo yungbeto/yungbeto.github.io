@@ -10,6 +10,14 @@ body {
     background: #18181b;
     color: #f4f4f5; }
 
+a,
+a:hover,
+a:visited,
+a:active,
+a:focus {
+  text-decoration: none;
+  color: inherit; }
+
 h3 {
   font-size: 24px;
   font-style: normal;
@@ -81,6 +89,7 @@ ul {
   color: #d4d4d8; }
 
 .job {
+  text-decoration: inherit;
   padding: 24px;
   display: flex;
   flex-direction: row;
@@ -118,8 +127,8 @@ ul {
   position: relative;
   width: 100%;
   /* Full width of the viewport */
-  height: 100vh;
-  /* Full height of the viewport or adjust as necessary */
+  height: auto;
+  aspect-ratio: 16/9;
   overflow: hidden;
   /* Hides anything outside the container */ }
 
@@ -177,16 +186,16 @@ ul {
       padding: 0.8rem; } }
   @media (max-width: 599px) {
     .imageBox {
-      padding: 0.5rem; } }
+      padding: 5px; } }
 
 .cavbox {
-  background-color: #fdba74; }
+  background-color: #feecd9; }
 
 .cavsection {
   background-color: #fff7ed; }
 
 .revelbox {
-  background-color: #7dd3fc; }
+  background-color: #e1f5fe; }
 
 .revelcontainer {
   background-color: #f0f9ff; }
@@ -223,8 +232,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(244, 244, 245, 0) 0%, rgba(228, 228, 228, 0.4) 100%); }
+  border-radius: 8px; }
   @media (max-width: 599px) {
     .sideProjects {
       border-radius: 0; } }
@@ -244,20 +252,18 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 0px;
-    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.03);
     transition: transform 0.25s ease-in-out, box-shadow 0.3s ease-in-out; }
-    .sideProjectList .project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06); }
-      .sideProjectList .project:hover .project-title {
-        margin-left: 2px; }
+    .sideProjectList .project:hover .project-head {
+      transform: translateY(-2px); }
+    .sideProjectList .project:hover .project-title {
+      margin-left: 2px; }
     .sideProjectList .project .project-head {
       max-width: 100%;
       height: 160px;
       min-height: 160px;
-      position: relative; }
+      position: relative;
+      transition: transform 0.3s ease-in-out; }
       .sideProjectList .project .project-head .project-video {
         position: absolute;
         top: 0;
@@ -266,8 +272,8 @@ footer {
         height: 100%;
         object-fit: cover; }
     .sideProjectList .project .project-body {
-      padding: 16px;
-      background-color: #f4f4f5;
+      padding: 16px 16px 16px 0px;
+      background-color: transparent;
       display: flex;
       flex-direction: column;
       gap: 16px;

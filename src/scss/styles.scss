@@ -55,6 +55,15 @@ body {
   }
 }
 
+a,
+a:hover,
+a:visited,
+a:active,
+a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
 h3 {
   font-size: 24px;
   font-style: normal;
@@ -135,6 +144,7 @@ ul {
 }
 
 .job {
+  text-decoration: inherit;
   padding: 24px;
   display: flex;
   flex-direction: row;
@@ -178,7 +188,8 @@ ul {
 .container.sizzle {
   position: relative;
   width: 100%; /* Full width of the viewport */
-  height: 100vh; /* Full height of the viewport or adjust as necessary */
+  height: auto;
+  aspect-ratio: 16/9;
   overflow: hidden; /* Hides anything outside the container */
 }
 
@@ -241,20 +252,20 @@ ul {
     padding: 0.8rem;
   }
   @include for-phone-only {
-    padding: 0.5rem;
+    padding: 5px;
   }
 }
 .entryVideo {
 }
 
 .cavbox {
-  background-color: #fdba74;
+  background-color: lighten($color: #fdba74, $amount: 20);
 }
 .cavsection {
   background-color: #fff7ed;
 }
 .revelbox {
-  background-color: #7dd3fc;
+  background-color: lighten($color: #7dd3fc, $amount: 20);
 }
 
 .revelcontainer {
@@ -296,11 +307,11 @@ footer {
   flex-direction: column;
   gap: 16px;
   border-radius: 8px;
-  background: linear-gradient(
-    180deg,
-    rgba(244, 244, 245, 0) 0%,
-    rgba(228, 228, 228, 0.4) 100%
-  );
+  //   background: linear-gradient(
+  //     180deg,
+  //     rgba(244, 244, 245, 0) 0%,
+  //     rgba(228, 228, 228, 0.4) 100%
+  //   );
   @include for-phone-only {
     border-radius: 0;
   }
@@ -318,20 +329,23 @@ footer {
   }
   .project {
     user-select: none;
+    // border: 1px solid $gray-300;
     width: auto;
     display: flex;
     flex-direction: column;
     gap: 0px;
-    border-radius: 8px;
+    // border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
-      0px 1px 2px 0px rgba(0, 0, 0, 0.03);
+    // box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    //   0px 1px 2px 0px rgba(0, 0, 0, 0.03);
     transition: transform 0.25s ease-in-out, box-shadow 0.3s ease-in-out;
     &:hover {
-      transform: translateY(-2px);
+      .project-head {
+        transform: translateY(-2px);
+      }
 
-      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+      //   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+      //     0px 2px 4px -1px rgba(0, 0, 0, 0.06);
       .project-title {
         margin-left: 2px;
       }
@@ -341,6 +355,7 @@ footer {
       height: 160px;
       min-height: 160px;
       position: relative;
+      transition: transform 0.3s ease-in-out;
       .project-video {
         position: absolute;
         top: 0;
@@ -351,12 +366,13 @@ footer {
       }
     }
     .project-body {
-      padding: 16px;
-      background-color: $gray-100;
+      padding: 16px 16px 16px 0px;
+      background-color: transparent;
       display: flex;
       flex-direction: column;
       gap: 16px;
       height: 100%;
+
       .project-title {
         display: flex;
         flex-direction: column;
