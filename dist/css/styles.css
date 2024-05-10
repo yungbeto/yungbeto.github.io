@@ -37,7 +37,7 @@ p {
   margin: 0; }
 
 header {
-  padding: 4rem 0; }
+  padding: 6rem 0 0 0; }
   header .title {
     margin: 0 24px; }
   header .header-copy {
@@ -276,7 +276,7 @@ footer {
       background-color: transparent;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 8px;
       height: 100%; }
       .sideProjectList .project .project-body .project-title {
         display: flex;
@@ -288,4 +288,5 @@ footer {
           padding: 0; }
   @media (max-width: 599px) {
     .sideProjectList {
-      flex-direction: column; } }
+      flex-direction: column;
+      gap: 32px; } }

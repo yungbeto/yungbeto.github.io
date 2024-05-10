@@ -83,7 +83,7 @@ p {
 }
 
 header {
-  padding: 4rem 0;
+  padding: 6rem 0 0 0;
   .title {
     margin: 0 24px;
   }
@@ -370,7 +370,7 @@ footer {
       background-color: transparent;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 8px;
       height: 100%;
 
       .project-title {
@@ -388,5 +388,6 @@ footer {
   }
   @include for-phone-only {
     flex-direction: column;
+    gap: 32px;
   }
 }
