@@ -496,6 +496,7 @@ footer {
       right: 24px;
       bottom: 24px; } }
   .sidebar-toggle .sidebarToggle {
+    color: #18181b;
     font-size: 16px;
     line-height: 8px;
     padding: 8px 16px;
