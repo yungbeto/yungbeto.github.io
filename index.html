@@ -417,12 +417,17 @@
 
             links.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const sectionId = this.getAttribute('href');
-                    smoothScroll(sectionId, 1000); // Duration in milliseconds
+                    const href = this.getAttribute('href');
+                    // Check if the href starts with '#', indicating an internal link
+                    if (href.startsWith('#')) {
+                        e.preventDefault(); // Prevent default only for internal links
+                        smoothScroll(href, 1000); // Perform the smooth scroll
+                    }
+                    // External links like 'mailto:' and absolute URLs will perform their default action
                 });
             });
         });
+
 
 
 
