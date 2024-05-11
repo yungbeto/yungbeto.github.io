@@ -86,7 +86,7 @@ a:focus {
 h3 {
   font-size: 24px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 800;
   line-height: 32px; /* 133.333% */
   letter-spacing: -0.72px;
   margin: 0;
@@ -322,7 +322,7 @@ ul {
   gap: 8px;
   border-radius: 8px;
   background: $gray-200;
-  margin-bottom: 1rem;
+  margin: 1rem;
   border-radius: 8px;
   border: 1px solid $gray-700;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.01);
@@ -331,15 +331,15 @@ ul {
     width: 100%;
     border-radius: 8px;
   }
-  //   @include md {
-  //     padding: 0.5rem;
-  //   }
-  //   @include lg {
-  //     padding: 0.8rem;
-  //   }
-  //   @include for-phone-only {
-  //     padding: 5px;
-  //   }
+  @include md {
+    margin: 1rem;
+  }
+  @include lg {
+    margin: 1rem;
+  }
+  @include for-phone-only {
+    margin: 8px;
+  }
 }
 .entryVideo {
 }

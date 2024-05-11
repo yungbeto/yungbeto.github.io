@@ -34,7 +34,7 @@ a:focus {
 h3 {
   font-size: 24px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 800;
   line-height: 32px;
   /* 133.333% */
   letter-spacing: -0.72px;
@@ -245,7 +245,7 @@ ul {
   gap: 8px;
   border-radius: 8px;
   background: #e4e4e7;
-  margin-bottom: 1rem;
+  margin: 1rem;
   border-radius: 8px;
   border: 1px solid #3f3f46;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.01); }
@@ -253,6 +253,15 @@ ul {
   .imageBox video {
     width: 100%;
     border-radius: 8px; }
+  @media (max-width: 900px) {
+    .imageBox {
+      margin: 1rem; } }
+  @media (min-width: 1200px) {
+    .imageBox {
+      margin: 1rem; } }
+  @media (max-width: 599px) {
+    .imageBox {
+      margin: 8px; } }
 
 .cavbox {
   background-color: #feecd9; }
