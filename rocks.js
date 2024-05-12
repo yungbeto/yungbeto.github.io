@@ -46,7 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
   Matter.Render.run(render);
 });
 
+const MAX_BODIES = 200;
+
 function createInitialBody() {
+  let bodies = Matter.Composite.allBodies(engine.world);
+  if (bodies.length > MAX_BODIES) {
+    Matter.World.remove(
+      engine.world,
+      bodies.find((body) => !body.isStatic)
+    );
+  }
+
   var initialBody = createBody(
     homeDiv.clientWidth / 2,
     homeDiv.clientHeight / 10
