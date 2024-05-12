@@ -124,11 +124,18 @@ function resizeCanvas() {
   render.canvas.height = homeDiv.clientHeight;
   render.options.width = homeDiv.clientWidth;
   render.options.height = homeDiv.clientHeight;
+  // Update the walls to adjust to the new canvas size
+  createWalls();
 }
 
 function createWalls() {
-  // Clear existing walls before creating new ones to match the current canvas size
-  Matter.World.clear(engine.world, true); // true to clear all but static bodies, preserving them
+  // Instead of clearing the entire world, just remove and recreate the walls
+  // Clear only walls
+  engine.world.bodies.forEach((body) => {
+    if (body.isStatic) {
+      Matter.Composite.remove(engine.world, body);
+    }
+  });
 
   var wallOptions = {
     isStatic: true,
