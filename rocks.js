@@ -1,3 +1,5 @@
+var engine, render, homeDiv;
+
 document.addEventListener('DOMContentLoaded', function () {
   homeDiv = document.getElementById('home');
   if (!homeDiv) {
@@ -46,40 +48,33 @@ document.addEventListener('DOMContentLoaded', function () {
   Matter.Render.run(render);
 });
 
-const MAX_BODIES = 200;
-
-function createInitialBody() {
-  let bodies = Matter.Composite.allBodies(engine.world);
-  if (bodies.length > MAX_BODIES) {
-    Matter.World.remove(
-      engine.world,
-      bodies.find((body) => !body.isStatic)
-    );
-  }
-
-  var initialBody = createBody(
-    homeDiv.clientWidth / 2,
-    homeDiv.clientHeight / 10
-  );
-  Matter.World.add(engine.world, initialBody);
-}
-
-// Rest of the code remains unchanged...
-
 function setupEventListeners() {
   render.canvas.addEventListener('pointerdown', handlePointerDown);
-  render.canvas.addEventListener('touchstart', function (e) {
-    e.preventDefault(); // Prevent scrolling and zooming on touch
-    handlePointerDown(e.touches[0]); // Handle the first touch point
-  });
+  render.canvas.addEventListener(
+    'touchstart',
+    function (e) {
+      handlePointerDown(e.touches[0]); // Pass the first touch point to the handler
+      e.preventDefault(); // Call preventDefault only if necessary (moved inside handlePointerDown)
+    },
+    { passive: false }
+  );
 }
 
 function handlePointerDown(event) {
   var rect = render.canvas.getBoundingClientRect();
   var clickX = event.clientX - rect.left;
   var clickY = event.clientY - rect.top;
-  var newBody = createBody(clickX, clickY);
-  Matter.World.add(engine.world, newBody);
+  // Only prevent default if the interaction is within the canvas area
+  if (
+    clickX >= 0 &&
+    clickX <= render.canvas.width &&
+    clickY >= 0 &&
+    clickY <= render.canvas.height
+  ) {
+    event.preventDefault();
+    var newBody = createBody(clickX, clickY);
+    Matter.World.add(engine.world, newBody);
+  }
 }
 
 function createBody(x, y) {
@@ -98,7 +93,6 @@ function createBody(x, y) {
   }
 
   var colors = ['#fc79bc', '#fcec79', '#f4f4f5'];
-
   var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   var body = Matter.Bodies.fromVertices(
