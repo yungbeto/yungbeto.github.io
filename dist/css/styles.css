@@ -63,8 +63,25 @@ header {
     header {
       padding: 4rem 0 0 0; } }
 
+#home {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  /* Ensures that it has a stacking context */ }
+
+#home canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* Ensures it is above the background but check for other overlays */ }
+
 .home-header {
-  padding: 2.75rem 0 0 0; }
+  padding: 2.75rem 0 0 0;
+  z-index: 2;
+  min-height: 80vh; }
 
 .layout {
   width: 100%;
@@ -569,3 +586,9 @@ footer {
     .sidebar-toggle .sidebarToggle > img {
       height: 24px;
       width: 24px; }
+
+#matterContainer {
+  width: 100%;
+  height: 400px;
+  /* Adjust height as necessary */
+  position: relative; }
