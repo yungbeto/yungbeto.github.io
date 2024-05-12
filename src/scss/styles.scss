@@ -292,15 +292,16 @@ ul {
     width: auto;
     padding: 24px 0 0 0;
   }
-  & > p {
-    font-size: 16px;
-    line-height: 24px;
-    color: $gray-500;
-    width: 100%;
-    margin-bottom: 1.4rem;
-    &:last-child {
-      margin-bottom: 0;
-    }
+}
+
+.job-description p {
+  font-size: 16px;
+  line-height: 24px;
+  color: $gray-500;
+  width: 100%;
+  margin-bottom: 1.4rem;
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
