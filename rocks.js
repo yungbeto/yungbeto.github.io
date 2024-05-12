@@ -1,5 +1,3 @@
-var engine, render, homeDiv;
-
 document.addEventListener('DOMContentLoaded', function () {
   homeDiv = document.getElementById('home');
   if (!homeDiv) {
@@ -26,7 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   createWalls(); // Create walls on initialization
-  createInitialBody();
+  createInitialBody(); // Create the first body immediately
+
+  // Set an interval to create a new body every 2 seconds
+  setInterval(createInitialBody, 2000);
 
   Matter.Events.on(engine, 'beforeUpdate', function () {
     applyCursorAttraction(engine);
@@ -44,6 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
   Matter.Engine.run(engine);
   Matter.Render.run(render);
 });
+
+function createInitialBody() {
+  var initialBody = createBody(
+    homeDiv.clientWidth / 2,
+    homeDiv.clientHeight / 10
+  );
+  Matter.World.add(engine.world, initialBody);
+}
+
+// Rest of the code remains unchanged...
 
 function setupEventListeners() {
   render.canvas.addEventListener('pointerdown', handlePointerDown);
@@ -187,7 +198,7 @@ function applyCursorAttraction(engine) {
 function createInitialBody() {
   var initialBody = createBody(
     homeDiv.clientWidth / 2,
-    homeDiv.clientHeight / 2
+    homeDiv.clientHeight / 10
   );
   Matter.World.add(engine.world, initialBody);
 }
