@@ -76,8 +76,12 @@ header {
   min-width: 13rem;
   height: 100vh;
   padding: 16px 16px 0 16px;
-  border-right: 1px solid #18181b;
-  border-top: 1px solid #18181b;
+  border-width: 1px 1px 0 1px;
+  /* top, right, bottom, left */
+  border-style: solid;
+  /* applies solid style to all sides */
+  border-color: #18181b;
+  /* sets color to black for all sides */
   position: sticky;
   background-color: #f4f4f5;
   top: 0;
@@ -145,16 +149,23 @@ section {
 ul {
   width: 100%;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 24;
+  padding-inline-start: 0;
   user-select: none; }
 
 .job-listings {
-  width: 100%;
-  margin-top: 2rem; }
+  width: auto;
+  margin-top: 2rem;
+  padding: 16px; }
+  @media (max-width: 599px) {
+    .job-listings {
+      padding: 16px; } }
+
+.expanded {
+  height: auto; }
 
 .jobs {
-  width: 100%; }
+  width: auto; }
 
 .gray-text {
   color: #71717a; }
@@ -164,17 +175,63 @@ ul {
 
 .job {
   text-decoration: inherit;
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 8px;
+  transition: background-color 0.15s ease-in-out;
+  width: 100%;
+  padding: 24px; }
+  @media (max-width: 599px) {
+    .job {
+      width: auto; } }
+  @media (min-width: 600px) {
+    .job {
+      width: auto; } }
+  @media (max-width: 900px) {
+    .job {
+      width: auto; } }
+  @media (min-width: 1200px) {
+    .job {
+      width: auto; } }
+  @media (min-width: 1800px) {
+    .job {
+      width: 100%; } }
+  .job:hover {
+    background-color: #efeff0; }
+    .job:hover > .job_head {
+      margin-left: 2px; }
+
+.outlined {
+  border: 1px solid #18181b;
+  margin: 24px 0; }
+
+.job-bar {
+  text-decoration: inherit;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: 8px;
-  transition: background-color 0.15s ease-in-out; }
-  .job:hover {
-    background-color: #f0f0f1; }
-    .job:hover > .job_head {
-      margin-left: 2px; }
+  width: 100%; }
+
+.job-description {
+  max-width: 32rem;
+  width: 100%;
+  padding: 24px 24px 16px 64px; }
+  @media (max-width: 599px) {
+    .job-description {
+      max-width: 100%;
+      width: auto;
+      padding: 24px 0 0 0; } }
+  .job-description > p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #71717a;
+    width: 100%;
+    margin-bottom: 1.5rem; }
+    .job-description > p:last-child {
+      margin-bottom: 0; }
 
 .job_head {
   display: flex;

@@ -132,8 +132,9 @@ header {
   min-width: 13rem;
   height: 100vh;
   padding: 16px 16px 0 16px;
-  border-right: 1px solid $black;
-  border-top: 1px solid $black;
+  border-width: 1px 1px 0 1px; /* top, right, bottom, left */
+  border-style: solid; /* applies solid style to all sides */
+  border-color: $black; /* sets color to black for all sides */
   position: sticky;
   background-color: $white;
   top: 0;
@@ -208,16 +209,25 @@ section {
 ul {
   width: 100%;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 24;
+  padding-inline-start: 0;
   user-select: none;
 }
 .job-listings {
-  width: 100%;
+  width: auto;
   margin-top: 2rem;
+  padding: 16px;
+
+  @include for-phone-only {
+    padding: 16px;
+  }
+}
+
+.expanded {
+  height: auto;
 }
 .jobs {
-  width: 100%;
+  width: auto;
 }
 .gray-text {
   color: $gray-500;
@@ -229,20 +239,71 @@ ul {
 
 .job {
   text-decoration: inherit;
-  padding: 24px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   border-radius: 8px;
   transition: background-color 0.15s ease-in-out;
+  width: 100%;
+  padding: 24px;
+  @include for-phone-only {
+    width: auto;
+  }
+  @include sm {
+    width: auto;
+  }
+  @include md {
+    width: auto;
+  }
+  @include lg {
+    width: auto;
+  }
+  @include xl {
+    width: 100%;
+  }
   &:hover {
-    background-color: darken($color: $gray-100, $amount: 1.5);
+    background-color: darken($color: $gray-100, $amount: 2);
     & > .job_head {
       margin-left: 2px;
     }
   }
 }
+.outlined {
+  border: 1px solid $black;
+  margin: 24px 0;
+}
+.job-bar {
+  text-decoration: inherit;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.job-description {
+  max-width: 32rem;
+  width: 100%;
+  padding: 24px 24px 16px 64px;
+  @include for-phone-only {
+    max-width: 100%;
+    width: auto;
+    padding: 24px 0 0 0;
+  }
+  & > p {
+    font-size: 16px;
+    line-height: 24px;
+    color: $gray-500;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .job_head {
   display: flex;
   flex-direction: row;
