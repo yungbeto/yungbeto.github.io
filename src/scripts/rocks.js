@@ -1,5 +1,6 @@
 var engine, render, homeDiv;
 var bodyCount = 0;
+var maxBodies = 100; // Adjusted maximum number of bodies
 
 document.addEventListener('DOMContentLoaded', function () {
   homeDiv = document.getElementById('home');
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Set an interval to create a new body every 2 seconds
   setInterval(function () {
-    if (bodyCount < 200) {
+    if (bodyCount < maxBodies) {
       createInitialBody();
     }
   }, 2000);
@@ -65,6 +66,28 @@ function setupEventListeners() {
   );
 }
 
+// Throttle function to limit event frequency
+function throttle(func, limit) {
+  let lastFunc;
+  let lastRan;
+  return function () {
+    const context = this;
+    const args = arguments;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function () {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+}
+
 function handlePointerDown(event) {
   var rect = render.canvas.getBoundingClientRect();
   var clickX = event.clientX - rect.left;
@@ -81,6 +104,7 @@ function handlePointerDown(event) {
     Matter.World.add(engine.world, newBody);
   }
 }
+
 function createBody(x, y) {
   x = x || Math.random() * homeDiv.clientWidth;
   y = y || -300; // Start bodies further above the top edge of the canvas
@@ -121,6 +145,7 @@ function createBody(x, y) {
     y: 2, // Set a positive y-velocity to simulate dropping
   });
 
+  bodyCount++;
   return body;
 }
 
@@ -183,18 +208,24 @@ function createWalls() {
 
 var mousePosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-document.addEventListener('mousemove', function (event) {
-  mousePosition.x = event.clientX;
-  mousePosition.y = event.clientY;
-});
+document.addEventListener(
+  'mousemove',
+  throttle(function (event) {
+    mousePosition.x = event.clientX;
+    mousePosition.y = event.clientY;
+  }, 100)
+);
 
-document.addEventListener('touchmove', function (event) {
-  if (event.touches.length > 0) {
-    var touch = event.touches[0];
-    mousePosition.x = touch.clientX;
-    mousePosition.y = touch.clientY;
-  }
-});
+document.addEventListener(
+  'touchmove',
+  throttle(function (event) {
+    if (event.touches.length > 0) {
+      var touch = event.touches[0];
+      mousePosition.x = touch.clientX;
+      mousePosition.y = touch.clientY;
+    }
+  }, 100)
+);
 
 function applyCursorAttraction(engine) {
   var bodies = Matter.Composite.allBodies(engine.world);

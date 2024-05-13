@@ -144,7 +144,6 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
                     <p class="info-links-header">Navigation</p>
                     <a href="#home" class="info-link ">Home</a>
                     <a href="#about" class="info-link ">About</a>
-                    <a href="#work-history" class="info-link ">Employment History</a>
                     <a href="#work" class="info-link ">Work Samples</a>
                     <div class="sub-info-links">
                         <a href="#cavnue" class="info-link ">Cavnue</a>
@@ -156,6 +155,7 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
                         <a href="#good-song-club" class="info-link ">Good Song Club</a>
                         <a href="#mood-palace" class="info-link ">Mood Palace</a>
                     </div>
+                    <a href="#work-history" class="info-link ">Employment History</a>
                 </div>
                 <div class="linksection">
                     <p class="info-links-header">Contact</p>
@@ -183,42 +183,35 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
             <div class="container" id="about">
                 <div class="inner-container">
 
-                    <header class="header">
-                        <div class="title">
+                    <div class="about-me-section">
 
-                            <h3>About me</h3>
 
+                        <div class="about-me-shape">
+
+                            <canvas id="spinningShapeCanvas"></canvas>
                         </div>
-                        <div class="header-copy">
-                            <p>I'm a designer and developer with over 10 years of
-                                experience
-                                spanning tech companies, nimble
-                                startups, and wide-ranging agencies. Industries in which I've worked include autonomous
-                                vehicles, mobility, enterprise SaaS software, ed-tech & more.</p>
-                            <p>I’m skilled in product design and front-end development and proficient in building
-                                software
-                                from
-                                0 to 1. Currently
-                                I’m open to contract collaborations and full-time opportunities.</p>
-                        </div>
-                    </header>
-                </div>
-            </div>
-            <div class="container" id="work-history">
-                <div class="inner-container">
+                        <header class="header">
+                            <div class="title">
 
-                    <header class="header">
-                        <div class="title">
+                                <h3>About me</h3>
 
-                            <h3>Companies I've worked for</h3>
+                            </div>
+                            <div class="header-copy">
+                                <p>I'm a designer and developer with over 10 years of
+                                    experience
+                                    spanning tech companies, nimble
+                                    startups, and wide-ranging agencies. Industries in which I've worked include
+                                    autonomous
+                                    vehicles, mobility, enterprise SaaS software, ed-tech & more.</p>
+                                <p>I’m skilled in product design and front-end development and
+                                    proficient in building
+                                    software
+                                    from
+                                    0 to 1. Currently
+                                    I’m open to contract collaborations and full-time opportunities.</p>
+                            </div>
+                    </div>
 
-                        </div>
-                        <div class="job-listings">
-                            <ul class="jobs">
-                                <!-- Jobs -->
-                            </ul>
-                        </div>
-                    </header>
                 </div>
             </div>
             <main>
@@ -243,7 +236,7 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
                     </section>
                 </div>
                 <!--Cavnue-->
-                <div class="container cavsection no-line" id="cavnue">
+                <div class="container" id="cavnue">
                     <section class="inner-container">
                         <header class="section-header">
                             <div class="title">
@@ -295,7 +288,7 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
 
                 </div>
                 <!--Revel-->
-                <div class="container revelcontainer" id="revel">
+                <div class="container" id="revel">
                     <section class="inner-container">
                         <header class="section-header">
                             <div class="title">
@@ -325,7 +318,7 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
                                         we
                                         saw a huge spike productivity and financial efficiency.</p>
                                 </div>
-                                <div class="header-copy">
+                                <div class=" header-copy-last">
                                     <p>In addition to internal tools I was a key stakeholder on a number of
                                         user-facing,
                                         high-revenue initiatives. For example I led design for a unique,
@@ -476,6 +469,24 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
 
                 </div>
             </div>
+
+            <div class="container" id="work-history">
+                <div class="inner-container">
+
+                    <header class="header">
+                        <div class="title">
+
+                            <h3>Companies I've worked for</h3>
+
+                        </div>
+                        <div class="job-listings">
+                            <ul class="jobs">
+                                <!-- Jobs -->
+                            </ul>
+                        </div>
+                    </header>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -592,7 +603,8 @@ XXXKKKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKKKKKKKKKKKKKKKKKKKXXXXXXXXXXXXXXXXXXXXXXXNN
 
     </script>
 
-    <script src="rocks.js"></script>
+    <script src="/src/scripts/spinning-shape.js"></script>
+    <script src="/src/scripts/rocks.js"></script>
 </body>
 
 </html>

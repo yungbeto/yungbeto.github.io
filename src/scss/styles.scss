@@ -53,7 +53,7 @@ body {
   overscroll-behavior: none;
   scrollbar-width: none;
   ::selection {
-    background: $yellow;
+    background: $pink;
     color: $black;
   }
   &::-webkit-scrollbar {
@@ -93,7 +93,7 @@ a:focus {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 800;
   line-height: 32px; /* 133.333% */
@@ -122,6 +122,17 @@ p {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+}
+
+.header-copy-last {
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px;
+  @include for-phone-only {
+    margin: 0 24px 24px 24px;
+  }
 }
 
 header {
@@ -468,27 +479,10 @@ ul {
   padding: 0;
 }
 
-.container.sizzle {
-  position: relative;
-  width: 100%; /* Full width of the viewport */
-  height: auto;
-  aspect-ratio: 16/9;
-  overflow: hidden; /* Hides anything outside the container */
-}
-
-.sizzle-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .inner-container {
   max-width: 56rem;
   margin: 0 auto;
-  padding: 2rem 0 4rem 0;
+  padding: 4rem 0 4rem 0;
   @include for-phone-only {
     padding: 0 0 3rem 0;
   }
@@ -522,7 +516,7 @@ ul {
   background: $gray-200;
   margin: 1rem;
   border-radius: 8px;
-  border: 1px solid $gray-700;
+
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.01);
   img,
   video {
@@ -572,7 +566,10 @@ ul {
   }
   @include for-phone-only {
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
+    &:last-child {
+      margin-top: -24px;
+    }
   }
 }
 footer {
@@ -767,4 +764,33 @@ footer {
   width: 100%;
   height: 400px; /* Adjust height as necessary */
   position: relative;
+}
+
+.about-me-section {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  @include for-phone-only {
+    flex-direction: column-reverse;
+  }
+}
+
+.about-me-shape {
+  max-width: 24rem;
+  aspect-ratio: 1;
+  padding: 24px;
+}
+
+#spinningShapeCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid $black;
+  border-radius: 8px;
+}
+
+#work {
+  background-color: $yellow;
+  color: $black;
 }
