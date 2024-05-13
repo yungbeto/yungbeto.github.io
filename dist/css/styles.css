@@ -49,6 +49,17 @@ p {
   /* 150% */
   margin: 0; }
 
+.home-title {
+  padding: 24px;
+  background-color: #f4f4f5;
+  display: block;
+  width: fit-content; }
+
+.job-company {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700; }
+
 header {
   padding: 2.3rem 0 0 0; }
   header .title {
@@ -63,11 +74,13 @@ header {
     header {
       padding: 4rem 0 0 0; } }
 
+.home-container {
+  z-index: 20; }
+
 #home {
   position: relative;
-  overflow: hidden;
-  z-index: 0;
-  /* Ensures that it has a stacking context */ }
+  /* This is crucial for z-index of children to work */
+  overflow: hidden; }
 
 #home canvas {
   position: absolute;
@@ -76,12 +89,25 @@ header {
   width: 100%;
   height: 100%;
   z-index: 1;
-  /* Ensures it is above the background but check for other overlays */ }
+  /* Canvas should be below the header */ }
 
 .home-header {
+  position: relative;
+  /* This needs to be positioned to use z-index */
+  z-index: 10;
+  /* Higher than canvas */
   padding: 2.75rem 0 0 0;
-  z-index: 2;
-  min-height: 80vh; }
+  min-height: 70vh;
+  background: transparent;
+  /* Optional: Ensure the background is transparent */
+  pointer-events: none; }
+
+/* Additional styles for .title to ensure visibility */
+.title {
+  position: relative;
+  /* This can also have a z-index if needed */
+  z-index: 11;
+  /* Optional: Ensure this is above the header and canvas */ }
 
 .layout {
   width: 100%;

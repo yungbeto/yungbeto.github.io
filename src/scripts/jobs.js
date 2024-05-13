@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="job_head">
               <img class="company-icon" src="${job.CompanyIcon}">
                 <div class="job-info">
-                  <p>${job.Company}</p>
+                  <p class="job-company">${job.Company}</p>
                   <p class="gray-text">${job.DateRange}</p>
                   <p class="phone-only gray-text">${job.JobRole}</p>
                 </div>
