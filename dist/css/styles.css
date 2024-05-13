@@ -21,7 +21,7 @@ body {
     background: none; }
 
 body {
-  background-color: #f4f4f5; }
+  background-color: #fafafa; }
 
 @keyframes GradientAnimate {
   0% {
@@ -60,7 +60,7 @@ p {
 
 .home-title {
   padding: 24px;
-  text-shadow: 1px 1px 1px #f4f4f5;
+  text-shadow: 1px 1px 1px #fafafa;
   display: block;
   width: fit-content; }
 
@@ -125,7 +125,7 @@ header {
   gap: 0; }
 
 .sidebar {
-  background-color: #f4f4f5;
+  background-color: #fafafa;
   min-width: 16rem;
   height: 100vh;
   /* Ensures the sidebar matches the height of the viewport */
@@ -195,7 +195,7 @@ header {
   font-size: 16px;
   line-height: 24px;
   border-radius: 64px;
-  background-color: #f4f4f5;
+  background-color: #fafafa;
   color: #18181b;
   transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out, padding-left 0.3s ease;
   position: relative;
@@ -227,7 +227,7 @@ header {
 
 .info-link:hover {
   background-color: #18181b;
-  color: #f4f4f5; }
+  color: #fafafa; }
 
 .info-link.active:hover {
   background-color: #fc79bc;
@@ -309,21 +309,21 @@ ul {
   color: #d4d4d8; }
 
 .job {
-  border: 1px solid #f4f4f5;
+  border: 1px solid #fafafa;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 8px;
-  background-color: #f4f4f5;
+  background-color: #fafafa;
   width: auto;
   padding: 16px;
   transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out, border 0.2s ease-in-out; }
   .job > .job-description {
     visibility: hidden; }
   .job:hover {
-    background-color: #f1f1f3;
+    background-color: #f7f7f7;
     border: 1px solid #71717a; }
 
 .outlined {
@@ -572,19 +572,19 @@ footer {
 
 .cta {
   background-color: #18181b;
-  color: #f4f4f5; }
+  color: #fafafa; }
   .cta:focus, .cta:active, .cta:visited, .cta:focus-visible, .cta:focus-within {
     background-color: #18181b;
-    color: #f4f4f5; }
+    color: #fafafa; }
   .cta:hover {
-    background-color: #f4f4f5;
+    background-color: #fafafa;
     color: #18181b; }
 
 .no-line {
   border-top: none; }
 
 .light-bg {
-  background-color: #f4f4f5; }
+  background-color: #fafafa; }
 
 .headshot {
   border-radius: 64px;
@@ -612,7 +612,7 @@ footer {
     padding: 8px 16px;
     border-radius: 64px;
     border: 1px solid #18181b;
-    background-color: #f4f4f5;
+    background-color: #fafafa;
     display: flex;
     flex-direction: row;
     justify-content: center;

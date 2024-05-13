@@ -13,7 +13,7 @@ $yellow: #fcec79;
 $pink: #fc79bc;
 
 $black: $gray-900;
-$white: $gray-100;
+$white: $gray-050;
 $copy: $gray-700;
 $gray: $gray-500;
 
@@ -252,7 +252,7 @@ header {
   font-size: 16px;
   line-height: 24px;
   border-radius: 64px;
-  background-color: $gray-100;
+  background-color: $white;
   color: $black;
   transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out,
     padding-left 0.3s ease;
@@ -390,7 +390,7 @@ ul {
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 8px;
-  background-color: $gray-100;
+  background-color: $white;
   width: auto;
   padding: 16px;
   transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out,
@@ -400,7 +400,7 @@ ul {
   }
 
   &:hover {
-    background-color: darken($color: $gray-100, $amount: 1);
+    background-color: darken($color: $white, $amount: 1);
     border: 1px solid $gray;
   }
 }

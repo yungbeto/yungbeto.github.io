@@ -96,7 +96,7 @@ function createBody(x, y) {
     });
   }
 
-  var colors = ['#fc79bc', '#fcec79', '#f4f4f5'];
+  var colors = ['#fc79bc', '#fcec79', '#fafafa'];
   var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   var body = Matter.Bodies.fromVertices(
