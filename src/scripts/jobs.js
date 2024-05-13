@@ -1,72 +1,59 @@
 document.addEventListener('DOMContentLoaded', function () {
   const jobsList = document.querySelector('.jobs');
 
-  fetch('../src/jobs.json') // Ensure the path to your JSON file is correct
+  fetch('../src/jobs.json')
     .then((response) => response.json())
     .then((data) => {
-      const jobElements = []; // To store references to all job elements
-
       data.forEach((job) => {
         const jobElement = document.createElement('li');
         jobElement.innerHTML = `
-        <div class="job" style="cursor: pointer;">
-          <div class="job-bar">
-            <div class="job_head">
-              <img class="company-icon" src="${job.CompanyIcon}">
+          <div class="job" style="cursor: pointer;" tabindex="0" aria-expanded="false">
+            <div class="job-bar">
+              <div class="job_head">
+                <img class="company-icon" src="${job.CompanyIcon}">
                 <div class="job-info">
                   <p class="job-company">${job.Company}</p>
                   <p class="gray-text">${job.DateRange}</p>
                   <p class="phone-only gray-text">${job.JobRole}</p>
                 </div>
+              </div>
+              <p class="desktop-only gray-text">${job.JobRole}</p>
             </div>
-            <p class="desktop-only gray-text">${job.JobRole}</p>
+            <div class="job-description" style="max-height: 0; overflow: hidden;">
+              ${job.JobDescription}
+            </div>
           </div>
-          <div class="job-description" style="display: none;">
-            ${job.JobDescription}
-          </div>
-        </div>
         `;
         jobsList.appendChild(jobElement);
-        jobElements.push(jobElement); // Add to the array of job elements
+      });
 
-        // Find the job bar and description in this jobElement and attach a click event
-        const jobBar = jobElement.querySelector('.job');
-        const description = jobElement.querySelector('.job-description');
+      jobsList.addEventListener('click', function (event) {
+        const job = event.target.closest('.job');
+        if (!job) return;
 
-        jobBar.addEventListener('click', () => {
-          const isOpen = description.style.display === 'block';
+        const description = job.querySelector('.job-description');
+        const isOpen = job.getAttribute('aria-expanded') === 'true';
 
-          // Close all job descriptions
-          jobElements.forEach((el) => {
-            el.querySelector('.job-description').style.display = 'none';
-            el.querySelector('.job').classList.remove('outlined');
-          });
-
-          // Toggle visibility and scroll if closing
-          if (!isOpen) {
-            description.style.display = 'block';
-            jobBar.classList.add('outlined');
-          } else {
-            jobBar.classList.remove('outlined');
-            if (isElementOutOfView(jobElement)) {
-              scrollToElement(jobElement);
-            }
-          }
+        // Reset all descriptions and job outlines
+        jobsList.querySelectorAll('.job-description').forEach((desc) => {
+          desc.style.maxHeight = '0';
         });
+        jobsList.querySelectorAll('.job').forEach((j) => {
+          j.setAttribute('aria-expanded', 'false');
+          j.classList.remove('outlined');
+        });
+
+        // Expand the clicked one if it was not open
+        if (!isOpen) {
+          description.style.maxHeight = `${description.scrollHeight}px`;
+          job.setAttribute('aria-expanded', 'true');
+          job.classList.add('outlined');
+        }
       });
     })
-    .catch((error) => console.error('Error loading job data:', error));
+    .catch((error) => {
+      console.error('Error loading job data:', error);
+      jobsList.innerHTML =
+        '<p>Failed to load jobs. Please try again later.</p>';
+    });
 });
-
-function scrollToElement(element) {
-  const topPos = element.getBoundingClientRect().top + window.pageYOffset;
-  window.scrollTo({
-    top: topPos,
-    behavior: 'smooth',
-  });
-}
-
-function isElementOutOfView(elem) {
-  const rect = elem.getBoundingClientRect();
-  return rect.top < 0 || rect.bottom < 0;
-}

@@ -51,9 +51,18 @@ body {
   padding: 0;
   margin: 0;
   overscroll-behavior: none;
+  scrollbar-width: none;
   ::selection {
-    background: $black;
-    color: $white;
+    background: $yellow;
+    color: $black;
+  }
+  &::-webkit-scrollbar {
+    background: none;
+    width: 16px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background: none;
   }
 }
 
@@ -103,7 +112,8 @@ p {
 
 .home-title {
   padding: 24px;
-  background-color: $white;
+  text-shadow: 1px 1px 1px rgba($color: $white, $alpha: 1);
+
   display: block;
   width: fit-content;
 }
@@ -171,28 +181,118 @@ header {
   gap: 0;
 }
 .sidebar {
-  min-width: 13rem;
-  height: 100vh;
-  padding: 16px 16px 0 16px;
-  border-width: 1px 1px 0 1px; /* top, right, bottom, left */
-  border-style: solid; /* applies solid style to all sides */
-  border-color: $black; /* sets color to black for all sides */
-  position: sticky;
   background-color: $white;
+  min-width: 16rem;
+  height: 100vh; /* Ensures the sidebar matches the height of the viewport */
+  position: sticky;
   top: 0;
-  overflow-y: scroll;
+  overflow-y: auto; /* Ensures scrolling is possible only when necessary */
   overflow-x: hidden;
+  scrollbar-width: none; /* For Firefox */
+  -webkit-scrollbar {
+    display: none; /* For Webkit browsers like Safari and Chrome */
+  }
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: space-between; /* Separates top and bottom link groups */
+  border-width: 1px 1px 0 1px;
+  border-color: $black;
+  border-style: solid;
+
   @include for-phone-only {
     width: 12rem; /* Set the width of the sidebar */
     position: fixed;
     top: 0;
-    left: -16rem; /* Start off-screen */
+    left: -18rem; /* Start off-screen */
     height: 100%;
     transition: left 0.3s;
     z-index: 1000;
     overflow-y: scroll;
     overflow-x: hidden;
   }
+}
+
+.info-links {
+  .info-links-header {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This is crucial for positioning one group at the top and one at the bottom */
+  height: 100%;
+
+  .sub-info-links {
+    margin-left: 16px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border-left: 1px solid $black;
+  }
+  a {
+    color: $black;
+  }
+  .linksection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 16px;
+    &:last-child {
+      margin-top: auto;
+    }
+  }
+}
+
+.info-link {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  margin: 0;
+  border: 1px solid $black;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 64px;
+  background-color: $gray-100;
+  color: $black;
+  transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out,
+    padding-left 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  @include for-phone-only {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.info-link::before {
+  content: '•';
+  color: $black;
+  position: absolute;
+  top: 50%;
+  left: 14px; /* Adjust as necessary to ensure correct visual effect */
+  transform: translateX(-150%) translateY(-50%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.info-link.active::before {
+  transform: translateX(0%) translateY(-50%);
+  opacity: 1;
+}
+
+.info-link.active {
+  padding-left: 30px; /* Increase padding to make space for the bullet */
+  background-color: $yellow;
+}
+
+.info-link:hover {
+  background-color: $black;
+  color: $white;
+}
+
+.info-link.active:hover {
+  background-color: $pink;
+  color: $black;
 }
 
 .sidebar.open {
@@ -259,7 +359,6 @@ ul {
   width: auto;
   margin-top: 2rem;
   padding: 16px;
-
   @include for-phone-only {
     padding: 16px;
   }
@@ -270,6 +369,9 @@ ul {
 }
 .jobs {
   width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .gray-text {
   color: $gray-500;
@@ -280,44 +382,41 @@ ul {
 }
 
 .job {
-  text-decoration: inherit;
+  border: 1px solid $white;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 8px;
-  transition: background-color 0.15s ease-in-out;
-  width: 100%;
-  padding: 24px;
-  @include for-phone-only {
-    width: auto;
+  background-color: $gray-100;
+  width: auto;
+  padding: 16px;
+  transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out,
+    border 0.2s ease-in-out;
+  & > .job-description {
+    visibility: hidden;
   }
-  @include sm {
-    width: auto;
-  }
-  @include md {
-    width: auto;
-  }
-  @include lg {
-    width: auto;
-  }
-  @include xl {
-    width: 100%;
-  }
+
   &:hover {
-    background-color: darken($color: $gray-100, $amount: 2);
-    & > .job_head {
-      margin-left: 2px;
-    }
+    background-color: darken($color: $gray-100, $amount: 1);
+    border: 1px solid $gray;
   }
 }
+
 .outlined {
   border: 1px solid $black;
-  margin: 24px 0;
+  background-color: $gray-050;
+  & > .job-description {
+    visibility: visible;
+  }
+  &:hover {
+    background-color: $gray-050;
+  }
 }
-.job-bar {
-  text-decoration: inherit;
 
+.job-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -325,48 +424,43 @@ ul {
   width: 100%;
 }
 
-.job-description {
-  max-width: 32rem;
-  width: 100%;
-  padding: 24px 24px 16px 64px;
-  @include for-phone-only {
-    max-width: 100%;
-    width: auto;
-    padding: 24px 0 0 0;
+.job_head {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  & > img {
+    width: 40px;
+    height: 40px;
   }
+}
+.job-description {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s, opacity 0.5s ease-in-out;
+  opacity: 0; // Start with hidden
+  visibility: hidden; // Ensure it's not interactable
+  padding: 0 24px 0 56px; // Adjust padding for transition
+  background-color: $gray-050;
 }
 
 .job-description p {
   font-size: 16px;
   line-height: 24px;
   color: $gray-500;
-  width: 100%;
   margin-bottom: 1.4rem;
-  &:last-child {
-    margin-bottom: 0;
+  &:first-child {
+    margin-top: 16px;
+    margin-bottom: 8px;
   }
 }
 
-.job_head {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  margin-left: 0;
-  transition: margin-left 0.2s ease-in-out;
+.outlined > .job-description {
+  opacity: 1;
+  visibility: visible; // Make it visible when outlined
 }
-.company-icon {
-  width: 48px;
-  height: 48px;
-}
-.job_info {
-  p {
-    &:first-child {
-      font-weight: 700;
-      color: $black;
-    }
-  }
-}
+
 .container {
   width: 100%;
   border-top: 1px solid $black;
@@ -602,86 +696,6 @@ footer {
     flex-direction: column;
     gap: 32px;
   }
-}
-.info-links {
-  .info-links-header {
-    font-size: 12px;
-    line-height: 16px;
-  }
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.8rem;
-  margin: 1rem 0 3.5rem 0;
-  width: 100%;
-  height: -webkit-fill-available;
-  .sub-info-links {
-    margin-left: 16px;
-    padding-left: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    border-left: 1px solid $black;
-  }
-  a {
-    color: $black;
-  }
-  .linksection {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
-.info-link {
-  flex: 0 0 auto;
-  padding: 8px 16px;
-  margin: 0;
-  border: 1px solid $black;
-  font-size: 16px;
-  line-height: 24px;
-  border-radius: 64px;
-  background-color: $gray-100;
-  color: $black;
-  transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out,
-    padding-left 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  @include for-phone-only {
-    font-size: 14px;
-    line-height: 20px;
-  }
-}
-
-.info-link::before {
-  content: '•';
-  color: $black;
-  position: absolute;
-  top: 50%;
-  left: 14px; /* Adjust as necessary to ensure correct visual effect */
-  transform: translateX(-150%) translateY(-50%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.info-link.active::before {
-  transform: translateX(0%) translateY(-50%);
-  opacity: 1;
-}
-
-.info-link.active {
-  padding-left: 30px; /* Increase padding to make space for the bullet */
-  background-color: $yellow;
-}
-
-.info-link:hover {
-  background-color: $black;
-  color: $white;
-}
-
-.info-link.active:hover {
-  background-color: $pink;
-  color: $black;
 }
 
 .cta {

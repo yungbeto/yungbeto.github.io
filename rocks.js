@@ -1,4 +1,5 @@
 var engine, render, homeDiv;
+var bodyCount = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
   homeDiv = document.getElementById('home');
@@ -29,7 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
   createInitialBody(); // Create the first body immediately
 
   // Set an interval to create a new body every 2 seconds
-  setInterval(createInitialBody, 2000);
+  setInterval(function () {
+    if (bodyCount < 200) {
+      createInitialBody();
+    }
+  }, 2000);
 
   Matter.Events.on(engine, 'beforeUpdate', function () {
     applyCursorAttraction(engine);
@@ -81,7 +86,7 @@ function createBody(x, y) {
   x = x || Math.random() * homeDiv.clientWidth;
   y = y || Math.random() * homeDiv.clientHeight;
   var sides = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
-  var maxRadius = 60;
+  var maxRadius = 40;
   var vertices = [];
   for (var i = 0; i < sides; i++) {
     var angle = ((Math.PI * 2) / sides) * i;

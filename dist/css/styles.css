@@ -5,11 +5,20 @@ body {
   color: #3f3f46;
   padding: 0;
   margin: 0;
-  overscroll-behavior: none; }
+  overscroll-behavior: none;
+  scrollbar-width: none; }
   html ::selection,
   body ::selection {
-    background: #18181b;
-    color: #f4f4f5; }
+    background: #fcec79;
+    color: #18181b; }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    background: none;
+    width: 16px;
+    background: transparent; }
+  html::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track {
+    background: none; }
 
 body {
   background-color: #f4f4f5; }
@@ -51,7 +60,7 @@ p {
 
 .home-title {
   padding: 24px;
-  background-color: #f4f4f5;
+  text-shadow: 1px 1px 1px #f4f4f5;
   display: block;
   width: fit-content; }
 
@@ -116,33 +125,113 @@ header {
   gap: 0; }
 
 .sidebar {
-  min-width: 13rem;
-  height: 100vh;
-  padding: 16px 16px 0 16px;
-  border-width: 1px 1px 0 1px;
-  /* top, right, bottom, left */
-  border-style: solid;
-  /* applies solid style to all sides */
-  border-color: #18181b;
-  /* sets color to black for all sides */
-  position: sticky;
   background-color: #f4f4f5;
+  min-width: 16rem;
+  height: 100vh;
+  /* Ensures the sidebar matches the height of the viewport */
+  position: sticky;
   top: 0;
-  overflow-y: scroll;
-  overflow-x: hidden; }
+  overflow-y: auto;
+  /* Ensures scrolling is possible only when necessary */
+  overflow-x: hidden;
+  scrollbar-width: none;
+  /* For Firefox */
+  display: flex;
+  flex-direction: column;
+  /* Stacks children vertically */
+  justify-content: space-between;
+  /* Separates top and bottom link groups */
+  border-width: 1px 1px 0 1px;
+  border-color: #18181b;
+  border-style: solid; }
+  .sidebar -webkit-scrollbar {
+    display: none;
+    /* For Webkit browsers like Safari and Chrome */ }
   @media (max-width: 599px) {
     .sidebar {
       width: 12rem;
       /* Set the width of the sidebar */
       position: fixed;
       top: 0;
-      left: -16rem;
+      left: -18rem;
       /* Start off-screen */
       height: 100%;
       transition: left 0.3s;
       z-index: 1000;
       overflow-y: scroll;
       overflow-x: hidden; } }
+
+.info-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* This is crucial for positioning one group at the top and one at the bottom */
+  height: 100%; }
+  .info-links .info-links-header {
+    font-size: 12px;
+    line-height: 16px; }
+  .info-links .sub-info-links {
+    margin-left: 16px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border-left: 1px solid #18181b; }
+  .info-links a {
+    color: #18181b; }
+  .info-links .linksection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 16px; }
+    .info-links .linksection:last-child {
+      margin-top: auto; }
+
+.info-link {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  margin: 0;
+  border: 1px solid #18181b;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 64px;
+  background-color: #f4f4f5;
+  color: #18181b;
+  transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out, padding-left 0.3s ease;
+  position: relative;
+  overflow: hidden; }
+  @media (max-width: 599px) {
+    .info-link {
+      font-size: 14px;
+      line-height: 20px; } }
+
+.info-link::before {
+  content: '•';
+  color: #18181b;
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  /* Adjust as necessary to ensure correct visual effect */
+  transform: translateX(-150%) translateY(-50%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease; }
+
+.info-link.active::before {
+  transform: translateX(0%) translateY(-50%);
+  opacity: 1; }
+
+.info-link.active {
+  padding-left: 30px;
+  /* Increase padding to make space for the bullet */
+  background-color: #fcec79; }
+
+.info-link:hover {
+  background-color: #18181b;
+  color: #f4f4f5; }
+
+.info-link.active:hover {
+  background-color: #fc79bc;
+  color: #18181b; }
 
 .sidebar.open {
   left: 0;
@@ -208,7 +297,10 @@ ul {
   height: auto; }
 
 .jobs {
-  width: auto; }
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; }
 
 .gray-text {
   color: #71717a; }
@@ -217,81 +309,69 @@ ul {
   color: #d4d4d8; }
 
 .job {
-  text-decoration: inherit;
+  border: 1px solid #f4f4f5;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 8px;
-  transition: background-color 0.15s ease-in-out;
-  width: 100%;
-  padding: 24px; }
-  @media (max-width: 599px) {
-    .job {
-      width: auto; } }
-  @media (min-width: 600px) {
-    .job {
-      width: auto; } }
-  @media (max-width: 900px) {
-    .job {
-      width: auto; } }
-  @media (min-width: 1200px) {
-    .job {
-      width: auto; } }
-  @media (min-width: 1800px) {
-    .job {
-      width: 100%; } }
+  background-color: #f4f4f5;
+  width: auto;
+  padding: 16px;
+  transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out, border 0.2s ease-in-out; }
+  .job > .job-description {
+    visibility: hidden; }
   .job:hover {
-    background-color: #efeff0; }
-    .job:hover > .job_head {
-      margin-left: 2px; }
+    background-color: #f1f1f3;
+    border: 1px solid #71717a; }
 
 .outlined {
   border: 1px solid #18181b;
-  margin: 24px 0; }
+  background-color: #fafafa; }
+  .outlined > .job-description {
+    visibility: visible; }
+  .outlined:hover {
+    background-color: #fafafa; }
 
 .job-bar {
-  text-decoration: inherit;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%; }
 
+.job_head {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center; }
+  .job_head > img {
+    width: 40px;
+    height: 40px; }
+
 .job-description {
-  max-width: 32rem;
-  width: 100%;
-  padding: 24px 24px 16px 64px; }
-  @media (max-width: 599px) {
-    .job-description {
-      max-width: 100%;
-      width: auto;
-      padding: 24px 0 0 0; } }
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s, opacity 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  padding: 0 24px 0 56px;
+  background-color: #fafafa; }
 
 .job-description p {
   font-size: 16px;
   line-height: 24px;
   color: #71717a;
-  width: 100%;
   margin-bottom: 1.4rem; }
-  .job-description p:last-child {
-    margin-bottom: 0; }
+  .job-description p:first-child {
+    margin-top: 16px;
+    margin-bottom: 8px; }
 
-.job_head {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  margin-left: 0;
-  transition: margin-left 0.2s ease-in-out; }
-
-.company-icon {
-  width: 48px;
-  height: 48px; }
-
-.job_info p:first-child {
-  font-weight: 700;
-  color: #18181b; }
+.outlined > .job-description {
+  opacity: 1;
+  visibility: visible; }
 
 .container {
   width: 100%;
@@ -489,77 +569,6 @@ footer {
     .sideProjectList {
       flex-direction: column;
       gap: 32px; } }
-
-.info-links {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.8rem;
-  margin: 1rem 0 3.5rem 0;
-  width: 100%;
-  height: -webkit-fill-available; }
-  .info-links .info-links-header {
-    font-size: 12px;
-    line-height: 16px; }
-  .info-links .sub-info-links {
-    margin-left: 16px;
-    padding-left: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    border-left: 1px solid #18181b; }
-  .info-links a {
-    color: #18181b; }
-  .info-links .linksection {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem; }
-
-.info-link {
-  flex: 0 0 auto;
-  padding: 8px 16px;
-  margin: 0;
-  border: 1px solid #18181b;
-  font-size: 16px;
-  line-height: 24px;
-  border-radius: 64px;
-  background-color: #f4f4f5;
-  color: #18181b;
-  transition: background-color 0.2s ease-in-out, color 0.195s ease-in-out, padding-left 0.3s ease;
-  position: relative;
-  overflow: hidden; }
-  @media (max-width: 599px) {
-    .info-link {
-      font-size: 14px;
-      line-height: 20px; } }
-
-.info-link::before {
-  content: '•';
-  color: #18181b;
-  position: absolute;
-  top: 50%;
-  left: 14px;
-  /* Adjust as necessary to ensure correct visual effect */
-  transform: translateX(-150%) translateY(-50%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease; }
-
-.info-link.active::before {
-  transform: translateX(0%) translateY(-50%);
-  opacity: 1; }
-
-.info-link.active {
-  padding-left: 30px;
-  /* Increase padding to make space for the bullet */
-  background-color: #fcec79; }
-
-.info-link:hover {
-  background-color: #18181b;
-  color: #f4f4f5; }
-
-.info-link.active:hover {
-  background-color: #fc79bc;
-  color: #18181b; }
 
 .cta {
   background-color: #18181b;
