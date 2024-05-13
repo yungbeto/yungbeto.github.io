@@ -162,7 +162,7 @@ header {
 .home-header {
   position: relative; /* This needs to be positioned to use z-index */
   z-index: 10; /* Higher than canvas */
-  padding: 2.75rem 0 0 0;
+  padding: 0;
   min-height: 70vh;
   background: transparent; /* Optional: Ensure the background is transparent */
   pointer-events: none;
