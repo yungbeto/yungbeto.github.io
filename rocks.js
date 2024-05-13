@@ -81,10 +81,9 @@ function handlePointerDown(event) {
     Matter.World.add(engine.world, newBody);
   }
 }
-
 function createBody(x, y) {
   x = x || Math.random() * homeDiv.clientWidth;
-  y = y || Math.random() * homeDiv.clientHeight;
+  y = y || -300; // Start bodies further above the top edge of the canvas
   var sides = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
   var maxRadius = 40;
   var vertices = [];
@@ -108,17 +107,18 @@ function createBody(x, y) {
       frictionAir: 0.05,
       inertia: Infinity,
       render: {
-        fillStyle: randomColor, // Interior color of the bodies
-        strokeStyle: '#3F3F46', // Color of the outline
-        lineWidth: 1, // Width of the outline
+        fillStyle: randomColor,
+        strokeStyle: '#3F3F46',
+        lineWidth: 1,
       },
     },
     true
   );
 
+  // Set a downward initial velocity to simulate dropping
   Matter.Body.setVelocity(body, {
-    x: (Math.random() - 0.5) * 0.5,
-    y: (Math.random() - 0.5) * 0.5,
+    x: (Math.random() - 0.5) * 0.2, // Reduced x velocity
+    y: 2, // Set a positive y-velocity to simulate dropping
   });
 
   return body;
@@ -214,7 +214,7 @@ function applyCursorAttraction(engine) {
 function createInitialBody() {
   var initialBody = createBody(
     homeDiv.clientWidth / 2,
-    homeDiv.clientHeight / 10
+    homeDiv.clientHeight / 50
   );
   Matter.World.add(engine.world, initialBody);
 }
