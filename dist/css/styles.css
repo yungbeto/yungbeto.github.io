@@ -267,7 +267,8 @@ header {
     left: 0; } }
 
 .page-body {
-  width: 100%; }
+  width: 100%;
+  overflow-x: hidden; }
 
 .section-header {
   padding: 2.75rem 0 0 0;
@@ -644,15 +645,18 @@ footer {
   border: 1px solid #18181b;
   border-radius: 8px; }
 
-#work {
+#work,
+#side-projects {
   background-color: transparent;
   color: #18181b;
   position: relative;
   max-height: 100%; }
   @media (max-width: 599px) {
-    #work {
+    #work,
+    #side-projects {
       height: 50vh; } }
-  #work canvas {
+  #work canvas,
+  #side-projects canvas {
     position: absolute;
     top: 0;
     left: 0;

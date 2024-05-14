@@ -335,6 +335,7 @@ header {
 
 .page-body {
   width: 100%;
+  overflow-x: hidden;
 }
 .section-header {
   padding: 2.75rem 0 0 0;
@@ -782,7 +783,8 @@ footer {
   border-radius: 8px;
 }
 
-#work {
+#work,
+#side-projects {
   background-color: transparent;
   color: $black;
   position: relative;
