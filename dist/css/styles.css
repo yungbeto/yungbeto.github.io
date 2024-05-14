@@ -91,7 +91,7 @@ header {
     gap: 16px; }
   @media (max-width: 599px) {
     header {
-      padding: 4rem 0 0 0; } }
+      padding: 4rem 0 2rem 0; } }
 
 .home-container {
   z-index: 20; }
@@ -599,13 +599,13 @@ footer {
       visibility: visible;
       display: block;
       position: fixed;
-      right: 24px;
-      bottom: 24px; } }
+      right: 16px;
+      bottom: 48px; } }
   .sidebar-toggle .sidebarToggle {
     color: #18181b;
     font-size: 16px;
     line-height: 8px;
-    padding: 8px 16px;
+    padding: 16px 16px;
     border-radius: 64px;
     border: 1px solid #18181b;
     background-color: #fafafa;
@@ -654,7 +654,7 @@ footer {
   @media (max-width: 599px) {
     #work,
     #side-projects {
-      height: 80vh; } }
+      height: auto; } }
   #work canvas,
   #side-projects canvas {
     position: absolute;
