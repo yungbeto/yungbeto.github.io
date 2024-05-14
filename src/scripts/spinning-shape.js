@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     engine: engine,
     options: {
       wireframes: false,
-      background: '#fafafa',
+      background: '#18181b',
     },
   });
 
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           isStatic: true,
           render: {
-            fillStyle: randomColor, // Fill color
-            strokeStyle: '#18181b', // Outline color
-            lineWidth: 2, // Outline thickness
+            fillStyle: '#18181b', // Fill color
+            strokeStyle: randomColor, // Outline color
+            lineWidth: 1, // Outline thickness
           },
         },
         true
