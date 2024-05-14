@@ -654,7 +654,7 @@ footer {
   @media (max-width: 599px) {
     #work,
     #side-projects {
-      height: 50vh; } }
+      height: 80vh; } }
   #work canvas,
   #side-projects canvas {
     position: absolute;
