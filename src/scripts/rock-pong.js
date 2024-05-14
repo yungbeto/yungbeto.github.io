@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
             restitution: 1, // High restitution for bounciness
             render: {
               fillStyle: '#fcec79', // Fill color
-              strokeStyle: 'rgba(0,0,0,.2)', // Outline color
+              strokeStyle: 'rgba(0,0,0,.8)', // Outline color
               lineWidth: 1, // Outline thickness
             },
           },

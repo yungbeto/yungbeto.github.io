@@ -37,7 +37,7 @@ a:visited,
 a:active,
 a:focus {
   text-decoration: none;
-  color: #fc79bc;
+  color: #18181b;
   cursor: pointer; }
 
 h3 {
@@ -151,7 +151,7 @@ header {
   /* Stacks children vertically */
   justify-content: space-between;
   /* Separates top and bottom link groups */
-  border-width: 1px 1px 0 1px;
+  border-width: 0px 1px 0 1px;
   border-color: #18181b;
   border-style: solid; }
   .sidebar -webkit-scrollbar {
@@ -475,15 +475,14 @@ ul {
 
 footer {
   padding: 8px 16px;
-  background-color: #fcec79;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-  color: #18181b;
-  border-top: 1px solid #18181b;
-  background-color: #fafafa;
+  color: #fafafa;
+  border-top: 1px solid #3f3f46;
+  background-color: #18181b;
   background-size: 400% 400%;
   background-attachment: fixed;
   animation: GradientAnimate 8s ease infinite; }
@@ -491,7 +490,7 @@ footer {
     font-size: 14px;
     line-height: 24px;
     text-align: center;
-    color: #18181b; }
+    color: #fafafa; }
 
 .sideProjects {
   padding: 24px;
@@ -667,3 +666,37 @@ footer {
 #about {
   background-color: #18181b;
   color: #fafafa; }
+
+.headliner {
+  font-size: 72px;
+  line-height: 76px; }
+  @media (max-width: 599px) {
+    .headliner {
+      font-size: 64px;
+      line-height: 64px; } }
+
+.headliner-copy {
+  font-size: 20px;
+  line-height: 28px; }
+
+.feature-button {
+  border: 1px solid #18181b;
+  padding: 8px 16px 8px 6px;
+  color: #18181b;
+  background-color: #fcec79;
+  text-decoration: none;
+  border-radius: 64px;
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  transition: background-color 0.2s ease-in-out, color 0.25s ease-in-out, transform 0.2s ease-in-out;
+  transform: rotate(-6deg);
+  /* This adds a slight rotation to the button */ }
+  .feature-button:hover {
+    background-color: #18181b;
+    color: #fc79bc;
+    transform: rotate(-1deg);
+    /* Slightly reduce rotation on hover */ }
