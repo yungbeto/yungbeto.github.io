@@ -668,12 +668,12 @@ footer {
   color: #fafafa; }
 
 .headliner {
-  font-size: 72px;
-  line-height: 76px; }
+  font-size: 64px;
+  line-height: 68px; }
   @media (max-width: 599px) {
     .headliner {
-      font-size: 64px;
-      line-height: 64px; } }
+      font-size: 56px;
+      line-height: 68px; } }
 
 .headliner-copy {
   font-size: 20px;
@@ -693,10 +693,15 @@ footer {
   justify-content: flex-start;
   gap: 4px;
   transition: background-color 0.2s ease-in-out, color 0.25s ease-in-out, transform 0.2s ease-in-out;
-  transform: rotate(-6deg);
+  transform: rotate(-3deg);
   /* This adds a slight rotation to the button */ }
   .feature-button:hover {
     background-color: #18181b;
     color: #fc79bc;
     transform: rotate(-1deg);
     /* Slightly reduce rotation on hover */ }
+  .feature-button img {
+    transition: transform 0.5s ease-in-out; }
+  .feature-button:hover img {
+    transform: rotate(360deg);
+    /* Spin the SVG 360 degrees on hover */ }

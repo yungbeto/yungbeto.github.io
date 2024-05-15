@@ -808,11 +808,11 @@ footer {
 }
 
 .headliner {
-  font-size: 72px;
-  line-height: 76px;
+  font-size: 64px;
+  line-height: 68px;
   @include for-phone-only {
-    font-size: 64px;
-    line-height: 64px;
+    font-size: 56px;
+    line-height: 68px;
   }
 }
 
@@ -837,11 +837,19 @@ footer {
   transition: background-color 0.2s ease-in-out, color 0.25s ease-in-out,
     transform 0.2s ease-in-out;
 
-  transform: rotate(-6deg); /* This adds a slight rotation to the button */
+  transform: rotate(-3deg); /* This adds a slight rotation to the button */
 
   &:hover {
     background-color: $black;
     color: $pink;
     transform: rotate(-1deg); /* Slightly reduce rotation on hover */
+  }
+
+  img {
+    transition: transform 0.5s ease-in-out;
+  }
+
+  &:hover img {
+    transform: rotate(360deg); /* Spin the SVG 360 degrees on hover */
   }
 }
