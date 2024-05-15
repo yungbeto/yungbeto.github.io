@@ -676,6 +676,16 @@ footer {
         }
       }
     }
+    @include sm {
+      flex-direction: column;
+      flex-flow: column-reverse;
+      margin-top: 0.4rem;
+    }
+    @include md {
+      flex-direction: column;
+      flex-flow: column-reverse;
+      margin-top: 0.4rem;
+    }
     @include for-phone-only {
       flex-direction: column;
       flex-flow: column-reverse;

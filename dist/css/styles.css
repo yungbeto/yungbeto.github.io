@@ -555,6 +555,16 @@ footer {
         .sideProjectList .project .project-body .project-title h4 {
           margin: 0;
           padding: 0; }
+    @media (min-width: 600px) {
+      .sideProjectList .project {
+        flex-direction: column;
+        flex-flow: column-reverse;
+        margin-top: 0.4rem; } }
+    @media (max-width: 900px) {
+      .sideProjectList .project {
+        flex-direction: column;
+        flex-flow: column-reverse;
+        margin-top: 0.4rem; } }
     @media (max-width: 599px) {
       .sideProjectList .project {
         flex-direction: column;
