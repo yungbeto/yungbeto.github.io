@@ -352,17 +352,19 @@ ul {
   border-radius: 8px;
   background-color: #fafafa;
   width: auto;
-  padding: 16px;
-  transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out, border 0.2s ease-in-out; }
+  padding: 16px 0;
+  transition: background-color 0.25s ease-in-out, max-height 0.3s ease-in-out, border 0.2s ease-in-out, padding 0.3s ease-in-out; }
   .job > .job-description {
     visibility: hidden; }
   .job:hover {
     background-color: #f7f7f7;
-    border: 1px solid #71717a; }
+    border: 1px solid #71717a;
+    padding: 16px 16px; }
 
 .outlined {
   border: 1px solid #18181b;
-  background-color: #fafafa; }
+  background-color: #fafafa;
+  padding: 16px; }
   .outlined > .job-description {
     visibility: visible; }
   .outlined:hover {
@@ -510,7 +512,7 @@ footer {
     color: #fafafa; }
 
 .sideProjects {
-  padding: 24px;
+  padding: 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -518,6 +520,9 @@ footer {
   @media (max-width: 599px) {
     .sideProjects {
       border-radius: 0; } }
+
+.project-container {
+  padding: 2rem 0; }
 
 .sideProjectList {
   display: flex;
@@ -546,7 +551,8 @@ footer {
         width: 100%;
         height: auto;
         aspect-ratio: 2 /1;
-        object-fit: cover; }
+        object-fit: cover;
+        border-radius: 8px; }
     .sideProjectList .project .project-body {
       padding: 16px 16px 16px 0px;
       max-width: 14rem;
