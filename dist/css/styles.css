@@ -111,7 +111,7 @@ header .header-copy {
 }
 @media (max-width: 599px) {
   header {
-    padding: 4rem 0 2rem 0;
+    padding: 0;
   }
 }
 
@@ -385,7 +385,7 @@ ul {
 
 .job-listings {
   width: auto;
-  margin-top: 2rem;
+
   padding: 16px;
 }
 @media (max-width: 599px) {
@@ -636,14 +636,18 @@ footer > p {
   gap: 16px;
   border-radius: 8px;
 }
+.project-container {
+  padding: 2rem 0;
+}
 @media (max-width: 599px) {
   .sideProjects {
     border-radius: 0;
+    padding: 0;
   }
-}
-
-.project-container {
-  padding: 2rem 0;
+  .project-container {
+    padding: 1rem 1rem 3rem 1rem;
+    min-height: 50dvh;
+  }
 }
 
 .sideProjectList {
@@ -736,6 +740,10 @@ footer > p {
   .sideProjectList {
     flex-direction: column;
     gap: 32px;
+  }
+  .project-body {
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -872,16 +880,20 @@ footer > p {
   font-size: 64px;
   line-height: 68px;
 }
-@media (max-width: 599px) {
-  .headliner {
-    font-size: 56px;
-    line-height: 68px;
-  }
-}
 
 .headliner-copy {
   font-size: 20px;
   line-height: 28px;
+}
+@media (max-width: 599px) {
+  .headliner {
+    font-size: 48px;
+    line-height: 52px;
+  }
+  .headliner-copy {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .feature-button {
