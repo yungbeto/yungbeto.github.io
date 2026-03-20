@@ -138,7 +138,7 @@ function initWorkCasePills() {
         caseInView = entries[0].isIntersecting;
         updatePill();
       },
-      { threshold: 0 },
+      { threshold: 0, rootMargin: '-96px 0px 0px 0px' },
     ).observe(workCase);
 
     new IntersectionObserver(
