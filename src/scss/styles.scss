@@ -26,6 +26,7 @@ body {
   background: $bg;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -344,6 +345,12 @@ ul {
     border-top: none;
 
     padding-bottom: 48px;
+  }
+  @media (max-width: $tablet) {
+    padding: 0;
+  }
+  @media (max-width: $mobile) {
+    padding: 0;
   }
 }
 

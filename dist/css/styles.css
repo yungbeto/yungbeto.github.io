@@ -12,6 +12,7 @@ body {
   background: #d4d4d8;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   scrollbar-width: none; }
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
@@ -258,6 +259,12 @@ ul {
   .work-case:first-child {
     border-top: none;
     padding-bottom: 48px; }
+  @media (max-width: 768px) {
+    .work-case {
+      padding: 0; } }
+  @media (max-width: 480px) {
+    .work-case {
+      padding: 0; } }
 
 .work-case-header {
   display: flex;
