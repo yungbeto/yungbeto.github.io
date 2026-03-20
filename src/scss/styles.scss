@@ -689,7 +689,7 @@ ul {
 
 .site-footer {
   background: $footer-bg;
-  min-height: calc(100vh - 116px);
+  min-height: calc(100vh - 56px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -731,6 +731,7 @@ ul {
   letter-spacing: -0.05em;
   color: #a1a1aa;
   margin: 0;
+  display: none;
 
   @media (max-width: $mobile) {
     font-size: 16px;
