@@ -178,11 +178,15 @@ ul {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  min-height: 400px; }
   .projects-info-box p {
     font-size: 16px;
     line-height: 24px;
     color: #000; }
+  @media (max-width: 768px) {
+    .projects-info-box {
+      padding: 16px; } }
 
 .projects-info-icon {
   font-size: 24px;
