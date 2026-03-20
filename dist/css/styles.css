@@ -12,7 +12,7 @@ body {
   background: #d4d4d8;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   scrollbar-width: none; }
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
