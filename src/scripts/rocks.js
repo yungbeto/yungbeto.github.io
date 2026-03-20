@@ -3,9 +3,10 @@ var bodyCount = 0;
 var maxBodies = 100; // Adjusted maximum number of bodies
 
 document.addEventListener('DOMContentLoaded', function () {
-  homeDiv = document.getElementById('home');
+  // Use desktop background for full-viewport fixed wallpaper, fallback to #home
+  homeDiv = document.getElementById('desktop-background') || document.getElementById('home');
   if (!homeDiv) {
-    console.error('homeDiv not found!');
+    console.error('rocks.js: container not found!');
     return;
   }
 
@@ -20,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     element: homeDiv,
     engine: engine,
     options: {
-      width: homeDiv.clientWidth,
-      height: homeDiv.clientHeight,
+      width: homeDiv.clientWidth || window.innerWidth,
+      height: homeDiv.clientHeight || window.innerHeight,
       wireframes: false,
       background: 'transparent',
     },
@@ -62,7 +63,7 @@ function setupEventListeners() {
       handlePointerDown(e.touches[0]); // Pass the first touch point to the handler
       e.preventDefault(); // Call preventDefault only if necessary (moved inside handlePointerDown)
     },
-    { passive: false }
+    { passive: false },
   );
 }
 
@@ -78,12 +79,15 @@ function throttle(func, limit) {
       lastRan = Date.now();
     } else {
       clearTimeout(lastFunc);
-      lastFunc = setTimeout(function () {
-        if (Date.now() - lastRan >= limit) {
-          func.apply(context, args);
-          lastRan = Date.now();
-        }
-      }, limit - (Date.now() - lastRan));
+      lastFunc = setTimeout(
+        function () {
+          if (Date.now() - lastRan >= limit) {
+            func.apply(context, args);
+            lastRan = Date.now();
+          }
+        },
+        limit - (Date.now() - lastRan),
+      );
     }
   };
 }
@@ -106,7 +110,8 @@ function handlePointerDown(event) {
 }
 
 function createBody(x, y) {
-  x = x || Math.random() * homeDiv.clientWidth;
+  var w = homeDiv.clientWidth || window.innerWidth;
+  x = x || Math.random() * w;
   y = y || -300; // Start bodies further above the top edge of the canvas
   var sides = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
   var maxRadius = 40;
@@ -120,8 +125,11 @@ function createBody(x, y) {
     });
   }
 
-  var colors = ['#fc79bc', '#fcec79', '#fafafa'];
+  var colors = ['#0f0f0f', '#2a2a2a'];
+  var strokeColor = ['#a3a3a3', '#737373'];
   var randomColor = colors[Math.floor(Math.random() * colors.length)];
+  var randomStrokeColor =
+    strokeColor[Math.floor(Math.random() * strokeColor.length)];
 
   var body = Matter.Bodies.fromVertices(
     x,
@@ -132,11 +140,11 @@ function createBody(x, y) {
       inertia: Infinity,
       render: {
         fillStyle: randomColor,
-        strokeStyle: '#3F3F46',
+        strokeStyle: randomStrokeColor,
         lineWidth: 1,
       },
     },
-    true
+    true,
   );
 
   // Set a downward initial velocity to simulate dropping
@@ -150,11 +158,12 @@ function createBody(x, y) {
 }
 
 function resizeCanvas() {
-  render.canvas.width = homeDiv.clientWidth;
-  render.canvas.height = homeDiv.clientHeight;
-  render.options.width = homeDiv.clientWidth;
-  render.options.height = homeDiv.clientHeight;
-  // Update the walls to adjust to the new canvas size
+  var w = homeDiv.clientWidth || window.innerWidth;
+  var h = homeDiv.clientHeight || window.innerHeight;
+  render.canvas.width = w;
+  render.canvas.height = h;
+  render.options.width = w;
+  render.options.height = h;
   createWalls();
 }
 
@@ -173,36 +182,13 @@ function createWalls() {
       visible: false,
     },
   };
-  // Adding walls
+  var w = homeDiv.clientWidth || window.innerWidth;
+  var h = homeDiv.clientHeight || window.innerHeight;
   Matter.World.add(engine.world, [
-    Matter.Bodies.rectangle(
-      homeDiv.clientWidth / 2,
-      -25,
-      homeDiv.clientWidth,
-      50,
-      wallOptions
-    ), // top
-    Matter.Bodies.rectangle(
-      homeDiv.clientWidth / 2,
-      homeDiv.clientHeight + 25,
-      homeDiv.clientWidth,
-      50,
-      wallOptions
-    ), // bottom
-    Matter.Bodies.rectangle(
-      -25,
-      homeDiv.clientHeight / 2,
-      50,
-      homeDiv.clientHeight,
-      wallOptions
-    ), // left
-    Matter.Bodies.rectangle(
-      homeDiv.clientWidth + 25,
-      homeDiv.clientHeight / 2,
-      50,
-      homeDiv.clientHeight,
-      wallOptions
-    ), // right
+    Matter.Bodies.rectangle(w / 2, -25, w, 50, wallOptions),
+    Matter.Bodies.rectangle(w / 2, h + 25, w, 50, wallOptions),
+    Matter.Bodies.rectangle(-25, h / 2, 50, h, wallOptions),
+    Matter.Bodies.rectangle(w + 25, h / 2, 50, h, wallOptions),
   ]);
 }
 
@@ -213,7 +199,7 @@ document.addEventListener(
   throttle(function (event) {
     mousePosition.x = event.clientX;
     mousePosition.y = event.clientY;
-  }, 100)
+  }, 100),
 );
 
 document.addEventListener(
@@ -224,7 +210,7 @@ document.addEventListener(
       mousePosition.x = touch.clientX;
       mousePosition.y = touch.clientY;
     }
-  }, 100)
+  }, 100),
 );
 
 function applyCursorAttraction(engine) {
@@ -243,25 +229,20 @@ function applyCursorAttraction(engine) {
 }
 
 function createInitialBody() {
-  var initialBody = createBody(
-    homeDiv.clientWidth / 2,
-    homeDiv.clientHeight / 50
-  );
+  var w = homeDiv.clientWidth || window.innerWidth;
+  var h = homeDiv.clientHeight || window.innerHeight;
+  var initialBody = createBody(w / 2, h / 50);
   Matter.World.add(engine.world, initialBody);
 }
 
 window.addEventListener('resize', function () {
-  render.canvas.width = homeDiv.clientWidth;
-  render.canvas.height = homeDiv.clientHeight;
-  render.options.width = homeDiv.clientWidth;
-  render.options.height = homeDiv.clientHeight;
-  console.log(
-    'Resized canvas dimensions:',
-    render.options.width,
-    'x',
-    render.options.height
-  );
+  var w = homeDiv.clientWidth || window.innerWidth;
+  var h = homeDiv.clientHeight || window.innerHeight;
+  render.canvas.width = w;
+  render.canvas.height = h;
+  render.options.width = w;
+  render.options.height = h;
+  createWalls();
 });
 
-Matter.Engine.run(engine);
-Matter.Render.run(render);
+// Note: Engine and render are started in DOMContentLoaded

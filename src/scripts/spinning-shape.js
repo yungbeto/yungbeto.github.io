@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     engine: engine,
     options: {
       wireframes: false,
-      background: '#18181b',
+      background: '#171717',
     },
   });
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
       numberOfVertices
     );
 
-    var colors = ['#fc79bc', '#fcec79', '#fafafa'];
+    var colors = ['#a3a3a3', '#737373', '#525252'];
     var randomColor = colors[Math.floor(Math.random() * colors.length)];
     try {
       return Matter.Bodies.fromVertices(
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           isStatic: true,
           render: {
-            fillStyle: '#18181b', // Fill color
+            fillStyle: '#262626', // Fill color
             strokeStyle: randomColor, // Outline color
             lineWidth: 1, // Outline thickness
           },

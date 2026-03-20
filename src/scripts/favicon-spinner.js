@@ -2,7 +2,7 @@
 
 const svgString = `
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-  <path d="M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z" stroke="#fc79bc"/>
+  <path d="M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z" stroke="#a3a3a3"/>
 </svg>`;
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');

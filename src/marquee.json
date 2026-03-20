@@ -1,0 +1,42 @@
+{
+  "strings": [
+    "TL;DR: Roby is a cool generalist and would be a delightful addition to your team.",
+    "TL;DR: You should really hire this Roby guy...",
+    "TL;DR: Wow! What a great designer!",
+    "TL;DR: Roby is a great designer and a pleasure to work with.",
+    "TL;DR: Roby is a designer/developer who likes to make software for people.",
+    "TL;DR: Roby CAN design his way out of a paper bag."
+  ],
+  "separators": [
+    [
+      "ph-alien",
+      "ph-baseball-cap",
+      "ph-balloon"
+    ],
+    [
+      "ph-dog",
+      "ph-yin-yang",
+      "ph-star-four"
+    ],
+    [
+      "ph-tree",
+      "ph-bicycle",
+      "ph-desk"
+    ],
+    [
+      "ph-city",
+      "ph-carrot",
+      "ph-clover"
+    ],
+    [
+      "ph-coffee",
+      "ph-flower",
+      "ph-cookie"
+    ],
+    [
+      "ph-music-note",
+      "ph-headphones",
+      "ph-vinyl-record"
+    ]
+  ]
+}

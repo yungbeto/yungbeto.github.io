@@ -1,0 +1,88 @@
+[
+  {
+    "id": "good-song-club",
+    "name": "Good Song Club",
+    "url": "https://goodsong.club",
+    "year": "2023",
+    "description": "A small social media platform that allows you to share good songs with your friends",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/gsc1.mp4"
+      }
+    ]
+  },
+  {
+    "id": "concrete-95",
+    "name": "Concrete 95",
+    "url": "https://concrete95.net/",
+    "year": "2025",
+    "description": "Concrete 95 is a sound design webapp inspired by Musique Concrete. It allows you to layer synth pads, melodies, and found sound randomly fetched from freesound.org to create a unique, ever-changing soundscape.",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/concrete.mp4"
+      }
+    ]
+  },
+  {
+    "id": "bpm-game",
+    "name": "BPM Game",
+    "url": "https://bpmga.me",
+    "year": "2025",
+    "description": "Listen to a metronome and guess the BPM.",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/bpm.mp4"
+      }
+    ]
+  },
+  {
+    "id": "dig-this",
+    "name": "Dig This",
+    "url": "https://digthis.club",
+    "year": "2024",
+    "description": "Web application that generates a random music recommendation using the Discogs API",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/digthis.mp4"
+      },
+      {
+        "type": "video",
+        "src": "src/img/video/dig1.mp4"
+      }
+    ],
+    "featureButton": {
+      "text": "Featured in DJ Mag!",
+      "url": "https://djmag.com/news/new-app-recommends-random-discogs-releases-based-genre"
+    }
+  },
+  {
+    "id": "mood-palace",
+    "name": "Mood Palace",
+    "url": "https://moodpalace.net",
+    "year": "2023",
+    "description": "A web repository that allows me to upload ambient audio for anyone to listen",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/mood.mp4"
+      }
+    ]
+  },
+  {
+    "id": "lever",
+    "name": "Lever",
+    "url": "https://www.figma.com/community/plugin/1008125233177309016/Lever---A-Figma-File-Starter",
+    "year": "2022",
+    "description": "A Figma plugin I built which provides a consistent structure to Figma files.",
+    "media": [
+      {
+        "type": "image",
+        "src": "src/img/lever/LEVER.gif"
+      }
+    ]
+  }
+]
