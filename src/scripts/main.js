@@ -41,12 +41,17 @@ async function loadProjectCards() {
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       card.className = 'projects-card';
+      const chipsHtml = project.skills
+        ? project.skills.split(',').map((s) => `<span class="projects-card-chip">${s.trim()}</span>`).join('')
+        : '';
+
       card.innerHTML = `
         <div class="projects-card-thumbnail">${mediaHtml}</div>
         <div class="projects-card-info">
           <p class="projects-card-title">${project.name}</p>
           <p class="projects-card-desc">${project.description}</p>
         </div>
+        ${chipsHtml ? `<div class="projects-card-meta">${chipsHtml}</div>` : ''}
       `;
 
       grid.appendChild(card);

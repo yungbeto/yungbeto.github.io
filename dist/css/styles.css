@@ -3,6 +3,14 @@
 *::after {
   box-sizing: border-box; }
 
+*::selection {
+  background: #3f3f46;
+  color: #d4d4d8; }
+
+*::-moz-selection {
+  background: #3f3f46;
+  color: #d4d4d8; }
+
 html,
 body {
   font-family: 'Inter', sans-serif;
@@ -221,7 +229,7 @@ ul {
 .projects-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
   border: 1px solid #3f3f46;
   border-radius: 8px;
   background: #d4d4d8;
@@ -253,7 +261,8 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px; }
+  padding: 16px;
+  flex-grow: 1; }
 
 .projects-card-title {
   font-weight: 600;
@@ -264,6 +273,25 @@ ul {
   font-size: 16px;
   color: #3f3f46;
   line-height: 24px; }
+
+.projects-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid #3f3f46;
+  width: 100%;
+  box-sizing: border-box; }
+
+.projects-card-chip {
+  font-size: 12px;
+  color: #3f3f46;
+  background: #e4e4e7;
+  border: 1px solid #3f3f46;
+  border-radius: 24px;
+  padding: 2px 8px;
+  line-height: 24px;
+  white-space: nowrap; }
 
 .work-content {
   display: flex;

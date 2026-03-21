@@ -4,6 +4,7 @@
     "name": "Good Song Club",
     "url": "https://goodsong.club",
     "year": "2023",
+    "skills": "React, Node.js, Firebase, Product Design",
     "description": "A small social media platform that allows you to share good songs with your friends",
     "media": [
       {
@@ -18,6 +19,7 @@
     "url": "https://concrete95.net/",
     "year": "2025",
     "description": "Concrete 95 is a sound design webapp inspired by Musique Concrete. It allows you to layer synth pads, melodies, and found sound randomly fetched from freesound.org to create a unique, ever-changing soundscape.",
+    "skills": "React, Node.js, Firebase, Agentic Development",
     "media": [
       {
         "type": "video",
@@ -31,6 +33,7 @@
     "url": "https://bpmga.me",
     "year": "2025",
     "description": "Listen to a metronome and guess the BPM.",
+    "skills": "React, Product Design, Firebase",
     "media": [
       {
         "type": "video",
@@ -44,6 +47,7 @@
     "url": "https://digthis.club",
     "year": "2024",
     "description": "Web application that generates a random music recommendation using the Discogs API",
+    "skills": "React, Node.js, Discogs API, Product Design",
     "media": [
       {
         "type": "video",
@@ -65,6 +69,7 @@
     "url": "https://moodpalace.net",
     "year": "2023",
     "description": "A web repository that allows me to upload ambient audio for anyone to listen",
+    "skills": "Next.js, Vercel, Product Design, Firebase",
     "media": [
       {
         "type": "video",
@@ -78,6 +83,7 @@
     "url": "https://www.figma.com/community/plugin/1008125233177309016/Lever---A-Figma-File-Starter",
     "year": "2022",
     "description": "A Figma plugin I built which provides a consistent structure to Figma files.",
+    "skills": "Figma, Product Design, Developer Tools",
     "media": [
       {
         "type": "image",
