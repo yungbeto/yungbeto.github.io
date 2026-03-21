@@ -204,6 +204,9 @@ hello@robysaavedra.com
                 document.addEventListener('click', function () {
                     img.classList.remove('visible');
                 });
+                window.addEventListener('scroll', function () {
+                    img.classList.remove('visible');
+                }, { passive: true });
             } else {
                 const OFFSET = 16;
                 const IMG_W = 240;

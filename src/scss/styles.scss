@@ -4,6 +4,7 @@ $surface: #e4e4e7;
 $ink: #3f3f46;
 $footer-bg: #3f3f46;
 $footer-fg: #d4d4d8;
+$green: #4d7c0f;
 
 $label-width: 104px;
 $desktop: 1280px;
@@ -18,7 +19,7 @@ $mobile: 480px;
 }
 
 *::selection {
-  background: $ink;
+  background: $green;
   color: $bg;
 }
 *::-moz-selection {
@@ -243,8 +244,9 @@ ul {
   cursor: default;
   text-decoration: underline;
   text-decoration-style: dotted;
-  text-underline-offset: 4px;
+  text-underline-offset: 8px;
   text-decoration-color: currentColor;
+  text-decoration-thickness: 4px;
 }
 
 .name-hover-img {
@@ -256,7 +258,9 @@ ul {
   pointer-events: none;
   opacity: 0;
   transform: translateY(6px) scale(0.97);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   z-index: 1000;
 
   &.visible {
