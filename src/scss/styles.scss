@@ -36,6 +36,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: clip;
+  overscroll-behavior: none;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -233,6 +234,10 @@ ul {
 }
 
 // ─── About / hero ────────────────────────────────────────────────────────────
+
+.about-section {
+  min-height: calc(100vh - 96px);
+}
 
 .hero-text {
   font-size: 80px;
