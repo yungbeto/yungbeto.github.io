@@ -38,6 +38,14 @@ ul {
   max-width: 1280px;
   border-left: 1px solid #3f3f46;
   border-right: 1px solid #3f3f46; }
+  @media (max-width: 768px) {
+    .page-container {
+      border-left: none;
+      border-right: none; } }
+  @media (max-width: 480px) {
+    .page-container {
+      border-left: none;
+      border-right: none; } }
 
 .navbar {
   display: flex;
@@ -114,7 +122,12 @@ ul {
       flex-direction: column; } }
 
 .section-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 104px;
+  gap: 8px;
   flex-shrink: 0;
   padding: 32px 16px;
   font-size: 16px;
@@ -122,12 +135,24 @@ ul {
   align-self: flex-start;
   position: sticky;
   top: 56px;
-  background: #d4d4d8; }
+  background: #d4d4d8;
+  z-index: 10; }
+  .section-label i {
+    font-size: 20px;
+    line-height: 1;
+    color: #3f3f46; }
   @media (max-width: 768px) {
     .section-label {
       width: 100%;
-      padding: 32px 16px 0;
-      position: static; } }
+      padding: 16px;
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      border-bottom: 1px solid #3f3f46;
+      position: sticky;
+      top: 56px; } }
 
 .section-content {
   flex: 1;
@@ -147,7 +172,7 @@ ul {
   @media (max-width: 768px) {
     .section-content-work {
       border-left: none;
-      padding: 32px 16px; } }
+      padding: 32px 0; } }
 
 .hero-text {
   font-size: 80px;
@@ -270,6 +295,13 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 24px; }
+  @media (max-width: 768px) {
+    .work-case-header {
+      gap: 16px;
+      padding: 16px; } }
+  @media (max-width: 480px) {
+    .work-case-header {
+      gap: 16px; } }
 
 .work-case-pill-wrapper {
   position: fixed;
@@ -282,7 +314,8 @@ ul {
   margin-right: -16px; }
   @media (max-width: 768px) {
     .work-case-pill-wrapper {
-      margin-right: -8px; } }
+      margin-right: 8px;
+      top: 120px; } }
 
 .work-case-pill {
   display: inline-flex;
@@ -358,10 +391,9 @@ ul {
 .work-case-media {
   display: flex;
   flex-direction: column;
-  gap: 24px; }
+  gap: 16px; }
 
 .work-case-media-item {
-  border: 1px solid #3f3f46;
   border-radius: 24px;
   overflow: hidden;
   background: #e4e4e7; }
@@ -371,6 +403,9 @@ ul {
     height: auto;
     display: block;
     object-fit: contain; }
+  @media (max-width: 768px) {
+    .work-case-media-item {
+      border-radius: 0px; } }
 
 .jobs-content {
   padding: 0; }
@@ -409,7 +444,6 @@ ul {
 .job-logo {
   width: 72px;
   height: 72px;
-  border: 1px solid #3f3f46;
   border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
@@ -607,7 +641,9 @@ ul {
   padding: 0;
   color: #d4d4d8;
   flex-shrink: 0;
-  transition: opacity 0.2s ease; }
+  transition: opacity 0.2s ease;
+  font-size: 16px;
+  line-height: 24px; }
   .copy-btn i {
     font-size: 16px;
     line-height: 1; }
