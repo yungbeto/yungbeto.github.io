@@ -239,6 +239,32 @@ ul {
   min-height: calc(100vh - 96px);
 }
 
+.name-hover-trigger {
+  cursor: default;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  text-decoration-color: currentColor;
+}
+
+.name-hover-img {
+  position: fixed;
+  width: 240px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .hero-text {
   font-size: 80px;
   line-height: 88px;

@@ -72,8 +72,9 @@ hello@robysaavedra.com
                 <section class="site-section about-section">
                     <div class="section-label"> <i class="ph ph-smiley-wink"></i> About</div>
                     <div class="section-content">
-                        <p class="hero-text">Roby Saavedra is a designer focused on human-centered products, meaningful
+                        <p class="hero-text"><span class="name-hover-trigger">Roby Saavedra</span> is a designer focused on human-centered products, meaningful
                             technology, and crafting the spaces where people and systems meet.</p>
+                        <img class="name-hover-img" src="src/img/pic.jpg" alt="Roby Saavedra">
                     </div>
                 </section>
 
@@ -182,6 +183,55 @@ hello@robysaavedra.com
                 icon.className = 'ph ph-warning';
             });
         });
+    </script>
+    <script>
+        (function () {
+            const trigger = document.querySelector('.name-hover-trigger');
+            const img = document.querySelector('.name-hover-img');
+            if (!trigger || !img) return;
+
+            const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+            if (isTouchDevice) {
+                trigger.style.cursor = 'pointer';
+                trigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const rect = trigger.getBoundingClientRect();
+                    img.style.left = (rect.left + rect.width / 2) + 'px';
+                    img.style.top = rect.top + 'px';
+                    img.classList.toggle('visible');
+                });
+                document.addEventListener('click', function () {
+                    img.classList.remove('visible');
+                });
+            } else {
+                const OFFSET = 16;
+                const IMG_W = 240;
+                const IMG_H = 300;
+
+                trigger.addEventListener('mouseenter', function () {
+                    img.classList.add('visible');
+                });
+                trigger.addEventListener('mouseleave', function () {
+                    img.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    img.classList.remove('visible');
+                }, { passive: true });
+                document.addEventListener('mousemove', function (e) {
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    const x = e.clientX;
+                    const y = e.clientY;
+
+                    const left = (x + OFFSET + IMG_W > vw) ? x - OFFSET - IMG_W : x + OFFSET;
+                    const top  = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
+
+                    img.style.left = left + 'px';
+                    img.style.top  = top + 'px';
+                });
+            }
+        })();
     </script>
 
 </body>
