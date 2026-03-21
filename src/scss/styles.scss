@@ -580,7 +580,8 @@ ul {
   border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
-  background: $bg;
+  background: transparent;
+  border: none;
 
   img {
     width: 100%;
