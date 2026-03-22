@@ -100,11 +100,11 @@ function startScramble(charSpans) {
   // Stop cycling once all chars have resolved + transition buffer
   setTimeout(() => clearInterval(timer), endTime);
 
-  // Animate TOC in after scramble completes
-  setTimeout(() => {
-    const toc = document.querySelector('.toc');
-    if (toc) toc.classList.add('in-view');
-  }, endTime);
+  // Animate TOC items in after scramble completes
+  const tocItems = document.querySelectorAll('.toc .toc-label, .toc .toc-link');
+  tocItems.forEach((el, i) => {
+    setTimeout(() => el.classList.add('in-view'), endTime + i * 80);
+  });
 }
 
 function initSectionLabelObserver() {
