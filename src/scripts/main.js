@@ -95,11 +95,16 @@ function startScramble(charSpans) {
     );
   });
 
+  const endTime = START_DELAY + charSpans.length * STAGGER_MS + 400;
+
   // Stop cycling once all chars have resolved + transition buffer
-  setTimeout(
-    () => clearInterval(timer),
-    START_DELAY + charSpans.length * STAGGER_MS + 400,
-  );
+  setTimeout(() => clearInterval(timer), endTime);
+
+  // Animate TOC in after scramble completes
+  setTimeout(() => {
+    const toc = document.querySelector('.toc');
+    if (toc) toc.classList.add('in-view');
+  }, endTime);
 }
 
 function initSectionLabelObserver() {

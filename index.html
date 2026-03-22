@@ -72,21 +72,32 @@ hello@robysaavedra.com
 
                 <section class="site-section about-section">
                     <div class="section-label"> <i class="ph ph-smiley-wink"></i> About</div>
-                    <div class="section-content">
+                    <div class="section-content hero-section">
                         <p class="hero-text"><span class="name-hover-trigger">Roby Saavedra </span> is a designer
                             focused on human-centered products, meaningful
                             technology, and crafting the spaces where people and systems meet.</p>
+                        <nav class="toc" aria-label="Jump to section">
+                            <p class="toc-label">JUMP TO SECTION</p>
+                            <a href="#projects" class="toc-link"><i class="ph ph-projector-screen"></i><span
+                                    class="toc-link-text">Projects</span></a>
+                            <a href="#work" class="toc-link"><i class="ph ph-briefcase"></i><span
+                                    class="toc-link-text">Work
+                                    Examples</span></a>
+                            <a href="#jobs" class="toc-link"><i class="ph ph-paperclip"></i><span
+                                    class="toc-link-text">Where I've
+                                    Worked</span></a>
+                        </nav>
                         <img class="name-hover-img" src="src/img/pic.jpg" alt="Roby Saavedra">
                     </div>
                 </section>
 
-                <section class="site-section projects-section">
+                <section class="site-section projects-section" id="projects">
                     <div class="section-label"> <i class="ph ph-projector-screen"></i> Projects</div>
                     <div class="section-content projects-grid" id="projects-grid">
                     </div>
                 </section>
 
-                <section class="site-section work-section">
+                <section class="site-section work-section" id="work">
                     <div class="section-label"> <i class="ph ph-briefcase"></i> Work Examples</div>
                     <div class="section-content-work work-content">
 
@@ -94,7 +105,7 @@ hello@robysaavedra.com
                     </div>
                 </section>
 
-                <section class="site-section jobs-section">
+                <section class="site-section jobs-section" id="jobs">
                     <div class="section-label"> <i class="ph ph-paperclip"></i> Where I've worked</div>
                     <div class="section-content jobs-content">
                         <ul class="jobs-list" id="jobs-list"></ul>
@@ -237,6 +248,15 @@ hello@robysaavedra.com
                 });
             }
         })();
+    </script>
+    <script>
+        document.querySelectorAll('.toc-link').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var target = document.querySelector(link.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
+            });
+        });
     </script>
 
 </body>

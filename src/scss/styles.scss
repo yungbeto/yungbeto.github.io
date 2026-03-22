@@ -227,10 +227,76 @@ ul {
   min-width: 0;
   padding: 32px;
   border-left: 1px solid $ink;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 
   @media (max-width: $tablet) {
     border-left: none;
     padding: 32px 16px;
+    gap: 40px;
+  }
+
+  @media (max-width: $mobile) {
+    gap: 32px;
+  }
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// ─── Table of Contents ────────────────────────────────────────────────────────
+
+.toc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  &.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toc-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: $ink;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.toc-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 24px;
+  color: $ink;
+  text-decoration: none;
+  width: fit-content;
+  .toc-link-text {
+    transition: transform 0.15s ease-in-out;
+  }
+
+  i {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    opacity: 0.5;
+    .toc-link-text {
+      transform: translateX(4px);
+    }
   }
 }
 .section-content-work {
