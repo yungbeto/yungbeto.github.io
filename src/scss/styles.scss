@@ -176,6 +176,17 @@ ul {
 }
 
 .section-label {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  &.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -237,14 +248,12 @@ ul {
 // ─── About / hero ────────────────────────────────────────────────────────────
 
 .about-section {
-  min-height: calc(100vh - 96px);
+  min-height: calc(100vh - 72px);
 }
 
 .name-hover-trigger {
   cursor: default;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 8px;
+  text-decoration: none;
   text-decoration-color: currentColor;
   text-decoration-thickness: 4px;
 }
@@ -266,6 +275,47 @@ ul {
   &.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+.hero-word {
+  display: inline-block;
+}
+
+.hero-char {
+  display: inline-block;
+  position: relative;
+}
+
+.hero-char-ghost {
+  visibility: hidden;
+}
+
+.hero-char-real {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  white-space: pre;
+
+  .hero-char.resolved & {
+    opacity: 1;
+  }
+}
+
+.hero-char-block {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  pointer-events: none;
+  white-space: pre;
+  transition: opacity 0.1s ease;
+  color: $ink;
+
+  .hero-char.resolved & {
+    opacity: 0;
   }
 }
 
@@ -493,13 +543,16 @@ ul {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: translateX(calc(100% + 24px));
   transition:
-    opacity 0.25s ease,
-    visibility 0.25s ease;
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   &.is-visible {
     opacity: 1;
     visibility: visible;
+    transform: translateX(0);
   }
 }
 

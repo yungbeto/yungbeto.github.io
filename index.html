@@ -55,7 +55,8 @@ hello@robysaavedra.com
         <div class="page-container">
 
             <nav class="navbar">
-                <span class="nav-name" role="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="cursor:pointer;">Roby Saavedra</span>
+                <span class="nav-name" role="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+                    style="cursor:pointer;">Roby Saavedra</span>
                 <div class="nav-icons">
                     <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer"
                         class="nav-icon" aria-label="LinkedIn" data-tooltip="LinkedIn">in</a>
@@ -72,7 +73,8 @@ hello@robysaavedra.com
                 <section class="site-section about-section">
                     <div class="section-label"> <i class="ph ph-smiley-wink"></i> About</div>
                     <div class="section-content">
-                        <p class="hero-text"><span class="name-hover-trigger">Roby Saavedra</span> is a designer focused on human-centered products, meaningful
+                        <p class="hero-text"><span class="name-hover-trigger">Roby Saavedra </span> is a designer
+                            focused on human-centered products, meaningful
                             technology, and crafting the spaces where people and systems meet.</p>
                         <img class="name-hover-img" src="src/img/pic.jpg" alt="Roby Saavedra">
                     </div>
@@ -228,10 +230,10 @@ hello@robysaavedra.com
                     const y = e.clientY;
 
                     const left = (x + OFFSET + IMG_W > vw) ? x - OFFSET - IMG_W : x + OFFSET;
-                    const top  = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
+                    const top = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
 
                     img.style.left = left + 'px';
-                    img.style.top  = top + 'px';
+                    img.style.top = top + 'px';
                 });
             }
         })();

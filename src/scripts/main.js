@@ -1,9 +1,126 @@
 document.addEventListener('DOMContentLoaded', function () {
-  loadProjectCards();
-  loadWorkCases();
-  loadJobs();
-  loadMarquee();
+  initHeroAnimation();
+  Promise.all([
+    loadProjectCards(),
+    loadWorkCases(),
+    loadJobs(),
+    loadMarquee(),
+  ]).then(initSectionLabelObserver);
 });
+
+function initHeroAnimation() {
+  const hero = document.querySelector('.hero-text');
+  if (!hero) return;
+
+  const charSpans = [];
+  const nodes = Array.from(hero.childNodes);
+  hero.innerHTML = '';
+
+  nodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      // Normalize whitespace from HTML source formatting
+      const text = node.textContent.replace(/\s+/g, ' ');
+      splitTextIntoChars(text, hero, charSpans);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      // Preserve the original element (keeps event listeners) but replace its text with char spans
+      const text = node.textContent;
+      node.innerHTML = '';
+      splitTextIntoChars(text, node, charSpans);
+      hero.appendChild(node);
+    }
+  });
+
+  startScramble(charSpans);
+}
+
+function splitTextIntoChars(text, container, charSpans) {
+  const words = text.split(' ');
+  words.forEach((word, wi) => {
+    if (!word) return;
+
+    // Wrap each word in an inline-block span so line breaks only happen between words
+    const wordSpan = document.createElement('span');
+    wordSpan.className = 'hero-word';
+
+    for (const char of word) {
+      const outer = document.createElement('span');
+      outer.className = 'hero-char';
+
+      const ghost = document.createElement('span');
+      ghost.className = 'hero-char-ghost';
+      ghost.textContent = char;
+
+      const real = document.createElement('span');
+      real.className = 'hero-char-real';
+      real.textContent = char;
+
+      const block = document.createElement('span');
+      block.className = 'hero-char-block';
+      block.textContent = '█';
+
+      outer.appendChild(ghost);
+      outer.appendChild(real);
+      outer.appendChild(block);
+      wordSpan.appendChild(outer);
+      charSpans.push({ outer, block });
+    }
+
+    container.appendChild(wordSpan);
+    if (wi < words.length - 1) {
+      container.appendChild(document.createTextNode(' '));
+    }
+  });
+}
+
+function startScramble(charSpans) {
+  const BLOCKS = ['█', '▓', '▒', '░', '▒', '▓'];
+  const CYCLE_MS = 40;
+  const START_DELAY = 150;
+  const STAGGER_MS = 12;
+
+  let frame = 0;
+  const timer = setInterval(() => {
+    frame++;
+    charSpans.forEach(({ outer, block }) => {
+      if (!outer.classList.contains('resolved')) {
+        block.textContent = BLOCKS[frame % BLOCKS.length];
+      }
+    });
+  }, CYCLE_MS);
+
+  charSpans.forEach(({ outer }, i) => {
+    setTimeout(
+      () => outer.classList.add('resolved'),
+      START_DELAY + i * STAGGER_MS,
+    );
+  });
+
+  // Stop cycling once all chars have resolved + transition buffer
+  setTimeout(
+    () => clearInterval(timer),
+    START_DELAY + charSpans.length * STAGGER_MS + 400,
+  );
+}
+
+function initSectionLabelObserver() {
+  const labels = document.querySelectorAll('.section-label');
+  if (!labels.length || !('IntersectionObserver' in window)) {
+    labels.forEach((el) => el.classList.add('in-view'));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+  labels.forEach((el) => observer.observe(el));
+}
 
 async function loadProjectCards() {
   const grid = document.getElementById('projects-grid');
@@ -42,7 +159,10 @@ async function loadProjectCards() {
       card.rel = 'noopener noreferrer';
       card.className = 'projects-card';
       const chipsHtml = project.skills
-        ? project.skills.split(',').map((s) => `<span class="projects-card-chip">${s.trim()}</span>`).join('')
+        ? project.skills
+            .split(',')
+            .map((s) => `<span class="projects-card-chip">${s.trim()}</span>`)
+            .join('')
         : '';
 
       card.innerHTML = `
