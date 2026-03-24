@@ -314,10 +314,13 @@ footer .olderWork__row {
   section .olderWork__row,
   footer .olderWork__row {
     flex-direction: column;
-    padding-bottom: 24px;
   }
   section .olderWork__row .entryInfo,
   footer .olderWork__row .entryInfo {
+    padding-bottom: 24px;
+  }
+  section .olderWork__row,
+  footer .olderWork__row {
     padding-bottom: 24px;
   }
 }
@@ -872,13 +875,13 @@ button.next {
   right: 0;
 }
 
+.hideScroll::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
 .hideScroll {
   /* Hide scrollbar for IE, Edge, and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-}
-.hideScroll::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
 }
 
 .scrollShowcase .imageContainer {

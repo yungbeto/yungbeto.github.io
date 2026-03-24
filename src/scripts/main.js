@@ -136,7 +136,7 @@ async function loadProjectCards() {
   infoBox.className = 'projects-info-box';
   infoBox.innerHTML = `
     <i class="ph ph-code projects-info-icon"></i>
-    <p>Here is a selection of projects that I've conceived, designed, and developed. These examples range from personal utilities, small social networks, and solutions to problems I've encountered in the wild.</p>
+    <p>Here is a selection of applications that I've conceived, designed, and developed. <br /><br/>These projects range from personal utilities, small social networks, and solutions to problems I've encountered in the wild.</p>
   `;
   grid.appendChild(infoBox);
 
