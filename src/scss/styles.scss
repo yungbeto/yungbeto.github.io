@@ -321,6 +321,26 @@ ul {
   min-height: calc(100dvh - 88px);
 }
 
+// Canvas injected by rocks.js — sits behind hero text
+.hero-section {
+  position: relative;
+  overflow: hidden;
+
+  > canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+// Hero content layers above the canvas
+.hero-text,
+.toc {
+  position: relative;
+  z-index: 1;
+}
+
 .name-hover-trigger {
   cursor: default;
   text-decoration: none;

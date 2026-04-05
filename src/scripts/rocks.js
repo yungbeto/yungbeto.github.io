@@ -1,120 +1,81 @@
 var engine, render, homeDiv;
-var bodyCount = 0;
-var maxBodies = 100; // Adjusted maximum number of bodies
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Use desktop background for full-viewport fixed wallpaper, fallback to #home
-  homeDiv = document.getElementById('desktop-background') || document.getElementById('home');
+  homeDiv = document.getElementById('hero-rocks');
   if (!homeDiv) {
-    console.error('rocks.js: container not found!');
+    console.warn('rocks.js: #hero-rocks container not found');
     return;
   }
 
   engine = Matter.Engine.create({
-    gravity: {
-      x: 0,
-      y: 0, // Zero gravity for floating effect
-    },
+    gravity: { x: 0, y: 1 },
   });
 
   render = Matter.Render.create({
     element: homeDiv,
     engine: engine,
     options: {
-      width: homeDiv.clientWidth || window.innerWidth,
-      height: homeDiv.clientHeight || window.innerHeight,
+      width: homeDiv.clientWidth,
+      height: homeDiv.clientHeight,
       wireframes: false,
       background: 'transparent',
     },
   });
 
-  createWalls(); // Create walls on initialization
-  createInitialBody(); // Create the first body immediately
+  render.canvas.style.position = 'absolute';
+  render.canvas.style.inset = '0';
+  render.canvas.style.zIndex = '0';
+  render.canvas.style.pointerEvents = 'none';
 
-  // Set an interval to create a new body every 2 seconds
-  setInterval(function () {
-    if (bodyCount < maxBodies) {
-      createInitialBody();
-    }
-  }, 2000);
+  createWalls();
+  scheduleNextDrop();
 
-  Matter.Events.on(engine, 'beforeUpdate', function () {
-    applyCursorAttraction(engine);
+  // Click anywhere in the hero section to drop a rock at that point
+  homeDiv.addEventListener('click', function (event) {
+    var rect = homeDiv.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    dropBody(x, y);
   });
 
-  setupEventListeners();
   window.addEventListener('resize', function () {
     resizeCanvas();
-    createWalls(); // Recreate walls on resize
+    createWalls();
   });
-  window.addEventListener('orientationchange', function () {
-    resizeCanvas();
-    createWalls(); // Ensure walls are adjusted on orientation change
-  });
+
   Matter.Engine.run(engine);
   Matter.Render.run(render);
 });
 
-function setupEventListeners() {
-  render.canvas.addEventListener('pointerdown', handlePointerDown);
-  render.canvas.addEventListener(
-    'touchstart',
-    function (e) {
-      handlePointerDown(e.touches[0]); // Pass the first touch point to the handler
-      e.preventDefault(); // Call preventDefault only if necessary (moved inside handlePointerDown)
-    },
-    { passive: false },
-  );
-}
+// Drop one rock, then wait for it to settle before dropping the next
+function scheduleNextDrop() {
+  var w = homeDiv.clientWidth;
+  // Spawn near top-center with a small random horizontal offset, like an hourglass neck
+  var x = w / 2 + (Math.random() - 0.5) * 40;
+  var body = dropBody(x, -60);
 
-// Throttle function to limit event frequency
-function throttle(func, limit) {
-  let lastFunc;
-  let lastRan;
-  return function () {
-    const context = this;
-    const args = arguments;
-    if (!lastRan) {
-      func.apply(context, args);
-      lastRan = Date.now();
-    } else {
-      clearTimeout(lastFunc);
-      lastFunc = setTimeout(
-        function () {
-          if (Date.now() - lastRan >= limit) {
-            func.apply(context, args);
-            lastRan = Date.now();
-          }
-        },
-        limit - (Date.now() - lastRan),
-      );
+  var settled = false;
+  var maxWait = setTimeout(function () {
+    if (!settled) { settled = true; scheduleNextDrop(); }
+  }, 6000); // fallback: next drop after 6s regardless
+
+  var checkInterval = setInterval(function () {
+    var spd = Math.sqrt(body.velocity.x * body.velocity.x + body.velocity.y * body.velocity.y);
+    if (spd < 0.15) {
+      clearInterval(checkInterval);
+      clearTimeout(maxWait);
+      if (!settled) {
+        settled = true;
+        // Small pause between rocks so it feels deliberate
+        setTimeout(scheduleNextDrop, 400);
+      }
     }
-  };
+  }, 100);
 }
 
-function handlePointerDown(event) {
-  var rect = render.canvas.getBoundingClientRect();
-  var clickX = event.clientX - rect.left;
-  var clickY = event.clientY - rect.top;
-  // Only prevent default if the interaction is within the canvas area
-  if (
-    clickX >= 0 &&
-    clickX <= render.canvas.width &&
-    clickY >= 0 &&
-    clickY <= render.canvas.height
-  ) {
-    event.preventDefault();
-    var newBody = createBody(clickX, clickY);
-    Matter.World.add(engine.world, newBody);
-  }
-}
-
-function createBody(x, y) {
-  var w = homeDiv.clientWidth || window.innerWidth;
-  x = x || Math.random() * w;
-  y = y || -300; // Start bodies further above the top edge of the canvas
-  var sides = Math.floor(Math.random() * (8 - 4 + 1)) + 4;
-  var maxRadius = 40;
+function dropBody(x, y) {
+  var sides = Math.floor(Math.random() * 5) + 4; // 4–8 sides
+  var maxRadius = 32;
   var vertices = [];
   for (var i = 0; i < sides; i++) {
     var angle = ((Math.PI * 2) / sides) * i;
@@ -125,124 +86,56 @@ function createBody(x, y) {
     });
   }
 
-  var colors = ['#0f0f0f', '#2a2a2a'];
-  var strokeColor = ['#a3a3a3', '#737373'];
-  var randomColor = colors[Math.floor(Math.random() * colors.length)];
-  var randomStrokeColor =
-    strokeColor[Math.floor(Math.random() * strokeColor.length)];
+  var fills = ['#e4e4e7', '#d4d4d8', '#cacaca'];
+  var fill = fills[Math.floor(Math.random() * fills.length)];
 
-  var body = Matter.Bodies.fromVertices(
-    x,
-    y,
-    [vertices],
-    {
-      frictionAir: 0.05,
-      inertia: Infinity,
-      render: {
-        fillStyle: randomColor,
-        strokeStyle: randomStrokeColor,
-        lineWidth: 1,
-      },
+  var body = Matter.Bodies.fromVertices(x, y, [vertices], {
+    frictionAir: 0.008,
+    friction: 0.8,
+    frictionStatic: 0.5,
+    restitution: 0.05,
+    render: {
+      fillStyle: fill,
+      strokeStyle: '#3f3f46',
+      lineWidth: 1,
     },
-    true,
-  );
+  }, true);
 
-  // Set a downward initial velocity to simulate dropping
+  // Tiny random horizontal nudge so they don't all stack perfectly
   Matter.Body.setVelocity(body, {
-    x: (Math.random() - 0.5) * 0.2, // Reduced x velocity
-    y: 2, // Set a positive y-velocity to simulate dropping
+    x: (Math.random() - 0.5) * 0.5,
+    y: 0,
   });
 
-  bodyCount++;
+  Matter.World.add(engine.world, body);
   return body;
 }
 
 function resizeCanvas() {
-  var w = homeDiv.clientWidth || window.innerWidth;
-  var h = homeDiv.clientHeight || window.innerHeight;
+  var w = homeDiv.clientWidth;
+  var h = homeDiv.clientHeight;
   render.canvas.width = w;
   render.canvas.height = h;
   render.options.width = w;
   render.options.height = h;
-  createWalls();
 }
 
 function createWalls() {
-  // Instead of clearing the entire world, just remove and recreate the walls
-  // Clear only walls
-  engine.world.bodies.forEach((body) => {
-    if (body.isStatic) {
-      Matter.Composite.remove(engine.world, body);
-    }
+  engine.world.bodies.forEach(function (body) {
+    if (body.isStatic) Matter.Composite.remove(engine.world, body);
   });
 
-  var wallOptions = {
-    isStatic: true,
-    render: {
-      visible: false,
-    },
-  };
-  var w = homeDiv.clientWidth || window.innerWidth;
-  var h = homeDiv.clientHeight || window.innerHeight;
+  var wallOptions = { isStatic: true, render: { visible: false } };
+  var w = homeDiv.clientWidth;
+  var h = homeDiv.clientHeight;
+
   Matter.World.add(engine.world, [
-    Matter.Bodies.rectangle(w / 2, -25, w, 50, wallOptions),
+    // floor
     Matter.Bodies.rectangle(w / 2, h + 25, w, 50, wallOptions),
+    // left wall
     Matter.Bodies.rectangle(-25, h / 2, 50, h, wallOptions),
+    // right wall
     Matter.Bodies.rectangle(w + 25, h / 2, 50, h, wallOptions),
+    // no ceiling — rocks fall in from the top
   ]);
 }
-
-var mousePosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-document.addEventListener(
-  'mousemove',
-  throttle(function (event) {
-    mousePosition.x = event.clientX;
-    mousePosition.y = event.clientY;
-  }, 100),
-);
-
-document.addEventListener(
-  'touchmove',
-  throttle(function (event) {
-    if (event.touches.length > 0) {
-      var touch = event.touches[0];
-      mousePosition.x = touch.clientX;
-      mousePosition.y = touch.clientY;
-    }
-  }, 100),
-);
-
-function applyCursorAttraction(engine) {
-  var bodies = Matter.Composite.allBodies(engine.world);
-
-  bodies.forEach(function (body) {
-    var dx = mousePosition.x - body.position.x;
-    var dy = mousePosition.y - body.position.y;
-    var distance = Math.sqrt(dx * dx + dy * dy);
-    var forceMagnitude = 0.00001 * body.mass; // Adjust this value to change the strength of the attraction
-    Matter.Body.applyForce(body, body.position, {
-      x: (dx / distance) * forceMagnitude,
-      y: (dy / distance) * forceMagnitude,
-    });
-  });
-}
-
-function createInitialBody() {
-  var w = homeDiv.clientWidth || window.innerWidth;
-  var h = homeDiv.clientHeight || window.innerHeight;
-  var initialBody = createBody(w / 2, h / 50);
-  Matter.World.add(engine.world, initialBody);
-}
-
-window.addEventListener('resize', function () {
-  var w = homeDiv.clientWidth || window.innerWidth;
-  var h = homeDiv.clientHeight || window.innerHeight;
-  render.canvas.width = w;
-  render.canvas.height = h;
-  render.options.width = w;
-  render.options.height = h;
-  createWalls();
-});
-
-// Note: Engine and render are started in DOMContentLoaded
