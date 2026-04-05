@@ -390,7 +390,7 @@ ul {
 }
 
 .hero-text {
-  font-size: 64px;
+  font-size: 60px;
   line-height: 72px;
   font-weight: 400;
   // color: $ink;
@@ -398,7 +398,7 @@ ul {
   margin: 0;
 
   @media (max-width: $desktop) {
-    font-size: 5vw;
+    font-size: 4.8vw;
     line-height: 5.5vw;
   }
 
@@ -858,6 +858,80 @@ ul {
       margin-bottom: 0;
     }
   }
+}
+
+// ─── Press ───────────────────────────────────────────────────────────────────
+
+.press-content {
+  flex: 1;
+  min-width: 0;
+  border-left: 1px solid $ink;
+
+  @media (max-width: $tablet) {
+    border-left: none;
+  }
+}
+
+.press-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 16px 24px 24px;
+  border-bottom: 1px solid $ink;
+  text-decoration: none;
+  color: $ink;
+  background: $bg;
+  transition: background 0.2s ease-in-out;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $surface;
+
+    .press-arrow {
+      transform: translate(3px, -3px);
+    }
+  }
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+}
+
+.press-publication {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba($ink, 0.5);
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.press-title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.press-title {
+  flex: 1;
+  font-size: 16px;
+  line-height: 24px;
+  color: $ink;
+}
+
+.press-arrow {
+  font-size: 20px;
+  flex-shrink: 0;
+  color: $ink;
+  transition: transform 0.2s ease-in-out;
 }
 
 // ─── Marquee ─────────────────────────────────────────────────────────────────
