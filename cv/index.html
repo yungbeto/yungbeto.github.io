@@ -9,7 +9,50 @@
   <meta name="robots" content="noindex">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <!-- Apply saved theme before first paint to prevent flash -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('cv-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <style>
+    /* ── Theme tokens ──────────────────────────── */
+
+    :root {
+      --color-bg:              #ffffff;
+      --color-text:            #18181b;
+      --color-muted:           #71717a;
+      --color-body:            #3f3f46;
+      --color-mid:             #52525b;
+      --color-faint:           #a1a1aa;
+      --color-border:          #f4f4f5;
+      --color-border-ui:       #e4e4e7;
+      --color-border-ui-hover: #a1a1aa;
+      --color-tag-bg:          #f4f4f5;
+      --color-tag-text:        #52525b;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:              #0c0c0e;
+      --color-text:            #fafafa;
+      --color-muted:           #a1a1aa;
+      --color-body:            #d4d4d8;
+      --color-mid:             #a1a1aa;
+      --color-faint:           #71717a;
+      --color-border:          #27272a;
+      --color-border-ui:       #27272a;
+      --color-border-ui-hover: #52525b;
+      --color-tag-bg:          #1c1c1f;
+      --color-tag-text:        #a1a1aa;
+    }
+
+    /* ── Reset ─────────────────────────────────── */
+
     *,
     *::before,
     *::after {
@@ -21,11 +64,12 @@
       font-size: 14px;
       font-weight: 300;
       line-height: 1.6;
-      color: #18181b;
-      background: #ffffff;
+      color: var(--color-text);
+      background: var(--color-bg);
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     a {
@@ -58,12 +102,12 @@
       align-items: center;
       gap: 6px;
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       transition: color 0.15s ease;
     }
 
     .cv-back:hover {
-      color: #18181b;
+      color: var(--color-text);
     }
 
     /* ── Header ────────────────────────────────── */
@@ -90,20 +134,20 @@
     .cv-name {
       font-size: 20px;
       font-weight: 500;
-      color: #18181b;
+      color: var(--color-text);
       margin: 0 0 3px;
       letter-spacing: -0.01em;
     }
 
     .cv-title {
       font-size: 14px;
-      color: #71717a;
+      color: var(--color-muted);
       margin: 0 0 4px;
     }
 
     .cv-location {
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       margin: 0 0 14px;
     }
 
@@ -116,7 +160,7 @@
 
     .cv-link {
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -124,7 +168,7 @@
     }
 
     .cv-link:hover {
-      color: #18181b;
+      color: var(--color-text);
     }
 
     /* ── Section ───────────────────────────────── */
@@ -138,15 +182,15 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #71717a;
+      color: var(--color-muted);
       margin: 0 0 24px;
       padding-bottom: 10px;
-      border-bottom: 1px solid #f4f4f5;
+      border-bottom: 1px solid var(--color-border);
     }
 
     .cv-about {
       font-size: 14px;
-      color: #3f3f46;
+      color: var(--color-body);
       line-height: 1.75;
     }
 
@@ -166,7 +210,7 @@
     .cv-item-date {
       flex: 0 0 100px;
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       padding-top: 2px;
       line-height: 1.5;
     }
@@ -179,19 +223,19 @@
     .cv-item-title {
       font-size: 14px;
       font-weight: 500;
-      color: #18181b;
+      color: var(--color-text);
       margin: 0 0 1px;
     }
 
     .cv-item-company {
       font-size: 13px;
-      color: #71717a;
+      color: var(--color-muted);
       margin: 0 0 2px;
     }
 
     .cv-item-context {
       font-size: 12px;
-      color: #52525b;
+      color: var(--color-mid);
       margin: 0 0 10px;
       font-style: italic;
     }
@@ -204,7 +248,7 @@
 
     .cv-item-bullet {
       font-size: 13px;
-      color: #52525b;
+      color: var(--color-mid);
       line-height: 1.65;
       display: flex;
       align-items: flex-start;
@@ -213,7 +257,7 @@
 
     .cv-item-bullet i {
       font-size: 10px;
-      color: #71717a;
+      color: var(--color-muted);
       flex-shrink: 0;
       margin-top: 4px;
     }
@@ -221,19 +265,19 @@
     /* Sub-bullet variant — lighter icon, same text */
     .cv-item-bullet--sub i {
       font-size: 9px;
-      color: #a1a1aa;
+      color: var(--color-faint);
     }
 
     .cv-item-desc {
       font-size: 13px;
-      color: #52525b;
+      color: var(--color-mid);
       line-height: 1.7;
       margin: 0;
     }
 
     .cv-item-link {
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -242,7 +286,7 @@
     }
 
     .cv-item-link:hover {
-      color: #18181b;
+      color: var(--color-text);
     }
 
     /* ── Education ─────────────────────────────── */
@@ -261,7 +305,7 @@
     .cv-edu-date {
       flex: 0 0 100px;
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       padding-top: 2px;
     }
 
@@ -272,13 +316,13 @@
     .cv-edu-degree {
       font-size: 14px;
       font-weight: 500;
-      color: #18181b;
+      color: var(--color-text);
       margin: 0 0 2px;
     }
 
     .cv-edu-school {
       font-size: 13px;
-      color: #71717a;
+      color: var(--color-muted);
       margin: 0;
     }
 
@@ -298,7 +342,7 @@
     .cv-skill-label {
       flex: 0 0 100px;
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       padding-top: 4px;
     }
 
@@ -311,8 +355,8 @@
 
     .cv-skill-tag {
       font-size: 12px;
-      color: #52525b;
-      background: #f4f4f5;
+      color: var(--color-tag-text);
+      background: var(--color-tag-bg);
       border-radius: 3px;
       padding: 2px 8px;
       line-height: 1.6;
@@ -334,14 +378,14 @@
     .cv-press-pub {
       flex: 0 0 100px;
       font-size: 12px;
-      color: #71717a;
+      color: var(--color-muted);
       padding-top: 2px;
     }
 
     .cv-press-link {
       flex: 1;
       font-size: 13px;
-      color: #52525b;
+      color: var(--color-mid);
       display: inline-flex;
       align-items: flex-start;
       gap: 5px;
@@ -350,7 +394,7 @@
     }
 
     .cv-press-link:hover {
-      color: #18181b;
+      color: var(--color-text);
     }
 
     .cv-press-link svg {
@@ -369,16 +413,49 @@
       flex-shrink: 0;
     }
 
-    /* ── Top bar (back + download) ─────────────── */
+    /* ── Top bar (back + controls) ─────────────── */
 
     .cv-topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-direction: row;
       margin-bottom: 52px;
       height: 28px;
     }
+
+    .cv-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cv-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+      color: var(--color-muted);
+      background: none;
+      border: 1px solid var(--color-border-ui);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      padding: 0;
+    }
+
+    .cv-theme-toggle:hover {
+      color: var(--color-text);
+      border-color: var(--color-border-ui-hover);
+    }
+
+    /* Show moon in light mode, sun in dark mode */
+    .cv-theme-toggle .icon-sun  { display: none; }
+    .cv-theme-toggle .icon-moon { display: inline; }
+
+    [data-theme="dark"] .cv-theme-toggle .icon-sun  { display: inline; }
+    [data-theme="dark"] .cv-theme-toggle .icon-moon { display: none; }
 
     .cv-download {
       display: inline-flex;
@@ -387,9 +464,9 @@
       font-size: 12px;
       font-family: inherit;
       font-weight: 400;
-      color: #71717a;
+      color: var(--color-muted);
       background: none;
-      border: 1px solid #e4e4e7;
+      border: 1px solid var(--color-border-ui);
       border-radius: 4px;
       padding: 5px 10px;
       cursor: pointer;
@@ -398,8 +475,8 @@
     }
 
     .cv-download:hover {
-      color: #18181b;
-      border-color: #a1a1aa;
+      color: var(--color-text);
+      border-color: var(--color-border-ui-hover);
     }
 
     /* ── Print ─────────────────────────────────── */
@@ -410,6 +487,22 @@
     }
 
     @media print {
+      /* Force light mode variables regardless of active theme */
+      :root,
+      [data-theme="dark"] {
+        --color-bg:              #ffffff;
+        --color-text:            #000000;
+        --color-muted:           #71717a;
+        --color-body:            #3f3f46;
+        --color-mid:             #52525b;
+        --color-faint:           #a1a1aa;
+        --color-border:          #f4f4f5;
+        --color-border-ui:       #e4e4e7;
+        --color-border-ui-hover: #a1a1aa;
+        --color-tag-bg:          #f4f4f5;
+        --color-tag-text:        #52525b;
+      }
+
       .cv-topbar {
         display: none;
       }
@@ -421,7 +514,7 @@
 
       body {
         font-size: 13px;
-        color: #000;
+        transition: none;
       }
 
       .cv-name {
@@ -429,13 +522,11 @@
       }
 
       .cv-skill-tag {
-        background: #f4f4f5 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
       .cv-item-bullet i {
-        color: #71717a !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -503,14 +594,20 @@
         </svg>
         robysaavedra.com
       </a>
-      <button class="cv-download" onclick="window.print()" aria-label="Download PDF">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-          <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
-            stroke-linejoin="round" />
-          <path d="M1.5 9.5v1h9v-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-        </svg>
-        Download PDF
-      </button>
+      <div class="cv-topbar-right">
+        <button class="cv-theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="ph ph-sun icon-sun" aria-hidden="true"></i>
+          <i class="ph ph-moon icon-moon" aria-hidden="true"></i>
+        </button>
+        <button class="cv-download" onclick="window.print()" aria-label="Download PDF">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M1.5 9.5v1h9v-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+          </svg>
+          Download PDF
+        </button>
+      </div>
     </div>
 
     <!-- Header -->
@@ -575,18 +672,14 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Product Designer IV</p>
             <p class="cv-item-company">Olympus Corporation of the Americas · Remote</p>
-            <p class="cv-item-context">Medical technology company building connected surgical and diagnostic solutions.
-            </p>
+            <p class="cv-item-context">Medical technology company building connected surgical and diagnostic solutions.</p>
             <ul class="cv-item-bullets">
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built AI-enhanced traceability
-                tools that unified millions of disparate
-                clinical data points into a natural language interface for endoscopy unit staff</li>
+                tools that unified millions of disparate clinical data points into a natural language interface for endoscopy unit staff</li>
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led AI workshops to embed
-                AI-informed thinking into the product design process
-                across internal teams</li>
+                AI-informed thinking into the product design process across internal teams</li>
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conducted field research in
-                hospital endoscopy units across multiple countries,
-                identifying workflow pain points directly at the point of care</li>
+                hospital endoscopy units across multiple countries, identifying workflow pain points directly at the point of care</li>
             </ul>
           </div>
         </div>
@@ -596,14 +689,11 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Senior Product Designer</p>
             <p class="cv-item-company">Cavnue · Remote</p>
-            <p class="cv-item-context">Infrastructure startup bridging current AV capabilities and full self-driving.
-            </p>
+            <p class="cv-item-context">Infrastructure startup bridging current AV capabilities and full self-driving.</p>
             <ul class="cv-item-bullets">
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed a real-time dashboard surfacing sensor accuracy, system confidence, and live telemetry for AV operators — translating infrastructure complexity into clear, actionable insight at the point of decision, and saving millions in third-party tooling costs</li>
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Established component foundations and design system for an in-house analytics suite, enabling engineers to ship new data views without recurring vendor costs</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Drove product roadmap with
-                PMs, integrating user research and market insights
-              </li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Drove product roadmap with PMs, integrating user research and market insights</li>
             </ul>
           </div>
         </div>
@@ -613,19 +703,13 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Senior Product Designer</p>
             <p class="cv-item-company">Revel · Brooklyn, NY</p>
-            <p class="cv-item-context">Electric mobility startup (mopeds + EV charging) operating across major US
-              cities.</p>
+            <p class="cv-item-context">Electric mobility startup (mopeds + EV charging) operating across major US cities.</p>
             <ul class="cv-item-bullets">
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>First designer at the company;
-                built the entire internal operations and
-                logistics tooling suite from scratch</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led design on the user-facing
-                iOS and Android apps</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Worked directly with every
-                department lead to align tooling with real
-                operational needs — launch resulted in significant spikes in productivity and financial efficiency</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built design system scaling
-                across multiple product lines</li>
+                built the entire internal operations and logistics tooling suite from scratch</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led design on the user-facing iOS and Android apps</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Worked directly with every department lead to align tooling with real operational needs — launch resulted in significant spikes in productivity and financial efficiency</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built design system scaling across multiple product lines</li>
             </ul>
           </div>
         </div>
@@ -637,12 +721,8 @@
             <p class="cv-item-company">Flocabulary · Brooklyn, NY</p>
             <p class="cv-item-context">EdTech company using hip-hop to engage K–12 students across core curricula.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led design on pedagogical
-                tools, games, and classroom activities for students
-                and teachers</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Ran user research and
-                usability testing; iterated on findings to measurably
-                improve product performance</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led design on pedagogical tools, games, and classroom activities for students and teachers</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Ran user research and usability testing; iterated on findings to measurably improve product performance</li>
             </ul>
           </div>
         </div>
@@ -665,8 +745,7 @@
             <p class="cv-item-company">Diligent Corporation · New York, NY</p>
             <p class="cv-item-context">B2B SaaS platform for secure boardroom document management (S&P 500 clients).</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led cross-platform design
-                across iOS, Android, macOS, and Windows</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led cross-platform design across iOS, Android, macOS, and Windows</li>
               <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led the PWA initiative end-to-end alongside engineering — achieving full feature parity in the browser, establishing a CI/CD release pipeline, and eliminating OS constraints for enterprise users</li>
             </ul>
           </div>
@@ -677,9 +756,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Freelance Designer</p>
             <ul class="cv-item-bullets" style="margin-top:10px">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed digital products and
-                brand experiences for Google (self-driving car
-                project / Waymo), Spotify, Zipcar, Kayak, Blue Apron, and others</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed digital products and brand experiences for Google (self-driving car project / Waymo), Spotify, Zipcar, Kayak, Blue Apron, and others</li>
             </ul>
           </div>
         </div>
@@ -779,8 +856,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Good Song Club</p>
             <p class="cv-item-company">React, Node.js, Firebase</p>
-            <p class="cv-item-desc" style="margin-top:8px">A collaborative music platform where users post one song a
-              day — a social layer on top of YouTube with a worldwide shared playlist.</p>
+            <p class="cv-item-desc" style="margin-top:8px">A collaborative music platform where users post one song a day — a social layer on top of YouTube with a worldwide shared playlist.</p>
             <a href="https://goodsong.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               goodsong.club
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -796,8 +872,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Dig This</p>
             <p class="cv-item-company">React, Node.js, Discogs API</p>
-            <p class="cv-item-desc" style="margin-top:8px">Music discovery tool that pulls random recommendations from
-              the Discogs database by genre. Featured in DJ Mag.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Music discovery tool that pulls random recommendations from the Discogs database by genre. Featured in DJ Mag.</p>
             <a href="https://digthis.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               digthis.club
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -813,8 +888,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Concrete 95</p>
             <p class="cv-item-company">React, Node.js, Firebase</p>
-            <p class="cv-item-desc" style="margin-top:8px">Experimental audio web app inspired by Musique Concrète —
-              lets users create generative soundscapes from synth pads and found sound.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Experimental audio web app inspired by Musique Concrète — lets users create generative soundscapes from synth pads and found sound.</p>
             <a href="https://concrete95.net/" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               concrete95.net
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -830,8 +904,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Lever</p>
             <p class="cv-item-company">Figma Plugin</p>
-            <p class="cv-item-desc" style="margin-top:8px">Figma plugin providing a consistent, opinionated structure to
-              Figma files — reducing setup friction and enforcing file hygiene across teams.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Figma plugin providing a consistent, opinionated structure to Figma files — reducing setup friction and enforcing file hygiene across teams.</p>
             <a href="https://www.figma.com/community/plugin/1008125233177309016/Lever---A-Figma-File-Starter"
               target="_blank" rel="noopener noreferrer" class="cv-item-link">
               Figma Community
@@ -879,6 +952,17 @@
     </section>
 
   </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', function () {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('cv-theme', next);
+    });
+  </script>
 </body>
 
 </html>
