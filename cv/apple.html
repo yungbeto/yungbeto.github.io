@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roby Saavedra — CV</title>
+  <meta name="description" content="CV of Roby Saavedra, Product Designer & Design Engineer.">
+  <meta name="robots" content="noindex">
+  <style>
+    /* SF Pro renders automatically on Apple devices via -apple-system */
+    :root {
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --bg: #ffffff;
+      --bg-subtle: #f5f5f7;
+      --border: #d2d2d7;
+      --border-subtle: #e8e8ed;
+      --accent: #0071e3;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* ── Layout ─── */
+
+    .cv {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 48px 100px;
+    }
+
+    /* ── Top bar ─── */
+
+    .cv-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .cv-back {
+      font-size: 13px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cv-print-btn {
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .cv-print-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Header ─── */
+
+    .cv-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+
+      padding-bottom: 48px;
+
+    }
+
+    .cv-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .cv-header-info {
+      flex: 1;
+    }
+
+    .cv-name {
+      font-family: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      color: var(--text-primary);
+      margin: 0 0 4px;
+    }
+
+    .cv-title {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0 0 2px;
+    }
+
+    .cv-location {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin: 0 0 16px;
+    }
+
+    .cv-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cv-link {
+      font-size: 13px;
+    }
+
+    /* ── Sections ─── */
+
+    .cv-section {
+      margin-bottom: 52px;
+    }
+
+    .cv-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 0 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .cv-summary {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ── Experience / Projects ─── */
+
+    .cv-items {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .cv-item {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 0 24px;
+    }
+
+    .cv-item-date {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      padding-top: 2px;
+      line-height: 1.5;
+    }
+
+    .cv-item-content {
+      min-width: 0;
+    }
+
+    .cv-item-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      color: var(--text-primary);
+      margin: 0 0 1px;
+    }
+
+    .cv-item-company {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0 0 2px;
+    }
+
+    .cv-item-context {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin: 0 0 10px;
+    }
+
+    .cv-item-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .cv-item-bullet {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .cv-item-bullet::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: var(--text-tertiary);
+    }
+
+    .cv-item-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+
+    .cv-item-link {
+      font-size: 12px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* ── Education ─── */
+
+    .cv-edu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cv-edu-item {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 0 24px;
+    }
+
+    .cv-edu-date {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      padding-top: 2px;
+    }
+
+    .cv-edu-degree {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.003em;
+      color: var(--text-primary);
+      margin: 0 0 2px;
+    }
+
+    .cv-edu-school {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* ── Skills ─── */
+
+    .cv-skill-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cv-skill-group {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 0 24px;
+    }
+
+    .cv-skill-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      padding-top: 5px;
+    }
+
+    .cv-skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cv-skill-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 3px 10px;
+      line-height: 1.5;
+    }
+
+    /* ── Press ─── */
+
+    .cv-press-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cv-press-item {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 0 24px;
+    }
+
+    .cv-press-pub {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      padding-top: 2px;
+    }
+
+    .cv-press-link {
+      font-size: 13px;
+    }
+
+    /* ── Print ─── */
+
+    @page {
+      margin: 0.7in 0.75in;
+      size: letter portrait;
+    }
+
+    @media print {
+      .cv-topbar {
+        display: none;
+      }
+
+      .cv {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      .cv-name {
+        font-size: 22px;
+      }
+
+      .cv-section {
+        margin-bottom: 32px;
+      }
+
+      .cv-items {
+        gap: 24px;
+      }
+
+      a {
+        color: var(--accent);
+
+      }
+
+      .cv-skill-tag {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ── Mobile ─── */
+
+    @media (max-width: 520px) {
+      .cv {
+        padding: 40px 20px 80px;
+      }
+
+      .cv-item,
+      .cv-edu-item,
+      .cv-press-item,
+      .cv-skill-group {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .cv-item-date,
+      .cv-edu-date,
+      .cv-press-pub,
+      .cv-skill-label {
+        font-size: 11px;
+      }
+
+      .cv-name {
+        font-size: 22px;
+      }
+
+      .cv-header {
+        gap: 16px;
+      }
+
+      .cv-avatar {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="cv">
+
+    <div class="cv-topbar">
+      <a href="/" class="cv-back">← robysaavedra.com</a>
+      <button class="cv-print-btn" onclick="window.print()">Save PDF</button>
+    </div>
+
+    <!-- Header -->
+    <header class="cv-header">
+      <img class="cv-avatar" src="/src/img/pic.jpg" alt="Roby Saavedra">
+      <div class="cv-header-info">
+        <h1 class="cv-name">Roberto "Roby" Saavedra</h1>
+        <p class="cv-title">Product Designer &amp; Design Engineer</p>
+        <p class="cv-location">Oakland, CA</p>
+        <div class="cv-links">
+          <a href="mailto:hello@robysaavedra.com" class="cv-link">hello@robysaavedra.com</a>
+          <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer"
+            class="cv-link">LinkedIn</a>
+          <a href="https://github.com/yungbeto/" target="_blank" rel="noopener noreferrer" class="cv-link">GitHub</a>
+          <a href="https://robysaavedra.com" class="cv-link">robysaavedra.com</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Summary</h2>
+      <p class="cv-summary">Designer and engineer working at the intersection of craft and technology. Trained as an
+        artist and self-taught in code, I design and develope the surfaces between human intention and complex systems.
+        Ten
+        years shipping products across healthcare, mobility, education, and infrastructure. I believe the best
+        interfaces disappear, leaving only the outcome the audience came for.</p>
+    </section>
+
+    <!-- Experience -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Experience</h2>
+      <div class="cv-items">
+
+        <div class="cv-item">
+          <div class="cv-item-date">2024 – 2026</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Product Designer IV</p>
+            <p class="cv-item-company">Olympus Corporation of the Americas · Remote</p>
+            <p class="cv-item-context">Medical technology — connected surgical and diagnostic solutions.</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Designed tools that bring calm and clarity to hospital endoscopy units, where
+                clinical staff make real-time decisions about patient care</li>
+              <li class="cv-item-bullet">Built an AI-powered interface that unified millions of disparate clinical data
+                points into plain-language answers, accessible at the point of care</li>
+              <li class="cv-item-bullet">Led AI literacy workshops that changed how design teams reason about what
+                machine intelligence should (and shouldn't) do</li>
+              <li class="cv-item-bullet">Conducted field research in hospital endoscopy units across multiple countries,
+                watching the work directly to understand what's genuinely hard</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">Sept 2023 – Present</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Founder, Designer &amp; Engineer</p>
+            <p class="cv-item-company">Good Song Club · Independent</p>
+            <p class="cv-item-context">Consumer music platform — conceived, designed, built, and maintained
+              independently.</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Conceived, designed, and shipped a collaborative music platform where users
+                share one song a day serving as a social layer on top of YouTube with a worldwide shared
+                playlist</li>
+              <li class="cv-item-bullet">Sole owner of every surface: product strategy, UX, visual design, front-end
+                engineering, back-end, and ongoing maintenance which has been a daily practice for over two years</li>
+              <li class="cv-item-bullet">Recognized by Site of Sites for excellence in UI design</li>
+              <a href="https://goodsong.club" target="_blank" rel="noopener noreferrer"
+                class="cv-item-link">goodsong.club ↗</a>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2022 – 2023</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Senior Product Designer</p>
+            <p class="cv-item-company">Cavnue · Remote</p>
+            <p class="cv-item-context">Infrastructure startup — bridging current AV capabilities and full self-driving.
+            </p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Made invisible infrastructure legible. Turned sensor accuracy, system
+                confidence, and live telemetry into a decisive interface for the humans responsible for keeping
+                autonomous vehicles safe, saving millions in third-party tooling costs</li>
+              <li class="cv-item-bullet">Built the design system that enabled engineers to ship new data views without
+                recurring design cycles or vendor dependencies</li>
+              <li class="cv-item-bullet">Drove product roadmap with PMs, integrating field research and market insight
+                to shape priorities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2019 – 2022</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Senior Product Designer</p>
+            <p class="cv-item-company">Revel · Brooklyn, NY</p>
+            <p class="cv-item-context">Electric mobility startup — mopeds and EV charging across major US cities.</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">First designer at the company, built every surface a rider or operator
+                touches, from the consumer iOS and Android apps to the full internal operations and logistics suite,
+                from scratch</li>
+              <li class="cv-item-bullet">Worked alongside every department lead to align tooling to real operational
+                needs; launch resulted in measurable gains in productivity and financial efficiency</li>
+              <li class="cv-item-bullet">Established the design system that scaled across the company's expanding
+                product lines</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2018 – 2019</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Product Designer</p>
+            <p class="cv-item-company">Flocabulary · Brooklyn, NY</p>
+            <p class="cv-item-context">EdTech — hip-hop-based learning for K–12 students across core curricula.</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Designed pedagogical tools, games, and classroom activities that made learning
+                feel less like school. Used by millions of K–12 students across the US</li>
+              <li class="cv-item-bullet">Ran structured usability research with students and teachers; iterated on
+                findings to measurably improve engagement and product performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2018</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Lead Product Designer</p>
+            <p class="cv-item-company">Propel ML · Brooklyn, NY</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Designed an in-browser JavaScript ML notebook for data scientists. Propel was a
+                focused
+                interface built around code, output, and model state that got out of the way and let people think</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2016 – 2018</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Product Designer</p>
+            <p class="cv-item-company">Diligent Corporation · New York, NY</p>
+            <p class="cv-item-context">B2B SaaS — secure boardroom document management for S&P 500 clients.</p>
+            <ul class="cv-item-bullets">
+              <li class="cv-item-bullet">Owned the desktop platform surface for macOS and web and
+                delivered a consistent, secure experience for board-level users at the world's largest companies</li>
+              <li class="cv-item-bullet">Led the PWA initiative end-to-end: achieved full feature parity in the browser,
+                established a CI/CD release pipeline, and eliminated OS constraints for enterprise users</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2012 – 2016</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Freelance Designer</p>
+            <ul class="cv-item-bullets" style="margin-top:10px">
+              <li class="cv-item-bullet">Helped define the early visual and interaction language for Google's
+                self-driving car project (now Waymo), Spotify, Zipcar, Kayak, Blue Apron, and others</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Education</h2>
+      <div class="cv-edu-items">
+
+        <div class="cv-edu-item">
+          <div class="cv-edu-date">2009 – 2011</div>
+          <div class="cv-edu-content">
+            <p class="cv-edu-degree">Master of Fine Arts, Art</p>
+            <p class="cv-edu-school">San Francisco Art Institute</p>
+          </div>
+        </div>
+
+        <div class="cv-edu-item">
+          <div class="cv-edu-date">2003 – 2008</div>
+          <div class="cv-edu-content">
+            <p class="cv-edu-degree">Bachelor of Fine Arts, Illustration</p>
+            <p class="cv-edu-school">California State University, Long Beach</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Skills</h2>
+      <div class="cv-skill-groups">
+
+        <div class="cv-skill-group">
+          <div class="cv-skill-label">Design</div>
+          <div class="cv-skill-tags">
+            <span class="cv-skill-tag">Design systems</span>
+            <span class="cv-skill-tag">UX research</span>
+            <span class="cv-skill-tag">Data visualization</span>
+            <span class="cv-skill-tag">AI interface design</span>
+            <span class="cv-skill-tag">Accessibility</span>
+            <span class="cv-skill-tag">Prototyping</span>
+            <span class="cv-skill-tag">Figma</span>
+          </div>
+        </div>
+
+        <div class="cv-skill-group">
+          <div class="cv-skill-label">Engineering</div>
+          <div class="cv-skill-tags">
+            <span class="cv-skill-tag">React</span>
+            <span class="cv-skill-tag">Next.js</span>
+            <span class="cv-skill-tag">Node.js</span>
+            <span class="cv-skill-tag">JavaScript</span>
+            <span class="cv-skill-tag">HTML / CSS</span>
+            <span class="cv-skill-tag">PWA</span>
+            <span class="cv-skill-tag">CI/CD</span>
+            <span class="cv-skill-tag">Firebase</span>
+          </div>
+        </div>
+
+        <div class="cv-skill-group">
+          <div class="cv-skill-label">Platforms</div>
+          <div class="cv-skill-tags">
+            <span class="cv-skill-tag">iOS</span>
+            <span class="cv-skill-tag">iPadOS</span>
+            <span class="cv-skill-tag">macOS</span>
+            <span class="cv-skill-tag">Android</span>
+            <span class="cv-skill-tag">Web</span>
+            <span class="cv-skill-tag">Human Interface Guidelines</span>
+          </div>
+        </div>
+
+        <div class="cv-skill-group">
+          <div class="cv-skill-label">Domains</div>
+          <div class="cv-skill-tags">
+            <span class="cv-skill-tag">Medical devices</span>
+            <span class="cv-skill-tag">Autonomous vehicles</span>
+            <span class="cv-skill-tag">Consumer apps</span>
+            <span class="cv-skill-tag">Internal tooling</span>
+            <span class="cv-skill-tag">B2B SaaS</span>
+            <span class="cv-skill-tag">EdTech</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Projects</h2>
+      <div class="cv-items">
+
+        <div class="cv-item">
+          <div class="cv-item-date">2024</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Dig This</p>
+            <p class="cv-item-company">React · Node.js · Discogs API</p>
+            <p class="cv-item-desc">Music discovery tool that surfaces random recommendations from the Discogs database
+              by genre. Featured in DJ Mag.</p>
+            <a href="https://digthis.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">digthis.club
+              ↗</a>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2025</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Concrete 95</p>
+            <p class="cv-item-company">React · Node.js · Firebase</p>
+            <p class="cv-item-desc">Experimental audio web app inspired by Musique Concrète — lets users create
+              generative soundscapes from synth pads and found sound.</p>
+            <a href="https://concrete95.net/" target="_blank" rel="noopener noreferrer"
+              class="cv-item-link">concrete95.net ↗</a>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2022</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Lever</p>
+            <p class="cv-item-company">Figma Plugin</p>
+            <p class="cv-item-desc">Figma plugin providing consistent, opinionated structure to design files — reducing
+              setup friction and enforcing file hygiene across teams.</p>
+            <a href="https://www.figma.com/community/plugin/1008125233177309016/Lever---A-Figma-File-Starter"
+              target="_blank" rel="noopener noreferrer" class="cv-item-link">Figma Community ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Press -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Press</h2>
+      <div class="cv-press-items">
+
+        <div class="cv-press-item">
+          <div class="cv-press-pub">DJ Mag</div>
+          <a href="https://djmag.com/news/new-app-recommends-random-discogs-releases-based-genre" target="_blank"
+            rel="noopener noreferrer" class="cv-press-link">"New app recommends random Discogs releases based on genre"
+            ↗</a>
+        </div>
+
+        <div class="cv-press-item">
+          <div class="cv-press-pub">MMN Magazine</div>
+          <a href="https://mmn-mag.hu/the-only-way-out-is-to-build-the-alternative/" target="_blank"
+            rel="noopener noreferrer" class="cv-press-link">"The only way out is to build the alternative" ↗</a>
+        </div>
+
+        <div class="cv-press-item">
+          <div class="cv-press-pub">Site of Sites</div>
+          <a href="https://www.siteofsites.co/websites/good-song-club" target="_blank" rel="noopener noreferrer"
+            class="cv-press-link">"Good Song Club" ↗</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</body>
+
+</html>
