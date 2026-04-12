@@ -1,11 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
   initHeroAnimation();
+  initFooterNameAnimation();
   Promise.all([
     loadProjectCards(),
     loadWorkCases(),
     loadJobs(),
     loadMarquee(),
-  ]).then(initSectionLabelObserver);
+  ]).then(() => {
+    initSectionLabelObserver();
+    initLightbox();
+  });
 });
 
 function initHeroAnimation() {
@@ -30,7 +34,43 @@ function initHeroAnimation() {
     }
   });
 
-  startScramble(charSpans);
+  startScramble(charSpans, () => {
+    const tocItems = document.querySelectorAll('.toc .toc-label, .toc .toc-link');
+    tocItems.forEach((el, i) => {
+      setTimeout(() => el.classList.add('in-view'), i * 80);
+    });
+  });
+}
+
+function initFooterNameAnimation() {
+  const el = document.querySelector('.footer-name');
+  if (!el) return;
+
+  const charSpans = [];
+  const nodes = Array.from(el.childNodes);
+  el.innerHTML = '';
+
+  nodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent.replace(/\s+/g, ' ').trim();
+      if (text) splitTextIntoChars(text, el, charSpans);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      // Preserve <br> and other inline elements
+      const text = node.textContent;
+      node.innerHTML = '';
+      if (text) splitTextIntoChars(text, node, charSpans);
+      el.appendChild(node);
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      observer.disconnect();
+      startScramble(charSpans, undefined, { startDelay: 100, staggerMs: 35 });
+    }
+  }, { threshold: 0.4 });
+
+  observer.observe(el);
 }
 
 function splitTextIntoChars(text, container, charSpans) {
@@ -72,11 +112,11 @@ function splitTextIntoChars(text, container, charSpans) {
   });
 }
 
-function startScramble(charSpans) {
+function startScramble(charSpans, onComplete, { startDelay = 150, staggerMs = 12 } = {}) {
   const BLOCKS = ['█', '▓', '▒', '░', '▒', '▓'];
   const CYCLE_MS = 40;
-  const START_DELAY = 150;
-  const STAGGER_MS = 12;
+  const START_DELAY = startDelay;
+  const STAGGER_MS = staggerMs;
 
   let frame = 0;
   const timer = setInterval(() => {
@@ -97,14 +137,10 @@ function startScramble(charSpans) {
 
   const endTime = START_DELAY + charSpans.length * STAGGER_MS + 400;
 
-  // Stop cycling once all chars have resolved + transition buffer
-  setTimeout(() => clearInterval(timer), endTime);
-
-  // Animate TOC items in after scramble completes
-  const tocItems = document.querySelectorAll('.toc .toc-label, .toc .toc-link');
-  tocItems.forEach((el, i) => {
-    setTimeout(() => el.classList.add('in-view'), endTime + i * 80);
-  });
+  setTimeout(() => {
+    clearInterval(timer);
+    onComplete?.();
+  }, endTime);
 }
 
 function initSectionLabelObserver() {
@@ -235,13 +271,24 @@ async function loadWorkCases() {
             <span class="work-case-pill-label">${c.company}</span>
           </div>
         </div>
-        <div class="work-case-media">${mediaHtml}</div>
+        <div class="work-case-carousel">
+          <div class="work-case-media-clip">
+            <div class="work-case-media">${mediaHtml}</div>
+            <button class="carousel-btn carousel-prev" aria-label="Previous slide">
+              <i class="ph ph-caret-left"></i>
+            </button>
+            <button class="carousel-btn carousel-next" aria-label="Next slide">
+              <i class="ph ph-caret-right"></i>
+            </button>
+          </div>
+        </div>
       `;
 
       container.appendChild(block);
     });
 
     initWorkCasePills();
+    initCarousels();
   } catch (err) {
     console.error('Failed to load work cases:', err);
   }
@@ -251,33 +298,286 @@ function initWorkCasePills() {
   const cases = document.querySelectorAll('.work-case');
   if (!cases.length) return;
 
+  // Global state map — only the first eligible case shows its pill at any time
+  const state = new Map();
+
+  function updateAllPills() {
+    let firstEligible = null;
+    cases.forEach((workCase) => {
+      const s = state.get(workCase);
+      if (s && s.caseInView && !s.metaInView && !firstEligible) {
+        firstEligible = workCase;
+      }
+    });
+    cases.forEach((workCase) => {
+      const pill = workCase.querySelector('.work-case-pill');
+      if (pill) pill.classList.toggle('is-visible', workCase === firstEligible);
+    });
+  }
+
   cases.forEach((workCase) => {
     const meta = workCase.querySelector('.work-case-meta');
-    const pill = workCase.querySelector('.work-case-pill');
-    if (!meta || !pill) return;
+    if (!meta) return;
 
-    let caseInView = false;
-    let metaInView = false;
-
-    function updatePill() {
-      pill.classList.toggle('is-visible', caseInView && !metaInView);
-    }
+    state.set(workCase, { caseInView: false, metaInView: false });
 
     new IntersectionObserver(
       (entries) => {
-        caseInView = entries[0].isIntersecting;
-        updatePill();
+        state.get(workCase).caseInView = entries[0].isIntersecting;
+        updateAllPills();
       },
       { threshold: 0, rootMargin: '-96px 0px 0px 0px' },
     ).observe(workCase);
 
     new IntersectionObserver(
       (entries) => {
-        metaInView = entries[0].isIntersecting;
-        updatePill();
+        state.get(workCase).metaInView = entries[0].isIntersecting;
+        updateAllPills();
       },
       { threshold: 0 },
     ).observe(meta);
+  });
+}
+
+function initCarousels() {
+  const GAP = 12; // must match CSS gap
+
+  document.querySelectorAll('.work-case-carousel').forEach((carousel) => {
+    const track   = carousel.querySelector('.work-case-media');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+
+    // Collect real items before any cloning
+    const realItems = [...track.querySelectorAll('.work-case-media-item')];
+    const N = realItems.length;
+
+    if (!track || N <= 1) {
+      prevBtn?.remove();
+      nextBtn?.remove();
+      if (N === 1) realItems[0].classList.add('is-active');
+      return;
+    }
+
+    // ── Infinite loop: prepend clone of last, append clone of first ───────
+    // DOM order: [headClone | real0 … realN-1 | tailClone]
+    // domIndex of realItem[i] = i + 1
+    const headClone = realItems[N - 1].cloneNode(true);
+    const tailClone = realItems[0].cloneNode(true);
+    headClone.setAttribute('aria-hidden', 'true');
+    tailClone.setAttribute('aria-hidden', 'true');
+    track.prepend(headClone);
+    track.appendChild(tailClone);
+
+    const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+
+    let current    = 0; // real index 0..N-1
+    let autoTimer  = null;
+    let jumping    = false;
+
+    function stride() {
+      return (allDomItems[1]?.offsetWidth ?? 0) + GAP;
+    }
+
+    // Mark the active (centred) item and its corresponding clone bright;
+    // everything else dims.
+    function updateActive() {
+      allDomItems.forEach((item, i) => {
+        const isActive =
+          i === current + 1                      // real item
+          || (current === 0     && i === N + 1)  // tailClone mirrors first
+          || (current === N - 1 && i === 0);     // headClone mirrors last
+        item.classList.toggle('is-active', isActive);
+      });
+    }
+
+    function goTo(realIndex) {
+      // Wrap to valid real index
+      current = ((realIndex % N) + N) % N;
+
+      // Choose which DOM index to animate toward
+      let domIdx;
+      if (realIndex < 0)  domIdx = 0;       // scroll through headClone
+      else if (realIndex >= N) domIdx = N + 1; // scroll through tailClone
+      else                domIdx = current + 1;
+
+      track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+      updateActive();
+    }
+
+    // After each scroll settles, silently jump from clone back to real item
+    let scrollSettleTimer;
+    track.addEventListener('scroll', () => {
+      if (jumping) return;
+      clearTimeout(scrollSettleTimer);
+      scrollSettleTimer = setTimeout(() => {
+        const s = stride();
+        if (!s) return;
+        const pos = Math.round(track.scrollLeft / s);
+
+        if (pos === 0) {
+          // Landed on headClone → jump to real last
+          jumping = true;
+          track.scrollTo({ left: N * s, behavior: 'instant' });
+          current = N - 1;
+          requestAnimationFrame(() => { jumping = false; });
+        } else if (pos === N + 1) {
+          // Landed on tailClone → jump to real first
+          jumping = true;
+          track.scrollTo({ left: s, behavior: 'instant' });
+          current = 0;
+          requestAnimationFrame(() => { jumping = false; });
+        } else {
+          current = pos - 1;
+        }
+        updateActive();
+      }, 80);
+    });
+
+    function startAutoAdvance() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 6000);
+    }
+
+    prevBtn?.addEventListener('click', () => { goTo(current - 1); startAutoAdvance(); });
+    nextBtn?.addEventListener('click', () => { goTo(current + 1); startAutoAdvance(); });
+
+    // Clicking a non-active (flanking) item advances the carousel instead of
+    // opening the lightbox. Capture phase intercepts before the lightbox handler.
+    allDomItems.forEach((item, i) => {
+      item.addEventListener('click', (e) => {
+        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+        e.stopPropagation();
+        if (i <= current) goTo(current - 1);
+        else goTo(current + 1);
+        startAutoAdvance();
+      }, true);
+    });
+
+    // Pause auto-advance while hovered
+    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel.addEventListener('mouseleave', startAutoAdvance);
+
+    // Never disable carets — carousel always loops
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
+
+    // Start at real item 0 (domIndex 1) without animation
+    requestAnimationFrame(() => {
+      track.scrollTo({ left: stride(), behavior: 'instant' });
+      updateActive();
+      startAutoAdvance();
+    });
+  });
+}
+
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+// Clone starts at the exact source rect (top/left/width/height), then
+// transitions to fullscreen. openRect is stored at open-time so close
+// reverses perfectly regardless of any layout shifts.
+
+function initLightbox() {
+  const EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  const DUR = '0.42s';
+  const TRANSITION = [
+    `top ${DUR} ${EASE}`,
+    `left ${DUR} ${EASE}`,
+    `width ${DUR} ${EASE}`,
+    `height ${DUR} ${EASE}`,
+    `border-radius ${DUR} ${EASE}`,
+  ].join(', ');
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'lightbox-backdrop';
+  document.body.appendChild(backdrop);
+
+  let cloneEl = null;
+  let openRect = null;
+  let isOpen = false;
+
+  function open(item) {
+    if (isOpen) return;
+    isOpen = true;
+
+    const rect = item.getBoundingClientRect();
+    openRect = rect;
+    const media = item.querySelector('img, video');
+    if (!media) return;
+
+    const pad = 32;
+
+    // Create clone positioned exactly over the source item, no transition yet
+    cloneEl = document.createElement('div');
+    cloneEl.className = 'lightbox-clone';
+    cloneEl.style.cssText = `
+      position: fixed;
+      top: ${rect.top}px;
+      left: ${rect.left}px;
+      width: ${rect.width}px;
+      height: ${rect.height}px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #e4e4e7;
+      z-index: 101;
+      cursor: zoom-out;
+      transition: none;
+    `;
+
+    const mediaClone = media.cloneNode(true);
+    if (mediaClone.tagName === 'VIDEO') {
+      mediaClone.muted = true;
+      mediaClone.autoplay = true;
+      mediaClone.loop = true;
+      mediaClone.playsInline = true;
+      mediaClone.play?.();
+    }
+    cloneEl.appendChild(mediaClone);
+    document.body.appendChild(cloneEl);
+
+    backdrop.classList.add('is-open');
+
+    // Force a paint of the starting position, then animate to fullscreen
+    cloneEl.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      cloneEl.style.transition = TRANSITION;
+      cloneEl.style.top = pad + 'px';
+      cloneEl.style.left = pad + 'px';
+      cloneEl.style.width = (window.innerWidth - pad * 2) + 'px';
+      cloneEl.style.height = (window.innerHeight - pad * 2) + 'px';
+      cloneEl.style.borderRadius = '8px';
+    });
+
+    cloneEl.addEventListener('click', close);
+  }
+
+  function close() {
+    if (!isOpen || !cloneEl || !openRect) return;
+
+    // Reverse back to the stored open rect — pixel-perfect because it's the
+    // same rect captured at open time, not a live re-read after potential scroll
+    cloneEl.style.top = openRect.top + 'px';
+    cloneEl.style.left = openRect.left + 'px';
+    cloneEl.style.width = openRect.width + 'px';
+    cloneEl.style.height = openRect.height + 'px';
+    cloneEl.style.borderRadius = '24px';
+    backdrop.classList.remove('is-open');
+
+    const cleanup = () => {
+      cloneEl?.remove();
+      cloneEl = null;
+      openRect = null;
+      isOpen = false;
+    };
+
+    cloneEl.addEventListener('transitionend', cleanup, { once: true });
+    setTimeout(cleanup, 600); // safety fallback
+  }
+
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.work-case-media-item');
+    if (item && !isOpen && item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') open(item);
   });
 }
 

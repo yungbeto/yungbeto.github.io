@@ -159,6 +159,48 @@ ul {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+
+  // Last icon tooltip right-aligns so it doesn't clip the viewport edge
+  &:last-child[data-tooltip]::after {
+    left: auto;
+    right: 0;
+    transform: translateY(-4px);
+  }
+  &:last-child[data-tooltip]:hover::after {
+    transform: translateY(0);
+  }
+}
+
+@keyframes nav-icon-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-icon {
+  opacity: 0;
+  animation: nav-icon-in 0.25s ease forwards;
+
+  &:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  &:nth-child(2) {
+    animation-delay: 0.11s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.17s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.23s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.29s;
+  }
 }
 
 // ─── Section layout ──────────────────────────────────────────────────────────
@@ -402,7 +444,7 @@ ul {
   pointer-events: none;
   white-space: pre;
   transition: opacity 0.1s ease;
-  color: $ink;
+  color: currentColor;
 
   .hero-char.resolved & {
     opacity: 0;
@@ -712,16 +754,49 @@ ul {
   }
 }
 
+.work-case-carousel {
+  width: 100%;
+}
+
+.work-case-media-clip {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
 .work-case-media {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  gap: 12px;
+  padding: 0 44px;
+  scroll-padding: 0 44px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .work-case-media-item {
-  border-radius: 24px;
+  flex: 0 0 calc(100% - 88px);
+  scroll-snap-align: center;
+  border-radius: 20px;
   overflow: hidden;
   background: $surface;
+  cursor: zoom-in;
+  filter: brightness(0.45);
+  border: 1px solid transparent;
+  transition:
+    filter 0.5s ease,
+    border 0.5s ease;
+
+  &.is-active {
+    filter: brightness(1);
+    border: 1px solid $ink;
+  }
 
   img,
   video {
@@ -730,8 +805,69 @@ ul {
     display: block;
     object-fit: contain;
   }
+
   @media (max-width: $tablet) {
-    border-radius: 0px;
+    border-radius: 14px;
+  }
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  z-index: 5;
+  transition: color 0.15s ease;
+
+  i {
+    font-size: 18px;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  }
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.carousel-prev {
+    left: 0;
+  }
+  &.carousel-next {
+    right: 0;
+  }
+}
+
+@media (max-width: $tablet) {
+  .work-case-media-clip {
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .work-case-media {
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding: 0;
+    scroll-padding: 0;
+    gap: 12px;
+  }
+
+  .work-case-media-item {
+    flex: 0 0 auto;
+    width: 100%;
+    scroll-snap-align: none;
+    border-radius: 14px;
+    filter: brightness(1);
+  }
+
+  .carousel-btn {
+    display: none;
   }
 }
 
@@ -1163,5 +1299,37 @@ ul {
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+// ─── Lightbox ─────────────────────────────────────────────────────────────────
+
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+
+  &.is-open {
+    opacity: 0.96;
+    pointer-events: all;
+  }
+}
+
+.lightbox-clone {
+  position: fixed;
+  z-index: 101;
+  overflow: hidden;
+  cursor: zoom-out;
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
 }
