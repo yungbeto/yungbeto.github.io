@@ -24,31 +24,31 @@
     /* ── Theme tokens ──────────────────────────── */
 
     :root {
-      --color-bg:              #ffffff;
-      --color-text:            #18181b;
-      --color-muted:           #71717a;
-      --color-body:            #3f3f46;
-      --color-mid:             #52525b;
-      --color-faint:           #a1a1aa;
-      --color-border:          #f4f4f5;
-      --color-border-ui:       #e4e4e7;
+      --color-bg: #ffffff;
+      --color-text: #18181b;
+      --color-muted: #71717a;
+      --color-body: #3f3f46;
+      --color-mid: #52525b;
+      --color-faint: #a1a1aa;
+      --color-border: #f4f4f5;
+      --color-border-ui: #e4e4e7;
       --color-border-ui-hover: #a1a1aa;
-      --color-tag-bg:          #f4f4f5;
-      --color-tag-text:        #52525b;
+      --color-tag-bg: #f4f4f5;
+      --color-tag-text: #52525b;
     }
 
     [data-theme="dark"] {
-      --color-bg:              #0c0c0e;
-      --color-text:            #fafafa;
-      --color-muted:           #a1a1aa;
-      --color-body:            #d4d4d8;
-      --color-mid:             #a1a1aa;
-      --color-faint:           #71717a;
-      --color-border:          #27272a;
-      --color-border-ui:       #27272a;
+      --color-bg: #0c0c0e;
+      --color-text: #fafafa;
+      --color-muted: #a1a1aa;
+      --color-body: #d4d4d8;
+      --color-mid: #a1a1aa;
+      --color-faint: #71717a;
+      --color-border: #27272a;
+      --color-border-ui: #27272a;
       --color-border-ui-hover: #52525b;
-      --color-tag-bg:          #1c1c1f;
-      --color-tag-text:        #a1a1aa;
+      --color-tag-bg: #1c1c1f;
+      --color-tag-text: #a1a1aa;
     }
 
     /* ── Reset ─────────────────────────────────── */
@@ -451,11 +451,21 @@
     }
 
     /* Show moon in light mode, sun in dark mode */
-    .cv-theme-toggle .icon-sun  { display: none; }
-    .cv-theme-toggle .icon-moon { display: inline; }
+    .cv-theme-toggle .icon-sun {
+      display: none;
+    }
 
-    [data-theme="dark"] .cv-theme-toggle .icon-sun  { display: inline; }
-    [data-theme="dark"] .cv-theme-toggle .icon-moon { display: none; }
+    .cv-theme-toggle .icon-moon {
+      display: inline;
+    }
+
+    [data-theme="dark"] .cv-theme-toggle .icon-sun {
+      display: inline;
+    }
+
+    [data-theme="dark"] .cv-theme-toggle .icon-moon {
+      display: none;
+    }
 
     .cv-download {
       display: inline-flex;
@@ -487,20 +497,21 @@
     }
 
     @media print {
+
       /* Force light mode variables regardless of active theme */
       :root,
       [data-theme="dark"] {
-        --color-bg:              #ffffff;
-        --color-text:            #000000;
-        --color-muted:           #71717a;
-        --color-body:            #3f3f46;
-        --color-mid:             #52525b;
-        --color-faint:           #a1a1aa;
-        --color-border:          #f4f4f5;
-        --color-border-ui:       #e4e4e7;
+        --color-bg: #ffffff;
+        --color-text: #000000;
+        --color-muted: #71717a;
+        --color-body: #3f3f46;
+        --color-mid: #52525b;
+        --color-faint: #a1a1aa;
+        --color-border: #f4f4f5;
+        --color-border-ui: #e4e4e7;
         --color-border-ui-hover: #a1a1aa;
-        --color-tag-bg:          #f4f4f5;
-        --color-tag-text:        #52525b;
+        --color-tag-bg: #f4f4f5;
+        --color-tag-text: #52525b;
       }
 
       .cv-topbar {
@@ -659,7 +670,11 @@
     <!-- Summary -->
     <section class="cv-section">
       <h2 class="cv-section-title">Summary</h2>
-      <p class="cv-about">Designer and engineer working at the intersection of craft and technology. Trained as an artist and self-taught in code, I design and develop the surfaces between human intention and complex systems. Ten years shipping products across healthcare, mobility, education, and infrastructure. I believe the best interfaces disappear, leaving only the outcome the person came for.</p>
+      <p class="cv-about">Designer and engineer with ten years shipping products across healthcare, mobility, education,
+        and infrastructure. Trained as an artist and self-taught in code, I work fluidly across the full stack of
+        design, from early research and systems thinking through to production front-end. I gravitate toward complex
+        domains and technical users, where the work demands both rigor and restraint. I believe the best interfaces
+        disappear, leaving only the outcome the person came for.</p>
     </section>
 
     <!-- Experience -->
@@ -674,10 +689,17 @@
             <p class="cv-item-company">Olympus Corporation of the Americas · Remote</p>
             <p class="cv-item-context">Medical technology — connected surgical and diagnostic solutions.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed tools that bring calm and clarity to hospital endoscopy units, where clinical staff make real-time decisions about patient care</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built an AI-powered interface that unified millions of disparate clinical data points into plain-language answers, accessible at the point of care</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led AI literacy workshops that changed how design teams reason about what machine intelligence should (and shouldn't) do</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conducted field research in hospital endoscopy units across multiple countries, watching the work directly to understand what's genuinely hard</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed tools that bring calm
+                and clarity to hospital endoscopy units, where clinical staff make real-time decisions about patient
+                care</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built an AI-powered interface
+                that unified millions of disparate clinical data points into plain-language answers, accessible at the
+                point of care</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led AI literacy workshops that
+                changed how design teams reason about what machine intelligence should (and shouldn't) do</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conducted field research in
+                hospital endoscopy units across multiple countries, watching the work directly to understand what's
+                genuinely hard</li>
             </ul>
           </div>
         </div>
@@ -687,15 +709,22 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Founder, Designer &amp; Engineer</p>
             <p class="cv-item-company">Good Song Club · Independent</p>
-            <p class="cv-item-context">Consumer music platform — conceived, designed, built, and maintained independently.</p>
+            <p class="cv-item-context">Consumer music platform — conceived, designed, built, and maintained
+              independently.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conceived, designed, and shipped a collaborative music platform where users share one song a day serving as a social layer on top of YouTube with a worldwide shared playlist</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Sole owner of every surface: product strategy, UX, visual design, front-end engineering, back-end, and ongoing maintenance — a daily practice for over two years</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Recognized by Site of Sites for excellence in UI design</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conceived, designed, and
+                shipped a collaborative music platform where users share one song a day serving as a social layer on top
+                of YouTube with a worldwide shared playlist</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Sole owner of every surface:
+                product strategy, UX, visual design, front-end engineering, back-end, and ongoing maintenance — a daily
+                practice for over two years</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Recognized by Site of Sites
+                for excellence in UI design</li>
               <a href="https://goodsong.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">
                 goodsong.club
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                  <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </a>
             </ul>
@@ -707,11 +736,17 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Senior Product Designer</p>
             <p class="cv-item-company">Cavnue · Remote</p>
-            <p class="cv-item-context">Infrastructure startup — bridging current AV capabilities and full self-driving.</p>
+            <p class="cv-item-context">Infrastructure startup — bridging current AV capabilities and full self-driving.
+            </p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Made invisible infrastructure legible — turned sensor accuracy, system confidence, and live telemetry into a decisive interface for the humans responsible for keeping autonomous vehicles safe, saving millions in third-party tooling costs</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built the design system that enabled engineers to ship new data views without recurring design cycles or vendor dependencies</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Drove product roadmap with PMs, integrating field research and market insight to shape priorities</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Made invisible infrastructure
+                legible — turned sensor accuracy, system confidence, and live telemetry into a decisive interface for
+                the humans responsible for keeping autonomous vehicles safe, saving millions in third-party tooling
+                costs</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built the design system that
+                enabled engineers to ship new data views without recurring design cycles or vendor dependencies</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Drove product roadmap with
+                PMs, integrating field research and market insight to shape priorities</li>
             </ul>
           </div>
         </div>
@@ -723,9 +758,14 @@
             <p class="cv-item-company">Revel · Brooklyn, NY</p>
             <p class="cv-item-context">Electric mobility startup — mopeds and EV charging across major US cities.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>First designer at the company — built every surface a rider or operator touches, from the consumer iOS and Android apps to the full internal operations and logistics suite, from scratch</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Worked alongside every department lead to align tooling to real operational needs; launch resulted in measurable gains in productivity and financial efficiency</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Established the design system that scaled across the company's expanding product lines</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>First designer at the company
+                — built every surface a rider or operator touches, from the consumer iOS and Android apps to the full
+                internal operations and logistics suite, from scratch</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Worked alongside every
+                department lead to align tooling to real operational needs; launch resulted in measurable gains in
+                productivity and financial efficiency</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Established the design system
+                that scaled across the company's expanding product lines</li>
             </ul>
           </div>
         </div>
@@ -737,8 +777,12 @@
             <p class="cv-item-company">Flocabulary · Brooklyn, NY</p>
             <p class="cv-item-context">EdTech — hip-hop-based learning for K–12 students across core curricula.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed pedagogical tools, games, and classroom activities that made learning feel less like school — used by millions of K–12 students across the US</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Ran structured usability research with students and teachers; iterated on findings to measurably improve engagement and product performance</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed pedagogical tools,
+                games, and classroom activities that made learning feel less like school — used by millions of K–12
+                students across the US</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Ran structured usability
+                research with students and teachers; iterated on findings to measurably improve engagement and product
+                performance</li>
             </ul>
           </div>
         </div>
@@ -749,7 +793,9 @@
             <p class="cv-item-title">Lead Product Designer</p>
             <p class="cv-item-company">Propel ML · Brooklyn, NY</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed an in-browser JavaScript ML notebook for data scientists — a focused interface built around code, output, and model state that got out of the way and let people think</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed an in-browser
+                JavaScript ML notebook for data scientists — a focused interface built around code, output, and model
+                state that got out of the way and let people think</li>
             </ul>
           </div>
         </div>
@@ -761,8 +807,12 @@
             <p class="cv-item-company">Diligent Corporation · New York, NY</p>
             <p class="cv-item-context">B2B SaaS — secure boardroom document management for S&P 500 clients.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Owned the desktop platform surface for macOS and web, delivering a consistent, secure experience for board-level users at the world's largest companies</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led the PWA initiative end-to-end: achieved full feature parity in the browser, established a CI/CD release pipeline, and eliminated OS constraints for enterprise users</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Owned the desktop platform
+                surface for macOS and web, delivering a consistent, secure experience for board-level users at the
+                world's largest companies</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led the PWA initiative
+                end-to-end: achieved full feature parity in the browser, established a CI/CD release pipeline, and
+                eliminated OS constraints for enterprise users</li>
             </ul>
           </div>
         </div>
@@ -772,7 +822,9 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Freelance Designer</p>
             <ul class="cv-item-bullets" style="margin-top:10px">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Helped define the early visual and interaction language for Google's self-driving car project (now Waymo), Spotify, Zipcar, Kayak, Blue Apron, and others</li>
+              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Helped define the early visual
+                and interaction language for Google's self-driving car project (now Waymo), Spotify, Zipcar, Kayak, Blue
+                Apron, and others</li>
             </ul>
           </div>
         </div>
@@ -873,7 +925,8 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Dig This</p>
             <p class="cv-item-company">React, Node.js, Discogs API</p>
-            <p class="cv-item-desc" style="margin-top:8px">Music discovery tool that pulls random recommendations from the Discogs database by genre. Featured in DJ Mag.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Music discovery tool that pulls random recommendations from
+              the Discogs database by genre. Featured in DJ Mag.</p>
             <a href="https://digthis.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               digthis.club
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -889,7 +942,8 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Concrete 95</p>
             <p class="cv-item-company">React, Node.js, Firebase</p>
-            <p class="cv-item-desc" style="margin-top:8px">Experimental audio web app inspired by Musique Concrète — lets users create generative soundscapes from synth pads and found sound.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Experimental audio web app inspired by Musique Concrète —
+              lets users create generative soundscapes from synth pads and found sound.</p>
             <a href="https://concrete95.net/" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               concrete95.net
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -905,7 +959,8 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Lever</p>
             <p class="cv-item-company">Figma Plugin</p>
-            <p class="cv-item-desc" style="margin-top:8px">Figma plugin providing a consistent, opinionated structure to Figma files — reducing setup friction and enforcing file hygiene across teams.</p>
+            <p class="cv-item-desc" style="margin-top:8px">Figma plugin providing a consistent, opinionated structure to
+              Figma files — reducing setup friction and enforcing file hygiene across teams.</p>
             <a href="https://www.figma.com/community/plugin/1008125233177309016/Lever---A-Figma-File-Starter"
               target="_blank" rel="noopener noreferrer" class="cv-item-link">
               Figma Community
@@ -951,8 +1006,8 @@
 
         <div class="cv-press-item">
           <div class="cv-press-pub">Site of Sites</div>
-          <a href="https://www.siteofsites.co/websites/good-song-club" target="_blank"
-            rel="noopener noreferrer" class="cv-press-link">
+          <a href="https://www.siteofsites.co/websites/good-song-club" target="_blank" rel="noopener noreferrer"
+            class="cv-press-link">
             "Good Song Club"
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
               <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
