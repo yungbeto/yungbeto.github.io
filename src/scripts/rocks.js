@@ -1,4 +1,5 @@
 var engine, render, homeDiv;
+var popEffects = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   homeDiv = document.getElementById('hero-rocks');
@@ -27,6 +28,51 @@ document.addEventListener('DOMContentLoaded', function () {
   render.canvas.style.zIndex = '0';
   render.canvas.style.pointerEvents = 'none';
 
+  Matter.Events.on(render, 'afterRender', function () {
+    if (popEffects.length === 0) return;
+    var ctx = render.canvas.getContext('2d');
+    var now = performance.now();
+    var duration = 320;
+    popEffects = popEffects.filter(function (pop) {
+      var t = (now - pop.start) / duration;
+      if (t >= 1) return false;
+      var dotPhase = 0.18;
+      var burstT = Math.max((t - dotPhase) / (1 - dotPhase), 0);
+      var easeOut = 1 - Math.pow(1 - burstT, 3);
+      var fade = 0.52 * (1 - burstT);
+      ctx.save();
+      ctx.globalAlpha = fade;
+      ctx.strokeStyle = '#52525b';
+      ctx.fillStyle = '#52525b';
+      ctx.lineWidth = 1.2;
+      ctx.lineCap = 'round';
+      if (t < dotPhase) {
+        var dotT = t / dotPhase;
+        var dotRadius = 1.25 - dotT * 0.5;
+        ctx.beginPath();
+        ctx.arc(pop.x, pop.y, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      for (var i = 0; i < 6; i++) {
+        var angle = ((Math.PI * 2) / 6) * i;
+        var cx = Math.cos(angle);
+        var cy = Math.sin(angle);
+        var startDist = 1 + easeOut * 16;
+        var length = 8 * (1 - burstT);
+        if (length <= 0) continue;
+        ctx.beginPath();
+        ctx.moveTo(pop.x + cx * startDist, pop.y + cy * startDist);
+        ctx.lineTo(
+          pop.x + cx * (startDist + length),
+          pop.y + cy * (startDist + length),
+        );
+        ctx.stroke();
+      }
+      ctx.restore();
+      return true;
+    });
+  });
+
   createWalls();
   scheduleNextDrop();
 
@@ -35,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var rect = homeDiv.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var y = event.clientY - rect.top;
+    popEffects.push({ x: x, y: y, start: performance.now() });
     dropBody(x, y);
   });
 
@@ -56,11 +103,16 @@ function scheduleNextDrop() {
 
   var settled = false;
   var maxWait = setTimeout(function () {
-    if (!settled) { settled = true; scheduleNextDrop(); }
+    if (!settled) {
+      settled = true;
+      scheduleNextDrop();
+    }
   }, 6000); // fallback: next drop after 6s regardless
 
   var checkInterval = setInterval(function () {
-    var spd = Math.sqrt(body.velocity.x * body.velocity.x + body.velocity.y * body.velocity.y);
+    var spd = Math.sqrt(
+      body.velocity.x * body.velocity.x + body.velocity.y * body.velocity.y,
+    );
     if (spd < 0.15) {
       clearInterval(checkInterval);
       clearTimeout(maxWait);
@@ -89,17 +141,23 @@ function dropBody(x, y) {
   var fills = ['#e4e4e7', '#d4d4d8', '#cacaca'];
   var fill = fills[Math.floor(Math.random() * fills.length)];
 
-  var body = Matter.Bodies.fromVertices(x, y, [vertices], {
-    frictionAir: 0.008,
-    friction: 0.8,
-    frictionStatic: 0.5,
-    restitution: 0.05,
-    render: {
-      fillStyle: fill,
-      strokeStyle: '#3f3f46',
-      lineWidth: 1,
+  var body = Matter.Bodies.fromVertices(
+    x,
+    y,
+    [vertices],
+    {
+      frictionAir: 0.008,
+      friction: 0.8,
+      frictionStatic: 0.5,
+      restitution: 0.05,
+      render: {
+        fillStyle: fill,
+        strokeStyle: '#3f3f46',
+        lineWidth: 1,
+      },
     },
-  }, true);
+    true,
+  );
 
   // Tiny random horizontal nudge so they don't all stack perfectly
   Matter.Body.setVelocity(body, {
