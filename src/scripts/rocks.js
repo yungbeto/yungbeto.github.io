@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var fade = 0.52 * (1 - burstT);
       ctx.save();
       ctx.globalAlpha = fade;
-      ctx.strokeStyle = '#52525b';
-      ctx.fillStyle = '#52525b';
+      ctx.strokeStyle = '#f472b6';
+      ctx.fillStyle = '#f472b6';
       ctx.lineWidth = 1.2;
       ctx.lineCap = 'round';
       if (t < dotPhase) {
