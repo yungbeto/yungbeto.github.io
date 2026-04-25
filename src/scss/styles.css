@@ -5,12 +5,12 @@
 }
 
 *::-moz-selection {
-  background: #4d7c0f;
+  background: #f472b6;
   color: #d4d4d8;
 }
 
 *::selection {
-  background: #4d7c0f;
+  background: #f472b6;
   color: #d4d4d8;
 }
 
@@ -98,11 +98,6 @@ ul {
   align-items: center;
 }
 
-@keyframes nav-icon-in {
-  from { opacity: 0; transform: translateY(5px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 .nav-icon {
   display: flex;
   align-items: center;
@@ -119,23 +114,6 @@ ul {
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
-  opacity: 0;
-  animation: nav-icon-in 0.25s ease forwards;
-}
-
-.nav-icon:nth-child(1) { animation-delay: 0.05s; }
-.nav-icon:nth-child(2) { animation-delay: 0.11s; }
-.nav-icon:nth-child(3) { animation-delay: 0.17s; }
-.nav-icon:nth-child(4) { animation-delay: 0.23s; }
-.nav-icon:nth-child(5) { animation-delay: 0.29s; }
-
-.nav-icon:last-child[data-tooltip]::after {
-  left: auto;
-  right: 0;
-  transform: translateY(-4px);
-}
-.nav-icon:last-child[data-tooltip]:hover::after {
-  transform: translateY(0);
 }
 .nav-icon i {
   font-size: 14px;
@@ -166,6 +144,44 @@ ul {
 .nav-icon[data-tooltip]:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+.nav-icon:last-child[data-tooltip]::after {
+  left: auto;
+  right: 0;
+  transform: translateY(-4px);
+}
+.nav-icon:last-child[data-tooltip]:hover::after {
+  transform: translateY(0);
+}
+
+@keyframes nav-icon-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.nav-icon {
+  opacity: 0;
+  animation: nav-icon-in 0.25s ease forwards;
+}
+.nav-icon:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.nav-icon:nth-child(2) {
+  animation-delay: 0.11s;
+}
+.nav-icon:nth-child(3) {
+  animation-delay: 0.17s;
+}
+.nav-icon:nth-child(4) {
+  animation-delay: 0.23s;
+}
+.nav-icon:nth-child(5) {
+  animation-delay: 0.29s;
 }
 
 .site-section {
@@ -397,7 +413,7 @@ ul {
   pointer-events: none;
   white-space: pre;
   transition: opacity 0.1s ease;
-  color: #3f3f46;
+  color: currentColor;
 }
 .hero-char.resolved .hero-char-block {
   opacity: 0;
@@ -725,18 +741,27 @@ ul {
   background: #e4e4e7;
   cursor: zoom-in;
   filter: brightness(0.45);
-  transition: filter 0.5s ease;
+  border: 1px solid transparent;
+  transition: filter 0.5s ease, border 0.5s ease;
 }
 .work-case-media-item.is-active {
   filter: brightness(1);
+  border: 1px solid #3f3f46;
 }
 .work-case-media-item img,
 .work-case-media-item video {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
+@media (max-width: 768px) {
+  .work-case-media-item {
+    border-radius: 14px;
+  }
+}
+
 .carousel-btn {
   position: absolute;
   top: 0;
@@ -754,7 +779,7 @@ ul {
 }
 .carousel-btn i {
   font-size: 18px;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
 .carousel-btn:hover {
   color: #fff;
@@ -790,37 +815,6 @@ ul {
     display: none;
   }
 }
-
-/* ── Lightbox ──────────────────────────────────────────────────────── */
-
-.lightbox-backdrop {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 100;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-.lightbox-backdrop.is-open {
-  opacity: 0.96;
-  pointer-events: all;
-}
-
-.lightbox-clone {
-  position: fixed;
-  z-index: 101;
-  overflow: hidden;
-  cursor: zoom-out;
-}
-.lightbox-clone img,
-.lightbox-clone video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
 .jobs-content {
   padding: 0;
 }
@@ -1232,4 +1226,32 @@ ul {
     transform: scale(1);
     opacity: 1;
   }
+}
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.lightbox-backdrop.is-open {
+  opacity: 0.96;
+  pointer-events: all;
+}
+
+.lightbox-clone {
+  position: fixed;
+  z-index: 101;
+  overflow: hidden;
+  cursor: zoom-out;
+}
+.lightbox-clone img,
+.lightbox-clone video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
 }/*# sourceMappingURL=styles.css.map */
