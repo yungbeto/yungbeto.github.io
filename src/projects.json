@@ -32,7 +32,7 @@
     "name": "BPM Game",
     "url": "https://bpmga.me",
     "year": "2025",
-    "description": "A very niche web-baed game where a player listens to a metronome and guesses the BPM.",
+    "description": "A very niche web-based game where a player listens to a metronome and guesses the BPM.",
     "skills": "React, Product Design, Firebase",
     "media": [
       {
