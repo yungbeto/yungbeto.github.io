@@ -18,7 +18,7 @@
     "name": "Concrete 95",
     "url": "https://concrete95.net/",
     "year": "2025",
-    "description": "Concrete 95 is a sound design webapp inspired by Musique Concrete. It allows you to layer synth pads, melodies, and found sound randomly fetched from freesound.org to create a unique, ever-changing soundscape.",
+    "description": "Concrete 95 is a sound design webapp inspired by Musique Concrete with a Windows 95 aesthetic. It allows you to layer synth pads, melodies, and found sound randomly fetched from freesound.org to create a unique, ever-changing soundscape.",
     "skills": "React, Node.js, Firebase, Agentic Development",
     "media": [
       {
@@ -32,7 +32,7 @@
     "name": "BPM Game",
     "url": "https://bpmga.me",
     "year": "2025",
-    "description": "Listen to a metronome and guess the BPM.",
+    "description": "A very niche web-baed game where a player listens to a metronome and guesses the BPM.",
     "skills": "React, Product Design, Firebase",
     "media": [
       {
