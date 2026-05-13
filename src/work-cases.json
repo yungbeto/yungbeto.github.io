@@ -1,8 +1,40 @@
 [
   {
+    "id": "olympus",
+    "company": "Olympus",
+    "role": "Senior Product Designer",
+    "icon": "src/img/companyIcons/companyIcon_olympus.png",
+    "caseStudy_url": "/olympus",
+    "copy": [
+      "I led design for a clinical traceability tool that helped hospital staff retrieve reprocessing records from complex structured data.",
+      "The work explored how to make high-stakes, low-frequency workflows feel understandable on first contact, using a guided query experience that reduced ambiguity and built confidence."
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "olympus/img/1.png",
+        "srcMobile": "olympus/img/1sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/2.png",
+        "srcMobile": "olympus/img/2sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/3.png",
+        "srcMobile": "olympus/img/3sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/4.png",
+        "srcMobile": "olympus/img/4sm.png"
+      }
+    ]
+  },
+  {
     "id": "cavnue",
     "company": "Cavnue",
-    "dateRange": "2022–2023",
     "role": "Senior Product Designer",
     "icon": "src/img/companyIcons/companyIcon_cavnue.png",
     "copy": [
@@ -35,7 +67,6 @@
   {
     "id": "revel",
     "company": "Revel",
-    "dateRange": "2019–2022",
     "role": "Senior Product Designer",
     "icon": "src/img/companyIcons/companyIcon_revel.png",
     "copy": [

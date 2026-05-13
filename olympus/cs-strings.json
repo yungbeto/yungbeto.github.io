@@ -1,0 +1,96 @@
+{
+  "_notes": "Revised copy strings for the Olympus traceability case study. Keys map to section > element. Lorem ipsum sections marked with TODO where original content is needed from Roby.",
+  "meta": {
+    "page_title": "Olympus / Case Study · Roby Saavedra",
+    "meta_description": "A case study on designing a clinical traceability tool at Olympus. Hospital staff get instant access to reprocessing data through a structured, wizard-driven interface built to lay the foundation for AI."
+  },
+  "intro": {
+    "label": "Case study / Olympus",
+    "hero_title": "Making clinical traceability data accessible at the point of care",
+    "lead": "At Olympus I led design on a traceability search tool that let clinical staff retrieve reprocessing records in seconds, with no SQL knowledge, no training, and no paper ledgers."
+  },
+  "background": {
+    "label": "Background",
+    "intro": "A few things to know before diving in.",
+    "blocks": [
+      {
+        "num": "1",
+        "label": "Reprocessing",
+        "text": "Endoscopes are used on multiple patients and must be rigorously cleaned between each use. This specialized sanitization process is called reprocessing."
+      },
+      {
+        "num": "2",
+        "label": "Documentation",
+        "text": "Every step of a reprocessing cycle must be documented. Regulatory guidelines are strict, and compliance is not optional."
+      },
+      {
+        "num": "3",
+        "label": "Structured Storage",
+        "text": "Documented steps produce data records that become critical evidence when a scope needs to be traced, such as after a potential patient exposure event."
+      },
+      {
+        "num": "4",
+        "label": "Scope Trace",
+        "text": "A scope trace follows the paper trail of a specific endoscope to determine who and what it came into contact with. Speed and accuracy here can have direct patient safety implications."
+      }
+    ]
+  },
+  "situation": {
+    "label": "The situation",
+    "section_title": "Documentation is still overwhelmingly stuck in an analog world",
+    "body": "Reprocessing documentation is required by law, but no digital solution had managed to stick on either the capture or retrieval side. Olympus was well-positioned to solve this problem, but previous attempts had failed. In the meantime, clinical staff were still managing records by hand: paper logs, shared spreadsheets, and physical ledgers.",
+    "problem_prompt": "The problem I set out to solve:",
+    "problem_statement": "How might we make traceability data accessible to clinical staff at the moment they need it most?"
+  },
+  "task": {
+    "label": "The task",
+    "section_title": "Design a retrieval interface for a high-stakes, low-frequency use case",
+    "body": "Olympus hardware was generating valuable data. The infrastructure to capture it was in place. The missing piece was a surface that made that data usable: something that could hold up under pressure, in a clinical setting, for a user encountering it for the first time."
+  },
+  "constraints": {
+    "label": "The constraints",
+    "items": [
+      {
+        "num": "1",
+        "text": "No technical knowledge required. Clinical staff should be able to query data without SQL or database experience."
+      },
+      {
+        "num": "2",
+        "text": "AI is off the table for the MVP due to privacy concerns and infrastructure constraints, but the design should lay the foundation for a natural language layer down the road."
+      },
+      {
+        "num": "3",
+        "text": "The solution must fit into clinical workflows and the mental models we observed in the field."
+      },
+      {
+        "num": "4",
+        "text": "The product must work correctly on first contact, with no training, under pressure."
+      },
+      {
+        "num": "5",
+        "text": "Build enough confidence in the tool that endoscopy departments can retire their paper ledgers"
+      }
+    ]
+  },
+  "action": {
+    "label": "The action",
+    "section_title": "Several directions were explored and tested before a pattern emerged",
+    "body": "The first explorations centered on a visual query builder: a structured UI that would let users construct SQL queries without writing any code. It tested poorly. The cognitive overhead was too high, and the interaction model had no relationship to how clinical staff actually thought about the problem.",
+    "body_2": "Field conversations with nurses made clear that they reasoned in plain language, not in database logic. That shifted the direction toward natural language input. From there, through repeated testing, something unexpected surfaced: the questions nurses needed to ask were not as varied as assumed. The system was closed, the data was structured, and the range of meaningful queries was finite. Once that was clear, the direction became obvious."
+  },
+  "testing": {
+    "section_title": "Testing revealed a finite, mappable query space",
+    "body": "Across every session, the same types of questions kept surfacing. The full range of possible queries turned out to be finite and mappable. That meant the interaction could be structured: a guided, wizard-style flow that encoded every permutation without requiring the user to construct a query from scratch."
+  },
+  "result": {
+    "label": "The result",
+    "section_title": "The MVP: a controlled, stepped interface that eliminated ambiguity",
+    "body": "The prototype walked users through a series of guided steps, each narrowing the query until the system had enough information to return a precise result. There were no open fields, no ambiguous inputs. Every path through the wizard was accounted for.",
+    "body_2": "In testing, nurses completed scope traces quickly and with confidence, often on first contact. The qualitative feedback was consistent: the tool felt familiar, even to users who had never seen it before. That was the signal we were after."
+  },
+  "outcome": {
+    "label": "Outcome",
+    "section_title": "The MVP tested well with clinical users and received strong endorsement from product leadership.",
+    "body": "The query-builder architecture we shipped solved the immediate problem and opened a longer road. As a structured, deterministic layer sitting between user intent and private patient data, it became the foundation any future natural language interface would route through."
+  }
+}

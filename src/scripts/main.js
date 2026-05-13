@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
   initHeroAnimation();
-  initFooterNameAnimation();
   Promise.all([
     loadProjectCards(),
     loadWorkCases(),
@@ -40,37 +39,6 @@ function initHeroAnimation() {
       setTimeout(() => el.classList.add('in-view'), i * 80);
     });
   });
-}
-
-function initFooterNameAnimation() {
-  const el = document.querySelector('.footer-name');
-  if (!el) return;
-
-  const charSpans = [];
-  const nodes = Array.from(el.childNodes);
-  el.innerHTML = '';
-
-  nodes.forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const text = node.textContent.replace(/\s+/g, ' ').trim();
-      if (text) splitTextIntoChars(text, el, charSpans);
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      // Preserve <br> and other inline elements
-      const text = node.textContent;
-      node.innerHTML = '';
-      if (text) splitTextIntoChars(text, node, charSpans);
-      el.appendChild(node);
-    }
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      observer.disconnect();
-      startScramble(charSpans, undefined, { startDelay: 100, staggerMs: 35 });
-    }
-  }, { threshold: 0.4 });
-
-  observer.observe(el);
 }
 
 function splitTextIntoChars(text, container, charSpans) {
@@ -237,6 +205,12 @@ async function loadWorkCases() {
       block.id = c.id;
 
       const copyHtml = c.copy.map((p) => `<p>${p}</p>`).join('');
+      const ctaHtml = c.caseStudy_url
+        ? `<a class="work-case-cta" href="${c.caseStudy_url}">
+            View case study
+            <i class="ph ph-arrow-right"></i>
+          </a>`
+        : '';
 
       const mediaHtml = c.media
         .map((m) => {
@@ -245,6 +219,14 @@ async function loadWorkCases() {
               <video autoplay loop muted playsinline preload="auto">
                 <source src="${m.src}" type="video/mp4">
               </video>
+            </div>`;
+          }
+          if (m.srcMobile) {
+            return `<div class="work-case-media-item">
+              <picture>
+                <source media="(max-width: 768px)" srcset="${m.srcMobile}">
+                <img src="${m.src}" alt="${c.company} work sample">
+              </picture>
             </div>`;
           }
           return `<div class="work-case-media-item">
@@ -259,11 +241,13 @@ async function loadWorkCases() {
             <img class="work-case-icon" src="${c.icon}" alt="${c.company} logo">
             <div>
               <h3 class="work-case-company">${c.company}</h3>
-              <p class="work-case-meta-text">${c.dateRange}</p>
               <p class="work-case-meta-text">${c.role}</p>
             </div>
           </div>
-          <div class="work-case-copy">${copyHtml}</div>
+          <div class="work-case-copy">
+            ${copyHtml}
+            ${ctaHtml}
+          </div>
         </header>
         <div class="work-case-pill-wrapper">
           <div class="work-case-pill" aria-hidden="true">

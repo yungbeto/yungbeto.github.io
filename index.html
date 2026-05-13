@@ -54,22 +54,7 @@ hello@robysaavedra.com
     <div class="page-outer">
         <div class="page-container">
 
-            <nav class="navbar">
-                <span class="nav-name" role="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-                    style="cursor:pointer;">Roby Saavedra</span>
-                <div class="nav-icons">
-                    <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer"
-                        class="nav-icon" aria-label="LinkedIn" data-tooltip="LinkedIn">in</a>
-                    <a href="/cv" class="nav-icon" aria-label="CV" data-tooltip="CV"><i class="ph ph-read-cv-logo"></i></a>
-                    <a href="https://github.com/yungbeto/" target="_blank" rel="noopener noreferrer"
-                        class="nav-icon" aria-label="GitHub" data-tooltip="GitHub"><i class="ph ph-github-logo"></i></a>
-                    <a href="https://signmyguestbook.net/" target="_blank" rel="noopener noreferrer" class="nav-icon"
-                        aria-label="Sign my guestbook" data-tooltip="Sign my guestbook"><i
-                            class="ph ph-book-open"></i></a>
-                    <a href="mailto:hello@robysaavedra.com" class="nav-icon" aria-label="Email"
-                        data-tooltip="Send email"><i class="ph ph-envelope"></i></a>
-                </div>
-            </nav>
+            <div data-site-navbar data-home-behavior="scroll"></div>
 
             <main>
 
@@ -156,40 +141,17 @@ hello@robysaavedra.com
                 <div class="marquee-inner" id="marquee-inner"></div>
             </div> -->
 
-            <footer class="site-footer">
-                <div class="footer-body">
-                    <p class="footer-name">Roby<br>Saavedra</p>
-                    <p class="footer-quote">"A pleasant person to work with"</p>
-                </div>
-                <div class="footer-bar">
-                    <div class="footer-contact">
-                        <button class="copy-btn" id="copy-btn" aria-label="Copy email address">
-                            <span class="copy-btn-label">
-                                <span class="copy-btn-text" id="footer-email">hello@robysaavedra.com</span>
-                            </span>
-                            <i class="ph ph-copy"></i>
-                        </button>
-                    </div>
-                    <div class="footer-secondary">
-                        <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank"
-                            rel="noopener noreferrer" class="footer-secondary-link">LinkedIn</a>
-                        <a href="https://github.com/yungbeto/" target="_blank"
-                            rel="noopener noreferrer" class="footer-secondary-link">GitHub</a>
-                        <a href="/cv" class="footer-secondary-link">CV</a>
-                        <a href="https://signmyguestbook.net/" target="_blank" rel="noopener noreferrer"
-                            class="footer-secondary-link">Guestbook</a>
-                        <span>© <span id="footer-year"></span></span>
-                    </div>
-                </div>
-            </footer>
+            <div data-site-footer></div>
 
         </div><!-- /.page-container -->
     </div><!-- /.page-outer -->
 
     <script src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.16.0/build/matter.min.js"></script>
+    <script src="src/scripts/site-chrome.js"></script>
     <script src="src/scripts/rocks.js"></script>
     <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/favicon-spinner.js"></script>
     <script>
         console.log(
             '%c\n' +
@@ -206,39 +168,6 @@ hello@robysaavedra.com
             '                               \\\\______/\n',
             'color: #3f3f46; font-family: monospace;'
         );
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
-        document.getElementById('copy-btn').addEventListener('click', function () {
-            const btn = this;
-            const icon = btn.querySelector('i');
-            const label = document.getElementById('footer-email');
-            if (!icon || !label) return;
-
-            navigator.clipboard.writeText('hello@robysaavedra.com').then(() => {
-                const DURATION = 240;
-                function swapText(newText) {
-                    label.classList.add('copy-state-exit');
-                    setTimeout(() => {
-                        label.textContent = newText;
-                        label.classList.remove('copy-state-exit');
-                        label.classList.add('copy-state-enter');
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => label.classList.remove('copy-state-enter'));
-                        });
-                    }, DURATION);
-                }
-
-                icon.className = 'ph ph-check copy-icon-success';
-                setTimeout(() => icon.classList.remove('copy-icon-success'), 400);
-                swapText('Email copied to clipboard');
-
-                setTimeout(() => {
-                    swapText('hello@robysaavedra.com');
-                    icon.className = 'ph ph-copy';
-                }, 1400);
-            }).catch(() => {
-                icon.className = 'ph ph-warning';
-            });
-        });
     </script>
     <script>
         (function () {

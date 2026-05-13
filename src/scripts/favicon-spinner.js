@@ -1,35 +1,66 @@
 // favicon-spinner.js
+(function () {
+  const favicon =
+    document.getElementById('favicon') ||
+    document.querySelector('link[rel~="icon"]') ||
+    document.head.appendChild(
+      Object.assign(document.createElement('link'), { rel: 'icon' }),
+    );
 
-const svgString = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-  <path d="M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z" stroke="#a3a3a3"/>
-</svg>`;
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
-const size = 16; // Size of the favicon
-canvas.width = size;
-canvas.height = size;
-let angle = 0;
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const size = 32;
+  const path = new Path2D(
+    'M22.875 6L8.5 9.0303L6 21.1516L19.75 26L26 14.4848L22.875 6Z',
+  );
+  let angle = 0;
+  let lastTime = performance.now();
 
-function updateFavicon() {
-  ctx.clearRect(0, 0, size, size); // Clear the canvas
-  ctx.save();
-  ctx.translate(size / 2, size / 2); // Move to the center of the canvas
-  ctx.rotate((angle * Math.PI) / 180); // Rotate the canvas
-  ctx.translate(-size / 2, -size / 2); // Move back to the top-left corner
+  if (!ctx) return;
 
-  const img = new Image();
-  img.src = 'data:image/svg+xml;base64,' + btoa(svgString);
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, size, size); // Draw the SVG onto the canvas
+  canvas.width = size;
+  canvas.height = size;
+
+  function draw() {
+    ctx.clearRect(0, 0, size, size);
+    ctx.save();
+    ctx.translate(size / 2, size / 2);
+    ctx.rotate((angle * Math.PI) / 180);
+    ctx.translate(-size / 2, -size / 2);
+
+    // Double stroke keeps the tiny icon visible on both light and dark browser chrome.
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#d4d4d8';
+    ctx.stroke(path);
+    ctx.lineWidth = 2.25;
+    ctx.strokeStyle = '#3f3f46';
+    ctx.fillStyle = '#f472b6';
+    ctx.fill(path);
+    ctx.stroke(path);
     ctx.restore();
 
-    const favicon = document.getElementById('favicon');
-    favicon.href = canvas.toDataURL('image/png'); // Update the favicon link
-  };
+    favicon.href = canvas.toDataURL('image/png');
+  }
 
-  angle = (angle + 1) % 360; // Increment the angle for the next frame
-  requestAnimationFrame(updateFavicon); // Request the next frame
-}
+  function tick(now) {
+    if (prefersReducedMotion) {
+      return;
+    }
 
-updateFavicon(); // Start the animation
+    const elapsed = now - lastTime;
+    lastTime = now;
+    angle = (angle + elapsed * 0.05) % 360;
+    draw();
+    requestAnimationFrame(tick);
+  }
+
+  draw();
+  if (!prefersReducedMotion) {
+    requestAnimationFrame(tick);
+  }
+})();

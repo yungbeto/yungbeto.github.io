@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olympus / Case Study · Roby Saavedra</title>
+    <meta name="description"
+        content="A case study on designing a clinical traceability tool at Olympus. Hospital staff get instant access to reprocessing data through a structured, wizard-driven interface built to lay the foundation for AI.">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <!-- ─── Intro ─────────────────────────────────────────────────────── -->
+
+            <div class="cs-intro">
+                <div class="cs-label-row">
+                    <i class="ph ph-asterisk cs-asterisk"></i>
+                    <p class="cs-label">Case study / Olympus</p>
+                </div>
+                <div class="cs-intro-row">
+                    <div class="cs-intro-copy">
+                        <h1 class="cs-hero-title">Making clinical traceability data accessible at the point of care</h1>
+                        <p class="cs-lead">At Olympus I led design on a traceability search tool that let clinical staff
+                            retrieve reprocessing records in seconds, with no SQL knowledge, no training, and no paper
+                            ledgers.</p>
+                    </div>
+                    <div class="cs-hero-img-wrap">
+                        <img src="Hero.jpg" alt="Healthcare worker using an endoscope" class="cs-hero-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Background ────────────────────────────────────────────────── -->
+
+            <div class="cs-bg">
+                <div class="cs-bg-inner">
+                    <p class="cs-label cs-label--light">Background</p>
+                    <p class="cs-bg-lead">A few things to know before diving in.</p>
+                    <div class="cs-bg-grid">
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">1</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Reprocessing</p>
+                                <p class="cs-bg-block-text">Endoscopes are used on multiple patients and must be
+                                    rigorously cleaned between each use. This specialized sanitization process is called
+                                    reprocessing.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">2</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Documentation</p>
+                                <p class="cs-bg-block-text">Every step of a reprocessing cycle must be documented.
+                                    Regulatory guidelines are strict, and compliance is not optional.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">3</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Structured Storage</p>
+                                <p class="cs-bg-block-text">Documented steps produce data records that become critical
+                                    evidence when a scope needs to be traced, such as after a potential patient exposure
+                                    event.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">4</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Scope Trace</p>
+                                <p class="cs-bg-block-text">A scope trace follows the paper trail of a specific
+                                    endoscope to determine who and what it came into contact with. Speed and accuracy
+                                    here can have direct patient safety implications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Situation ─────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The situation</p>
+                </div>
+                <div class="cs-situation-row">
+                    <img src="Ruler.jpg" alt="Analog ruler and measurement tools" class="cs-ruler-img">
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+
+                            <p class="cs-section-title">Documentation is still overwhelmingly stuck in an analog world
+                            </p>
+                            <p class="cs-body-text">Reprocessing documentation is required by law, but no digital
+                                solution had managed to stick on either the capture or retrieval side. Olympus was
+                                well-positioned to solve this problem, but previous attempts had failed. In the
+                                meantime,
+                                clinical staff were still managing records by hand: paper logs, shared spreadsheets, and
+                                physical ledgers.
+                            </p>
+                        </div>
+                        <div class="cs-problem-statement">
+
+                            <div class="cs-problem-box">
+                                <span class="cs-problem-box-label-container">
+
+                                    <i class="ph ph-question cs-problem-box-icon"></i>
+                                    <p class="cs-problem-box-label">The problem I set out to solve:</p>
+                                </span>
+
+                                <p class="cs-problem-box-body-text">How might we make traceability data accessible to
+                                    clinical
+                                    staff
+                                    at the moment they need it most?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Task + Constraints ─────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">The task</p>
+                    <p class="cs-section-title">Design a retrieval interface for a high-stakes, low-frequency use case
+                    </p>
+                    <p class="cs-body-text">Olympus hardware was generating valuable data. The infrastructure to capture
+                        it was in place. The missing piece was a surface that made that data usable: something that
+                        could
+                        hold up under pressure, in a clinical setting, for a user encountering it for the first time.
+                    </p>
+                </div>
+                <div class="cs-constraints">
+                    <p class="cs-label">The constraints</p>
+                    <div class="cs-constraint-list">
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">1</p>
+                            <p class="cs-constraint-text">No technical knowledge required. Clinical staff should be able
+                                to query data without SQL or database experience.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">2</p>
+                            <p class="cs-constraint-text">AI is off the table for the MVP due to privacy concerns and
+                                infrastructure constraints, but the design should lay the foundation for a natural
+                                language layer down the road.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">3</p>
+                            <p class="cs-constraint-text">The solution must fit into clinical workflows and the mental
+                                models we observed in the field.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">4</p>
+                            <p class="cs-constraint-text">The product must work correctly on first contact, with no
+                                training, under pressure.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">5</p>
+                            <p class="cs-constraint-text">Build enough confidence in the tool that endoscopy departments
+                                can retire their paper ledgers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Action ────────────────────────────────────────────────────── -->
+
+            <div class="cs-action">
+                <div class="cs-action-header">
+                    <p class="cs-label cs-label--light">The action</p>
+                    <div class="cs-action-copy">
+                        <p class="cs-action-title">Several directions were explored and <span
+                                class="cs-action-title-highlight">tested</span> before a
+                            pattern emerged
+                        </p>
+                        <figure class="cs-action-title-hover-card">
+                            <img class="cs-action-title-hover-img" src="Action 09.jpg"
+                                alt="Roby in clinical testing gear">
+                            <figcaption>Here I am during a research trip at a Hospital in Barcelona</figcaption>
+                        </figure>
+                        <div class="cs-copy-pair">
+                            <p class="cs-action-body">The first explorations centered on a visual query builder: a
+                                structured UI that would let users construct SQL queries without writing any code. It
+                                tested poorly. The cognitive overhead was too high, and the interaction model had no
+                                relationship to how clinical staff actually thought about the problem.</p>
+                            <p class="cs-action-body">Field conversations with nurses made clear that they reasoned in
+                                plain language, not in database logic. That shifted the direction toward natural
+                                language
+                                input. From there, through repeated testing, something unexpected surfaced: the
+                                questions
+                                nurses needed to ask were not as varied as assumed. The system was closed, the data was
+                                structured, and the range of meaningful queries was finite. Once that was clear, the
+                                direction became obvious.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <p class="cs-action-carousel-title">Wireframes we used for testing</p>
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item"><img src="Action 01.jpg" alt="Exploration 1"></div>
+                            <div class="work-case-media-item"><img src="Action 02.jpg" alt="Exploration 2"></div>
+                            <div class="work-case-media-item"><img src="Action 03.jpg" alt="Exploration 3"></div>
+                            <div class="work-case-media-item"><img src="Action 04.jpg" alt="Exploration 4"></div>
+                            <div class="work-case-media-item"><img src="Action 05.jpg" alt="Exploration 5"></div>
+                            <div class="work-case-media-item"><img src="Action 06.jpg" alt="Exploration 6"></div>
+                            <div class="work-case-media-item"><img src="Action 07.jpg" alt="Exploration 7"></div>
+                            <div class="work-case-media-item"><img src="Action 08.jpg" alt="Exploration 8"></div>
+
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Testing ───────────────────────────────────────────────────── -->
+
+            <div class="cs-testing">
+                <div class="cs-testing-copy">
+                    <p class="cs-label">The breakthrough</p>
+                    <p class="cs-section-title">Testing revealed a finite, mappable query space</p>
+                    <p class="cs-body-text">Across every session, the same types of questions kept surfacing. The full
+                        range of possible queries turned out to be finite and mappable. That meant the interaction could
+                        be structured: a guided, wizard-style flow that encoded every permutation without requiring the
+                        user to construct a query from scratch.</p>
+                </div>
+                <div class="cs-flow-zoom">
+                    <img src="Query Flow.png" alt="Query flow diagram showing all possible permutations"
+                        class="cs-flow-img">
+                    <div class="cs-flow-zoom-hint">
+                        <i class="ph ph-magnifying-glass-plus"></i>
+                        <span>Hover to zoom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Result ────────────────────────────────────────────────────── -->
+
+            <div class="cs-result">
+                <div class="cs-result-header">
+                    <p class="cs-label">The result</p>
+                    <p class="cs-section-title">The MVP: a controlled, stepped interface that eliminated ambiguity</p>
+                    <div class="cs-copy-pair">
+                        <p class="cs-body-text">The prototype walked users through a series of guided steps, each
+                            narrowing the query until the system had enough information to return a precise result.
+                            There were no open fields, no ambiguous inputs. Every path through the wizard was accounted
+                            for.</p>
+                        <p class="cs-body-text">In testing, nurses completed scope traces quickly and with confidence,
+                            often on first contact. The qualitative feedback was consistent: the tool felt familiar,
+                            even
+                            to users who had never seen it before. That was the signal we were after.</p>
+                    </div>
+                </div>
+                <div class="work-case-carousel buffer">
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/1sm.png"><img src="img/1.png"
+                                        alt="MVP screen 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/2sm.png"><img src="img/2.png"
+                                        alt="MVP screen 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/3sm.png"><img src="img/3.png"
+                                        alt="MVP screen 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/4sm.png"><img src="img/4.png"
+                                        alt="MVP screen 4">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Outcome ───────────────────────────────────────────────────── -->
+
+            <div class="cs-outcome">
+                <div class="cs-outcome-inner">
+                    <p class="cs-label">Outcome</p>
+                    <p class="cs-section-title ">The MVP tested well with clinical users and
+                        received strong endorsement
+                        from product leadership.</p>
+                    <p class="cs-body-text ">The query-builder architecture we shipped solved the immediate problem and
+                        opened a longer road. As a structured, deterministic layer sitting between user intent and
+                        private patient data, it became the foundation any future natural language interface would route
+                        through.</p>
+                </div>
+            </div>
+
+            <!-- ─── Footer ────────────────────────────────────────────────────── -->
+
+            <div data-site-footer></div>
+
+        </div><!-- /.page-container -->
+    </div><!-- /.page-outer -->
+
+    <script src="../src/scripts/site-chrome.js"></script>
+    <script src="../src/scripts/favicon-spinner.js"></script>
+    <script>
+        loadCaseStudyStrings().finally(initActionTitleHover);
+
+        initCarousels();
+        initConstraintScrollBackgrounds();
+
+        async function loadCaseStudyStrings() {
+            try {
+                const res = await fetch('./cs-strings.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const copy = await res.json();
+
+                function setText(selector, value, root = document) {
+                    if (value == null) return;
+                    const el = root.querySelector(selector);
+                    if (el) el.textContent = value;
+                }
+
+                function setHighlightedText(selector, value, highlight) {
+                    if (value == null || !highlight) return;
+                    const el = document.querySelector(selector);
+                    if (!el) return;
+
+                    const parts = value.split(highlight);
+                    if (parts.length === 1) {
+                        el.textContent = value;
+                        return;
+                    }
+
+                    el.textContent = '';
+                    el.append(document.createTextNode(parts[0]));
+                    const highlightEl = document.createElement('span');
+                    highlightEl.className = 'cs-action-title-highlight';
+                    highlightEl.textContent = highlight;
+                    el.append(highlightEl);
+                    el.append(document.createTextNode(parts.slice(1).join(highlight)));
+                }
+
+                function setBlocks(selector, items, apply) {
+                    if (!Array.isArray(items)) return;
+                    document.querySelectorAll(selector).forEach(function (el, i) {
+                        if (items[i]) apply(el, items[i]);
+                    });
+                }
+
+                if (copy.meta?.page_title) document.title = copy.meta.page_title;
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription && copy.meta?.meta_description) {
+                    metaDescription.setAttribute('content', copy.meta.meta_description);
+                }
+
+                setText('.cs-intro .cs-label', copy.intro?.label);
+                setText('.cs-hero-title', copy.intro?.hero_title);
+                setText('.cs-lead', copy.intro?.lead);
+
+                setText('.cs-bg .cs-label', copy.background?.label);
+                setText('.cs-bg-lead', copy.background?.intro);
+                setBlocks('.cs-bg-block', copy.background?.blocks, function (el, block) {
+                    setText('.cs-bg-num', block.num, el);
+                    setText('.cs-bg-block-label', block.label, el);
+                    setText('.cs-bg-block-text', block.text, el);
+                });
+
+                setText('.cs-situation .cs-label', copy.situation?.label);
+                setText('.cs-situation .cs-section-title', copy.situation?.section_title);
+                setText('.cs-situation-copy .cs-body-text', copy.situation?.body);
+                setText('.cs-problem-box-label', copy.situation?.problem_prompt);
+                setText('.cs-problem-box-body-text', copy.situation?.problem_statement);
+
+                setText('.cs-task .cs-label', copy.task?.label);
+                setText('.cs-task .cs-section-title', copy.task?.section_title);
+                setText('.cs-task .cs-body-text', copy.task?.body);
+
+                setText('.cs-constraints > .cs-label', copy.constraints?.label);
+                setBlocks('.cs-constraint', copy.constraints?.items, function (el, item) {
+                    setText('.cs-constraint-num', item.num, el);
+                    setText('.cs-constraint-text', item.text, el);
+                });
+
+                setText('.cs-action .cs-label', copy.action?.label);
+                setHighlightedText('.cs-action-title', copy.action?.section_title, 'tested');
+                setText('.cs-action-body:nth-child(1)', copy.action?.body);
+                setText('.cs-action-body:nth-child(2)', copy.action?.body_2);
+
+                setText('.cs-testing .cs-section-title', copy.testing?.section_title);
+                setText('.cs-testing .cs-body-text', copy.testing?.body);
+
+                setText('.cs-result .cs-label', copy.result?.label);
+                setText('.cs-result-header .cs-section-title', copy.result?.section_title);
+                setText('.cs-result-header .cs-body-text:nth-child(1)', copy.result?.body);
+                setText('.cs-result-header .cs-body-text:nth-child(2)', copy.result?.body_2);
+
+                setText('.cs-outcome .cs-label', copy.outcome?.label);
+                setText('.cs-outcome .cs-section-title', copy.outcome?.section_title);
+                setText('.cs-outcome .cs-body-text', copy.outcome?.body);
+            } catch (error) {
+                console.warn('Unable to load Olympus case study copy:', error);
+            }
+        }
+
+        function initActionTitleHover() {
+            const trigger = document.querySelector('.cs-action-title-highlight');
+            const card = document.querySelector('.cs-action-title-hover-card');
+            if (!trigger || !card || trigger.dataset.hoverInit === 'true') return;
+
+            trigger.dataset.hoverInit = 'true';
+            const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+            if (isTouchDevice) {
+                trigger.style.cursor = 'pointer';
+                trigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const rect = trigger.getBoundingClientRect();
+                    card.style.left = (rect.left + rect.width / 2) + 'px';
+                    card.style.top = rect.top + 'px';
+                    card.classList.toggle('visible');
+                });
+                document.addEventListener('click', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+            } else {
+                const OFFSET = 16;
+                const IMG_W = 240;
+                const IMG_H = 300;
+
+                trigger.addEventListener('mouseenter', function () {
+                    card.classList.add('visible');
+                });
+                trigger.addEventListener('mouseleave', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+                document.addEventListener('mousemove', function (e) {
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    const x = e.clientX;
+                    const y = e.clientY;
+
+                    const left = (x + OFFSET + IMG_W > vw) ? x - OFFSET - IMG_W : x + OFFSET;
+                    const top = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
+
+                    card.style.left = left + 'px';
+                    card.style.top = top + 'px';
+                });
+            }
+        }
+
+        function initCarousels() {
+            const GAP = 12;
+            document.querySelectorAll('.work-case-carousel').forEach(function (carousel) {
+                const track = carousel.querySelector('.work-case-media');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                const realItems = [...track.querySelectorAll('.work-case-media-item')];
+                const N = realItems.length;
+
+                if (!track || N <= 1) {
+                    prevBtn?.remove(); nextBtn?.remove();
+                    if (N === 1) realItems[0].classList.add('is-active');
+                    return;
+                }
+
+                const headClone = realItems[N - 1].cloneNode(true);
+                const tailClone = realItems[0].cloneNode(true);
+                headClone.setAttribute('aria-hidden', 'true');
+                tailClone.setAttribute('aria-hidden', 'true');
+                track.prepend(headClone);
+                track.appendChild(tailClone);
+
+                const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+                let current = 0, autoTimer = null, jumping = false;
+
+                function stride() { return (allDomItems[1]?.offsetWidth ?? 0) + GAP; }
+
+                function updateActive() {
+                    allDomItems.forEach(function (item, i) {
+                        const isActive = i === current + 1
+                            || (current === 0 && i === N + 1)
+                            || (current === N - 1 && i === 0);
+                        item.classList.toggle('is-active', isActive);
+                    });
+                }
+
+                function goTo(realIndex) {
+                    current = ((realIndex % N) + N) % N;
+                    let domIdx;
+                    if (realIndex < 0) domIdx = 0;
+                    else if (realIndex >= N) domIdx = N + 1;
+                    else domIdx = current + 1;
+                    track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+                    updateActive();
+                }
+
+                let scrollSettleTimer;
+                track.addEventListener('scroll', function () {
+                    if (jumping) return;
+                    clearTimeout(scrollSettleTimer);
+                    scrollSettleTimer = setTimeout(function () {
+                        const s = stride(); if (!s) return;
+                        const pos = Math.round(track.scrollLeft / s);
+                        if (pos === 0) {
+                            jumping = true;
+                            track.scrollTo({ left: N * s, behavior: 'instant' });
+                            current = N - 1;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else if (pos === N + 1) {
+                            jumping = true;
+                            track.scrollTo({ left: s, behavior: 'instant' });
+                            current = 0;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else { current = pos - 1; }
+                        updateActive();
+                    }, 80);
+                });
+
+                function startAutoAdvance() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
+                }
+
+                prevBtn?.addEventListener('click', function () { goTo(current - 1); startAutoAdvance(); });
+                nextBtn?.addEventListener('click', function () { goTo(current + 1); startAutoAdvance(); });
+
+                allDomItems.forEach(function (item, i) {
+                    item.addEventListener('click', function (e) {
+                        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+                        e.stopPropagation();
+                        if (i <= current) goTo(current - 1); else goTo(current + 1);
+                        startAutoAdvance();
+                    }, true);
+                });
+
+                carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carousel.addEventListener('mouseleave', startAutoAdvance);
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
+
+                requestAnimationFrame(function () {
+                    track.scrollTo({ left: stride(), behavior: 'instant' });
+                    updateActive();
+                    startAutoAdvance();
+                });
+            });
+        }
+
+        function initConstraintScrollBackgrounds() {
+            const cards = [...document.querySelectorAll('.cs-constraint')];
+            if (!cards.length) return;
+
+            const triggerY = 240;
+            const fadeRange = 280;
+            let ticking = false;
+
+            function smoothstep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function update() {
+                cards.forEach(function (card) {
+                    const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
+                    const raw = Math.max(0, 1 - distance / fadeRange);
+                    card.style.setProperty('--cs-constraint-bg-alpha', smoothstep(raw).toFixed(3));
+                });
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
+        // ── Staggered scroll-entrance ─────────────────────────────────────────
+        (function () {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+            // Background blocks — stagger 0, 80, 160, 240ms
+            document.querySelectorAll('.cs-bg-block').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 80) + 'ms');
+                observer.observe(el);
+            });
+
+            // Constraint cards — stagger 0, 60, 120 … ms
+            document.querySelectorAll('.cs-constraint').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 60) + 'ms');
+                observer.observe(el);
+            });
+        })();
+
+        // ── Query Flow zoom ───────────────────────────────────────────────────
+        (function () {
+            const wrap = document.querySelector('.cs-flow-zoom');
+            const img = wrap?.querySelector('.cs-flow-img');
+            const hint = wrap?.querySelector('.cs-flow-zoom-hint');
+            const hintText = hint?.querySelector('span');
+            if (!wrap || !img) return;
+
+            const SCALE = 4;
+            let active = false;
+            const isTouchFirst = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+            if (hintText && isTouchFirst) {
+                hintText.textContent = 'Tap + drag to zoom';
+            }
+
+            function zoomIn() {
+                active = true;
+                img.style.transitionDuration = '0.25s';
+                img.style.transform = 'scale(' + SCALE + ')';
+                if (hint) hint.style.opacity = '0';
+            }
+
+            function updateOrigin(e) {
+                if (!active) return;
+                const r = wrap.getBoundingClientRect();
+                const x = ((e.clientX - r.left) / r.width) * 100;
+                const y = ((e.clientY - r.top) / r.height) * 100;
+                img.style.transitionDuration = '0s';
+                img.style.transformOrigin = x + '% ' + y + '%';
+            }
+
+            function zoomOut() {
+                active = false;
+                img.style.transitionDuration = '0.3s';
+                img.style.transform = 'scale(1)';
+                img.style.transformOrigin = '50% 50%';
+                if (hint) hint.style.opacity = '1';
+            }
+
+            wrap.addEventListener('pointerenter', function (e) {
+                if (e.pointerType === 'mouse') zoomIn();
+            });
+
+            wrap.addEventListener('pointerdown', function (e) {
+                zoomIn();
+                updateOrigin(e);
+                wrap.setPointerCapture?.(e.pointerId);
+            });
+
+            wrap.addEventListener('pointermove', updateOrigin);
+
+            wrap.addEventListener('pointerleave', function (e) {
+                if (e.pointerType === 'mouse') zoomOut();
+            });
+
+            wrap.addEventListener('pointerup', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                if (e.pointerType !== 'mouse') zoomOut();
+            });
+
+            wrap.addEventListener('pointercancel', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                zoomOut();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
