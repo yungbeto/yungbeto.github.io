@@ -593,7 +593,9 @@
                 cards.forEach(function (card) {
                     const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
                     const raw = Math.max(0, 1 - distance / fadeRange);
-                    card.style.setProperty('--cs-constraint-bg-alpha', smoothstep(raw).toFixed(3));
+                    const progress = smoothstep(raw).toFixed(3);
+                    card.style.setProperty('--cs-constraint-bg-alpha', progress);
+                    card.style.setProperty('--cs-constraint-shadow-progress', progress);
                 });
                 ticking = false;
             }
