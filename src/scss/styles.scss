@@ -2010,6 +2010,162 @@ ul {
   }
 }
 
+// ─── Video section ───────────────────────────────────────────────────────────
+
+.cs-video-section {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+  border-bottom: 1px solid $ink;
+
+  @media (max-width: $tablet) {
+    height: auto;
+    min-height: 100dvh;
+  }
+}
+
+.cs-video-section-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.cs-video-section-content {
+  position: absolute;
+  inset: 0;
+  padding: 64px 32px 32px 32px;
+  background: linear-gradient(
+    to bottom,
+    rgba(63, 63, 70, 0.8) 0%,
+    rgba(63, 63, 70, 0) 55%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: flex-start;
+
+  .cs-label {
+    margin: 0;
+  }
+
+  @media (max-width: $tablet) {
+    padding: 24px 16px;
+  }
+}
+
+.cs-video-section-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 584px;
+
+  @media (max-width: $tablet) {
+    max-width: 100%;
+  }
+}
+
+.cs-video-section-text {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: $footer-fg;
+  margin: 0;
+  text-wrap: pretty;
+
+  @media (max-width: $tablet) {
+    font-size: 28px;
+  }
+}
+
+.cs-video-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $footer-fg;
+  border: 1px solid $ink;
+  border-radius: 56px;
+  padding: 16px 32px 16px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: $ink;
+  cursor: pointer;
+  width: fit-content;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+
+  i {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  &:hover {
+    background: #fff;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// ─── Video modal ──────────────────────────────────────────────────────────────
+
+.cs-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.cs-video-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  i {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.cs-video-modal-player {
+  width: 90vw;
+  max-width: 1280px;
+  max-height: 80dvh;
+  border-radius: 8px;
+  display: block;
+}
+
 // ─── Outcome (dark) ───────────────────────────────────────────────────────────
 
 .cs-outcome {

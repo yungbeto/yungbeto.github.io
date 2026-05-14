@@ -1931,6 +1931,151 @@ ul {
   max-width: 584px;
 }
 
+.cs-video-section {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+  border-bottom: 1px solid #3f3f46;
+}
+@media (max-width: 768px) {
+  .cs-video-section {
+    height: auto;
+    min-height: 100dvh;
+  }
+}
+
+.cs-video-section-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.cs-video-section-content {
+  position: absolute;
+  inset: 0;
+  padding: 64px 32px 32px 32px;
+  background: linear-gradient(to bottom, rgba(63, 63, 70, 0.8) 0%, rgba(63, 63, 70, 0) 55%);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: flex-start;
+}
+.cs-video-section-content .cs-label {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .cs-video-section-content {
+    padding: 24px 16px;
+  }
+}
+
+.cs-video-section-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 584px;
+}
+@media (max-width: 768px) {
+  .cs-video-section-text-block {
+    max-width: 100%;
+  }
+}
+
+.cs-video-section-text {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #d4d4d8;
+  margin: 0;
+  text-wrap: pretty;
+}
+@media (max-width: 768px) {
+  .cs-video-section-text {
+    font-size: 28px;
+  }
+}
+
+.cs-video-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #d4d4d8;
+  border: 1px solid #3f3f46;
+  border-radius: 56px;
+  padding: 16px 32px 16px 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: #3f3f46;
+  cursor: pointer;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.cs-video-watch-btn i {
+  font-size: 24px;
+  line-height: 1;
+}
+.cs-video-watch-btn:hover {
+  background: #fff;
+}
+.cs-video-watch-btn:active {
+  transform: scale(0.96);
+}
+
+.cs-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.cs-video-modal.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cs-video-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.cs-video-modal-close i {
+  font-size: 20px;
+}
+.cs-video-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cs-video-modal-player {
+  width: 90vw;
+  max-width: 1280px;
+  max-height: 80dvh;
+  border-radius: 8px;
+  display: block;
+}
+
 .cs-outcome {
   background: #e4e4e7;
   height: 100dvh;

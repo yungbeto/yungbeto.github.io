@@ -297,6 +297,36 @@
                 </div>
             </div>
 
+            <!-- ─── Video section ────────────────────────────────────────────── -->
+
+            <div class="cs-video-section">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="videoSectionBackgroundMobile.png">
+                    <img src="videoSectionBackgroundDesktop.png" alt="" class="cs-video-section-bg">
+                </picture>
+                <div class="cs-video-section-content">
+                    <p class="cs-label cs-label--light">Bonus</p>
+                    <div class="cs-video-section-text-block">
+                        <p class="cs-video-section-text">I even got to compose the music for the announcement video</p>
+                        <button class="cs-video-watch-btn" id="watch-video-btn">
+                            <i class="ph ph-play"></i>
+                            Watch video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Video modal ───────────────────────────────────────────────── -->
+
+            <div class="cs-video-modal" id="video-modal" aria-hidden="true" role="dialog" aria-label="Revel announcement video">
+                <button class="cs-video-modal-close" id="video-modal-close" aria-label="Close video">
+                    <i class="ph ph-x"></i>
+                </button>
+                <video class="cs-video-modal-player" id="modal-video" controls preload="none">
+                    <source src="ridesharevideo.mp4" type="video/mp4">
+                </video>
+            </div>
+
             <!-- ─── Outcome ───────────────────────────────────────────────────── -->
 
             <div class="cs-outcome">
@@ -543,6 +573,37 @@
             wrap.addEventListener('pointercancel', function (e) {
                 wrap.releasePointerCapture?.(e.pointerId);
                 zoomOut();
+            });
+        })();
+
+        // ── Video modal ───────────────────────────────────────────────────
+        (function () {
+            const btn = document.getElementById('watch-video-btn');
+            const modal = document.getElementById('video-modal');
+            const closeBtn = document.getElementById('video-modal-close');
+            const video = document.getElementById('modal-video');
+            if (!btn || !modal || !video) return;
+
+            function openModal() {
+                modal.classList.add('is-open');
+                modal.setAttribute('aria-hidden', 'false');
+                video.play();
+            }
+
+            function closeModal() {
+                modal.classList.remove('is-open');
+                modal.setAttribute('aria-hidden', 'true');
+                video.pause();
+                video.currentTime = 0;
+            }
+
+            btn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
             });
         })();
 
