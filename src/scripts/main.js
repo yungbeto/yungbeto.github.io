@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initHeroAnimation();
+  initRandomCaseStudyLink();
   Promise.all([
     loadProjectCards(),
     loadWorkCases(),
@@ -10,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
     initLightbox();
   });
 });
+
+function initRandomCaseStudyLink() {
+  const link = document.querySelector('.toc-link--random');
+  if (!link) return;
+  const cases = ['/olympus', '/revel'];
+  link.addEventListener('click', function () {
+    this.href = cases[Math.floor(Math.random() * cases.length)];
+  });
+}
 
 function initHeroAnimation() {
   const hero = document.querySelector('.hero-text');
@@ -244,9 +254,9 @@ async function loadWorkCases() {
               <p class="work-case-meta-text">${c.role}</p>
             </div>
           </div>
+          ${ctaHtml}
           <div class="work-case-copy">
             ${copyHtml}
-            ${ctaHtml}
           </div>
         </header>
         <div class="work-case-pill-wrapper">
@@ -294,8 +304,9 @@ function initWorkCasePills() {
       }
     });
     cases.forEach((workCase) => {
+      const isActive = workCase === firstEligible;
       const pill = workCase.querySelector('.work-case-pill');
-      if (pill) pill.classList.toggle('is-visible', workCase === firstEligible);
+      if (pill) pill.classList.toggle('is-visible', isActive);
     });
   }
 
@@ -454,116 +465,6 @@ function initCarousels() {
   });
 }
 
-// ── Lightbox ──────────────────────────────────────────────────────────────────
-// Clone starts at the exact source rect (top/left/width/height), then
-// transitions to fullscreen. openRect is stored at open-time so close
-// reverses perfectly regardless of any layout shifts.
-
-function initLightbox() {
-  const EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-  const DUR = '0.42s';
-  const TRANSITION = [
-    `top ${DUR} ${EASE}`,
-    `left ${DUR} ${EASE}`,
-    `width ${DUR} ${EASE}`,
-    `height ${DUR} ${EASE}`,
-    `border-radius ${DUR} ${EASE}`,
-  ].join(', ');
-
-  const backdrop = document.createElement('div');
-  backdrop.className = 'lightbox-backdrop';
-  document.body.appendChild(backdrop);
-
-  let cloneEl = null;
-  let openRect = null;
-  let isOpen = false;
-
-  function open(item) {
-    if (isOpen) return;
-    isOpen = true;
-
-    const rect = item.getBoundingClientRect();
-    openRect = rect;
-    const media = item.querySelector('img, video');
-    if (!media) return;
-
-    const pad = 32;
-
-    // Create clone positioned exactly over the source item, no transition yet
-    cloneEl = document.createElement('div');
-    cloneEl.className = 'lightbox-clone';
-    cloneEl.style.cssText = `
-      position: fixed;
-      top: ${rect.top}px;
-      left: ${rect.left}px;
-      width: ${rect.width}px;
-      height: ${rect.height}px;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #e4e4e7;
-      z-index: 101;
-      cursor: zoom-out;
-      transition: none;
-    `;
-
-    const mediaClone = media.cloneNode(true);
-    if (mediaClone.tagName === 'VIDEO') {
-      mediaClone.muted = true;
-      mediaClone.autoplay = true;
-      mediaClone.loop = true;
-      mediaClone.playsInline = true;
-      mediaClone.play?.();
-    }
-    cloneEl.appendChild(mediaClone);
-    document.body.appendChild(cloneEl);
-
-    backdrop.classList.add('is-open');
-
-    // Force a paint of the starting position, then animate to fullscreen
-    cloneEl.getBoundingClientRect();
-    requestAnimationFrame(() => {
-      cloneEl.style.transition = TRANSITION;
-      cloneEl.style.top = pad + 'px';
-      cloneEl.style.left = pad + 'px';
-      cloneEl.style.width = (window.innerWidth - pad * 2) + 'px';
-      cloneEl.style.height = (window.innerHeight - pad * 2) + 'px';
-      cloneEl.style.borderRadius = '8px';
-    });
-
-    cloneEl.addEventListener('click', close);
-  }
-
-  function close() {
-    if (!isOpen || !cloneEl || !openRect) return;
-
-    // Reverse back to the stored open rect — pixel-perfect because it's the
-    // same rect captured at open time, not a live re-read after potential scroll
-    cloneEl.style.top = openRect.top + 'px';
-    cloneEl.style.left = openRect.left + 'px';
-    cloneEl.style.width = openRect.width + 'px';
-    cloneEl.style.height = openRect.height + 'px';
-    cloneEl.style.borderRadius = '24px';
-    backdrop.classList.remove('is-open');
-
-    const cleanup = () => {
-      cloneEl?.remove();
-      cloneEl = null;
-      openRect = null;
-      isOpen = false;
-    };
-
-    cloneEl.addEventListener('transitionend', cleanup, { once: true });
-    setTimeout(cleanup, 600); // safety fallback
-  }
-
-  backdrop.addEventListener('click', close);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-
-  document.addEventListener('click', (e) => {
-    const item = e.target.closest('.work-case-media-item');
-    if (item && !isOpen && item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') open(item);
-  });
-}
 
 async function loadJobs() {
   const list = document.getElementById('jobs-list');

@@ -6,7 +6,7 @@
     const nameMarkup =
       homeBehavior === 'scroll'
         ? '<span class="nav-name" role="button" style="cursor:pointer;">Roby Saavedra</span>'
-        : '<a href="/" class="nav-name" style="text-decoration:none; color:inherit;">Roby Saavedra</a>';
+        : '<a href="/" class="nav-name nav-name--back" style="text-decoration:none; color:inherit;"><i class="ph ph-arrow-left"></i>Roby Saavedra</a>';
 
     root.outerHTML = `
       <nav class="navbar">
@@ -208,4 +208,146 @@
   document.querySelectorAll('[data-site-footer]').forEach(renderFooter);
   initFooter();
   initFooterNameAnimation();
+})();
+
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+function initLightbox() {
+  if (document.querySelector('.lightbox-backdrop')) return;
+
+  var EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  var DUR = '0.42s';
+  var TRANSITION = [
+    'top ' + DUR + ' ' + EASE,
+    'left ' + DUR + ' ' + EASE,
+    'width ' + DUR + ' ' + EASE,
+    'height ' + DUR + ' ' + EASE,
+    'border-radius ' + DUR + ' ' + EASE,
+  ].join(', ');
+
+  var backdrop = document.createElement('div');
+  backdrop.className = 'lightbox-backdrop';
+  document.body.appendChild(backdrop);
+
+  var cloneEl = null;
+  var openRect = null;
+  var isOpen = false;
+
+  function open(item) {
+    if (isOpen) return;
+    isOpen = true;
+
+    var rect = item.getBoundingClientRect();
+    openRect = rect;
+    var media = item.querySelector('img, video');
+    if (!media) return;
+
+    var pad = 32;
+
+    cloneEl = document.createElement('div');
+    cloneEl.className = 'lightbox-clone';
+    cloneEl.style.cssText = [
+      'position:fixed',
+      'top:' + rect.top + 'px',
+      'left:' + rect.left + 'px',
+      'width:' + rect.width + 'px',
+      'height:' + rect.height + 'px',
+      'border-radius:24px',
+      'overflow:hidden',
+      'background:#e4e4e7',
+      'z-index:101',
+      'cursor:zoom-out',
+      'transition:none',
+    ].join(';');
+
+    var mediaClone = media.cloneNode(true);
+    if (mediaClone.tagName === 'VIDEO') {
+      mediaClone.muted = true;
+      mediaClone.autoplay = true;
+      mediaClone.loop = true;
+      mediaClone.playsInline = true;
+      mediaClone.play && mediaClone.play();
+    }
+    cloneEl.appendChild(mediaClone);
+    document.body.appendChild(cloneEl);
+
+    backdrop.classList.add('is-open');
+
+    cloneEl.getBoundingClientRect();
+    requestAnimationFrame(function () {
+      cloneEl.style.transition = TRANSITION;
+      cloneEl.style.top = pad + 'px';
+      cloneEl.style.left = pad + 'px';
+      cloneEl.style.width = (window.innerWidth - pad * 2) + 'px';
+      cloneEl.style.height = (window.innerHeight - pad * 2) + 'px';
+      cloneEl.style.borderRadius = '8px';
+    });
+
+    cloneEl.addEventListener('click', close);
+  }
+
+  function close() {
+    if (!isOpen || !cloneEl || !openRect) return;
+
+    cloneEl.style.top = openRect.top + 'px';
+    cloneEl.style.left = openRect.left + 'px';
+    cloneEl.style.width = openRect.width + 'px';
+    cloneEl.style.height = openRect.height + 'px';
+    cloneEl.style.borderRadius = '24px';
+    backdrop.classList.remove('is-open');
+
+    var capturedClone = cloneEl;
+    function cleanup() {
+      capturedClone.remove();
+      cloneEl = null;
+      openRect = null;
+      isOpen = false;
+    }
+
+    capturedClone.addEventListener('transitionend', cleanup, { once: true });
+    setTimeout(cleanup, 600);
+  }
+
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+  document.addEventListener('click', function (e) {
+    var item = e.target.closest('.work-case-media-item');
+    if (item && !isOpen && item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') {
+      open(item);
+    }
+  });
+}
+
+window.initLightbox = initLightbox;
+
+// ── Page transitions ──────────────────────────────────────────────────────────
+(function () {
+  var DURATION = 250;
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    if (link.target === '_blank') return;
+    if (link.hostname !== location.hostname) return;
+    if (link.href === location.href) return;
+    if (link.hash && link.pathname === location.pathname) return;
+
+    e.preventDefault();
+    var dest = link.href;
+    var page = document.querySelector('.page-outer');
+    if (page) page.classList.add('is-exiting');
+
+    setTimeout(function () {
+      location.assign(dest);
+    }, DURATION);
+  });
+
+  // Restore state when browser restores a bfcache page (back/forward)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      var page = document.querySelector('.page-outer');
+      if (page) page.classList.remove('is-exiting');
+    }
+  });
 })();

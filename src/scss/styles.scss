@@ -61,11 +61,24 @@ ul {
 
 // ─── Page container ──────────────────────────────────────────────────────────
 
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .page-outer {
   background: $bg;
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  animation: page-enter 0.4s ease-out both;
+
+  &.is-exiting {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.25s ease-in;
+    pointer-events: none;
+  }
 }
 
 .page-container {
@@ -101,6 +114,20 @@ ul {
 .nav-name {
   font-size: 16px;
   color: $ink;
+
+  &--back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+    i {
+      font-size: 16px;
+      line-height: 1;
+    }
+    @media (max-width: $tablet) {
+      margin-left: 0;
+    }
+  }
 }
 
 .nav-icons {
@@ -125,6 +152,12 @@ ul {
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+  }
 
   i {
     font-size: 14px;
@@ -459,7 +492,7 @@ ul {
   line-height: 72px;
   font-weight: 400;
   // color: $ink;
-
+  text-wrap: balance;
   margin: 0;
 
   @media (max-width: $desktop) {
@@ -770,12 +803,18 @@ ul {
   font-weight: 600;
   line-height: 24px;
   text-decoration: none;
-  transition: background 0.2s ease-in-out;
+  transition:
+    background 0.2s ease-in-out,
+    transform 0.15s ease;
   background: $surface;
 
   &:hover {
     background: rgba($ink, 1);
     color: $surface;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   i {
@@ -825,7 +864,7 @@ ul {
   border: 1px solid transparent;
   transition:
     filter 0.5s ease,
-    border 0.5s ease;
+    border-color 0.5s ease;
 
   &.is-active {
     filter: brightness(1);
@@ -1290,7 +1329,9 @@ ul {
   padding: 0;
   color: $footer-fg;
   flex-shrink: 0;
-  transition: opacity 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
   font-size: 16px;
   line-height: 24px;
   i {
@@ -1300,6 +1341,10 @@ ul {
 
   &:hover {
     opacity: 0.7;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 }
 
@@ -1475,7 +1520,7 @@ ul {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid #71717a;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 // ─── Background (dark) ────────────────────────────────────────────────────────
@@ -1600,7 +1645,7 @@ ul {
   object-fit: cover;
   display: block;
   border-radius: 8px;
-  border: 1px solid #71717a;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
 
   @media (max-width: $tablet) {
     width: 100%;
@@ -2017,14 +2062,24 @@ ul {
 // ─── Video section ───────────────────────────────────────────────────────────
 
 .cs-video-section {
-  position: relative;
-  height: 100dvh;
-  overflow: hidden;
+  padding: 32px;
   border-bottom: 1px solid $ink;
 
   @media (max-width: $tablet) {
+    padding: 16px;
+  }
+}
+
+.cs-video-section-frame {
+  position: relative;
+  height: calc(100dvh - 64px);
+  overflow: hidden;
+  border-radius: 20px;
+
+  @media (max-width: $tablet) {
     height: auto;
-    min-height: 100dvh;
+    min-height: calc(100dvh - 32px);
+    border-radius: 14px;
   }
 }
 
@@ -2227,5 +2282,29 @@ ul {
 
   @media (max-width: $tablet) {
     padding: 0;
+  }
+}
+
+// ─── Next case study ──────────────────────────────────────────────────────────
+
+.cs-next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 64px 32px;
+  border-bottom: 1px solid $ink;
+
+  .cs-label {
+    margin: 0;
+  }
+
+  .cs-section-title {
+    max-width: 584px;
+  }
+
+  @media (max-width: $tablet) {
+    padding: 48px 16px;
+    gap: 24px;
   }
 }

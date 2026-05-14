@@ -300,6 +300,7 @@
             <!-- ─── Video section ────────────────────────────────────────────── -->
 
             <div class="cs-video-section">
+                <div class="cs-video-section-frame">
                 <picture>
                     <source media="(max-width: 768px)" srcset="videoSectionBackgroundMobile.png">
                     <img src="videoSectionBackgroundDesktop.png" alt="" class="cs-video-section-bg">
@@ -314,6 +315,7 @@
                         </button>
                     </div>
                 </div>
+                </div><!-- /.cs-video-section-frame -->
             </div>
 
             <!-- ─── Video modal ───────────────────────────────────────────────── -->
@@ -346,6 +348,18 @@
                 </div>
             </div>
 
+
+            <!-- ─── Next ──────────────────────────────────────────────────────── -->
+
+            <div class="cs-next">
+                <p class="cs-label">Next</p>
+                <p class="cs-section-title">How I designed a clinical search tool</p>
+                <a class="work-case-cta" href="/olympus">
+                    View case study
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+
             <!-- ─── Footer ────────────────────────────────────────────────────── -->
 
             <div data-site-footer></div>
@@ -357,6 +371,7 @@
     <script src="../src/scripts/favicon-spinner.js"></script>
     <script>
         initCarousels();
+        initLightbox();
         initConstraintScrollBackgrounds();
         initProblemTextAnimation();
 
