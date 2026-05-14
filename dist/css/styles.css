@@ -1274,49 +1274,48 @@ ul {
 .cs-body-text--light {
   color: #d4d4d8; }
 
-.cs-problem-statement {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  height: -webkit-fill-available; }
-
-.cs-problem-box {
+.cs-problem-section {
   background: #3f3f46;
-  border: 1px solid #a1a1aa;
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  flex-grow: 1;
-  height: -webkit-fill-available; }
-
-.cs-problem-box-label-container {
+  height: 100dvh;
+  padding: 96px 32px;
+  border-bottom: 1px solid #52525b;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-bottom: 32px; }
+  justify-content: center; }
+  @media (max-width: 768px) {
+    .cs-problem-section {
+      padding: 48px 16px;
+      height: auto;
+      min-height: 50dvh; } }
 
-.cs-problem-box-label {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #d4d4d8;
-  margin: 0; }
+.cs-problem-section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 576px;
+  margin: 0 auto; }
 
-.cs-problem-box-icon {
-  font-size: 24px;
-  line-height: 1;
-  color: #d4d4d8; }
+.cs-problem-section-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px; }
+  .cs-problem-section-label-row i {
+    font-size: 20px;
+    color: #d4d4d8; }
+  .cs-problem-section-label-row .cs-label {
+    margin: 0;
+    color: #d4d4d8; }
 
-.cs-problem-box-body-text {
-  font-size: 24px;
-  line-height: 1.33;
+.cs-problem-section-text {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.4;
   color: #d4d4d8;
   margin: 0;
-  text-wrap: pretty;
-  max-width: 75%; }
+  text-wrap: pretty; }
+  @media (max-width: 768px) {
+    .cs-problem-section-text {
+      font-size: 28px; } }
 
 .cs-task-wrap {
   display: flex;

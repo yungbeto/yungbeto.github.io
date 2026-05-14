@@ -110,22 +110,19 @@
                                 physical ledgers.
                             </p>
                         </div>
-                        <div class="cs-problem-statement">
-
-                            <div class="cs-problem-box">
-                                <span class="cs-problem-box-label-container">
-
-                                    <i class="ph ph-question cs-problem-box-icon"></i>
-                                    <p class="cs-problem-box-label">The problem I set out to solve:</p>
-                                </span>
-
-                                <p class="cs-problem-box-body-text">How might we make traceability data accessible to
-                                    clinical
-                                    staff
-                                    at the moment they need it most?</p>
-                            </div>
-                        </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- ─── Problem statement ────────────────────────────────────────────── -->
+
+            <div class="cs-problem-section">
+                <div class="cs-problem-section-inner">
+                    <div class="cs-problem-section-label-row">
+                        <i class="ph ph-question"></i>
+                        <p class="cs-label">The problem I set out to solve</p>
+                    </div>
+                    <p class="cs-problem-section-text">How might we make traceability data accessible to clinical staff at the moment they need it most?</p>
                 </div>
             </div>
 
@@ -393,8 +390,8 @@
                 setText('.cs-situation .cs-label', copy.situation?.label);
                 setText('.cs-situation .cs-section-title', copy.situation?.section_title);
                 setText('.cs-situation-copy .cs-body-text', copy.situation?.body);
-                setText('.cs-problem-box-label', copy.situation?.problem_prompt);
-                setText('.cs-problem-box-body-text', copy.situation?.problem_statement);
+                setText('.cs-problem-section-label-row .cs-label', copy.situation?.problem_prompt);
+                setText('.cs-problem-section-text', copy.situation?.problem_statement);
 
                 setText('.cs-task .cs-label', copy.task?.label);
                 setText('.cs-task .cs-section-title', copy.task?.section_title);

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revel Pax App / Case Study · Roby Saavedra</title>
+    <meta name="description"
+        content="A case study on designing the Pax App, a passenger-facing tablet experience inside Revel's all-electric Tesla rideshare fleet in New York City.">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <!-- ─── Intro ─────────────────────────────────────────────────────── -->
+
+            <div class="cs-intro">
+                <div class="cs-label-row">
+                    <i class="ph ph-asterisk cs-asterisk"></i>
+                    <p class="cs-label">Case study / Revel</p>
+                </div>
+                <div class="cs-intro-row">
+                    <div class="cs-intro-copy">
+                        <h1 class="cs-hero-title">Designing the passenger experience inside an all-electric rideshare
+                            fleet</h1>
+                        <p class="cs-lead">At Revel I designed the Pax App, a tablet interface mounted in the back seat
+                            of every Tesla in the fleet, turning an untouched surface into a differentiated passenger
+                            experience.</p>
+                    </div>
+                    <div class="cs-hero-img-wrap">
+                        <img src="Hero.jpg" alt="Revel Tesla rideshare interior with tablet" class="cs-hero-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Background ────────────────────────────────────────────────── -->
+
+            <div class="cs-bg">
+                <div class="cs-bg-inner">
+                    <p class="cs-label cs-label--light">Background</p>
+                    <p class="cs-bg-lead">A few things to know before diving in.</p>
+                    <div class="cs-bg-grid">
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">1</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Revel</p>
+                                <p class="cs-bg-block-text">Revel launched in 2018 as a Brooklyn-based moped sharing
+                                    platform and expanded into an all-electric Tesla rideshare service operating in New
+                                    York City.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">2</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Full Fleet Ownership</p>
+                                <p class="cs-bg-block-text">Revel owned the entire fleet outright. That gave the company
+                                    end-to-end control over the rider experience, from the consumer app to the moment a
+                                    passenger stepped out of the car, in a way Uber or Lyft never could.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">3</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The Back Seat</p>
+                                <p class="cs-bg-block-text">Revel installed a custom tablet in the back seat of every
+                                    Tesla in the fleet. Hardware sourced and mounted by Revel, it turned an otherwise
+                                    ignored surface into a dedicated passenger screen.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">4</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">First Designer</p>
+                                <p class="cs-bg-block-text">I joined Revel as the first designer. The Pax App was one of
+                                    many surfaces I built from scratch, alongside ops tools, the consumer moped app, and
+                                    the company's design system.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Situation ─────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The situation</p>
+                </div>
+                <div class="cs-situation-row">
+                    <img src="Situation.jpg" alt="Tesla back seat with tablet screen" class="cs-ruler-img">
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+                            <p class="cs-section-title">A blank screen in the back of every car, and no playbook for
+                                what to put on it</p>
+                            <p class="cs-body-text">Revel was betting on brand, on being a fundamentally different kind
+                                of rideshare company. The back seat tablet was a chance to make that real. But no one
+                                had designed for this context before. Custom hardware installed by Revel, the tablet
+                                occupied a surface no other rideshare company had taken seriously: a shared, semi-public
+                                screen inside a moving vehicle, used by strangers for 10 to 30 minutes at a time,
+                                usually
+                                without any clear intent going in. Mirroring the mobile app was the obvious first
+                                instinct. That framing didn't hold up.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Problem statement ────────────────────────────────────────────── -->
+
+            <div class="cs-problem-section">
+                <div class="cs-problem-section-inner">
+                    <div class="cs-problem-section-label-row">
+                        <i class="ph ph-question"></i>
+                        <p class="cs-label">The problem I set out to solve</p>
+                    </div>
+                    <p class="cs-problem-section-text">How might we use the back seat tablet to create a passenger
+                        experience that actually reflects what makes Revel different?</p>
+                </div>
+            </div>
+
+            <!-- ─── Task + Constraints ─────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">The task</p>
+                    <p class="cs-section-title">Design a new kind of in-ride experience from scratch, for a surface with
+                        no precedent</p>
+                    <p class="cs-body-text">The brief had three threads: distinguish the product in the market, give
+                        passengers something to actually engage with during the ride, and use the surface to tell the
+                        Revel story. Achieving all three meant designing something that felt ambient enough to ignore
+                        and interesting enough to explore.</p>
+                </div>
+                <div class="cs-constraints">
+                    <p class="cs-label">The constraints</p>
+                    <div class="cs-constraint-list">
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">1</p>
+                            <p class="cs-constraint-text">The surface is shared and semi-public. Content needed to work
+                                for any passenger, regardless of language, age, or familiarity with the product.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">2</p>
+                            <p class="cs-constraint-text">Tesla's API access was limited. Many features that seemed
+                                obvious in early exploration ran up against hard technical walls.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">3</p>
+                            <p class="cs-constraint-text">The session is inherently short and unintentional. Passengers
+                                are in a car, not actively choosing to engage. Anything too complex or demanding would
+                                go
+                                untouched.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">4</p>
+                            <p class="cs-constraint-text">Pairing had to be frictionless. A passenger shouldn't need
+                                instructions to connect to their own ride's screen.</p>
+                        </div>
+                        <div class="cs-constraint">
+                            <p class="cs-constraint-num">5</p>
+                            <p class="cs-constraint-text">The screen needed a safe default state: something that looked
+                                good and communicated brand even when no one was interacting with it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Action ────────────────────────────────────────────────────── -->
+
+            <div class="cs-action">
+                <div class="cs-action-header">
+                    <p class="cs-label cs-label--light">The action</p>
+                    <div class="cs-action-copy">
+                        <p class="cs-action-title">A wide net cast, then narrowed through testing and constraint
+                        </p>
+
+                        <div class="cs-copy-pair">
+                            <p class="cs-action-body">The research phase started with a clarity/risk matrix: mapping
+                                what we knew well and what needed investigation before committing to design direction.
+                                Early steps included a competitive landscape sweep, hands-on sessions with clickable
+                                prototypes in actual vehicles, and a close look at what Tesla's API would and wouldn't
+                                allow.</p>
+                            <p class="cs-action-body">Early explorations went broad: music integration, weather
+                                displays, climate controls, seat warmers, company information, driver profiles, and
+                                video content all made it into the first round. Each feature was stress-tested against
+                                the constraints: does it work for a stranger with 12 minutes to kill? Does it require
+                                setup? Does it break if someone ignores it entirely? That filter eliminated a lot.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <p class="cs-action-carousel-title">Design explorations</p>
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="actionImages/action_01_sm.png"><img
+                                        src="actionImages/action_01.png" alt="Design exploration 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="actionImages/action_02_sm.png"><img
+                                        src="actionImages/action_02.png" alt="Design exploration 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="actionImages/action_03_sm.png"><img
+                                        src="actionImages/action_03.png" alt="Design exploration 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="actionImages/action_04_sm.png"><img
+                                        src="actionImages/action_04.png" alt="Design exploration 4">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- ─── Result ────────────────────────────────────────────────────── -->
+
+            <div class="cs-result">
+                <div class="cs-result-header">
+                    <p class="cs-label">The result</p>
+                    <p class="cs-section-title">The MVP: a coherent in-ride experience built around ambient presence and
+                        passenger choice</p>
+                    <div class="cs-copy-pair">
+                        <p class="cs-body-text">The shipped product opened with a pairing flow. Passengers entered a
+                            code to link their session to the vehicle, then settled into a sleep screen showing the
+                            time, local weather, and a subtle prompt to explore. From there, passengers could browse
+                            radio stations, check the weather, read about Revel's drivers and mission, control climate
+                            settings and seat warmers, or watch company videos.</p>
+                        <p class="cs-body-text">Every feature was scoped to the context: no accounts, no friction, no
+                            feature that required more than a tap or two to reach. The design also included a small
+                            easter egg: a hidden screen that surfaced app version info for drivers and a 🍄 unlock
+                            moment. A little personality in an unusual context goes a long way.</p>
+                    </div>
+                </div>
+                <div class="work-case-carousel buffer">
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="mvpImages/RevelMVP_1sm.png"><img
+                                        src="mvpImages/RevelMVP_1.png" alt="Revel Pax App screen 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item"><video autoplay loop muted playsinline preload="auto"
+                                    style="aspect-ratio: 1440/800; object-fit: cover;">
+                                    <source src="mvpImages/tablet.mp4" type="video/mp4">
+                                </video></div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="mvpImages/RevelMVP_2sm.png"><img
+                                        src="mvpImages/RevelMVP_2.png" alt="Revel Pax App screen 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="mvpImages/RevelMVP_3sm.png"><img
+                                        src="mvpImages/RevelMVP_3.png" alt="Revel Pax App screen 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="mvpImages/RevelMVP_4sm.png"><img
+                                        src="mvpImages/RevelMVP_4.png" alt="Revel Pax App screen 4">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Outcome ───────────────────────────────────────────────────── -->
+
+            <div class="cs-outcome">
+                <div class="cs-outcome-inner">
+                    <p class="cs-label">Outcome</p>
+                    <p class="cs-section-title">The MVP launched, engaged passengers, and ran into a wall it couldn't
+                        design its way out of.</p>
+                    <p class="cs-body-text">Early engagement data and driver observations were encouraging. Passengers
+                        were interacting with the screen, and the anecdotal feedback was positive. The design had real
+                        legs. Then a DOT ruling changed everything: removing the front passenger seat (a requirement for
+                        the tablet mount configuration) was declared illegal, making the hardware setup untenable. The
+                        project ended not because the product failed, but because the physical constraint it depended on
+                        was regulated away. I still believe the core idea was sound. The work stands as a template
+                        for what a differentiated in-ride experience could look like when the hardware situation allows.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ─── Footer ────────────────────────────────────────────────────── -->
+
+            <div data-site-footer></div>
+
+        </div><!-- /.page-container -->
+    </div><!-- /.page-outer -->
+
+    <script src="../src/scripts/site-chrome.js"></script>
+    <script src="../src/scripts/favicon-spinner.js"></script>
+    <script>
+        initCarousels();
+        initConstraintScrollBackgrounds();
+
+        function initCarousels() {
+            const GAP = 12;
+            document.querySelectorAll('.work-case-carousel').forEach(function (carousel) {
+                const track = carousel.querySelector('.work-case-media');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                const realItems = [...track.querySelectorAll('.work-case-media-item')];
+                const N = realItems.length;
+
+                if (!track || N <= 1) {
+                    prevBtn?.remove(); nextBtn?.remove();
+                    if (N === 1) realItems[0].classList.add('is-active');
+                    return;
+                }
+
+                const headClone = realItems[N - 1].cloneNode(true);
+                const tailClone = realItems[0].cloneNode(true);
+                headClone.setAttribute('aria-hidden', 'true');
+                tailClone.setAttribute('aria-hidden', 'true');
+                track.prepend(headClone);
+                track.appendChild(tailClone);
+
+                const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+                let current = 0, autoTimer = null, jumping = false;
+
+                function stride() { return (allDomItems[1]?.offsetWidth ?? 0) + GAP; }
+
+                function updateActive() {
+                    allDomItems.forEach(function (item, i) {
+                        const isActive = i === current + 1
+                            || (current === 0 && i === N + 1)
+                            || (current === N - 1 && i === 0);
+                        item.classList.toggle('is-active', isActive);
+                    });
+                }
+
+                function goTo(realIndex) {
+                    current = ((realIndex % N) + N) % N;
+                    let domIdx;
+                    if (realIndex < 0) domIdx = 0;
+                    else if (realIndex >= N) domIdx = N + 1;
+                    else domIdx = current + 1;
+                    track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+                    updateActive();
+                }
+
+                let scrollSettleTimer;
+                track.addEventListener('scroll', function () {
+                    if (jumping) return;
+                    clearTimeout(scrollSettleTimer);
+                    scrollSettleTimer = setTimeout(function () {
+                        const s = stride(); if (!s) return;
+                        const pos = Math.round(track.scrollLeft / s);
+                        if (pos === 0) {
+                            jumping = true;
+                            track.scrollTo({ left: N * s, behavior: 'instant' });
+                            current = N - 1;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else if (pos === N + 1) {
+                            jumping = true;
+                            track.scrollTo({ left: s, behavior: 'instant' });
+                            current = 0;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else { current = pos - 1; }
+                        updateActive();
+                    }, 80);
+                });
+
+                function startAutoAdvance() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
+                }
+
+                prevBtn?.addEventListener('click', function () { goTo(current - 1); startAutoAdvance(); });
+                nextBtn?.addEventListener('click', function () { goTo(current + 1); startAutoAdvance(); });
+
+                allDomItems.forEach(function (item, i) {
+                    item.addEventListener('click', function (e) {
+                        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+                        e.stopPropagation();
+                        if (i <= current) goTo(current - 1); else goTo(current + 1);
+                        startAutoAdvance();
+                    }, true);
+                });
+
+                carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carousel.addEventListener('mouseleave', startAutoAdvance);
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
+
+                requestAnimationFrame(function () {
+                    track.scrollTo({ left: stride(), behavior: 'instant' });
+                    updateActive();
+                    startAutoAdvance();
+                });
+            });
+        }
+
+        function initConstraintScrollBackgrounds() {
+            const cards = [...document.querySelectorAll('.cs-constraint')];
+            if (!cards.length) return;
+
+            const triggerY = 240;
+            const fadeRange = 280;
+            let ticking = false;
+
+            function smoothstep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function update() {
+                cards.forEach(function (card) {
+                    const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
+                    const raw = Math.max(0, 1 - distance / fadeRange);
+                    const progress = smoothstep(raw).toFixed(3);
+                    card.style.setProperty('--cs-constraint-bg-alpha', progress);
+                    card.style.setProperty('--cs-constraint-shadow-progress', progress);
+                });
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
+        // ── Staggered scroll-entrance ─────────────────────────────────────────
+        (function () {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+            document.querySelectorAll('.cs-bg-block').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 80) + 'ms');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.cs-constraint').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 60) + 'ms');
+                observer.observe(el);
+            });
+        })();
+
+        // ── Flow diagram zoom ─────────────────────────────────────────────────
+        (function () {
+            const wrap = document.querySelector('.cs-flow-zoom');
+            const img = wrap?.querySelector('.cs-flow-img');
+            const hint = wrap?.querySelector('.cs-flow-zoom-hint');
+            const hintText = hint?.querySelector('span');
+            if (!wrap || !img) return;
+
+            const SCALE = 4;
+            let active = false;
+            const isTouchFirst = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+            if (hintText && isTouchFirst) {
+                hintText.textContent = 'Tap + drag to zoom';
+            }
+
+            function zoomIn() {
+                active = true;
+                img.style.transitionDuration = '0.25s';
+                img.style.transform = 'scale(' + SCALE + ')';
+                if (hint) hint.style.opacity = '0';
+            }
+
+            function updateOrigin(e) {
+                if (!active) return;
+                const r = wrap.getBoundingClientRect();
+                const x = ((e.clientX - r.left) / r.width) * 100;
+                const y = ((e.clientY - r.top) / r.height) * 100;
+                img.style.transitionDuration = '0s';
+                img.style.transformOrigin = x + '% ' + y + '%';
+            }
+
+            function zoomOut() {
+                active = false;
+                img.style.transitionDuration = '0.3s';
+                img.style.transform = 'scale(1)';
+                img.style.transformOrigin = '50% 50%';
+                if (hint) hint.style.opacity = '1';
+            }
+
+            wrap.addEventListener('pointerenter', function (e) {
+                if (e.pointerType === 'mouse') zoomIn();
+            });
+            wrap.addEventListener('pointerdown', function (e) {
+                zoomIn();
+                updateOrigin(e);
+                wrap.setPointerCapture?.(e.pointerId);
+            });
+            wrap.addEventListener('pointermove', updateOrigin);
+            wrap.addEventListener('pointerleave', function (e) {
+                if (e.pointerType === 'mouse') zoomOut();
+            });
+            wrap.addEventListener('pointerup', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                if (e.pointerType !== 'mouse') zoomOut();
+            });
+            wrap.addEventListener('pointercancel', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                zoomOut();
+            });
+        })();
+
+        // ── Action title hover card ───────────────────────────────────────────
+        (function () {
+            const trigger = document.querySelector('.cs-action-title-highlight');
+            const card = document.querySelector('.cs-action-title-hover-card');
+            if (!trigger || !card || trigger.dataset.hoverInit === 'true') return;
+
+            trigger.dataset.hoverInit = 'true';
+            const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+            if (isTouchDevice) {
+                trigger.style.cursor = 'pointer';
+                trigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const rect = trigger.getBoundingClientRect();
+                    card.style.left = (rect.left + rect.width / 2) + 'px';
+                    card.style.top = rect.top + 'px';
+                    card.classList.toggle('visible');
+                });
+                document.addEventListener('click', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+            } else {
+                const OFFSET = 16;
+                const IMG_W = 240;
+                const IMG_H = 300;
+
+                trigger.addEventListener('mouseenter', function () {
+                    card.classList.add('visible');
+                });
+                trigger.addEventListener('mouseleave', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+                document.addEventListener('mousemove', function (e) {
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    const x = e.clientX;
+                    const y = e.clientY;
+                    const left = (x + OFFSET + IMG_W > vw) ? x - OFFSET - IMG_W : x + OFFSET;
+                    const top = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
+                    card.style.left = left + 'px';
+                    card.style.top = top + 'px';
+                });
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

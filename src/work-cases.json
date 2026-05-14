@@ -2,7 +2,7 @@
   {
     "id": "olympus",
     "company": "Olympus",
-    "role": "Senior Product Designer",
+    "role": "Staff Product Designer",
     "icon": "src/img/companyIcons/companyIcon_olympus.png",
     "caseStudy_url": "/olympus",
     "copy": [
@@ -69,6 +69,7 @@
     "company": "Revel",
     "role": "Senior Product Designer",
     "icon": "src/img/companyIcons/companyIcon_revel.png",
+    "caseStudy_url": "/revel",
     "copy": [
       "I joined Revel as their first designer in the Summer of 2019 — a pivotal time in the company's growth. I was tasked with designing a full suite of internal tools that would allow the company to bring all their operations and logistics in-house.",
       "I worked closely with nearly every department lead in the company to ensure that the tools we built met the needs of all who'd be using it. As a result, once we released the tools, we saw a huge spike in productivity and financial efficiency.",
