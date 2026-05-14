@@ -201,6 +201,9 @@
     }, startDelay + charSpans.length * staggerMs + 400);
   }
 
+  window.splitTextIntoChars = splitTextIntoChars;
+  window.startScramble = startScramble;
+
   document.querySelectorAll('[data-site-navbar]').forEach(renderNavbar);
   document.querySelectorAll('[data-site-footer]').forEach(renderFooter);
   initFooter();

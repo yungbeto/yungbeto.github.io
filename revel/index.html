@@ -318,7 +318,8 @@
 
             <!-- ─── Video modal ───────────────────────────────────────────────── -->
 
-            <div class="cs-video-modal" id="video-modal" aria-hidden="true" role="dialog" aria-label="Revel announcement video">
+            <div class="cs-video-modal" id="video-modal" aria-hidden="true" role="dialog"
+                aria-label="Revel announcement video">
                 <button class="cs-video-modal-close" id="video-modal-close" aria-label="Close video">
                     <i class="ph ph-x"></i>
                 </button>
@@ -357,6 +358,26 @@
     <script>
         initCarousels();
         initConstraintScrollBackgrounds();
+        initProblemTextAnimation();
+
+        function initProblemTextAnimation() {
+            const el = document.querySelector('.cs-problem-section-text');
+            if (!el || typeof splitTextIntoChars !== 'function') return;
+
+            const text = el.textContent;
+
+            const observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    const charSpans = [];
+                    el.textContent = '';
+                    splitTextIntoChars(text, el, charSpans);
+                    startScramble(charSpans, undefined, { startDelay: 80, staggerMs: 18 });
+                }
+            }, { threshold: 0.3 });
+
+            observer.observe(el);
+        }
 
         function initCarousels() {
             const GAP = 12;
@@ -460,7 +481,7 @@
             const cards = [...document.querySelectorAll('.cs-constraint')];
             if (!cards.length) return;
 
-            const triggerY = 240;
+            const triggerY = 200;
             const fadeRange = 280;
             let ticking = false;
 
@@ -522,7 +543,7 @@
             const hintText = hint?.querySelector('span');
             if (!wrap || !img) return;
 
-            const SCALE = 4;
+            const SCALE = 5;
             let active = false;
             const isTouchFirst = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 

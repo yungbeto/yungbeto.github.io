@@ -122,7 +122,8 @@
                         <i class="ph ph-question"></i>
                         <p class="cs-label">The problem I set out to solve</p>
                     </div>
-                    <p class="cs-problem-section-text">How might we make traceability data accessible to clinical staff at the moment they need it most?</p>
+                    <p class="cs-problem-section-text">How might we make traceability data accessible to clinical staff
+                        at the moment they need it most?</p>
                 </div>
             </div>
 
@@ -208,10 +209,30 @@
                     <p class="cs-action-carousel-title">Wireframes we used for testing</p>
                     <div class="work-case-media-clip">
                         <div class="work-case-media">
-                            <div class="work-case-media-item"><picture><source media="(max-width: 768px)" srcset="img/Olympus_Action_01_mobile.png"><img src="img/Olympus_Action_01_desktop.png" alt="Exploration 1"></picture></div>
-                            <div class="work-case-media-item"><picture><source media="(max-width: 768px)" srcset="img/Olympus_Action_02_mobile.png"><img src="img/Olympus_Action_02_desktop.png" alt="Exploration 2"></picture></div>
-                            <div class="work-case-media-item"><picture><source media="(max-width: 768px)" srcset="img/Olympus_Action_03_mobile.png"><img src="img/Olympus_Action_03_desktop.png" alt="Exploration 3"></picture></div>
-                            <div class="work-case-media-item"><picture><source media="(max-width: 768px)" srcset="img/Olympus_Action_04_mobile.png"><img src="img/Olympus_Action_04_desktop.png" alt="Exploration 4"></picture></div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/Olympus_Action_01_mobile.png"><img
+                                        src="img/Olympus_Action_01_desktop.png" alt="Exploration 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/Olympus_Action_02_mobile.png"><img
+                                        src="img/Olympus_Action_02_desktop.png" alt="Exploration 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/Olympus_Action_03_mobile.png"><img
+                                        src="img/Olympus_Action_03_desktop.png" alt="Exploration 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/Olympus_Action_04_mobile.png"><img
+                                        src="img/Olympus_Action_04_desktop.png" alt="Exploration 4">
+                                </picture>
+                            </div>
 
                         </div>
                         <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
@@ -325,6 +346,26 @@
 
         initCarousels();
         initConstraintScrollBackgrounds();
+        initProblemTextAnimation();
+
+        function initProblemTextAnimation() {
+            const el = document.querySelector('.cs-problem-section-text');
+            if (!el || typeof splitTextIntoChars !== 'function') return;
+
+            const text = el.textContent;
+
+            const observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    const charSpans = [];
+                    el.textContent = '';
+                    splitTextIntoChars(text, el, charSpans);
+                    startScramble(charSpans, undefined, { startDelay: 80, staggerMs: 18 });
+                }
+            }, { threshold: 0.3 });
+
+            observer.observe(el);
+        }
 
         async function loadCaseStudyStrings() {
             try {
@@ -574,7 +615,7 @@
             const cards = [...document.querySelectorAll('.cs-constraint')];
             if (!cards.length) return;
 
-            const triggerY = 240;
+            const triggerY = 200;
             const fadeRange = 280;
             let ticking = false;
 
@@ -638,7 +679,7 @@
             const hintText = hint?.querySelector('span');
             if (!wrap || !img) return;
 
-            const SCALE = 4;
+            const SCALE = 5;
             let active = false;
             const isTouchFirst = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 

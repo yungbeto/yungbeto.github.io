@@ -1438,24 +1438,26 @@ ul {
 .cs-bg-block {
   border: 1px solid #71717a;
   border-radius: 8px;
-  padding: 24px 16px 24px 32px;
+  padding: 16px 16px 24px 16px;
   display: flex;
-  gap: 8px;
+  gap: 16px;
   align-items: flex-start;
-}
-@media (max-width: 768px) {
-  .cs-bg-block {
-    padding: 16px;
-  }
 }
 
 .cs-bg-num {
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 40px;
   color: #a1a1aa;
   width: 40px;
+  height: 40px;
   flex-shrink: 0;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(113, 113, 122, 0.5);
+  border-radius: 40px;
 }
 
 .cs-bg-content {
@@ -1467,14 +1469,15 @@ ul {
 }
 
 .cs-bg-block-label {
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 40px;
   color: #a1a1aa;
   margin: 0;
+  font-weight: 600;
 }
 
 .cs-bg-block-text {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.5;
   color: #e4e4e7;
   margin: 0;
@@ -1482,7 +1485,7 @@ ul {
 }
 @media (max-width: 768px) {
   .cs-bg-block-text {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
