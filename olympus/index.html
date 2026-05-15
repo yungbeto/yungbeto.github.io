@@ -25,7 +25,7 @@
 
             <!-- ─── Intro ─────────────────────────────────────────────────────── -->
 
-            <div class="cs-intro">
+            <div class="cs-intro cs-intro--paywall-preview">
                 <div class="cs-label-row">
                     <i class="ph ph-asterisk cs-asterisk"></i>
                     <p class="cs-label">Case study / Olympus</p>
@@ -42,6 +42,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="cs-paywall is-locked" data-olympus-paywall>
+                <div class="cs-paywall-gate" role="dialog" aria-labelledby="olympus-paywall-title"
+                    aria-describedby="olympus-paywall-copy">
+                    <form class="cs-paywall-card" data-olympus-paywall-form>
+                        <div class="cs-paywall-card-header">
+                            <p class="cs-paywall-title" id="olympus-paywall-title">Hold on</p>
+                        </div>
+                        <div class="cs-paywall-card-body">
+                            <label class="cs-paywall-label" for="olympus-password" id="olympus-paywall-copy">Please
+                                enter the password to continue</label>
+                            <input class="cs-paywall-input" id="olympus-password" name="password" type="password"
+                                autocomplete="current-password" required>
+                            <p class="cs-paywall-error" data-olympus-paywall-error aria-live="polite"></p>
+                        </div>
+                        <div class="cs-paywall-card-footer">
+                            <button class="cs-paywall-submit" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="cs-paywall-content" data-olympus-paywall-content aria-hidden="true" inert>
 
             <!-- ─── Background ────────────────────────────────────────────────── -->
 
@@ -344,6 +365,9 @@
                 </a>
             </div>
 
+                </div>
+            </div>
+
             <!-- ─── Footer ────────────────────────────────────────────────────── -->
 
             <div data-site-footer></div>
@@ -354,12 +378,135 @@
     <script src="../src/scripts/site-chrome.js"></script>
     <script src="../src/scripts/favicon-spinner.js"></script>
     <script>
+        initOlympusPaywall();
         loadCaseStudyStrings().finally(initActionTitleHover);
 
         initCarousels();
         initLightbox();
         initConstraintScrollBackgrounds();
         initProblemTextAnimation();
+
+        function initOlympusPaywall() {
+            const intro = document.querySelector('.cs-intro--paywall-preview');
+            const shell = document.querySelector('[data-olympus-paywall]');
+            const form = document.querySelector('[data-olympus-paywall-form]');
+            const input = document.getElementById('olympus-password');
+            const content = document.querySelector('[data-olympus-paywall-content]');
+            const error = document.querySelector('[data-olympus-paywall-error]');
+            if (!shell || !form || !input || !content) return;
+
+            const storageKey = 'olympus-case-study-unlocked';
+            const passwordHash = '2e9148ded9f71781a99cc6d4b4c9045be342131a0ed9613853ef32fb8cc19fc8';
+
+            function unlock() {
+                shell.classList.remove('is-locked');
+                shell.classList.remove('is-unlocking');
+                shell.classList.add('is-unlocked');
+                intro?.classList.add('cs-intro--paywall-open');
+                content.removeAttribute('aria-hidden');
+                content.inert = false;
+                form.setAttribute('aria-hidden', 'true');
+            }
+
+            function unlockWithMotion() {
+                shell.classList.add('is-unlocking');
+                intro?.classList.add('cs-intro--paywall-open');
+                content.removeAttribute('aria-hidden');
+                content.inert = false;
+                setTimeout(unlock, 240);
+            }
+
+            function showUnlockToast() {
+                var toast = document.createElement('div');
+                toast.className = 'cs-paywall-toast';
+                toast.setAttribute('role', 'status');
+                toast.innerHTML = '<i class="ph ph-check"></i><span>You\'re in</span>';
+                document.body.appendChild(toast);
+
+                setTimeout(function () {
+                    toast.classList.add('is-exiting');
+                    toast.addEventListener('animationend', function () {
+                        toast.remove();
+                    }, { once: true });
+                }, 2000);
+            }
+
+            async function hashPassword(value) {
+                const bytes = new TextEncoder().encode(value);
+                const digest = await crypto.subtle.digest('SHA-256', bytes);
+                return Array.from(new Uint8Array(digest))
+                    .map(function (byte) { return byte.toString(16).padStart(2, '0'); })
+                    .join('');
+            }
+
+            content.inert = true;
+
+            if (window.localStorage.getItem(storageKey) === 'true') {
+                unlock();
+                return;
+            }
+
+            // Animate the card in when the paywall scrolls into view
+            var gate = shell.querySelector('.cs-paywall-gate');
+            if (gate && 'IntersectionObserver' in window) {
+                var revealObserver = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        revealObserver.disconnect();
+                        gate.classList.add('is-revealed');
+                    }
+                }, { threshold: 0.1 });
+                revealObserver.observe(shell);
+            }
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const submit = form.querySelector('button[type="submit"]');
+                const value = input.value.trim();
+
+                if (!crypto.subtle) {
+                    if (error) error.textContent = 'This browser cannot verify the password.';
+                    return;
+                }
+
+                submit.disabled = true;
+                if (error) {
+                    error.textContent = '';
+                    error.classList.remove('is-visible');
+                }
+                input.classList.remove('is-error');
+
+                try {
+                    const digest = await hashPassword(value);
+                    if (digest === passwordHash) {
+                        window.localStorage.setItem(storageKey, 'true');
+                        showUnlockToast();
+                        unlockWithMotion();
+                        return;
+                    }
+
+                    // Shake the card
+                    form.classList.remove('is-shaking');
+                    void form.offsetWidth;
+                    form.classList.add('is-shaking');
+
+                    // Error state on the input, cleared on next keystroke
+                    input.classList.add('is-error');
+                    input.addEventListener('input', function () {
+                        input.classList.remove('is-error');
+                    }, { once: true });
+
+                    // Animate error message in
+                    if (error) {
+                        error.textContent = 'That password did not work. Please try again.';
+                        void error.offsetWidth;
+                        error.classList.add('is-visible');
+                    }
+                    input.select();
+                } finally {
+                    submit.disabled = false;
+                }
+            });
+        }
 
         function initProblemTextAnimation() {
             const el = document.querySelector('.cs-problem-section-text');

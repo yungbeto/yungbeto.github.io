@@ -152,6 +152,7 @@ ul {
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
+  transition: transform 0.1s ease;
 
   &::before {
     content: '';
@@ -167,6 +168,10 @@ ul {
   &:hover {
     background: $ink;
     color: $bg;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   // Tooltip
@@ -365,6 +370,14 @@ ul {
   color: $ink;
   text-decoration: none;
   width: fit-content;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -8px -4px;
+  }
+
   .toc-link-text {
     transition: transform 0.15s ease-in-out;
   }
@@ -432,6 +445,7 @@ ul {
   height: 300px;
   object-fit: cover;
   border-radius: 4px;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
   pointer-events: none;
   opacity: 0;
   transform: translateY(6px) scale(0.97);
@@ -750,9 +764,9 @@ ul {
 .work-case-icon {
   width: 72px;
   height: 72px;
-
   border-radius: 4px;
   object-fit: cover;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .work-case-company {
@@ -1003,12 +1017,12 @@ ul {
 .job-logo {
   width: 72px;
   height: 72px;
-
   border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
   background: transparent;
   border: none;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
@@ -1253,6 +1267,7 @@ ul {
   line-height: 0.85;
   color: $footer-fg;
   margin: 0;
+  text-wrap: balance;
 
   @media (max-width: $tablet) {
     font-size: 5rem;
@@ -1430,10 +1445,62 @@ ul {
   gap: 48px;
   padding: 32px;
   border-bottom: 1px solid $ink;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: $tablet) {
     padding: 16px;
   }
+}
+
+@keyframes cs-paywall-crossfade-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cs-intro--paywall-preview {
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -180px;
+    height: 360px;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba($bg, 0) 0%, rgba($bg, 0.42) 34%, rgba($footer-bg, 0.72) 72%, rgba($footer-bg, 0) 100%);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 78%, transparent 100%);
+    opacity: 0;
+    animation: cs-paywall-crossfade-in 0.58s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  @media (max-width: $tablet) {
+    &::after {
+      bottom: -132px;
+      height: 264px;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+}
+
+.cs-intro--paywall-open::after {
+  animation: none;
+  opacity: 0;
+  transform: translateY(-12px);
 }
 
 .cs-label-row {
@@ -1521,6 +1588,414 @@ ul {
   object-fit: cover;
   border-radius: 8px;
   outline: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+// ─── Olympus paywall ──────────────────────────────────────────────────────────
+
+@keyframes cs-paywall-scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cs-paywall-card-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cs-paywall-piece-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes cs-paywall-gate-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(var(--cs-paywall-gate-start-y));
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(var(--cs-paywall-gate-y));
+  }
+}
+
+@keyframes cs-paywall-shake {
+  0%, 100% { transform: translateX(0); }
+  16%       { transform: translateX(-10px); }
+  33%       { transform: translateX(9px); }
+  50%       { transform: translateX(-6px); }
+  67%       { transform: translateX(6px); }
+  84%       { transform: translateX(-3px); }
+}
+
+@keyframes cs-paywall-error-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cs-paywall {
+  position: relative;
+  background: $footer-bg;
+  z-index: 0;
+}
+
+.cs-paywall-content {
+  transition:
+    filter 0.28s cubic-bezier(0.2, 0, 0, 1),
+    opacity 0.28s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cs-paywall.is-locked {
+  margin-top: -1px;
+  min-height: calc(100dvh - 56px);
+  overflow: hidden;
+
+  .cs-paywall-content {
+    max-height: 86dvh;
+    filter: blur(12px);
+    opacity: 0.82;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba($footer-bg, 0) 0%, rgba($bg, 0.5) 52%, $bg 100%),
+      linear-gradient(to bottom, rgba($footer-bg, 0.08), rgba($footer-bg, 0.24));
+    opacity: 0;
+    animation: cs-paywall-scrim-in 0.48s cubic-bezier(0.2, 0, 0, 1) 0.06s both;
+  }
+}
+
+.cs-paywall.is-unlocking {
+  .cs-paywall-content {
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  &::after,
+  .cs-paywall-gate {
+    opacity: 0;
+  }
+
+  &::after {
+    animation: none;
+  }
+
+  .cs-paywall-gate {
+    transform: translateY(104px);
+    filter: blur(10px);
+  }
+}
+
+.cs-paywall.is-unlocked {
+  background: transparent;
+
+  .cs-paywall-gate {
+    display: none;
+  }
+}
+
+.cs-paywall-gate {
+  --cs-paywall-gate-y: 144px;
+  --cs-paywall-gate-start-y: 196px;
+
+  position: sticky;
+  top: 96px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  padding: 0 32px;
+  margin-bottom: -208px;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(var(--cs-paywall-gate-y));
+  transition:
+    opacity 0.22s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+    filter 0.22s cubic-bezier(0.2, 0, 0, 1);
+
+  @media (max-width: $tablet) {
+    --cs-paywall-gate-y: 96px;
+    --cs-paywall-gate-start-y: 140px;
+
+    top: 72px;
+    padding: 0 16px;
+    margin-bottom: -176px;
+  }
+}
+
+.cs-paywall-card {
+  width: 100%;
+  max-width: 456px;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid rgba($ink, 0.72);
+  border-radius: 4px;
+  box-shadow:
+    0 24px 80px rgba($ink, 0.22),
+    0 2px 0 rgba($ink, 0.08);
+  color: $ink;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.cs-paywall-card.is-shaking {
+  animation: cs-paywall-shake 0.44s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  opacity: 1; // override the base opacity:0 so the card stays visible while shaking
+}
+
+.cs-paywall-card-header,
+.cs-paywall-card-footer {
+  padding: 16px 20px;
+  background: #fafafa;
+  opacity: 0;
+}
+
+.cs-paywall-card-header {
+  border-bottom: 1px solid rgba($ink, 0.5);
+}
+
+.cs-paywall-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 20px 16px;
+  background: #fafafa;
+  opacity: 0;
+}
+
+.cs-paywall-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid rgba($ink, 0.5);
+}
+
+// Scroll-triggered reveal — IntersectionObserver adds .is-revealed to the gate
+.cs-paywall-gate.is-revealed {
+  animation: cs-paywall-gate-in 0.52s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
+
+  .cs-paywall-card {
+    animation: cs-paywall-card-in 0.46s cubic-bezier(0.2, 0, 0, 1) both;
+  }
+  .cs-paywall-card-header,
+  .cs-paywall-card-footer {
+    animation: cs-paywall-piece-in 0.38s cubic-bezier(0.2, 0, 0, 1) both;
+  }
+  .cs-paywall-card-header {
+    animation-delay: 0.2s;
+  }
+  .cs-paywall-card-body {
+    animation: cs-paywall-piece-in 0.38s cubic-bezier(0.2, 0, 0, 1) 0.32s both;
+  }
+  .cs-paywall-card-footer {
+    animation-delay: 0.42s;
+  }
+}
+
+.cs-paywall-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cs-paywall-label {
+  font-size: 12px;
+  line-height: 1.5;
+  color: $ink;
+}
+
+.cs-paywall-input {
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  border: 1px solid rgba($ink, 0.72);
+  border-radius: 4px;
+  background: $surface;
+  color: $ink;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  outline: none;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+
+  &:focus {
+    background: #fafafa;
+    box-shadow: 0 0 0 3px rgba($ink, 0.12);
+  }
+
+  &.is-error {
+    border-color: #b91c1c;
+    box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+  }
+}
+
+.cs-paywall-error {
+  min-height: 18px;
+  margin: 0;
+  color: #b91c1c;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0;
+
+  &.is-visible {
+    animation: cs-paywall-error-in 0.22s cubic-bezier(0.2, 0, 0, 1) both;
+  }
+}
+
+.cs-paywall-submit {
+  min-width: 76px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid $ink;
+  border-radius: 0;
+  background: $ink;
+  color: #fafafa;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #27272a;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.64;
+  }
+}
+
+// Footer is irrelevant when the paywall is blocking the page
+.cs-paywall.is-locked ~ .site-footer {
+  display: none;
+}
+
+// ─── Unlock toast ─────────────────────────────────────────────────────────────
+
+@keyframes cs-paywall-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes cs-paywall-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+.cs-paywall-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 10px 12px;
+  background: $ink;
+  color: $bg;
+  border-radius: 48px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 500;
+  pointer-events: none;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: cs-paywall-toast-in 0.35s cubic-bezier(0.2, 0, 0, 1) both;
+
+  i {
+    font-size: 16px;
+    color: #4ade80;
+  }
+
+  &.is-exiting {
+    animation: cs-paywall-toast-out 0.28s cubic-bezier(0.4, 0, 1, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-paywall-toast {
+    animation-duration: 1ms;
+  }
+  .cs-paywall-toast.is-exiting {
+    animation-duration: 1ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-intro--paywall-preview::after,
+  .cs-paywall.is-locked::after,
+  .cs-paywall-card,
+  .cs-paywall-card.is-shaking,
+  .cs-paywall-gate.is-revealed,
+  .cs-paywall-gate.is-revealed .cs-paywall-card,
+  .cs-paywall-gate.is-revealed .cs-paywall-card-header,
+  .cs-paywall-gate.is-revealed .cs-paywall-card-body,
+  .cs-paywall-gate.is-revealed .cs-paywall-card-footer {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+
+  .cs-paywall-gate,
+  .cs-paywall-content,
+  .cs-paywall-error.is-visible,
+  .cs-intro--paywall-preview::after {
+    transition-duration: 1ms;
+    animation-duration: 1ms;
+  }
 }
 
 // ─── Background (dark) ────────────────────────────────────────────────────────
@@ -2258,7 +2733,7 @@ ul {
   color: $ink;
   margin: 0;
   text-align: center;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 
 // ─── Scroll-entrance animation ────────────────────────────────────────────────
