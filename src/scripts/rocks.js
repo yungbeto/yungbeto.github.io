@@ -138,7 +138,7 @@ function dropBody(x, y) {
     });
   }
 
-  var fills = ['#e4e4e7', '#d4d4d8', '#cacaca'];
+  var fills = ['#e4e4e7', '#d4d4d8', '#cacaca', '#f9a8d4'];
   var fill = fills[Math.floor(Math.random() * fills.length)];
 
   var body = Matter.Bodies.fromVertices(

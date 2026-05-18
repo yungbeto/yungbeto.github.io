@@ -204,10 +204,36 @@
   window.splitTextIntoChars = splitTextIntoChars;
   window.startScramble = startScramble;
 
+  function initKvList() {
+    document.querySelectorAll('.cs-hero-kv-list').forEach(function (list) {
+      var header = list.querySelector('.cs-hero-kv-list-header');
+      if (!header) return;
+
+      list.classList.add('is-collapsed');
+      header.setAttribute('role', 'button');
+      header.setAttribute('tabindex', '0');
+      header.setAttribute('aria-expanded', 'false');
+
+      function toggle() {
+        var collapsed = list.classList.toggle('is-collapsed');
+        header.setAttribute('aria-expanded', String(!collapsed));
+      }
+
+      header.addEventListener('click', toggle);
+      header.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  }
+
   document.querySelectorAll('[data-site-navbar]').forEach(renderNavbar);
   document.querySelectorAll('[data-site-footer]').forEach(renderFooter);
   initFooter();
   initFooterNameAnimation();
+  initKvList();
 })();
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────

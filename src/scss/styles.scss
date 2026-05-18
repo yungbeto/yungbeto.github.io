@@ -5,7 +5,11 @@ $ink: #3f3f46;
 $footer-bg: #3f3f46;
 $footer-fg: #d4d4d8;
 $green: #4d7c0f;
-$pink: #f472b6;
+$pink: #f9a8d4;
+
+$blue-200: #cbd5e1;
+$blue-300: #94a3b8;
+$blue-400: #64748b;
 
 $label-width: 104px;
 $desktop: 1280px;
@@ -62,8 +66,12 @@ ul {
 // ─── Page container ──────────────────────────────────────────────────────────
 
 @keyframes page-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .page-outer {
@@ -389,6 +397,7 @@ ul {
 
   &:hover {
     opacity: 0.5;
+    color: darken($pink, 40%);
     .toc-link-text {
       transform: translateX(4px);
     }
@@ -823,8 +832,8 @@ ul {
   background: $surface;
 
   &:hover {
-    background: rgba($ink, 1);
-    color: $surface;
+    background: $pink;
+    color: $ink;
   }
 
   &:active {
@@ -1448,7 +1457,7 @@ ul {
   position: relative;
   z-index: 1;
 
-  @media (max-width: $tablet) {
+  @media (max-width: 960px) {
     padding: 16px;
   }
 }
@@ -1474,20 +1483,38 @@ ul {
     height: 360px;
     z-index: 2;
     pointer-events: none;
-    background:
-      linear-gradient(to bottom, rgba($bg, 0) 0%, rgba($bg, 0.42) 34%, rgba($footer-bg, 0.72) 72%, rgba($footer-bg, 0) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba($bg, 0) 0%,
+      rgba($bg, 0.42) 34%,
+      rgba($footer-bg, 0.72) 72%,
+      rgba($footer-bg, 0) 100%
+    );
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 78%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 30%,
+      #000 78%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 30%,
+      #000 78%,
+      transparent 100%
+    );
     opacity: 0;
-    animation: cs-paywall-crossfade-in 0.58s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
+    animation: cs-paywall-crossfade-in 0.58s cubic-bezier(0.2, 0, 0, 1) 0.08s
+      both;
     transition:
       opacity 0.22s ease,
       transform 0.22s ease;
   }
 
-  @media (max-width: $tablet) {
+  @media (max-width: 960px) {
     &::after {
       bottom: -132px;
       height: 264px;
@@ -1505,6 +1532,7 @@ ul {
 
 .cs-label-row {
   display: flex;
+  flex-direction: row;
   align-items: flex-end;
   gap: 8px;
 }
@@ -1533,7 +1561,7 @@ ul {
   gap: 48px;
   align-items: flex-start;
 
-  @media (max-width: $tablet) {
+  @media (max-width: 960px) {
     flex-direction: column;
   }
 }
@@ -1544,7 +1572,8 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 48px;
-  justify-content: center;
+  justify-content: flex-start;
+  height: stretch;
 }
 
 .cs-hero-title {
@@ -1556,7 +1585,7 @@ ul {
   margin: 0;
   text-wrap: balance;
 
-  @media (max-width: $tablet) {
+  @media (max-width: 960px) {
     font-size: 48px;
   }
 }
@@ -1570,15 +1599,152 @@ ul {
   text-wrap: pretty;
 }
 
+.cs-intro-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.cs-hero-kv-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 1px solid rgba($ink, 0.1);
+  border-radius: 8px;
+
+  width: 100%;
+  overflow: hidden;
+
+  background: darken($surface, 8%);
+}
+
+.cs-hero-kv-list-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba($ink, 0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    border-color 0.35s cubic-bezier(0.2, 0, 0, 1),
+    background 0.2s ease,
+    opacity 0.15s ease;
+
+  &:hover {
+    background: darken($surface, 10%);
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+
+  i {
+    transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+.cs-hero-kv-list-header-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: $ink;
+}
+.cs-hero-kv-list-body {
+  overflow: hidden;
+  max-height: 400px;
+  transition: max-height 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cs-hero-kv-list-body-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+// Enter: stagger each item ~80ms apart with fade + slide up
+.cs-hero-kv-list-body-inner .cs-hero-kv {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.3s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+
+  &:nth-child(1) {
+    transition-delay: 0.08s;
+  }
+  &:nth-child(2) {
+    transition-delay: 0.16s;
+  }
+}
+
+.cs-hero-kv-list.is-collapsed {
+  .cs-hero-kv-list-header {
+    border-bottom-color: transparent;
+    transition:
+      border-color 0.12s ease,
+      background-color 0.12s ease,
+      opacity 0.15s ease;
+
+    i {
+      transform: rotate(-90deg);
+      transition: transform 0.18s ease;
+    }
+  }
+
+  .cs-hero-kv-list-body {
+    max-height: 0;
+    transition: max-height 0.22s ease;
+  }
+
+  // Exit: fast fade + small upward shift, no stagger
+  .cs-hero-kv-list-body-inner .cs-hero-kv {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.1s ease,
+      transform 0.1s ease;
+    transition-delay: 0s;
+  }
+}
+
+.cs-hero-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.cs-hero-kv-key {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba($ink, 0.8);
+}
+
+.cs-hero-kv-val {
+  font-size: 16px;
+  font-weight: 500;
+  color: $ink;
+  line-height: 1.5;
+}
+
 .cs-hero-img-wrap {
   width: 576px;
   height: 800px;
   flex-shrink: 0;
   overflow: hidden;
 
-  @media (max-width: $tablet) {
+  @media (max-width: 960px) {
     width: 100%;
     height: 400px;
+    order: -1;
   }
 }
 
@@ -1641,17 +1807,36 @@ ul {
 }
 
 @keyframes cs-paywall-shake {
-  0%, 100% { transform: translateX(0); }
-  16%       { transform: translateX(-10px); }
-  33%       { transform: translateX(9px); }
-  50%       { transform: translateX(-6px); }
-  67%       { transform: translateX(6px); }
-  84%       { transform: translateX(-3px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  16% {
+    transform: translateX(-10px);
+  }
+  33% {
+    transform: translateX(9px);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+  67% {
+    transform: translateX(6px);
+  }
+  84% {
+    transform: translateX(-3px);
+  }
 }
 
 @keyframes cs-paywall-error-in {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cs-paywall {
@@ -1686,7 +1871,12 @@ ul {
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(to bottom, rgba($footer-bg, 0) 0%, rgba($bg, 0.5) 52%, $bg 100%),
+      linear-gradient(
+        to bottom,
+        rgba($footer-bg, 0) 0%,
+        rgba($bg, 0.5) 52%,
+        $bg 100%
+      ),
       linear-gradient(to bottom, rgba($footer-bg, 0.08), rgba($footer-bg, 0.24));
     opacity: 0;
     animation: cs-paywall-scrim-in 0.48s cubic-bezier(0.2, 0, 0, 1) 0.06s both;
@@ -2644,6 +2834,70 @@ ul {
 
   &:active {
     transform: scale(0.96);
+  }
+}
+
+// ─── Video section frame mount animation ─────────────────────────────────────
+
+.cs-video-section-frame {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+
+  &.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Bg image always visible beneath the video — slow zoom-out when video ends
+  .cs-video-section-bg {
+    transform: scale(1.04);
+    transition: transform 1.8s cubic-bezier(0.2, 0, 0, 1);
+
+    &.is-in-view {
+      transform: scale(1);
+    }
+  }
+}
+
+// Intro video: sits above bg image, fades out when done
+.cs-video-section-intro {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.7s ease;
+
+  &.is-fading-out {
+    opacity: 0;
+  }
+}
+
+// Content overlay must sit above the intro video
+.cs-video-section-content {
+  z-index: 2;
+}
+
+// Content children: hidden until staggered in at the 2s mark
+.cs-video-section-content .cs-label,
+.cs-video-section-content .cs-video-section-text,
+.cs-video-section-content .cs-video-watch-btn {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.5s cubic-bezier(0.2, 0, 0, 1),
+    background-color 0.15s ease;
+
+  &.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
