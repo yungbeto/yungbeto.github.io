@@ -1240,7 +1240,14 @@ ul {
   font-weight: 700;
   letter-spacing: 0em;
   text-transform: uppercase;
-  color: #3f3f46; }
+  color: #3f3f46;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px; }
+  .cs-hero-kv-list-header-title i {
+    font-size: 20px;
+    line-height: 1; }
 
 .cs-hero-kv-list-body {
   overflow: hidden;
@@ -1250,8 +1257,8 @@ ul {
 .cs-hero-kv-list-body-inner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px; }
+  gap: 24px;
+  padding: 24px 16px; }
 
 .cs-hero-kv-list-body-inner .cs-hero-kv {
   opacity: 1;
@@ -1265,8 +1272,8 @@ ul {
 .cs-hero-kv-list.is-collapsed .cs-hero-kv-list-header {
   border-bottom-color: transparent;
   transition: border-color 0.12s ease, background-color 0.12s ease, opacity 0.15s ease; }
-  .cs-hero-kv-list.is-collapsed .cs-hero-kv-list-header i {
-    transform: rotate(-90deg);
+  .cs-hero-kv-list.is-collapsed .cs-hero-kv-list-header .caret-icon {
+    transform: rotate(180deg);
     transition: transform 0.18s ease; }
 
 .cs-hero-kv-list.is-collapsed .cs-hero-kv-list-body {
@@ -1289,12 +1296,10 @@ ul {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(63, 63, 70, 0.8); }
+  text-transform: uppercase; }
 
 .cs-hero-kv-val {
   font-size: 16px;
-  font-weight: 500;
   color: #3f3f46;
   line-height: 1.5; }
 

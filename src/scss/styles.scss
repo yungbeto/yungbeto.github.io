@@ -1653,6 +1653,15 @@ ul {
   letter-spacing: 0em;
   text-transform: uppercase;
   color: $ink;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  i {
+    font-size: 20px;
+    line-height: 1;
+  }
 }
 .cs-hero-kv-list-body {
   overflow: hidden;
@@ -1663,8 +1672,8 @@ ul {
 .cs-hero-kv-list-body-inner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
+  gap: 24px;
+  padding: 24px 16px;
 }
 
 // Enter: stagger each item ~80ms apart with fade + slide up
@@ -1691,8 +1700,8 @@ ul {
       background-color 0.12s ease,
       opacity 0.15s ease;
 
-    i {
-      transform: rotate(-90deg);
+    .caret-icon {
+      transform: rotate(180deg);
       transition: transform 0.18s ease;
     }
   }
@@ -1725,12 +1734,10 @@ ul {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba($ink, 0.8);
 }
 
 .cs-hero-kv-val {
   font-size: 16px;
-  font-weight: 500;
   color: $ink;
   line-height: 1.5;
 }
