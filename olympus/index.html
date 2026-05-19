@@ -473,6 +473,7 @@
     <script src="../src/scripts/site-chrome.js"></script>
     <script src="../src/scripts/favicon-spinner.js"></script>
     <script>
+        var PAYWALL_ENABLED = false;
         initOlympusPaywall();
         loadCaseStudyStrings().finally(initActionTitleHover);
 
@@ -532,6 +533,11 @@
                 return Array.from(new Uint8Array(digest))
                     .map(function (byte) { return byte.toString(16).padStart(2, '0'); })
                     .join('');
+            }
+
+            if (!PAYWALL_ENABLED) {
+                unlock();
+                return;
             }
 
             content.inert = true;
