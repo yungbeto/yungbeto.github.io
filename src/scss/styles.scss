@@ -16,6 +16,12 @@ $desktop: 1280px;
 $tablet: 768px;
 $mobile: 480px;
 
+$card-color-01: #b3b7ff;
+$card-color-02: #db98ff;
+$card-color-03: #d0f583;
+$card-color-04: #ff99ff;
+$card-color-05: #ffbb68;
+
 // Reset
 *,
 *::before,
@@ -1448,6 +1454,17 @@ ul {
 
 // ─── Case Study ──────────────────────────────────────────────────────────────
 
+@keyframes cs-intro-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cs-intro {
   display: flex;
   flex-direction: column;
@@ -1631,15 +1648,15 @@ ul {
   user-select: none;
   transition:
     border-color 0.35s cubic-bezier(0.2, 0, 0, 1),
-    background 0.2s ease,
-    opacity 0.15s ease;
+    background-color 0.2s ease,
+    transform 0.1s cubic-bezier(0.2, 0, 0, 1);
 
   &:hover {
     background: darken($surface, 10%);
   }
 
   &:active {
-    opacity: 0.6;
+    transform: scale(0.96);
   }
 
   i {
@@ -1740,13 +1757,13 @@ ul {
   font-size: 16px;
   color: $ink;
   line-height: 1.5;
+  text-wrap: pretty;
 }
 
 .cs-hero-img-wrap {
   width: 576px;
   height: 800px;
   flex-shrink: 0;
-  overflow: hidden;
 
   @media (max-width: 960px) {
     width: 100%;
@@ -1760,7 +1777,23 @@ ul {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  outline: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.cs-intro .cs-label-row {
+  animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+.cs-intro .cs-hero-title {
+  animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 80ms both;
+}
+.cs-intro .cs-hero-img-wrap {
+  animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 140ms both;
+}
+.cs-intro .cs-lead {
+  animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 200ms both;
+}
+.cs-intro .cs-hero-kv-list {
+  animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 280ms both;
 }
 
 // ─── Olympus paywall ──────────────────────────────────────────────────────────
@@ -2482,16 +2515,21 @@ ul {
   gap: 48px;
   min-height: 220px;
   text-wrap: pretty;
-  background-color: rgba($surface, var(--cs-constraint-bg-alpha, 0));
-  box-shadow: calc(4px * var(--cs-constraint-shadow-progress, 0))
-    calc(4px * var(--cs-constraint-shadow-progress, 0)) 0 0
-    rgba(156, 163, 175, var(--cs-constraint-shadow-progress, 0));
+  background-color: color-mix(
+    in srgb,
+    var(--cs-constraint-color, $surface)
+      calc(var(--cs-constraint-progress, 0) * 100%),
+    $surface
+  );
+  box-shadow: calc(4px * var(--cs-constraint-progress, 0))
+    calc(4px * var(--cs-constraint-progress, 0)) 0 0
+    rgba(156, 163, 175, var(--cs-constraint-progress, 0));
 }
 
 .cs-constraint-num {
   font-size: 20px;
   line-height: 1.2;
-  color: #71717a;
+  color: $ink;
   margin: 0;
 }
 
@@ -2504,7 +2542,7 @@ ul {
   max-width: 75%;
 
   span {
-    color: #71717a;
+    color: $ink;
   }
 }
 
@@ -2699,6 +2737,412 @@ ul {
   i {
     font-size: 14px;
     line-height: 1;
+  }
+}
+
+// ─── Clarity / Risk Matrix ────────────────────────────────────────────────────
+
+.cs-clarity-risk {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 32px;
+  border-bottom: 1px solid $ink;
+
+  @media (max-width: $tablet) {
+    padding: 16px;
+    gap: 32px;
+  }
+}
+
+.cs-clarity-risk-header {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 584px;
+
+  @media (max-width: $tablet) {
+    padding: 0 16px;
+  }
+}
+
+.cs-clarity-risk-title {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #e4e4e7;
+  margin: 0;
+}
+
+.cs-clarity-risk-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e4e4e7;
+  margin: 0;
+}
+.crm-interactive {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.crm-prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: $ink;
+  background: $bg;
+  border: 1px solid rgba($ink, 0.35);
+  border-radius: 24px;
+  padding: 9px 16px;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+
+  &.is-hidden {
+    opacity: 0;
+  }
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+
+  i {
+    font-size: 15px;
+  }
+}
+
+.crm-graph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.crm-axis-label-h {
+  font-size: 12px;
+  color: $ink;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.crm-graph-middle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.crm-axis-label-v {
+  font-size: 12px;
+  color: $ink;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+
+  &:first-child {
+    transform: rotate(180deg);
+  }
+}
+
+.crm-table-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.crm-axis-h,
+.crm-axis-v {
+  position: absolute;
+  background: $ink;
+  pointer-events: none;
+}
+
+.crm-axis-h {
+  height: 1px;
+  top: 50%;
+  left: -16px;
+  right: -16px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: -4px;
+    border-left: 6px solid $ink;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+}
+
+.crm-axis-v {
+  width: 1px;
+  left: 50%;
+  top: -16px;
+  bottom: -16px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    border-bottom: 6px solid $ink;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+}
+
+.crm-table {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  min-height: 280px;
+  background: $surface;
+  background-image: radial-gradient(
+    circle,
+    rgba(63, 63, 70, 0.25) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  border: 1px solid $ink;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &.is-interactive {
+    cursor: none;
+  }
+
+  @media (max-width: $tablet) {
+    aspect-ratio: 1 / 1;
+    min-height: unset;
+  }
+}
+
+.crm-cell {
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  color: $ink;
+  opacity: 0.8;
+  padding: 16px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+  font-family: 'Geist Mono', monospace;
+  background: transparent;
+  transition: background 0.2s ease;
+  &--tl {
+    border-right: 1px solid rgba($ink, 0.2);
+    border-bottom: 1px solid rgba($ink, 0.2);
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  &--tr {
+    border-bottom: 1px solid rgba($ink, 0.2);
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: right;
+  }
+  &--bl {
+    border-right: 1px solid rgba($ink, 0.2);
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+.crm-cursor-dot,
+.crm-user-marker,
+.crm-pink-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.crm-cursor-dot {
+  background: $ink;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+.crm-user-marker {
+  background: $ink;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.is-placed {
+    opacity: 1;
+  }
+
+  .crm-marker-label {
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.crm-pink-marker {
+  background: $pink;
+  left: 89%;
+  top: 64%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .crm-marker-label {
+    top: 50%;
+    right: calc(100% + 8px);
+    left: auto;
+    transform: translateY(-50%);
+  }
+}
+
+.crm-marker-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  color: $ink;
+  background: $bg;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba($ink, 0.2);
+
+  &--user {
+    background: $ink;
+    color: $bg;
+    border-color: $ink;
+  }
+  &--pink {
+    background: $pink;
+    color: $ink;
+    border-color: $pink;
+  }
+}
+
+.crm-reveal {
+  position: absolute;
+  bottom: 72px;
+  left: 48px;
+  max-width: 320px;
+  z-index: 3;
+  padding: 16px 20px;
+  background: lighten($pink, 5%);
+  border-radius: 12px;
+  border: 1px solid rgba($ink, 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  @media (max-width: $tablet) {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    align-self: stretch;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transform: none;
+    transition:
+      opacity 0.4s ease,
+      max-height 0.4s ease,
+      margin-top 0.4s ease;
+
+    &.is-visible {
+      max-height: 300px;
+      margin-top: 16px;
+      transform: none;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: $ink;
+    margin: 0;
+  }
+}
+
+.crm-reset-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: $ink;
+  background: $bg;
+  border: 1px solid rgba($ink, 0.35);
+  border-radius: 24px;
+  padding: 9px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.6s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    background: $ink;
+    color: $bg;
+  }
+
+  i {
+    font-size: 14px;
   }
 }
 

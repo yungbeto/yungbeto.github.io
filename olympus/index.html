@@ -218,14 +218,14 @@
                         <div class="cs-constraints">
                             <p class="cs-label">The constraints</p>
                             <div class="cs-constraint-list">
-                                <div class="cs-constraint">
+                                <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
                                     <p class="cs-constraint-num">1</p>
                                     <p class="cs-constraint-text">No technical knowledge required. Clinical staff
                                         should
                                         be able
                                         to query data without SQL or database experience.</p>
                                 </div>
-                                <div class="cs-constraint">
+                                <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
                                     <p class="cs-constraint-num">2</p>
                                     <p class="cs-constraint-text">AI is off the table for the MVP due to privacy
                                         concerns and
@@ -233,21 +233,21 @@
                                         natural
                                         language layer down the road.</p>
                                 </div>
-                                <div class="cs-constraint">
+                                <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
                                     <p class="cs-constraint-num">3</p>
                                     <p class="cs-constraint-text">The solution must fit into clinical workflows and
                                         the
                                         mental
                                         models we observed in the field.</p>
                                 </div>
-                                <div class="cs-constraint">
+                                <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
                                     <p class="cs-constraint-num">4</p>
                                     <p class="cs-constraint-text">The product must work correctly on first contact,
                                         with
                                         no
                                         training, under pressure.</p>
                                 </div>
-                                <div class="cs-constraint">
+                                <div class="cs-constraint" style="--cs-constraint-color: #ffbb68;">
                                     <p class="cs-constraint-num">5</p>
                                     <p class="cs-constraint-text">Build enough confidence in the tool that endoscopy
                                         departments
@@ -453,8 +453,8 @@
 
                     <div class="cs-next">
                         <p class="cs-label">Next</p>
-                        <p class="cs-section-title">Designing a rideshare passenger experience</p>
-                        <a class="work-case-cta" href="/revel">
+                        <p class="cs-section-title">Designing a hardware network dashboard for autonomous vehicles</p>
+                        <a class="work-case-cta" href="/cavnue">
                             View case study
                             <i class="ph ph-arrow-right"></i>
                         </a>
@@ -889,8 +889,7 @@
                     const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
                     const raw = Math.max(0, 1 - distance / fadeRange);
                     const progress = smoothstep(raw).toFixed(3);
-                    card.style.setProperty('--cs-constraint-bg-alpha', progress);
-                    card.style.setProperty('--cs-constraint-shadow-progress', progress);
+                    card.style.setProperty('--cs-constraint-progress', progress);
                 });
                 ticking = false;
             }

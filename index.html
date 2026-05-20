@@ -10,7 +10,7 @@ hello@robysaavedra.com
 <html lang="en">
 
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z82FTF9X8P"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -19,6 +19,7 @@ hello@robysaavedra.com
         gtag('config', 'G-Z82FTF9X8P');
     </script>
 
+    <!-- Meta -->
     <link id="favicon" rel="icon"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
     <meta charset="UTF-8" />
@@ -29,6 +30,7 @@ hello@robysaavedra.com
     <meta name="description"
         content="Roby Saavedra is a designer focused on human-centered products, meaningful technology, and crafting the spaces where people and systems meet.">
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://robysaavedra.com/">
     <meta property="og:title" content="Roby Saavedra — Designer / Developer">
@@ -36,6 +38,7 @@ hello@robysaavedra.com
         content="Roby Saavedra is a designer focused on human-centered products, meaningful technology, and crafting the spaces where people and systems meet.">
     <meta property="og:image" content="https://robysaavedra.com/src/img/card.png">
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="robysaavedra.com">
     <meta property="twitter:url" content="https://robysaavedra.com/">
@@ -44,20 +47,28 @@ hello@robysaavedra.com
         content="Roby Saavedra is a designer focused on human-centered products, meaningful technology, and crafting the spaces where people and systems meet.">
     <meta name="twitter:image" content="https://robysaavedra.com/src/img/card.png">
 
+    <!-- Styles & fonts -->
     <link rel="stylesheet" href="dist/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 </head>
 
 <body>
 
+    <!-- Page layout -->
     <div class="page-outer">
         <div class="page-container">
 
+            <!-- Navbar (injected by site-chrome.js) -->
             <div data-site-navbar data-home-behavior="scroll"></div>
 
             <main>
 
+                <!-- About / hero -->
                 <section class="site-section about-section">
                     <div class="section-label"> <i class="ph ph-smiley-wink"></i> About</div>
                     <div class="section-content hero-section" id="hero-rocks">
@@ -82,12 +93,7 @@ hello@robysaavedra.com
                     </div>
                 </section>
 
-                <section class="site-section projects-section" id="projects">
-                    <div class="section-label"> <i class="ph ph-projector-screen"></i> Projects</div>
-                    <div class="section-content projects-grid" id="projects-grid">
-                    </div>
-                </section>
-
+                <!-- Work examples (populated by main.js) -->
                 <section class="site-section work-section" id="work">
                     <div class="section-label"> <i class="ph ph-briefcase"></i> Work Examples</div>
                     <div class="section-content-work work-content">
@@ -96,6 +102,15 @@ hello@robysaavedra.com
                     </div>
                 </section>
 
+                <!-- Projects (populated by main.js) -->
+                <section class="site-section projects-section" id="projects">
+                    <div class="section-label"> <i class="ph ph-projector-screen"></i> Projects</div>
+                    <div class="section-content projects-grid" id="projects-grid">
+                    </div>
+                </section>
+
+
+                <!-- Jobs (populated by main.js) -->
                 <section class="site-section jobs-section" id="jobs">
                     <div class="section-label"> <i class="ph ph-paperclip"></i> Where I've worked</div>
                     <div class="section-content jobs-content">
@@ -105,6 +120,7 @@ hello@robysaavedra.com
 
             </main>
 
+            <!-- Press -->
             <section class="site-section press-section" id="press">
                 <div class="section-label"><i class="ph ph-newspaper"></i> Press</div>
                 <div class="press-content">
@@ -137,21 +153,29 @@ hello@robysaavedra.com
                 </div>
             </section>
 
-            <!-- <div class="marquee-section">
+            <!-- Marquee (disabled)
+            <div class="marquee-section">
                 <div class="marquee-inner" id="marquee-inner"></div>
-            </div> -->
+            </div>
+            -->
 
+            <!-- Footer (injected by site-chrome.js) -->
             <div data-site-footer></div>
 
         </div><!-- /.page-container -->
     </div><!-- /.page-outer -->
 
+    <!-- External libraries -->
     <script src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.16.0/build/matter.min.js"></script>
+
+    <!-- App scripts -->
     <script src="src/scripts/site-chrome.js"></script>
     <script src="src/scripts/rocks.js"></script>
     <script src="src/scripts/main.js"></script>
     <script src="src/scripts/favicon-spinner.js"></script>
+
+    <!-- Console easter egg -->
     <script>
         console.log(
             '%c\n' +
@@ -169,6 +193,8 @@ hello@robysaavedra.com
             'color: #3f3f46; font-family: monospace;'
         );
     </script>
+
+    <!-- Name hover image (touch + desktop) -->
     <script>
         (function () {
             const trigger = document.querySelector('.name-hover-trigger');
@@ -221,6 +247,8 @@ hello@robysaavedra.com
             }
         })();
     </script>
+
+    <!-- Table of contents smooth scroll -->
     <script>
         document.querySelectorAll('.toc-link').forEach(function (link) {
             link.addEventListener('click', function (e) {

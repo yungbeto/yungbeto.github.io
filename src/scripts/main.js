@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function initRandomCaseStudyLink() {
   const link = document.querySelector('.toc-link--random');
   if (!link) return;
-  const cases = ['/olympus', '/revel'];
+  const cases = ['/olympus', '/revel', '/cavnue'];
   link.addEventListener('click', function () {
     this.href = cases[Math.floor(Math.random() * cases.length)];
   });

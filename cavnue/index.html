@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cavscan / Case Study · Roby Saavedra</title>
+    <meta name="description"
+        content="A case study on designing Cavscan, a system health dashboard for monitoring AV road corridor hardware at Cavnue.">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <!-- ─── Intro ─────────────────────────────────────────────────────── -->
+
+            <div class="cs-intro">
+                <div class="cs-label-row">
+                    <i class="ph ph-asterisk cs-asterisk"></i>
+                    <p class="cs-label">Case study / Cavnue</p>
+                </div>
+                <div class="cs-intro-row">
+                    <div class="cs-intro-copy">
+                        <h1 class="cs-hero-title">Designing an information dense dashboard for autonomous vehicle
+                            sensors</h1>
+                        <div class="cs-intro-body">
+                            <p class="cs-lead">At Cavnue I designed <strong>Cavscan</strong>, a dashboard that
+                                let engineers monitor the
+                                health of hundreds of roadside sensors across active AV corridors in real time.</p>
+                            <div class="cs-hero-kv-list">
+                                <div class="cs-hero-kv-list-header">
+                                    <p class="cs-hero-kv-list-header-title">
+                                        <i class="ph ph-info"></i>
+                                        Quick Info
+                                    </p>
+                                    <i class="ph ph-caret-down caret-icon"></i>
+                                </div>
+                                <div class="cs-hero-kv-list-body">
+                                    <div class="cs-hero-kv-list-body-inner">
+                                        <div class="cs-hero-kv">
+                                            <span class="cs-hero-kv-key">My Role</span>
+                                            <span class="cs-hero-kv-val">Design Lead, User Research</span>
+                                        </div>
+                                        <div class="cs-hero-kv">
+                                            <span class="cs-hero-kv-key">TL;DR</span>
+                                            <span class="cs-hero-kv-val">I designed a dashboard that made dense,
+                                                evolving data scannable at a glance, cutting corridor
+                                                downtime for the engineers who depended on it.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-hero-img-wrap">
+                        <img src="/cavnue/img/hero.png" alt="AV road corridor with sensor poles" class="cs-hero-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Background ────────────────────────────────────────────────── -->
+
+            <div class="cs-bg">
+                <div class="cs-bg-inner">
+                    <p class="cs-label cs-label--light">Background</p>
+                    <p class="cs-bg-lead">A few things to know before diving in.</p>
+                    <div class="cs-bg-grid">
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">1</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Cavnue</p>
+                                <p class="cs-bg-block-text">Cavnue is an AV infrastructure startup incubated inside
+                                    Sidewalk Labs. Its mission: build the roadside infrastructure that makes autonomous
+                                    vehicle corridors viable at scale, bridging the gap between AV software and the
+                                    physical road.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">2</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The Corridor</p>
+                                <p class="cs-bg-block-text">Cavnue operated sensor-equipped road corridors. Each
+                                    corridor is lined with poles carrying cameras, radar, IMU sensors, and compute
+                                    hardware that continuously stream data to autonomous vehicles traveling the
+                                    dedicated lane.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">3</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The Hardware</p>
+                                <p class="cs-bg-block-text">Each pole contained a layered stack of networked components:
+                                    Jetson Xavier compute units, APUs, POE switches, Cradlepoint modems, video encode
+                                    and decode modules, and detection and tracking software, all tightly interdependent.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">4</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">System Health</p>
+                                <p class="cs-bg-block-text">Keeping a corridor operational meant knowing the real-time
+                                    status of hundreds of components across multiple poles. Any degraded component could
+                                    compromise the data quality that autonomous vehicles depended on.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Situation ─────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The situation</p>
+                </div>
+                <div class="cs-situation-row">
+                    <img src="/cavnue/img/situation.png" alt="Roadside sensor pole hardware panel" class="cs-ruler-img">
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+                            <p class="cs-section-title">Complex hardware in the field, with no unified view of its
+                                health</p>
+                            <p class="cs-body-text">The corridors were generating data. The hardware was deployed. But
+                                there was no tool designed to surface that hardware's status to the people who needed it
+                                most. Engineers were piecing together system health from raw logs and ad hoc checks,
+                                with no single view of what was up, what was degraded, or where in the network a problem
+                                had originated. As the first full-time design hire at Cavnue, I was brought in to solve
+                                this.</p>
+                            <p class="cs-body-text">I had to start from scratch, in a domain where no design playbook
+                                existed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Problem statement ────────────────────────────────────────────── -->
+
+            <div class="cs-problem-section">
+                <div class="cs-problem-section-inner">
+                    <div class="cs-problem-section-label-row">
+                        <i class="ph ph-question"></i>
+                        <p class="cs-label">The problem I set out to solve</p>
+                    </div>
+                    <p class="cs-problem-section-text">How might we organize a complex sensor network's health data to
+                        be immediately useful to every type of user who depends on it?</p>
+                </div>
+            </div>
+
+            <!-- ─── Task + Constraints ─────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">The task</p>
+                    <p class="cs-section-title">Design a system health dashboard for a hardware-dense, multi-user
+                        context with no design precedent</p>
+                    <p class="cs-body-text">The hardware was real and in the field. The data was flowing. The missing
+                        piece was a surface that made that data interpretable for road operators monitoring corridor
+                        uptime, ML engineers validating sensor output, and vehicle OEMs evaluating corridor
+                        readiness, all in one place.</p>
+                </div>
+                <div class="cs-constraints">
+                    <p class="cs-label">The constraints</p>
+                    <div class="cs-constraint-list">
+                        <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
+                            <p class="cs-constraint-num">1</p>
+                            <p class="cs-constraint-text">The hardware schema was actively evolving. The design had to
+                                accommodate a moving target without breaking every time a new component was introduced
+                                or renamed.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
+                            <p class="cs-constraint-num">2</p>
+                            <p class="cs-constraint-text">Three distinct user types with meaningfully different needs:
+                                road operators, ML engineers, and vehicle OEMs, each with a different layer of
+                                the hardware stack to care about.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
+                            <p class="cs-constraint-num">3</p>
+                            <p class="cs-constraint-text">Status had to read instantly. Downtime in the field had direct
+                                operational consequences. The interface couldn't require parsing or interpretation
+                                under pressure.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
+                            <p class="cs-constraint-num">4</p>
+                            <p class="cs-constraint-text">The MVP needed to serve internal users first, then scale to
+                                external beta partners at real-world test sites without a full redesign.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ffbb68;">
+                            <p class="cs-constraint-num">5</p>
+                            <p class="cs-constraint-text">No existing tool solved this problem. Available traffic
+                                monitoring software was decades behind and not built for component-level hardware
+                                visibility.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Clarity / Risk Matrix ─────────────────────────────────────── -->
+
+            <div class="cs-clarity-risk">
+                <div class="cs-clarity-risk-header">
+                    <p class="cs-label">Clarity / Risk</p>
+                    <p class="cs-section-title">Weighing what we knew against what could go wrong</p>
+                    <p class="cs-body-text">Before a single screen was designed, I needed to position the problem. Using
+                        a clarity/risk matrix I plotted the challenge: low problem clarity combined with high stakes
+                        puts this squarely in Research Heavy territory. That framing justified a long discovery phase
+                        before any design work began.</p>
+                </div>
+                <div class="crm-interactive">
+                    <div class="crm-graph">
+                        <div class="crm-graph-top">
+                            <span class="crm-axis-label-h">High Problem Clarity</span>
+                        </div>
+                        <div class="crm-graph-middle">
+                            <span class="crm-axis-label-v">Low Risk</span>
+                            <div class="crm-table-wrap">
+                                <div class="crm-prompt" id="crm-prompt">
+                                    <i class="ph ph-cursor-click"></i>
+                                    <span>Where do you think this problem landed?</span>
+                                </div>
+                                <button class="crm-reset-btn" id="crm-reset" type="button">
+                                    <i class="ph ph-arrow-counter-clockwise"></i>
+                                    Try again
+                                </button>
+                                <div class="crm-table" id="crm-table">
+                                    <div class="crm-cell crm-cell--tl">Ship it and measure</div>
+                                    <div class="crm-cell crm-cell--tr">Design Heavy</div>
+                                    <div class="crm-cell crm-cell--bl">Research Light</div>
+                                    <div class="crm-cell crm-cell--br">Research Heavy</div>
+                                    <div class="crm-cursor-dot" id="crm-cursor-dot" aria-hidden="true"></div>
+                                    <div class="crm-user-marker" id="crm-user-marker" aria-hidden="true">
+                                        <div class="crm-marker-label crm-marker-label--user">Your guess</div>
+                                    </div>
+                                    <div class="crm-pink-marker" id="crm-pink-marker" aria-hidden="true">
+                                        <div class="crm-marker-label crm-marker-label--pink">Where I landed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="crm-axis-label-v">High Risk</span>
+                        </div>
+                        <div class="crm-graph-bottom">
+                            <span class="crm-axis-label-h">Low Problem Clarity</span>
+                        </div>
+                        <div class="crm-reveal" id="crm-reveal">
+                            <p>The problem sat in the <strong>Research Heavy</strong> quadrant: high risk, low problem
+                                clarity. That's why weeks went into understanding the hardware, the users, and the
+                                domain before a single screen was designed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Action ────────────────────────────────────────────────────── -->
+
+            <div class="cs-action">
+                <div class="cs-action-header">
+                    <p class="cs-label cs-label--light">The action</p>
+                    <div class="cs-action-copy">
+                        <p class="cs-action-title">A research-heavy start, many explorations, and a hard turn toward
+                            simplicity</p>
+
+                        <div class="cs-copy-pair">
+                            <p class="cs-action-body">The problem landed squarely in the high-risk, low-clarity quadrant
+                                of a clarity/risk matrix, so research had to come first. I mapped the anatomy
+                                of the corridor hardware in detail, held regular syncs with the hardware team as the
+                                schema evolved, studied existing traffic monitoring software and analogous asset network
+                                tools, and arranged conversations with each of the three user groups to understand what
+                                they actually needed in the field.</p>
+                            <p class="cs-action-body">Early explorations ranged widely: traffic performance dashboards
+                                with vehicle throughput metrics, lane-level analytics views, data-dense asset management
+                                panels with temporal dimensions, and map-overlaid monitoring interfaces. Each direction
+                                was tested against the constraints. The data-dense approaches were powerful but
+                                illegible under pressure. Analytics-forward views served one user type and ignored the
+                                others. After many rounds, the direction became clear: strip complexity as much as
+                                possible for the MVP and iterate upward from there.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <p class="cs-action-carousel-title">Design explorations</p>
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/action_01_sm.png"><img
+                                        src="/cavnue/img/action_01.png" alt="Design exploration 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/action_02_sm.png"><img
+                                        src="/cavnue/img/action_02.png" alt="Design exploration 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/action_03_sm.png"><img
+                                        src="/cavnue/img/action_03.png" alt="Design exploration 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/action_04_sm.png"><img
+                                        src="/cavnue/img/action_04.png" alt="Design exploration 4">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ─── Result ────────────────────────────────────────────────────── -->
+
+            <div class="cs-result">
+                <div class="cs-result-header">
+                    <p class="cs-label">The result</p>
+                    <p class="cs-section-title">The MVP: a scannable, color-coded health grid organized around how the
+                        hardware is actually structured</p>
+                    <div class="cs-copy-pair">
+                        <p class="cs-body-text">The shipped design organized the corridor by router, then camera, then
+                            individual component. Each camera was represented as a card displaying its sub-components:
+                            Jetson Xavier, APU, POE Switch, Cradlepoint, Video Encode, Video Decode, D&C, and Tracking,
+                            color-coded green, yellow, or red based on real-time status. The entire corridor's health
+                            was readable in a single scan.</p>
+                        <p class="cs-body-text">Clicking any component opened a detail panel showing event ID,
+                            timestamp, and granular status for each sub-asset, giving engineers everything needed to
+                            diagnose and act without leaving the screen. The same interface shipped as a mobile view for
+                            field teams.
+                            Status propagated upward: a degraded component turned its camera card yellow; a failed one
+                            turned it red. Engineers always knew exactly where to look.</p>
+                    </div>
+                </div>
+                <div class="work-case-carousel buffer">
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/mvp_01_sm.png"><img
+                                        src="/cavnue/img/mvp_01.png" alt="Cavscan MVP screen 1">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/mvp_02_sm.png"><img
+                                        src="/cavnue/img/mvp_02.png" alt="Cavscan MVP screen 2">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/mvp_03_sm.png"><img
+                                        src="/cavnue/img/mvp_03.png" alt="Cavscan MVP screen 3">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/mvp_04_sm.png"><img
+                                        src="/cavnue/img/mvp_04.png" alt="Cavscan MVP screen 4">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Outcome ───────────────────────────────────────────────────── -->
+
+            <div class="cs-outcome">
+                <div class="cs-outcome-inner">
+                    <p class="cs-label">Outcome</p>
+                    <p class="cs-section-title">The MVP reached the field, reduced downtime, and established the data
+                        schema the whole platform was built on.</p>
+                    <p class="cs-body-text">The data schema was finalized in collaboration with the hardware team during
+                        development, becoming a shared source of truth across the organization. Internal rollout to ML
+                        and hardware engineers followed, then a limited beta release across the Michigan I-80 corridor
+                        and the Ford proving ground. Engineers reported less downtime. The dashboard made it faster to
+                        spot and respond to hardware issues before they cascaded. The minimalist MVP held up, and became
+                        the foundation to build from.</p>
+                </div>
+            </div>
+
+            <!-- ─── Next ──────────────────────────────────────────────────────── -->
+
+            <div class="cs-next">
+                <p class="cs-label">Next</p>
+                <p class="cs-section-title">Designing a rideshare passenger experience</p>
+                <a class="work-case-cta" href="/revel">
+                    View case study
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- ─── Footer ────────────────────────────────────────────────────── -->
+
+            <div data-site-footer></div>
+
+        </div><!-- /.page-container -->
+    </div><!-- /.page-outer -->
+
+    <script src="../src/scripts/site-chrome.js"></script>
+    <script src="../src/scripts/favicon-spinner.js"></script>
+    <script>
+        initCarousels();
+        initLightbox();
+        initConstraintScrollBackgrounds();
+        initProblemTextAnimation();
+        initClarityRiskMatrix();
+
+        function initProblemTextAnimation() {
+            const el = document.querySelector('.cs-problem-section-text');
+            if (!el || typeof splitTextIntoChars !== 'function') return;
+
+            const text = el.textContent;
+
+            const observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    const charSpans = [];
+                    el.textContent = '';
+                    splitTextIntoChars(text, el, charSpans);
+                    startScramble(charSpans, undefined, { startDelay: 80, staggerMs: 18 });
+                }
+            }, { threshold: 0.3 });
+
+            observer.observe(el);
+        }
+
+        function initCarousels() {
+            const GAP = 12;
+            document.querySelectorAll('.work-case-carousel').forEach(function (carousel) {
+                const track = carousel.querySelector('.work-case-media');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                const realItems = [...track.querySelectorAll('.work-case-media-item')];
+                const N = realItems.length;
+
+                if (!track || N <= 1) {
+                    prevBtn?.remove(); nextBtn?.remove();
+                    if (N === 1) realItems[0].classList.add('is-active');
+                    return;
+                }
+
+                const headClone = realItems[N - 1].cloneNode(true);
+                const tailClone = realItems[0].cloneNode(true);
+                headClone.setAttribute('aria-hidden', 'true');
+                tailClone.setAttribute('aria-hidden', 'true');
+                track.prepend(headClone);
+                track.appendChild(tailClone);
+
+                const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+                let current = 0, autoTimer = null, jumping = false;
+
+                function stride() { return (allDomItems[1]?.offsetWidth ?? 0) + GAP; }
+
+                function updateActive() {
+                    allDomItems.forEach(function (item, i) {
+                        const isActive = i === current + 1
+                            || (current === 0 && i === N + 1)
+                            || (current === N - 1 && i === 0);
+                        item.classList.toggle('is-active', isActive);
+                    });
+                }
+
+                function goTo(realIndex) {
+                    current = ((realIndex % N) + N) % N;
+                    let domIdx;
+                    if (realIndex < 0) domIdx = 0;
+                    else if (realIndex >= N) domIdx = N + 1;
+                    else domIdx = current + 1;
+                    track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+                    updateActive();
+                }
+
+                let scrollSettleTimer;
+                track.addEventListener('scroll', function () {
+                    if (jumping) return;
+                    clearTimeout(scrollSettleTimer);
+                    scrollSettleTimer = setTimeout(function () {
+                        const s = stride(); if (!s) return;
+                        const pos = Math.round(track.scrollLeft / s);
+                        if (pos === 0) {
+                            jumping = true;
+                            track.scrollTo({ left: N * s, behavior: 'instant' });
+                            current = N - 1;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else if (pos === N + 1) {
+                            jumping = true;
+                            track.scrollTo({ left: s, behavior: 'instant' });
+                            current = 0;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else { current = pos - 1; }
+                        updateActive();
+                    }, 80);
+                });
+
+                function startAutoAdvance() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
+                }
+
+                prevBtn?.addEventListener('click', function () { goTo(current - 1); startAutoAdvance(); });
+                nextBtn?.addEventListener('click', function () { goTo(current + 1); startAutoAdvance(); });
+
+                allDomItems.forEach(function (item, i) {
+                    item.addEventListener('click', function (e) {
+                        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+                        e.stopPropagation();
+                        if (i <= current) goTo(current - 1); else goTo(current + 1);
+                        startAutoAdvance();
+                    }, true);
+                });
+
+                carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carousel.addEventListener('mouseleave', startAutoAdvance);
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
+
+                requestAnimationFrame(function () {
+                    track.scrollTo({ left: stride(), behavior: 'instant' });
+                    updateActive();
+                    startAutoAdvance();
+                });
+            });
+        }
+
+        function initConstraintScrollBackgrounds() {
+            const cards = [...document.querySelectorAll('.cs-constraint')];
+            if (!cards.length) return;
+
+            const triggerY = 200;
+            const fadeRange = 280;
+            let ticking = false;
+
+            function smoothstep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function update() {
+                cards.forEach(function (card) {
+                    const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
+                    const raw = Math.max(0, 1 - distance / fadeRange);
+                    const progress = smoothstep(raw).toFixed(3);
+                    card.style.setProperty('--cs-constraint-progress', progress);
+                });
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
+        // ── Staggered scroll-entrance ─────────────────────────────────────────
+        (function () {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+            document.querySelectorAll('.cs-bg-block').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 80) + 'ms');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.cs-constraint').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 60) + 'ms');
+                observer.observe(el);
+            });
+        })();
+
+        function initClarityRiskMatrix() {
+            const table = document.getElementById('crm-table');
+            if (!table) return;
+            const cursorDot = document.getElementById('crm-cursor-dot');
+            const userMarker = document.getElementById('crm-user-marker');
+            const pinkMarker = document.getElementById('crm-pink-marker');
+            const prompt = document.getElementById('crm-prompt');
+            const reveal = document.getElementById('crm-reveal');
+            const resetBtn = document.getElementById('crm-reset');
+            let placed = false;
+            const isTouch = window.matchMedia('(hover: none)').matches;
+
+            let promptTimer = null;
+
+            if (!isTouch) {
+                table.classList.add('is-interactive');
+                table.addEventListener('mouseenter', function () {
+                    if (placed || !prompt) return;
+                    promptTimer = setTimeout(function () {
+                        prompt.classList.add('is-hidden');
+                    }, 3000);
+                });
+                table.addEventListener('mouseleave', function () {
+                    clearTimeout(promptTimer);
+                    if (!placed) cursorDot.classList.remove('is-visible');
+                });
+                table.addEventListener('mousemove', function (e) {
+                    if (placed) return;
+                    const rect = table.getBoundingClientRect();
+                    cursorDot.style.left = (e.clientX - rect.left) + 'px';
+                    cursorDot.style.top = (e.clientY - rect.top) + 'px';
+                    cursorDot.classList.add('is-visible');
+                });
+            }
+
+            function placeMarker(x, y) {
+                if (placed) return;
+                placed = true;
+                clearTimeout(promptTimer);
+                userMarker.style.left = x + 'px';
+                userMarker.style.top = y + 'px';
+                userMarker.classList.add('is-placed');
+                cursorDot.classList.remove('is-visible');
+                table.classList.remove('is-interactive');
+                if (prompt) prompt.classList.add('is-hidden');
+                setTimeout(function () { pinkMarker.classList.add('is-revealed'); }, 300);
+                setTimeout(function () {
+                    if (reveal) reveal.classList.add('is-visible');
+                    if (resetBtn) resetBtn.classList.add('is-visible');
+                }, 600);
+            }
+
+            table.addEventListener('click', function (e) {
+                const rect = table.getBoundingClientRect();
+                placeMarker(e.clientX - rect.left, e.clientY - rect.top);
+            });
+
+            table.addEventListener('touchend', function (e) {
+                e.preventDefault();
+                const t = e.changedTouches[0];
+                const rect = table.getBoundingClientRect();
+                placeMarker(t.clientX - rect.left, t.clientY - rect.top);
+            }, { passive: false });
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function () {
+                    placed = false;
+                    userMarker.classList.remove('is-placed');
+                    pinkMarker.classList.remove('is-revealed');
+                    reveal.classList.remove('is-visible');
+                    resetBtn.classList.remove('is-visible');
+                    prompt.classList.remove('is-hidden');
+                    if (!isTouch) table.classList.add('is-interactive');
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
