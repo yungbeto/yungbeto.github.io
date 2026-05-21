@@ -451,25 +451,35 @@ ul {
   .projects-card-thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block; }
 
 .projects-card-info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding: 16px;
   flex-grow: 1; }
 
+.projects-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; }
+
 .projects-card-title {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   color: #3f3f46; }
+
+.projects-card-url {
+  font-size: 12px;
+  color: rgba(63, 63, 70, 0.5); }
 
 .projects-card-desc {
   font-size: 16px;
   color: #3f3f46;
-  line-height: 24px; }
+  line-height: 24px;
+  text-wrap: pretty; }
 
 .projects-card-meta {
   display: flex;

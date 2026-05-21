@@ -187,7 +187,10 @@ async function loadProjectCards() {
       card.innerHTML = `
         <div class="projects-card-thumbnail">${mediaHtml}</div>
         <div class="projects-card-info">
-          <p class="projects-card-title">${project.name}</p>
+          <div class="projects-card-title-group">
+            <p class="projects-card-title">${project.name}</p>
+            <p class="projects-card-url">${project.url.replace(/^https?:\/\//, '')}</p>
+          </div>
           <p class="projects-card-desc">${project.description}</p>
         </div>
         ${chipsHtml ? `<div class="projects-card-meta">${chipsHtml}</div>` : ''}

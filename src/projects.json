@@ -1,5 +1,19 @@
 [
   {
+    "id": "windsome",
+    "name": "Windsome",
+    "url": "https://windso.me",
+    "year": "2026",
+    "skills": "Svelte, Tone.js, Product Design",
+    "description": "Windsome is a browser-based step sequencer built with Svelte and Tone.js, inspired by hardware instruments like the Elektron RYTM and Octatrack. It supports multi-layer pattern sequencing with per-step parameter locks, trig conditions, LFOs, and a scene/chain system for arranging patterns into full songs.",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/windsome.mp4"
+      }
+    ]
+  },
+  {
     "id": "good-song-club",
     "name": "Good Song Club",
     "url": "https://goodsong.club",
