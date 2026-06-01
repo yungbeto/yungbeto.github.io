@@ -217,75 +217,28 @@ async function loadWorkCases() {
       block.className = 'work-case';
       block.id = c.id;
 
-      const copyHtml = c.copy.map((p) => `<p>${p}</p>`).join('');
       const ctaHtml = c.caseStudy_url
-        ? `<a class="work-case-cta" href="${c.caseStudy_url}">
-            View case study
-            <i class="ph ph-arrow-right"></i>
-          </a>`
+        ? `<div class="work-case-cta-container">
+            <a class="work-case-cta" href="${c.caseStudy_url}">
+              View Case Study
+              <i class="ph ph-arrow-right"></i>
+            </a>
+          </div>`
         : '';
 
-      const mediaHtml = c.media
-        .map((m) => {
-          if (m.type === 'video') {
-            return `<div class="work-case-media-item">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="${m.src}" type="video/mp4">
-              </video>
-            </div>`;
-          }
-          if (m.srcMobile) {
-            return `<div class="work-case-media-item">
-              <picture>
-                <source media="(max-width: 768px)" srcset="${m.srcMobile}">
-                <img src="${m.src}" alt="${c.company} work sample">
-              </picture>
-            </div>`;
-          }
-          return `<div class="work-case-media-item">
-            <img src="${m.src}" alt="${c.company} work sample">
-          </div>`;
-        })
-        .join('');
-
       block.innerHTML = `
-        <header class="work-case-header">
-          <div class="work-case-meta">
-            <img class="work-case-icon" src="${c.icon}" alt="${c.company} logo">
-            <div>
-              <h3 class="work-case-company">${c.company}</h3>
-              <p class="work-case-meta-text">${c.role}</p>
-            </div>
-          </div>
-          ${ctaHtml}
-          <div class="work-case-copy">
-            ${copyHtml}
-          </div>
-        </header>
-        <div class="work-case-pill-wrapper">
-          <div class="work-case-pill" aria-hidden="true">
-            <img class="work-case-pill-icon" src="${c.icon}" alt="">
-            <span class="work-case-pill-label">${c.company}</span>
-          </div>
+        <div class="work-case-image">
+          <img src="${c.caseStudyImage}" alt="${c.company} case study">
         </div>
-        <div class="work-case-carousel">
-          <div class="work-case-media-clip">
-            <div class="work-case-media">${mediaHtml}</div>
-            <button class="carousel-btn carousel-prev" aria-label="Previous slide">
-              <i class="ph ph-caret-left"></i>
-            </button>
-            <button class="carousel-btn carousel-next" aria-label="Next slide">
-              <i class="ph ph-caret-right"></i>
-            </button>
-          </div>
+        <div class="work-case-copy">
+          <p class="work-case-title">${c.title}</p>
+          <p class="work-case-blurb">${c.blurb}</p>
+          ${ctaHtml}
         </div>
       `;
 
       container.appendChild(block);
     });
-
-    initWorkCasePills();
-    initCarousels();
   } catch (err) {
     console.error('Failed to load work cases:', err);
   }
