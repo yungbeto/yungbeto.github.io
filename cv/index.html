@@ -11,6 +11,11 @@
   <!-- Apply saved theme before first paint to prevent flash -->
   <script>
     (function () {
+      if (new URLSearchParams(location.search).get('print') === '1') {
+        document.documentElement.setAttribute('data-cv-print', '1');
+        document.documentElement.setAttribute('data-theme', 'light');
+        return;
+      }
       const saved = localStorage.getItem('cv-theme');
       if (saved) {
         document.documentElement.setAttribute('data-theme', saved);
@@ -495,6 +500,26 @@
       size: letter portrait;
     }
 
+    /* Dedicated print window (?print=1) — light layout before the dialog opens */
+    html[data-cv-print] {
+      color-scheme: light;
+    }
+
+    html[data-cv-print] .cv-topbar {
+      display: none;
+    }
+
+    html[data-cv-print] body {
+      background: #ffffff;
+      color: #18181b;
+      transition: none;
+    }
+
+    html[data-cv-print] .cv {
+      max-width: 100%;
+      padding: 0;
+    }
+
     @media print {
 
       /* Force light mode variables regardless of active theme */
@@ -509,49 +534,88 @@
         --color-border: #f4f4f5;
         --color-border-ui: #e4e4e7;
         --color-border-ui-hover: #a1a1aa;
-        --color-tag-bg: #f4f4f5;
+        --color-tag-bg: transparent;
         --color-tag-text: #52525b;
       }
 
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
       .cv-topbar {
-        display: none;
+        display: none !important;
       }
 
       .cv {
         max-width: 100%;
-        padding: 0;
-      }
-
-      body,
-      .cv,
-      .cv * {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+        padding: 0 0 0 0;
       }
 
       body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
         font-size: 13px;
-        transition: none;
+        background: #ffffff;
       }
 
       .cv-name {
         font-size: 18px;
       }
 
+      /* Borders instead of filled pills — much faster for Chrome to rasterize */
       .cv-skill-tag {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        background: transparent !important;
+        border: 1px solid #d4d4d8;
+        -webkit-print-color-adjust: economy;
+        print-color-adjust: economy;
+      }
+
+      /* Simpler block layout — avoids flex + gap pagination hangs */
+      .cv-item,
+      .cv-edu-item,
+      .cv-press-item,
+      .cv-skill-group {
+        display: block;
+      }
+
+      .cv-item-date,
+      .cv-edu-date,
+      .cv-press-pub,
+      .cv-skill-label {
+        float: left;
+        width: 100px;
+        margin-right: 28px;
+      }
+
+      .cv-item-content,
+      .cv-edu-content,
+      .cv-press-link,
+      .cv-skill-tags {
+        overflow: hidden;
       }
 
       .cv-section {
         margin-bottom: 36px;
+        break-inside: auto;
       }
 
       .cv-items {
-        gap: 24px;
+        gap: 0;
+      }
+
+      .cv-item {
+        margin-bottom: 24px;
+      }
+
+      .cv-item:last-child {
+        margin-bottom: 0;
       }
 
       a {
         color: inherit;
+        text-decoration: none;
       }
     }
 
@@ -615,7 +679,7 @@
             <path d="M10.25 8.75a4.25 4.25 0 01-5-5 4.5 4.5 0 105 5z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <button class="cv-download" onclick="window.print()" aria-label="Download PDF">
+        <button class="cv-download" id="cvDownload" type="button" aria-label="Download PDF">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
               stroke-linejoin="round" />
@@ -1033,14 +1097,51 @@
   </main>
 
   <script>
-    const toggle = document.getElementById('themeToggle');
-    toggle.addEventListener('click', function () {
+    (function () {
       const root = document.documentElement;
-      const current = root.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('cv-theme', next);
-    });
+      const isPrintMode = root.hasAttribute('data-cv-print');
+
+      if (!isPrintMode) {
+        const toggle = document.getElementById('themeToggle');
+        toggle?.addEventListener('click', function () {
+          const current = root.getAttribute('data-theme');
+          const next = current === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('cv-theme', next);
+        });
+
+        document.getElementById('cvDownload')?.addEventListener('click', function () {
+          const url = new URL(location.href);
+          url.searchParams.set('print', '1');
+          window.open(url.pathname + url.search, '_blank', 'noopener,noreferrer');
+        });
+
+        window.addEventListener('beforeprint', function () {
+          root.setAttribute('data-theme', 'light');
+        });
+        return;
+      }
+
+      function triggerPrint() {
+        window.print();
+      }
+
+      window.addEventListener('afterprint', function () {
+        window.close();
+      }, { once: true });
+
+      if (document.readyState === 'complete') {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(triggerPrint);
+        });
+      } else {
+        window.addEventListener('load', function () {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(triggerPrint);
+          });
+        }, { once: true });
+      }
+    })();
   </script>
 </body>
 
