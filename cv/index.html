@@ -7,8 +7,7 @@
   <title>Roby Saavedra — CV</title>
   <meta name="description" content="CV of Roby Saavedra, Product Designer & Design Engineer.">
   <meta name="robots" content="noindex">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="screen">
   <!-- Apply saved theme before first paint to prevent flash -->
   <script>
     (function () {
@@ -255,16 +254,16 @@
       gap: 8px;
     }
 
-    .cv-item-bullet i {
-      font-size: 10px;
+    .cv-item-bullet::before {
+      content: '✦';
+      font-size: 9px;
       color: var(--color-muted);
       flex-shrink: 0;
-      margin-top: 4px;
+      margin-top: 5px;
+      line-height: 1;
     }
 
-    /* Sub-bullet variant — lighter icon, same text */
-    .cv-item-bullet--sub i {
-      font-size: 9px;
+    .cv-item-bullet--sub::before {
       color: var(--color-faint);
     }
 
@@ -456,11 +455,11 @@
     }
 
     .cv-theme-toggle .icon-moon {
-      display: inline;
+      display: block;
     }
 
     [data-theme="dark"] .cv-theme-toggle .icon-sun {
-      display: inline;
+      display: block;
     }
 
     [data-theme="dark"] .cv-theme-toggle .icon-moon {
@@ -523,6 +522,12 @@
         padding: 0;
       }
 
+      body,
+      .cv,
+      .cv * {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+      }
+
       body {
         font-size: 13px;
         transition: none;
@@ -533,11 +538,6 @@
       }
 
       .cv-skill-tag {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-
-      .cv-item-bullet i {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -607,8 +607,13 @@
       </a>
       <div class="cv-topbar-right">
         <button class="cv-theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <i class="ph ph-sun icon-sun" aria-hidden="true"></i>
-          <i class="ph ph-moon icon-moon" aria-hidden="true"></i>
+          <svg class="icon-sun" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.1" />
+            <path d="M7 1.25v1.5M7 11.25v1.5M1.25 7h1.5M11.25 7h1.5M3.05 3.05l1.06 1.06M9.89 9.89l1.06 1.06M3.05 10.95l1.06-1.06M9.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+          </svg>
+          <svg class="icon-moon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M10.25 8.75a4.25 4.25 0 01-5-5 4.5 4.5 0 105 5z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </button>
         <button class="cv-download" onclick="window.print()" aria-label="Download PDF">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -623,7 +628,7 @@
 
     <!-- Header -->
     <header class="cv-header">
-      <img class="cv-avatar" src="/src/img/cv-pic.jpg" alt="Roby Saavedra">
+      <img class="cv-avatar" src="/src/img/cv-pic.jpg" alt="Roby Saavedra" width="64" height="64" decoding="async">
       <div class="cv-header-info">
         <h1 class="cv-name">Roberto "Roby" Saavedra</h1>
         <p class="cv-title">Product Designer &amp; Design Engineer</p>
@@ -689,15 +694,15 @@
             <p class="cv-item-company">Olympus Corporation of the Americas · Remote</p>
             <p class="cv-item-context">Medical technology — connected surgical and diagnostic solutions.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed tools that bring calm
+              <li class="cv-item-bullet">Designed tools that bring calm
                 and clarity to hospital endoscopy units, where clinical staff make real-time decisions about patient
                 care</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed a natural language
+              <li class="cv-item-bullet">Designed a natural language
                 traceability interface — a wizard-based system that made complex clinical data queryable without an AI
                 dependency, architected to accommodate an AI layer as the dataset matures</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led AI literacy workshops that
+              <li class="cv-item-bullet">Led AI literacy workshops that
                 changed how design teams reason about what machine intelligence should (and shouldn't) do</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conducted field research in
+              <li class="cv-item-bullet">Conducted field research in
                 hospital endoscopy units across multiple countries, watching the work directly to understand what's
                 genuinely hard</li>
             </ul>
@@ -712,13 +717,13 @@
             <p class="cv-item-context">Consumer music platform — conceived, designed, built, and maintained
               independently.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Conceived, designed, and
+              <li class="cv-item-bullet">Conceived, designed, and
                 shipped a collaborative music platform where users share one song a day serving as a social layer on top
                 of YouTube with a worldwide shared playlist</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Sole owner of every surface:
+              <li class="cv-item-bullet">Sole owner of every surface:
                 product strategy, UX, visual design, front-end engineering, back-end, and ongoing maintenance — a daily
                 practice for over two years</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Recognized by Site of Sites
+              <li class="cv-item-bullet">Recognized by Site of Sites
                 for excellence in UI design</li>
               <a href="https://goodsong.club" target="_blank" rel="noopener noreferrer" class="cv-item-link">
                 goodsong.club
@@ -739,13 +744,13 @@
             <p class="cv-item-context">Infrastructure startup — bridging current AV capabilities and full self-driving.
             </p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Made invisible infrastructure
+              <li class="cv-item-bullet">Made invisible infrastructure
                 legible — turned sensor accuracy, system confidence, and live telemetry into a decisive interface for
                 the humans responsible for keeping autonomous vehicles safe, saving millions in third-party tooling
                 costs</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Built the design system that
+              <li class="cv-item-bullet">Built the design system that
                 enabled engineers to ship new data views without recurring design cycles or vendor dependencies</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Drove product roadmap with
+              <li class="cv-item-bullet">Drove product roadmap with
                 PMs, integrating field research and market insight to shape priorities</li>
             </ul>
           </div>
@@ -758,13 +763,13 @@
             <p class="cv-item-company">Revel · Brooklyn, NY</p>
             <p class="cv-item-context">Electric mobility startup — mopeds and EV charging across major US cities.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>First designer at the company
+              <li class="cv-item-bullet">First designer at the company
                 — built every surface a rider or operator touches, from the consumer iOS and Android apps to the full
                 internal operations and logistics suite, from scratch</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Worked alongside every
+              <li class="cv-item-bullet">Worked alongside every
                 department lead to align tooling to real operational needs; launch resulted in measurable gains in
                 productivity and financial efficiency</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Established the design system
+              <li class="cv-item-bullet">Established the design system
                 that scaled across the company's expanding product lines</li>
             </ul>
           </div>
@@ -777,10 +782,10 @@
             <p class="cv-item-company">Flocabulary · Brooklyn, NY</p>
             <p class="cv-item-context">EdTech — hip-hop-based learning for K–12 students across core curricula.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed pedagogical tools,
+              <li class="cv-item-bullet">Designed pedagogical tools,
                 games, and classroom activities that made learning feel less like school — used by millions of K–12
                 students across the US</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Ran structured usability
+              <li class="cv-item-bullet">Ran structured usability
                 research with students and teachers; iterated on findings to measurably improve engagement and product
                 performance</li>
             </ul>
@@ -793,7 +798,7 @@
             <p class="cv-item-title">Lead Product Designer</p>
             <p class="cv-item-company">Propel ML · Brooklyn, NY</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Designed an in-browser
+              <li class="cv-item-bullet">Designed an in-browser
                 JavaScript ML notebook for data scientists — a focused interface built around code, output, and model
                 state that got out of the way and let people think</li>
             </ul>
@@ -807,10 +812,10 @@
             <p class="cv-item-company">Diligent Corporation · New York, NY</p>
             <p class="cv-item-context">B2B SaaS — secure boardroom document management for S&P 500 clients.</p>
             <ul class="cv-item-bullets">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Owned the desktop platform
+              <li class="cv-item-bullet">Owned the desktop platform
                 surface for macOS and web, delivering a consistent, secure experience for board-level users at the
                 world's largest companies</li>
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Led the PWA initiative
+              <li class="cv-item-bullet">Led the PWA initiative
                 end-to-end: achieved full feature parity in the browser, established a CI/CD release pipeline, and
                 eliminated OS constraints for enterprise users</li>
             </ul>
@@ -822,7 +827,7 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Freelance Designer</p>
             <ul class="cv-item-bullets" style="margin-top:10px">
-              <li class="cv-item-bullet"><i class="ph ph-asterisk" aria-hidden="true"></i>Helped define the early visual
+              <li class="cv-item-bullet">Helped define the early visual
                 and interaction language for Google's self-driving car project (now Waymo), Spotify, Zipcar, Kayak, Blue
                 Apron, and others</li>
             </ul>
