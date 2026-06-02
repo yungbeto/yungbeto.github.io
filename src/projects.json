@@ -1,5 +1,19 @@
 [
   {
+    "id": "noise-table",
+    "name": "Noise Table",
+    "url": "https://noisetable.xyz",
+    "year": "2026",
+    "skills": "JavaScript, Web Audio, Product Design",
+    "description": "Noise Table is a collection of generative audio tools—each one its own channel on a VHS-style launcher.",
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/noisetable.mp4"
+      }
+    ]
+  },
+  {
     "id": "windsome",
     "name": "Windsome",
     "url": "https://windso.me",
