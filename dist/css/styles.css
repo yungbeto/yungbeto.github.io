@@ -719,7 +719,7 @@ body.js-ready .projects-card.is-visible {
     transition: opacity 0.2s ease 120ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 120ms; }
   .projects-card.is-active .projects-card-chip:nth-child(4) {
     transition: opacity 0.2s ease 140ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 140ms; }
-  .projects-card.is-active .projects-card-chip:nth-child(n+5) {
+  .projects-card.is-active .projects-card-chip:nth-child(n + 5) {
     transition: opacity 0.2s ease 155ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 155ms; }
   .projects-card.is-active .projects-card-visit {
     transition: opacity 0.25s ease 180ms; }
@@ -1451,8 +1451,6 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   transition: border-color 0.35s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s ease, transform 0.1s cubic-bezier(0.2, 0, 0, 1); }
   .cs-hero-kv-list-header:hover {
     background: #c9c9cf; }
-  .cs-hero-kv-list-header:active {
-    transform: scale(0.96); }
   .cs-hero-kv-list-header i {
     transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1); }
 
