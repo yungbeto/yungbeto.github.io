@@ -925,13 +925,10 @@ ul {
   line-height: 24px;
   color: $ink;
   text-decoration: none;
-  z-index: 3;
+  z-index: 5;
   opacity: 0;
-  transform: translateY(4px);
   pointer-events: none;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+  transition: opacity 0.2s ease;
 
   &:active {
     transform: scale(0.96);
@@ -940,11 +937,9 @@ ul {
 
 .projects-card.is-active .projects-card-visit {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
   transition:
-    opacity 0.3s ease 430ms,
-    transform 0.3s cubic-bezier(0.2, 0, 0, 1) 430ms;
+    opacity 0.3s ease 580ms;
 }
 
 // ─── Projects mobile overrides ────────────────────────────────────────────────
@@ -958,7 +953,7 @@ ul {
 
   // Tighten content top to match reduced label height
   .projects-card-details {
-    top: 68px;
+    top: 80px;
   }
 
   // Smaller body text, fewer clamped lines
@@ -978,10 +973,36 @@ ul {
   .projects-card.is-active .projects-card-media {
     scale: 1;
     translate: 0px 0px;
-    opacity: 0.15;
+    opacity: 0.05;
     border-radius: 0;
     box-shadow: none;
     transition: opacity 0.3s ease;
+  }
+
+  // No PiP means no need to wait — collapse all content delays
+  .projects-card.is-active .projects-card-close i {
+    transition:
+      scale 0.2s cubic-bezier(0.2, 0, 0, 1) 50ms,
+      opacity 0.2s cubic-bezier(0.2, 0, 0, 1) 50ms,
+      filter 0.2s cubic-bezier(0.2, 0, 0, 1) 50ms;
+  }
+
+  .projects-card.is-active .projects-card-details {
+    transition:
+      opacity 0.25s ease 60ms,
+      transform 0.25s cubic-bezier(0.2, 0, 0, 1) 60ms;
+  }
+
+  .projects-card.is-active .projects-card-chip {
+    &:nth-child(1) { transition: opacity 0.2s ease 80ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 80ms; }
+    &:nth-child(2) { transition: opacity 0.2s ease 100ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 100ms; }
+    &:nth-child(3) { transition: opacity 0.2s ease 120ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 120ms; }
+    &:nth-child(4) { transition: opacity 0.2s ease 140ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 140ms; }
+    &:nth-child(n+5) { transition: opacity 0.2s ease 155ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 155ms; }
+  }
+
+  .projects-card.is-active .projects-card-visit {
+    transition: opacity 0.25s ease 180ms;
   }
 
   // Hide the sticker on mobile — not enough room

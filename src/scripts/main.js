@@ -218,13 +218,15 @@ async function loadProjectCards() {
         </a>
       `;
 
-      card.addEventListener('click', () => card.classList.toggle('is-active'));
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) return;
+        card.classList.toggle('is-active');
+      });
 
       const badge = card.querySelector('.projects-card-press-badge');
       if (badge) badge.addEventListener('click', (e) => e.stopPropagation());
 
-      card.querySelector('.projects-card-close').addEventListener('click', (e) => {
-        e.stopPropagation();
+      card.querySelector('.projects-card-close').addEventListener('click', () => {
         card.classList.remove('is-active');
       });
 

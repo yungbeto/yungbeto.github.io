@@ -823,7 +823,7 @@ ul {
     font-size: 18px;
   }
   .projects-card-details {
-    top: 68px;
+    top: 80px;
   }
   .projects-card-desc {
     font-size: 14px;
@@ -837,7 +837,7 @@ ul {
   .projects-card.is-active .projects-card-media {
     scale: 1;
     translate: 0px 0px;
-    opacity: 0.15;
+    opacity: 0.05;
     border-radius: 0;
     box-shadow: none;
     transition: opacity 0.3s ease;
