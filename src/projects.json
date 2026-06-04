@@ -5,7 +5,7 @@
     "url": "https://noisetable.xyz",
     "year": "2026",
     "skills": "JavaScript, Web Audio, Product Design",
-    "description": "Noise Table is a collection of generative audio tools in a VHS-style launcher.",
+    "description": "Noise Table is a collection of generative audio tools in a VHS-style launcher. Make the next great aleotoric album or just vibe out.",
     "media": [
       {
         "type": "video",
@@ -19,7 +19,7 @@
     "url": "https://windso.me",
     "year": "2026",
     "skills": "Svelte, Tone.js, Product Design",
-    "description": "Windsome is a browser-based step sequencer built with Svelte and Tone.js, inspired by hardware instruments like the Elektron RYTM and Octatrack. It supports multi-layer pattern sequencing with per-step parameter locks, trig conditions, LFOs, and a scene/chain system for arranging patterns into full songs.",
+    "description": "Windsome is a browser-based step sequencer built with Svelte and Tone.js, inspired by hardware instruments like the Elektron Digitakt.",
     "media": [
       {
         "type": "video",
@@ -46,7 +46,7 @@
     "name": "Concrete 95",
     "url": "https://concrete95.net/",
     "year": "2025",
-    "description": "Concrete 95 is a sound design webapp inspired by Musique Concrete with a Windows 95 aesthetic. It allows you to layer synth pads, melodies, and found sound randomly fetched from freesound.org to create a unique, ever-changing soundscape.",
+    "description": "Sound design app inspired by Musique Concrete with a Windows 95 aesthetic. Layer synth pads, melodies, and found sound randomly fetched from freesound.org.",
     "skills": "React, Node.js, Firebase, Agentic Development",
     "media": [
       {

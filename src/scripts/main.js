@@ -44,7 +44,9 @@ function initHeroAnimation() {
   });
 
   startScramble(charSpans, () => {
-    const tocItems = document.querySelectorAll('.toc .toc-label, .toc .toc-link');
+    const tocItems = document.querySelectorAll(
+      '.toc .toc-label, .toc .toc-link',
+    );
     tocItems.forEach((el, i) => {
       setTimeout(() => el.classList.add('in-view'), i * 80);
     });
@@ -90,7 +92,11 @@ function splitTextIntoChars(text, container, charSpans) {
   });
 }
 
-function startScramble(charSpans, onComplete, { startDelay = 150, staggerMs = 12 } = {}) {
+function startScramble(
+  charSpans,
+  onComplete,
+  { startDelay = 150, staggerMs = 12 } = {},
+) {
   const BLOCKS = ['█', '▓', '▒', '░', '▒', '▓'];
   const CYCLE_MS = 40;
   const START_DELAY = startDelay;
@@ -146,37 +152,35 @@ async function loadProjectCards() {
   if (!grid) return;
 
   // Projects Info Box — first card in the grid
-  const infoBox = document.createElement('div');
-  infoBox.className = 'projects-info-box';
-  infoBox.innerHTML = `
-    <i class="ph ph-code projects-info-icon"></i>
-    <p>Here is a selection of applications that I've conceived, designed, and developed. <br /><br/>These projects range from personal utilities, small social networks, and solutions to problems I've encountered in the wild.</p>
-  `;
-  grid.appendChild(infoBox);
+  // const infoBox = document.createElement('div');
+  // infoBox.className = 'projects-info-box';
+  // infoBox.innerHTML = `
+  //   <i class="ph ph-code projects-info-icon"></i>
+  //   <p>Here is a selection of applications that I've conceived, designed, and developed. <br /><br/>These projects range from personal utilities, small social networks, and solutions to problems I've encountered in the wild.</p>
+  // `;
+  // grid.appendChild(infoBox);
 
   try {
     const res = await fetch('src/projects.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const projects = await res.json();
 
+    const cardColors = ['#b3b7ff', '#db98ff', '#d0f583', '#ff99ff', '#ffbb68'];
+
     projects.forEach((project) => {
       const media = project.media?.[0];
       if (!media) return;
+      const overlayColor = cardColors[Math.floor(Math.random() * cardColors.length)];
 
       let mediaHtml;
       if (media.type === 'video') {
-        mediaHtml = `<video autoplay loop muted playsinline preload="auto">
+        mediaHtml = `<video class="projects-card-media" autoplay loop muted playsinline preload="auto">
           <source src="${media.src}" type="video/mp4">
         </video>`;
       } else {
-        mediaHtml = `<img src="${media.src}" alt="${project.name}">`;
+        mediaHtml = `<img class="projects-card-media" src="${media.src}" alt="${project.name}">`;
       }
 
-      const card = document.createElement('a');
-      card.href = project.url;
-      card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-      card.className = 'projects-card';
       const chipsHtml = project.skills
         ? project.skills
             .split(',')
@@ -184,17 +188,49 @@ async function loadProjectCards() {
             .join('')
         : '';
 
+      const badgeHtml = project.featureButton
+        ? `<a class="projects-card-press-badge" href="${project.featureButton.url}" target="_blank" rel="noopener noreferrer" aria-label="${project.featureButton.text}">
+            <span class="projects-card-press-badge-kicker">Featured in</span>
+            <span class="projects-card-press-badge-main">DJ Mag!</span>
+          </a>`
+        : '';
+
+      const card = document.createElement('div');
+      card.className = 'projects-card';
+
       card.innerHTML = `
-        <div class="projects-card-thumbnail">${mediaHtml}</div>
-        <div class="projects-card-info">
-          <div class="projects-card-title-group">
-            <p class="projects-card-title">${project.name}</p>
-            <p class="projects-card-url">${project.url.replace(/^https?:\/\//, '')}</p>
-          </div>
-          <p class="projects-card-desc">${project.description}</p>
+        ${mediaHtml}
+        <div class="projects-card-overlay" style="background: ${overlayColor}"></div>
+        <div class="projects-card-label">
+          <p class="projects-card-title">${project.name}</p>
+          <p class="projects-card-year">${project.year || ''}</p>
         </div>
-        ${chipsHtml ? `<div class="projects-card-meta">${chipsHtml}</div>` : ''}
+        ${badgeHtml}
+        <button class="projects-card-close" aria-label="Close">
+          <i class="ph ph-x"></i>
+        </button>
+        <div class="projects-card-details">
+          <p class="projects-card-desc">${project.description}</p>
+          ${chipsHtml ? `<div class="projects-card-chips">${chipsHtml}</div>` : ''}
+        </div>
+        <a class="projects-card-visit" href="${project.url}" target="_blank" rel="noopener noreferrer">
+          Visit <i class="ph ph-arrow-up-right"></i>
+        </a>
       `;
+
+      card.addEventListener('click', () => card.classList.toggle('is-active'));
+
+      const badge = card.querySelector('.projects-card-press-badge');
+      if (badge) badge.addEventListener('click', (e) => e.stopPropagation());
+
+      card.querySelector('.projects-card-close').addEventListener('click', (e) => {
+        e.stopPropagation();
+        card.classList.remove('is-active');
+      });
+
+      card.querySelector('.projects-card-visit').addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
 
       grid.appendChild(card);
     });
@@ -294,7 +330,7 @@ function initCarousels() {
   const GAP = 12; // must match CSS gap
 
   document.querySelectorAll('.work-case-carousel').forEach((carousel) => {
-    const track   = carousel.querySelector('.work-case-media');
+    const track = carousel.querySelector('.work-case-media');
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
 
@@ -321,9 +357,9 @@ function initCarousels() {
 
     const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
 
-    let current    = 0; // real index 0..N-1
-    let autoTimer  = null;
-    let jumping    = false;
+    let current = 0; // real index 0..N-1
+    let autoTimer = null;
+    let jumping = false;
 
     function stride() {
       return (allDomItems[1]?.offsetWidth ?? 0) + GAP;
@@ -334,9 +370,9 @@ function initCarousels() {
     function updateActive() {
       allDomItems.forEach((item, i) => {
         const isActive =
-          i === current + 1                      // real item
-          || (current === 0     && i === N + 1)  // tailClone mirrors first
-          || (current === N - 1 && i === 0);     // headClone mirrors last
+          i === current + 1 || // real item
+          (current === 0 && i === N + 1) || // tailClone mirrors first
+          (current === N - 1 && i === 0); // headClone mirrors last
         item.classList.toggle('is-active', isActive);
       });
     }
@@ -347,9 +383,11 @@ function initCarousels() {
 
       // Choose which DOM index to animate toward
       let domIdx;
-      if (realIndex < 0)  domIdx = 0;       // scroll through headClone
-      else if (realIndex >= N) domIdx = N + 1; // scroll through tailClone
-      else                domIdx = current + 1;
+      if (realIndex < 0)
+        domIdx = 0; // scroll through headClone
+      else if (realIndex >= N)
+        domIdx = N + 1; // scroll through tailClone
+      else domIdx = current + 1;
 
       track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
       updateActive();
@@ -370,13 +408,17 @@ function initCarousels() {
           jumping = true;
           track.scrollTo({ left: N * s, behavior: 'instant' });
           current = N - 1;
-          requestAnimationFrame(() => { jumping = false; });
+          requestAnimationFrame(() => {
+            jumping = false;
+          });
         } else if (pos === N + 1) {
           // Landed on tailClone → jump to real first
           jumping = true;
           track.scrollTo({ left: s, behavior: 'instant' });
           current = 0;
-          requestAnimationFrame(() => { jumping = false; });
+          requestAnimationFrame(() => {
+            jumping = false;
+          });
         } else {
           current = pos - 1;
         }
@@ -389,19 +431,33 @@ function initCarousels() {
       autoTimer = setInterval(() => goTo(current + 1), 6000);
     }
 
-    prevBtn?.addEventListener('click', () => { goTo(current - 1); startAutoAdvance(); });
-    nextBtn?.addEventListener('click', () => { goTo(current + 1); startAutoAdvance(); });
+    prevBtn?.addEventListener('click', () => {
+      goTo(current - 1);
+      startAutoAdvance();
+    });
+    nextBtn?.addEventListener('click', () => {
+      goTo(current + 1);
+      startAutoAdvance();
+    });
 
     // Clicking a non-active (flanking) item advances the carousel instead of
     // opening the lightbox. Capture phase intercepts before the lightbox handler.
     allDomItems.forEach((item, i) => {
-      item.addEventListener('click', (e) => {
-        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
-        e.stopPropagation();
-        if (i <= current) goTo(current - 1);
-        else goTo(current + 1);
-        startAutoAdvance();
-      }, true);
+      item.addEventListener(
+        'click',
+        (e) => {
+          if (
+            item.classList.contains('is-active') &&
+            item.getAttribute('aria-hidden') !== 'true'
+          )
+            return;
+          e.stopPropagation();
+          if (i <= current) goTo(current - 1);
+          else goTo(current + 1);
+          startAutoAdvance();
+        },
+        true,
+      );
     });
 
     // Pause auto-advance while hovered
@@ -420,7 +476,6 @@ function initCarousels() {
     });
   });
 }
-
 
 async function loadJobs() {
   const list = document.getElementById('jobs-list');
