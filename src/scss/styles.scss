@@ -775,13 +775,14 @@ ul {
 }
 
 .projects-card-chip {
-  font-size: 16px;
+  font-size: 12px;
+  line-height: 16px;
   color: $ink;
   background: rgba($surface, 0.5);
   border: 1px solid $ink;
   border-radius: 24px;
-  padding: 2px 16px;
-  line-height: 24px;
+  padding: 2px 8px;
+
   white-space: nowrap;
   opacity: 0;
   transform: translateY(3px);
@@ -943,8 +944,8 @@ ul {
   transform: translateY(0);
   pointer-events: auto;
   transition:
-    opacity 0.3s ease 430ms,
-    transform 0.3s cubic-bezier(0.2, 0, 0, 1) 430ms;
+    opacity 0.3s ease 580ms,
+    transform 0.3s cubic-bezier(0.2, 0, 0, 1) 580ms;
 }
 
 // ─── Projects mobile overrides ────────────────────────────────────────────────
@@ -966,12 +967,6 @@ ul {
     font-size: 14px;
     line-height: 20px;
     -webkit-line-clamp: 3;
-  }
-
-  // Smaller chips
-  .projects-card-chip {
-    font-size: 13px;
-    padding: 2px 10px;
   }
 
   // Smaller visit button
