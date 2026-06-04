@@ -236,6 +236,26 @@ async function loadProjectCards() {
 
       grid.appendChild(card);
     });
+
+    // Staggered scroll-triggered enter animation
+    document.body.classList.add('js-ready');
+    grid.querySelectorAll('.projects-card').forEach((card, i) => {
+      card.style.transitionDuration = '0.5s';
+      card.style.transitionDelay = (i * 90) + 'ms';
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          card.classList.add('is-visible');
+          obs.disconnect();
+          // Restore original hover-speed transition once entry completes
+          setTimeout(() => {
+            card.style.transitionDuration = '';
+            card.style.transitionDelay = '';
+          }, 500 + i * 90);
+        }
+      }, { threshold: 0.1 });
+      obs.observe(card);
+    });
+
   } catch (err) {
     console.error('Failed to load projects:', err);
   }
@@ -277,6 +297,19 @@ async function loadWorkCases() {
 
       container.appendChild(block);
     });
+
+    // Staggered enter animation — JS adds is-visible, CSS drives the internal stagger
+    document.body.classList.add('js-ready');
+    container.querySelectorAll('.work-case').forEach((workCase) => {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          workCase.classList.add('is-visible');
+          obs.disconnect();
+        }
+      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+      obs.observe(workCase);
+    });
+
   } catch (err) {
     console.error('Failed to load work cases:', err);
   }

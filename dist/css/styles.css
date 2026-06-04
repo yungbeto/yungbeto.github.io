@@ -416,24 +416,33 @@ ul {
   aspect-ratio: 3/2;
   background: #3f3f46;
   user-select: none;
-  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease; }
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease; }
   .projects-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
   .projects-card:active {
     transform: scale(0.97);
     box-shadow: none; }
-  .projects-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 55%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.52) 0%, transparent 100%);
-    z-index: 1;
-    pointer-events: none;
-    border-radius: 8px 8px 0 0; }
+
+body.js-ready .projects-card {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97); }
+
+body.js-ready .projects-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1); }
+
+.projects-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.52) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 8px 8px 0 0; }
 
 .projects-card-media {
   position: absolute;
@@ -580,22 +589,28 @@ ul {
   padding: 2px 8px;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(3px);
-  transition: opacity 0.15s ease, transform 0.15s ease; }
+  transform: translateY(5px) scale(0.9);
+  filter: blur(2px);
+  transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease; }
 
 .projects-card.is-active .projects-card-chip {
   opacity: 1;
-  transform: translateY(0); }
+  transform: translateY(0) scale(1);
+  filter: blur(0); }
   .projects-card.is-active .projects-card-chip:nth-child(1) {
-    transition: opacity 0.2s ease 400ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 400ms; }
+    transition: opacity 0.22s ease 320ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 320ms, filter 0.22s ease 320ms; }
   .projects-card.is-active .projects-card-chip:nth-child(2) {
-    transition: opacity 0.2s ease 425ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 425ms; }
+    transition: opacity 0.22s ease 385ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 385ms, filter 0.22s ease 385ms; }
   .projects-card.is-active .projects-card-chip:nth-child(3) {
-    transition: opacity 0.2s ease 450ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 450ms; }
+    transition: opacity 0.22s ease 450ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 450ms, filter 0.22s ease 450ms; }
   .projects-card.is-active .projects-card-chip:nth-child(4) {
-    transition: opacity 0.2s ease 475ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 475ms; }
-  .projects-card.is-active .projects-card-chip:nth-child(n + 5) {
-    transition: opacity 0.2s ease 495ms, transform 0.2s cubic-bezier(0.2, 0, 0, 1) 495ms; }
+    transition: opacity 0.22s ease 515ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 515ms, filter 0.22s ease 515ms; }
+  .projects-card.is-active .projects-card-chip:nth-child(5) {
+    transition: opacity 0.22s ease 580ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 580ms, filter 0.22s ease 580ms; }
+  .projects-card.is-active .projects-card-chip:nth-child(6) {
+    transition: opacity 0.22s ease 645ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 645ms, filter 0.22s ease 645ms; }
+  .projects-card.is-active .projects-card-chip:nth-child(n + 7) {
+    transition: opacity 0.22s ease 710ms, transform 0.22s cubic-bezier(0.2, 0, 0, 1) 710ms, filter 0.22s ease 710ms; }
 
 .projects-card-press-badge {
   position: absolute;
@@ -755,7 +770,8 @@ ul {
   font-size: 32px;
   line-height: 40px;
   color: #3f3f46;
-  margin: 0; }
+  margin: 0;
+  text-wrap: balance; }
   @media (max-width: 768px) {
     .work-case-title {
       font-size: 24px;
@@ -765,7 +781,8 @@ ul {
   font-size: 16px;
   line-height: 24px;
   color: #3f3f46;
-  margin: 0; }
+  margin: 0;
+  text-wrap: pretty; }
 
 .work-case-cta-container {
   display: flex;
@@ -802,6 +819,42 @@ ul {
     transition: transform 0.2s ease-in-out; }
   .work-case-cta:hover i {
     transform: translateX(4px); }
+
+body.js-ready .work-case-image,
+body.js-ready .work-case-title,
+body.js-ready .work-case-blurb,
+body.js-ready .work-case-cta-container {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.55s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+
+body.js-ready .work-case-image {
+  transform: translateY(16px); }
+
+body.js-ready .work-case-title,
+body.js-ready .work-case-blurb,
+body.js-ready .work-case-cta-container {
+  transform: translateY(10px); }
+
+body.js-ready .work-case.is-visible .work-case-image {
+  opacity: 1;
+  transform: translateY(0); }
+
+body.js-ready .work-case.is-visible .work-case-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 90ms; }
+
+body.js-ready .work-case.is-visible .work-case-blurb {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 160ms; }
+
+body.js-ready .work-case.is-visible .work-case-cta-container {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 220ms; }
 
 .work-case-carousel {
   width: 100%; }
