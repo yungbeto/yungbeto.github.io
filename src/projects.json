@@ -5,7 +5,7 @@
     "url": "https://noisetable.xyz",
     "year": "2026",
     "skills": "JavaScript, Web Audio, Product Design",
-    "description": "Noise Table is a collection of generative audio tools in a VHS-style launcher. Make the next great aleotoric album or just vibe out.",
+    "description": "A collection of generative audio tools in a VHS-style launcher. Make the next great ambient album or just vibe out.",
     "media": [
       {
         "type": "video",
@@ -19,7 +19,7 @@
     "url": "https://windso.me",
     "year": "2026",
     "skills": "Svelte, Tone.js, Product Design",
-    "description": "Windsome is a browser-based step sequencer built with Svelte and Tone.js, inspired by hardware instruments like the Elektron Digitakt.",
+    "description": "A browser-based step sequencer inspired by hardware instruments like the Elektron Digitakt.",
     "media": [
       {
         "type": "video",
@@ -74,7 +74,7 @@
     "name": "Dig This",
     "url": "https://digthis.club",
     "year": "2024",
-    "description": "Web application that generates a random music recommendation using the Discogs API",
+    "description": "Web app that gives you a random music recommendation using the Discogs API",
     "skills": "React, Node.js, Discogs API, Product Design",
     "media": [
       {

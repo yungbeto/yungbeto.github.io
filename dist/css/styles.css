@@ -672,7 +672,7 @@ ul {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  transition: opacity 0.3s ease 580ms, transform 0.3s cubic-bezier(0.2, 0, 0, 1) 580ms; }
+  transition: opacity 0.3s ease 430ms, transform 0.3s cubic-bezier(0.2, 0, 0, 1) 430ms; }
 
 @media (max-width: 768px) {
   .projects-card-title,
