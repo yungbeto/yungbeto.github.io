@@ -416,9 +416,13 @@ ul {
   aspect-ratio: 3/2;
   background: #3f3f46;
   user-select: none;
-  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1); }
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease; }
+  .projects-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
   .projects-card:active {
-    transform: scale(0.97); }
+    transform: scale(0.97);
+    box-shadow: none; }
   .projects-card::after {
     content: '';
     position: absolute;
