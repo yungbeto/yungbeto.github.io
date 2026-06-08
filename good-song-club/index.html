@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Analytics -->
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="bb851ff0-09f5-425f-8b27-fe8e74aac5a7"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Good Song Club / Case Study · Roby Saavedra</title>
+    <meta name="description"
+        content="A case study on designing and building Good Song Club — a music platform built around a single daily constraint: one song per person per day, no algorithm.">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <style>
+        :root {
+            --cta-hover: #F6D566;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <!-- ─── Intro ─────────────────────────────────────────────────────── -->
+
+            <div class="cs-intro">
+                <div class="cs-label-row">
+                    <i class="ph ph-asterisk cs-asterisk"></i>
+                    <p class="cs-label">Case study / Good Song Club</p>
+                </div>
+                <div class="cs-intro-row">
+                    <div class="cs-intro-copy">
+                        <h1 class="cs-hero-title">A deliberate music platform in an age of infinite scroll</h1>
+                        <div class="cs-intro-body">
+                            <p class="cs-lead"><a href="https://goodsong.club" target="_blank" rel="noopener noreferrer"
+                                    class="cs-body-text-link">Good Song Club</a> is a platform built around a single
+                                constraint: one song
+                                per person per day. No algorithm, no recommendations engine, no engagement tricks. Just
+                                a worldwide shared playlist that updates one entry at a time, as people post what
+                                their favorite songs.</p>
+                            <div class="cs-hero-kv-list">
+                                <div class="cs-hero-kv-list-header">
+                                    <p class="cs-hero-kv-list-header-title">
+                                        <i class="ph ph-info"></i>
+                                        Quick Info
+                                    </p>
+                                    <i class="ph ph-caret-down caret-icon"></i>
+                                </div>
+                                <div class="cs-hero-kv-list-body">
+                                    <div class="cs-hero-kv-list-body-inner">
+                                        <div class="cs-hero-kv">
+                                            <span class="cs-hero-kv-key">My Role</span>
+                                            <span class="cs-hero-kv-val">Sole Designer &amp; Engineer</span>
+                                        </div>
+                                        <div class="cs-hero-kv">
+                                            <span class="cs-hero-kv-key">Status</span>
+                                            <span class="cs-hero-kv-val">Live since September 2023</span>
+                                        </div>
+
+                                        <div class="cs-hero-kv">
+                                            <span class="cs-hero-kv-key">TL;DR</span>
+                                            <span class="cs-hero-kv-val">A bet that a platform built around deliberate
+                                                constraint and zero algorithmic curation could find its people. It
+                                                did.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-hero-img-wrap">
+                        <video class="cs-hero-img" src="../src/img/video/goodsong.mp4" autoplay loop muted playsinline
+                            preload="auto" style="object-fit: cover;"></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Background ────────────────────────────────────────────────── -->
+
+            <div class="cs-bg">
+                <div class="cs-bg-inner">
+                    <p class="cs-label cs-label--light">Background</p>
+                    <p class="cs-bg-lead">A few things to know before diving in.</p>
+                    <div class="cs-bg-grid">
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">1</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The problem with music sharing</p>
+                                <p class="cs-bg-block-text">Streaming platforms optimise for volume. Social sharing on
+                                    them produces listening activity, not recommendations. There was no dedicated place
+                                    for the specific ritual of saying to someone: you have to hear this one song.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">2</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The window to build</p>
+                                <p class="cs-bg-block-text">A layoff in mid-2023 gave me an unexpected run of
+                                    unstructured time. Instead of immediately job hunting, I used it to build something
+                                    I'd been wanting to exist. Good Song Club launched in September 2023.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">3</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">Two constraints as product philosophy</p>
+                                <p class="cs-bg-block-text">The platform runs on exactly two rules: only YouTube links
+                                    are allowed, and each user can post one song per day. These aren't technical
+                                    limitations — they're deliberate design decisions that define everything about how
+                                    the community behaves.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">4</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">One person, every surface</p>
+                                <p class="cs-bg-block-text">I designed and built the entire product alone: product
+                                    strategy, visual design, front-end, back-end, and ongoing infrastructure. Two years
+                                    in, I'm still the only person who has ever touched the codebase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Situation ─────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The itch</p>
+                </div>
+                <div class="cs-situation-row">
+                    <img class="cs-ruler-img" src="/good-song-club/img/TheItch.png" alt="The itch" preload="auto"
+                        style="object-fit: cover; border-radius: 8px;"></img>
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+                            <p class="cs-section-title">Sharing music online is hard. I wanted to make it easier.</p>
+                            <p class="cs-body-text">The TikTokification of the internet has relegated music to the
+                                sidelines of social media. It disappears as an uncredited background sound, a decorative
+                                detail. I wanted to know what a space that foregrounded music might look like.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Bet statement ─────────────────────────────────────────────── -->
+
+            <div class="cs-problem-section">
+                <div class="cs-problem-section-inner">
+                    <div class="cs-problem-section-label-row">
+                        <i class="ph ph-dice-five"></i>
+                        <p class="cs-label">The bet</p>
+                    </div>
+                    <p class="cs-problem-section-text">The best music discovery engine is still just one person saying:
+                        you have to hear this.</p>
+                </div>
+            </div>
+
+            <!-- ─── Constraints ───────────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">What I set out to build</p>
+                    <p class="cs-section-title">A platform that gets out of the way and lets the music do the work</p>
+                    <p class="cs-body-text">The product had to be frictionless to use and resistant to the dynamics that
+                        make social platforms feel exhausting. That meant making deliberate choices about what it would
+                        and wouldn't do, and holding those lines even as the user base grew.</p>
+                </div>
+                <div class="cs-constraints">
+                    <p class="cs-label">The constraints I designed around</p>
+                    <div class="cs-constraint-list">
+                        <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
+                            <p class="cs-constraint-num">1</p>
+                            <p class="cs-constraint-text">YouTube links only. Universal, free, accessible everywhere —
+                                no paywall, no region lock, no account required to listen.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
+                            <p class="cs-constraint-num">2</p>
+                            <p class="cs-constraint-text">One post per day. The constraint that makes each post mean
+                                something. You can't spam. You have to choose.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
+                            <p class="cs-constraint-num">3</p>
+                            <p class="cs-constraint-text">No algorithm. The feed is strictly chronological. No ranking,
+                                no boosting, no content that performs better than other content.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
+                            <p class="cs-constraint-num">4</p>
+                            <p class="cs-constraint-text">No engagement mechanics.
+                                No streak notifications, no features designed to manufacture habit.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ffbb68;">
+                            <p class="cs-constraint-num">5</p>
+                            <p class="cs-constraint-text">Browse without an account. Anyone can listen before
+                                committing. Frictionless entry was non-negotiable — the first song someone hears has to
+                                earn the signup.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Action ────────────────────────────────────────────────────── -->
+
+            <div class="cs-action">
+                <div class="cs-action-header">
+                    <p class="cs-label cs-label--light">The build</p>
+                    <div class="cs-action-copy">
+                        <p class="cs-action-title">Designing and building the whole thing, alone, in the open</p>
+                        <div class="cs-copy-pair">
+                            <p class="cs-action-body">Working without a team or a deadline changes how you make
+                                decisions. There's no ticket to close, no sprint to hit. Every design choice gets made
+                                on its own merits, and you live with the consequences directly — in your own product,
+                                with your own users.</p>
+                            <p class="cs-action-body">The stack is React, Node.js, and Firebase. The design system I
+                                built is simple by design: a small set of components that prioritise the music over
+                                everything else. The product has one job, and the interface should make that job feel
+                                effortless.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <p class="cs-action-carousel-title">The product</p>
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <video autoplay loop muted playsinline preload="auto"
+                                    style="aspect-ratio: 16/10; object-fit: cover;">
+                                    <source src="../src/img/video/gsc1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="work-case-media-item">
+                                <video autoplay loop muted playsinline preload="auto"
+                                    style="aspect-ratio: 16/10; object-fit: cover;">
+                                    <source src="./img/gscmobile.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── The moment ────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The moment it found its people</p>
+                </div>
+                <div class="cs-situation-row">
+                    <video class="cs-outcome-video" src="./img/touchinggrass.mp4" autoplay loop muted playsinline
+                        preload="auto"></video>
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+                            <p class="cs-section-title">For a year it was quiet. Then one Instagram post changed
+                                everything.</p>
+                            <p class="cs-body-text">For the first year, Good Song Club was a small thing — me, a
+                                handful of friends, and a slowly growing trickle of strangers who'd stumbled onto it.
+                                Then in October 2024, an Instagram account called
+                                <strong>Designteamofone</strong> featured it in a post about hidden corners of the
+                                internet. The response was immediate. Traffic spiked, new users flooded in from around
+                                the world, and server costs jumped fast enough to cause genuine anxiety for about 48
+                                hours.
+                            </p>
+                            <p class="cs-body-text">The community that arrived stayed. And they turned out to be
+                                exactly the kind of people the platform was built for: curious, generous about music,
+                                completely uninterested in performing taste for an audience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Outcome ───────────────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">Outcome</p>
+                    <p class="cs-section-title">10,000 songs, a genuinely kind community, and an ongoing education in
+                        music I'd never have found alone.</p>
+                    <p class="cs-body-text">By April 2026 the platform had crossed 10,000 songs posted — Brazilian
+                        boogie, experimental jazz, whatever's playing at a coffee shop in Seoul. The community is
+                        multilingual and scattered across continents, and in two-plus years it has managed to remain
+                        completely free of the toxicity that finds its way into most spaces where strangers gather
+                        online. I think the constraints are why. When every post costs something — even just a moment of
+                        consideration — people tend to mean it.</p>
+                    <p class="cs-body-text"><a href="https://www.siteofsites.co/websites/good-song-club" target="_blank"
+                            rel="noopener noreferrer" class="cs-body-text-link">Site of Sites recognised it for
+                            excellence in UI design.</a> I'm
+                        more proud that it still runs the way it was meant to: one song at a time, no algorithm,
+                        and a worldwide playlist that gets a little longer every day.</p>
+                </div>
+                <div class="cs-constraints">
+                    <div class="cs-outcome-gallery">
+                        <img class="cs-outcome-gallery-img" src="./img/examplePost_01.png" alt="Example post">
+                        <img class="cs-outcome-gallery-img" src="./img/examplePost_02.png" alt="Example post">
+                        <img class="cs-outcome-gallery-img" src="./img/examplePost_03.png" alt="Example post">
+                        <img class="cs-outcome-gallery-img" src="./img/examplePost_04.png" alt="Example post">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Next ──────────────────────────────────────────────────────── -->
+
+            <div class="cs-next">
+                <p class="cs-label">Next</p>
+                <p class="cs-section-title">How I designed a passenger experience for an all-electric rideshare fleet
+                </p>
+                <a class="work-case-cta" href="/revel">
+                    View case study
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- ─── Footer ────────────────────────────────────────────────────── -->
+
+            <div data-site-footer></div>
+
+        </div><!-- /.page-container -->
+    </div><!-- /.page-outer -->
+
+    <script src="../src/scripts/site-chrome.js"></script>
+    <script src="../src/scripts/favicon-spinner.js"></script>
+    <script>
+        initCarousels();
+        initConstraintScrollBackgrounds();
+        initProblemTextAnimation();
+
+        function initProblemTextAnimation() {
+            const el = document.querySelector('.cs-problem-section-text');
+            if (!el || typeof splitTextIntoChars !== 'function') return;
+
+            const text = el.textContent;
+
+            const observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    const charSpans = [];
+                    el.textContent = '';
+                    splitTextIntoChars(text, el, charSpans);
+                    startScramble(charSpans, undefined, { startDelay: 80, staggerMs: 18 });
+                }
+            }, { threshold: 0.3 });
+
+            observer.observe(el);
+        }
+
+        function initCarousels() {
+            const GAP = 12;
+            document.querySelectorAll('.work-case-carousel').forEach(function (carousel) {
+                const track = carousel.querySelector('.work-case-media');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                const realItems = [...track.querySelectorAll('.work-case-media-item')];
+                const N = realItems.length;
+
+                if (!track || N <= 1) {
+                    prevBtn?.remove(); nextBtn?.remove();
+                    if (N === 1) realItems[0].classList.add('is-active');
+                    return;
+                }
+
+                const headClone = realItems[N - 1].cloneNode(true);
+                const tailClone = realItems[0].cloneNode(true);
+                headClone.setAttribute('aria-hidden', 'true');
+                tailClone.setAttribute('aria-hidden', 'true');
+                track.prepend(headClone);
+                track.appendChild(tailClone);
+
+                const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+                let current = 0, autoTimer = null, jumping = false;
+
+                function stride() { return (allDomItems[1]?.offsetWidth ?? 0) + GAP; }
+
+                function updateActive() {
+                    allDomItems.forEach(function (item, i) {
+                        const isActive = i === current + 1
+                            || (current === 0 && i === N + 1)
+                            || (current === N - 1 && i === 0);
+                        item.classList.toggle('is-active', isActive);
+                    });
+                }
+
+                function goTo(realIndex) {
+                    current = ((realIndex % N) + N) % N;
+                    let domIdx;
+                    if (realIndex < 0) domIdx = 0;
+                    else if (realIndex >= N) domIdx = N + 1;
+                    else domIdx = current + 1;
+                    track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+                    updateActive();
+                }
+
+                let scrollSettleTimer;
+                track.addEventListener('scroll', function () {
+                    if (jumping) return;
+                    clearTimeout(scrollSettleTimer);
+                    scrollSettleTimer = setTimeout(function () {
+                        const s = stride(); if (!s) return;
+                        const pos = Math.round(track.scrollLeft / s);
+                        if (pos === 0) {
+                            jumping = true;
+                            track.scrollTo({ left: N * s, behavior: 'instant' });
+                            current = N - 1;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else if (pos === N + 1) {
+                            jumping = true;
+                            track.scrollTo({ left: s, behavior: 'instant' });
+                            current = 0;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else { current = pos - 1; }
+                        updateActive();
+                    }, 80);
+                });
+
+                function startAutoAdvance() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
+                }
+
+                prevBtn?.addEventListener('click', function () { goTo(current - 1); startAutoAdvance(); });
+                nextBtn?.addEventListener('click', function () { goTo(current + 1); startAutoAdvance(); });
+
+                allDomItems.forEach(function (item, i) {
+                    item.addEventListener('click', function (e) {
+                        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+                        e.stopPropagation();
+                        if (i <= current) goTo(current - 1); else goTo(current + 1);
+                        startAutoAdvance();
+                    }, true);
+                });
+
+                carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carousel.addEventListener('mouseleave', startAutoAdvance);
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
+
+                requestAnimationFrame(function () {
+                    track.scrollTo({ left: stride(), behavior: 'instant' });
+                    updateActive();
+                    startAutoAdvance();
+                });
+            });
+        }
+
+        function initConstraintScrollBackgrounds() {
+            const cards = [...document.querySelectorAll('.cs-constraint')];
+            if (!cards.length) return;
+
+            const triggerY = 200;
+            const fadeRange = 280;
+            let ticking = false;
+
+            function smoothstep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function update() {
+                cards.forEach(function (card) {
+                    const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
+                    const raw = Math.max(0, 1 - distance / fadeRange);
+                    const progress = smoothstep(raw).toFixed(3);
+                    card.style.setProperty('--cs-constraint-progress', progress);
+                });
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
+        // ── Staggered scroll-entrance ─────────────────────────────────────────
+        (function () {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+            document.querySelectorAll('.cs-bg-block').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 80) + 'ms');
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.cs-constraint').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 60) + 'ms');
+                observer.observe(el);
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

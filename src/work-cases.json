@@ -36,6 +36,29 @@
     ]
   },
   {
+    "id": "good-song-club",
+    "company": "Good Song Club",
+    "role": "Founder, Designer & Engineer",
+    "caseStudy_url": "/good-song-club",
+    "caseStudyImage": "src/img/CaseStudyImages/GoodSongClubCaseStudy.jpg",
+    "title": "A music platform built around one constraint: one song per person per day",
+    "blurb": "I designed and built Good Song Club independently — a platform where the only rule is one song per day, no algorithm. Two years in, it has crossed 10,000 posts and found a worldwide community.",
+    "copy": [
+      "Good Song Club started from a personal frustration: there was no good place to share a single, considered music recommendation with friends. Streaming platforms optimise for volume; social media buries a link in noise.",
+      "The platform runs on two deliberate constraints — YouTube links only, one post per day — that define everything about how it feels to use it. I designed and built the entire product alone, from product strategy through front-end and back-end engineering."
+    ],
+    "media": [
+      {
+        "type": "video",
+        "src": "src/img/video/gsc1.mp4"
+      },
+      {
+        "type": "video",
+        "src": "src/img/video/goodsong.mp4"
+      }
+    ]
+  },
+  {
     "id": "cavnue",
     "company": "Cavnue",
     "role": "Senior Product Designer",

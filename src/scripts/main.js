@@ -284,9 +284,13 @@ async function loadWorkCases() {
           </div>`
         : '';
 
+      const imageInner = c.caseStudy_url
+        ? `<a href="${c.caseStudy_url}" class="work-case-image-link" aria-label="View ${c.company} case study"><img src="${c.caseStudyImage}" alt="${c.company} case study"></a>`
+        : `<img src="${c.caseStudyImage}" alt="${c.company} case study">`;
+
       block.innerHTML = `
         <div class="work-case-image">
-          <img src="${c.caseStudyImage}" alt="${c.company} case study">
+          ${imageInner}
         </div>
         <div class="work-case-copy">
           <p class="work-case-title">${c.title}</p>

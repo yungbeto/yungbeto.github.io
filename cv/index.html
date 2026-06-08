@@ -27,638 +27,7 @@
       }
     })();
   </script>
-  <style>
-    /* ── Theme tokens ──────────────────────────── */
-
-    :root {
-      --color-bg: #ffffff;
-      --color-text: #18181b;
-      --color-muted: #71717a;
-      --color-body: #3f3f46;
-      --color-mid: #52525b;
-      --color-faint: #a1a1aa;
-      --color-border: #f4f4f5;
-      --color-border-ui: #e4e4e7;
-      --color-border-ui-hover: #a1a1aa;
-      --color-tag-bg: #f4f4f5;
-      --color-tag-text: #52525b;
-    }
-
-    [data-theme="dark"] {
-      --color-bg: #0c0c0e;
-      --color-text: #fafafa;
-      --color-muted: #a1a1aa;
-      --color-body: #d4d4d8;
-      --color-mid: #a1a1aa;
-      --color-faint: #71717a;
-      --color-border: #27272a;
-      --color-border-ui: #27272a;
-      --color-border-ui-hover: #52525b;
-      --color-tag-bg: #1c1c1f;
-      --color-tag-text: #a1a1aa;
-    }
-
-    /* ── Reset ─────────────────────────────────── */
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.6;
-      color: var(--color-text);
-      background: var(--color-bg);
-      margin: 0;
-      padding: 0;
-      -webkit-font-smoothing: antialiased;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    /* ── Layout ────────────────────────────────── */
-
-    .cv {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 64px 32px 120px;
-    }
-
-    /* ── Back link ─────────────────────────────── */
-
-    .cv-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--color-muted);
-      transition: color 0.15s ease;
-    }
-
-    .cv-back:hover {
-      color: var(--color-text);
-    }
-
-    /* ── Header ────────────────────────────────── */
-
-    .cv-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 56px;
-    }
-
-    .cv-avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .cv-header-info {
-      flex: 1;
-    }
-
-    .cv-name {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--color-text);
-      margin: 0 0 3px;
-      letter-spacing: -0.01em;
-    }
-
-    .cv-title {
-      font-size: 14px;
-      color: var(--color-muted);
-      margin: 0 0 4px;
-    }
-
-    .cv-location {
-      font-size: 12px;
-      color: var(--color-muted);
-      margin: 0 0 14px;
-    }
-
-    .cv-links {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 18px;
-      row-gap: 6px;
-    }
-
-    .cv-link {
-      font-size: 12px;
-      color: var(--color-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.15s ease;
-    }
-
-    .cv-link:hover {
-      color: var(--color-text);
-    }
-
-    /* ── Section ───────────────────────────────── */
-
-    .cv-section {
-      margin-bottom: 52px;
-    }
-
-    .cv-section-title {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin: 0 0 24px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .cv-about {
-      font-size: 14px;
-      color: var(--color-body);
-      line-height: 1.75;
-    }
-
-    /* ── Items (experience / projects) ─────────── */
-
-    .cv-items {
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-    }
-
-    .cv-item {
-      display: flex;
-      gap: 28px;
-    }
-
-    .cv-item-date {
-      flex: 0 0 100px;
-      font-size: 12px;
-      color: var(--color-muted);
-      padding-top: 2px;
-      line-height: 1.5;
-    }
-
-    .cv-item-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cv-item-title {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text);
-      margin: 0 0 1px;
-    }
-
-    .cv-item-company {
-      font-size: 13px;
-      color: var(--color-muted);
-      margin: 0 0 2px;
-    }
-
-    .cv-item-context {
-      font-size: 12px;
-      color: var(--color-mid);
-      margin: 0 0 10px;
-      font-style: italic;
-    }
-
-    .cv-item-bullets {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .cv-item-bullet {
-      font-size: 13px;
-      color: var(--color-mid);
-      line-height: 1.65;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .cv-item-bullet::before {
-      content: '✦';
-      font-size: 9px;
-      color: var(--color-muted);
-      flex-shrink: 0;
-      margin-top: 5px;
-      line-height: 1;
-    }
-
-    .cv-item-bullet--sub::before {
-      color: var(--color-faint);
-    }
-
-    .cv-item-desc {
-      font-size: 13px;
-      color: var(--color-mid);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .cv-item-link {
-      font-size: 12px;
-      color: var(--color-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 8px;
-      transition: color 0.15s ease;
-    }
-
-    .cv-item-link:hover {
-      color: var(--color-text);
-    }
-
-    /* ── Education ─────────────────────────────── */
-
-    .cv-edu-items {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .cv-edu-item {
-      display: flex;
-      gap: 28px;
-    }
-
-    .cv-edu-date {
-      flex: 0 0 100px;
-      font-size: 12px;
-      color: var(--color-muted);
-      padding-top: 2px;
-    }
-
-    .cv-edu-content {
-      flex: 1;
-    }
-
-    .cv-edu-degree {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--color-text);
-      margin: 0 0 2px;
-    }
-
-    .cv-edu-school {
-      font-size: 13px;
-      color: var(--color-muted);
-      margin: 0;
-    }
-
-    /* ── Skills ────────────────────────────────── */
-
-    .cv-skill-groups {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .cv-skill-group {
-      display: flex;
-      gap: 28px;
-    }
-
-    .cv-skill-label {
-      flex: 0 0 100px;
-      font-size: 12px;
-      color: var(--color-muted);
-      padding-top: 4px;
-    }
-
-    .cv-skill-tags {
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .cv-skill-tag {
-      font-size: 12px;
-      color: var(--color-tag-text);
-      background: var(--color-tag-bg);
-      border-radius: 20px;
-      padding: 2px 8px;
-      line-height: 1.6;
-    }
-
-    /* ── Press ─────────────────────────────────── */
-
-    .cv-press-items {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .cv-press-item {
-      display: flex;
-      gap: 28px;
-    }
-
-    .cv-press-pub {
-      flex: 0 0 100px;
-      font-size: 12px;
-      color: var(--color-muted);
-      padding-top: 2px;
-    }
-
-    .cv-press-link {
-      flex: 1;
-      font-size: 13px;
-      color: var(--color-mid);
-      display: inline-flex;
-      align-items: flex-start;
-      gap: 5px;
-      line-height: 1.5;
-      transition: color 0.15s ease;
-    }
-
-    .cv-press-link:hover {
-      color: var(--color-text);
-    }
-
-    .cv-press-link svg {
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-
-    /* ── SVG helpers ───────────────────────────── */
-
-    .icon-arrow-left {
-      display: inline-block;
-    }
-
-    .icon-external {
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    /* ── Top bar (back + controls) ─────────────── */
-
-    .cv-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 52px;
-      height: 28px;
-    }
-
-    .cv-topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cv-theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
-      color: var(--color-muted);
-      background: none;
-      border: 1px solid var(--color-border-ui);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: color 0.15s ease, border-color 0.15s ease;
-      padding: 0;
-    }
-
-    .cv-theme-toggle:hover {
-      color: var(--color-text);
-      border-color: var(--color-border-ui-hover);
-    }
-
-    /* Show moon in light mode, sun in dark mode */
-    .cv-theme-toggle .icon-sun {
-      display: none;
-    }
-
-    .cv-theme-toggle .icon-moon {
-      display: block;
-    }
-
-    [data-theme="dark"] .cv-theme-toggle .icon-sun {
-      display: block;
-    }
-
-    [data-theme="dark"] .cv-theme-toggle .icon-moon {
-      display: none;
-    }
-
-    .cv-download {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-family: inherit;
-      font-weight: 400;
-      color: var(--color-muted);
-      background: none;
-      border: 1px solid var(--color-border-ui);
-      border-radius: 4px;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: color 0.15s ease, border-color 0.15s ease;
-      line-height: 1;
-    }
-
-    .cv-download:hover {
-      color: var(--color-text);
-      border-color: var(--color-border-ui-hover);
-    }
-
-    /* ── Print ─────────────────────────────────── */
-
-    @page {
-      margin: 0.7in 0.75in;
-      size: letter portrait;
-    }
-
-    /* Dedicated print window (?print=1) — light layout before the dialog opens */
-    html[data-cv-print] {
-      color-scheme: light;
-    }
-
-    html[data-cv-print] .cv-topbar {
-      display: none;
-    }
-
-    html[data-cv-print] body {
-      background: #ffffff;
-      color: #18181b;
-      transition: none;
-    }
-
-    html[data-cv-print] .cv {
-      max-width: 100%;
-      padding: 0;
-    }
-
-    @media print {
-
-      /* Force light mode variables regardless of active theme */
-      :root,
-      [data-theme="dark"] {
-        --color-bg: #ffffff;
-        --color-text: #000000;
-        --color-muted: #71717a;
-        --color-body: #3f3f46;
-        --color-mid: #52525b;
-        --color-faint: #a1a1aa;
-        --color-border: #f4f4f5;
-        --color-border-ui: #e4e4e7;
-        --color-border-ui-hover: #a1a1aa;
-        --color-tag-bg: transparent;
-        --color-tag-text: #52525b;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition: none !important;
-        animation: none !important;
-      }
-
-      .cv-topbar {
-        display: none !important;
-      }
-
-      .cv {
-        max-width: 100%;
-        padding: 0 0 0 0;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        font-size: 13px;
-        background: #ffffff;
-      }
-
-      .cv-name {
-        font-size: 18px;
-      }
-
-      /* Borders instead of filled pills — much faster for Chrome to rasterize */
-      .cv-skill-tag {
-        background: transparent !important;
-        border: 1px solid #d4d4d8;
-        -webkit-print-color-adjust: economy;
-        print-color-adjust: economy;
-      }
-
-      /* Simpler block layout — avoids flex + gap pagination hangs */
-      .cv-item,
-      .cv-edu-item,
-      .cv-press-item,
-      .cv-skill-group {
-        display: block;
-      }
-
-      .cv-item-date,
-      .cv-edu-date,
-      .cv-press-pub,
-      .cv-skill-label {
-        float: left;
-        width: 100px;
-        margin-right: 28px;
-      }
-
-      .cv-item-content,
-      .cv-edu-content,
-      .cv-press-link,
-      .cv-skill-tags {
-        overflow: hidden;
-      }
-
-      .cv-section {
-        margin-bottom: 36px;
-        break-inside: auto;
-      }
-
-      .cv-items {
-        gap: 0;
-      }
-
-      .cv-item {
-        margin-bottom: 24px;
-      }
-
-      .cv-item:last-child {
-        margin-bottom: 0;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-    }
-
-    /* ── Mobile ────────────────────────────────── */
-
-    @media (max-width: 520px) {
-      .cv {
-        padding: 40px 20px 80px;
-      }
-
-      .cv-item,
-      .cv-edu-item,
-      .cv-press-item,
-      .cv-skill-group {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .cv-item-date,
-      .cv-edu-date,
-      .cv-press-pub,
-      .cv-skill-label {
-        flex: none;
-        font-size: 11px;
-      }
-
-      .cv-header {
-        gap: 14px;
-      }
-
-      .cv-avatar {
-        width: 52px;
-        height: 52px;
-      }
-
-      .cv-name {
-        font-size: 18px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="cv.css">
 </head>
 
 <body>
@@ -997,6 +366,36 @@
     <section class="cv-section">
       <h2 class="cv-section-title">Projects</h2>
       <div class="cv-items">
+        <div class="cv-item">
+          <div class="cv-item-date">2026</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Noise Table</p>
+            <p class="cv-item-company">JavaScript, Web Audio, Product Design</p>
+            <p class="cv-item-desc" style="margin-top:8px">A collection of generative audio tools in a VHS-style launcher. Make the next great ambient album or just vibe out.</p>
+            <a href="https://noisetable.xyz" target="_blank" rel="noopener noreferrer" class="cv-item-link">
+              noisetable.xyz
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-date">2026</div>
+          <div class="cv-item-content">
+            <p class="cv-item-title">Windsome</p>
+            <p class="cv-item-company">Svelte, Tone.js, Product Design</p>
+            <p class="cv-item-desc" style="margin-top:8px">A browser-based step sequencer inspired by hardware instruments like the Elektron Digitakt.</p>
+            <a href="https://windso.me" target="_blank" rel="noopener noreferrer" class="cv-item-link">
+              windso.me
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
 
         <div class="cv-item">
           <div class="cv-item-date">2024</div>
@@ -1122,6 +521,48 @@
         window.addEventListener('beforeprint', function () {
           root.setAttribute('data-theme', 'light');
         });
+
+        document.body.classList.add('js-ready');
+
+        // Per-section stagger reveal for experience / project items
+        document.querySelectorAll('.cv-section').forEach(function(section) {
+          section.querySelectorAll('.cv-item').forEach(function(item, i) {
+            item.style.transitionDelay = (i * 55) + 'ms';
+            var obs = new IntersectionObserver(function(entries) {
+              if (entries[0].isIntersecting) {
+                item.classList.add('is-visible');
+                obs.disconnect();
+              }
+            }, { threshold: 0.08 });
+            obs.observe(item);
+          });
+        });
+
+        // Stagger reveal for skill chips
+        document.querySelectorAll('.cv-skill-tags').forEach(function(group) {
+          var chips = Array.from(group.querySelectorAll('.cv-skill-tag'));
+          chips.forEach(function(chip, i) { chip.style.transitionDelay = (i * 65) + 'ms'; });
+          var obs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              chips.forEach(function(chip) { chip.classList.add('is-visible'); });
+              obs.disconnect();
+            }
+          }, { threshold: 0.15 });
+          obs.observe(group);
+        });
+
+        // Stagger reveal for press items
+        document.querySelectorAll('.cv-press-item').forEach(function(item, i) {
+          item.style.transitionDelay = (i * 70) + 'ms';
+          var obs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              item.classList.add('is-visible');
+              obs.disconnect();
+            }
+          }, { threshold: 0.1 });
+          obs.observe(item);
+        });
+
         return;
       }
 

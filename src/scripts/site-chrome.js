@@ -15,7 +15,7 @@
           <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="LinkedIn" data-tooltip="LinkedIn">in</a>
           <a href="/cv" class="nav-icon" aria-label="CV" data-tooltip="CV"><i class="ph ph-read-cv-logo"></i></a>
           <a href="https://github.com/yungbeto/" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="GitHub" data-tooltip="GitHub"><i class="ph ph-github-logo"></i></a>
-          <a href="https://signmyguestbook.net/" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="Sign my guestbook" data-tooltip="Sign my guestbook"><i class="ph ph-book-open"></i></a>
+          
           <a href="mailto:${EMAIL}" class="nav-icon" aria-label="Email" data-tooltip="Send email"><i class="ph ph-envelope"></i></a>
         </div>
       </nav>
@@ -49,7 +49,7 @@
             <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer" class="footer-secondary-link">LinkedIn</a>
             <a href="https://github.com/yungbeto/" target="_blank" rel="noopener noreferrer" class="footer-secondary-link">GitHub</a>
             <a href="/cv" class="footer-secondary-link">CV</a>
-            <a href="https://signmyguestbook.net/" target="_blank" rel="noopener noreferrer" class="footer-secondary-link">Guestbook</a>
+            
             <span>© <span id="footer-year"></span></span>
           </div>
         </div>
@@ -69,36 +69,39 @@
       const icon = copyBtn.querySelector('i');
       if (!icon) return;
 
-      navigator.clipboard.writeText(EMAIL).then(function () {
-        const DURATION = 240;
+      navigator.clipboard
+        .writeText(EMAIL)
+        .then(function () {
+          const DURATION = 240;
 
-        function swapText(newText) {
-          label.classList.add('copy-state-exit');
-          setTimeout(function () {
-            label.textContent = newText;
-            label.classList.remove('copy-state-exit');
-            label.classList.add('copy-state-enter');
-            requestAnimationFrame(function () {
+          function swapText(newText) {
+            label.classList.add('copy-state-exit');
+            setTimeout(function () {
+              label.textContent = newText;
+              label.classList.remove('copy-state-exit');
+              label.classList.add('copy-state-enter');
               requestAnimationFrame(function () {
-                label.classList.remove('copy-state-enter');
+                requestAnimationFrame(function () {
+                  label.classList.remove('copy-state-enter');
+                });
               });
-            });
-          }, DURATION);
-        }
+            }, DURATION);
+          }
 
-        icon.className = 'ph ph-check copy-icon-success';
-        setTimeout(function () {
-          icon.classList.remove('copy-icon-success');
-        }, 400);
-        swapText('Email copied to clipboard');
+          icon.className = 'ph ph-check copy-icon-success';
+          setTimeout(function () {
+            icon.classList.remove('copy-icon-success');
+          }, 400);
+          swapText('Email copied to clipboard');
 
-        setTimeout(function () {
-          swapText(EMAIL);
-          icon.className = 'ph ph-copy';
-        }, 1400);
-      }).catch(function () {
-        icon.className = 'ph ph-warning';
-      });
+          setTimeout(function () {
+            swapText(EMAIL);
+            icon.className = 'ph ph-copy';
+          }, 1400);
+        })
+        .catch(function () {
+          icon.className = 'ph ph-warning';
+        });
     });
   }
 
@@ -127,12 +130,18 @@
       return;
     }
 
-    const observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        observer.disconnect();
-        startScramble(charSpans, undefined, { startDelay: 100, staggerMs: 35 });
-      }
-    }, { threshold: 0.4 });
+    const observer = new IntersectionObserver(
+      function (entries) {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          startScramble(charSpans, undefined, {
+            startDelay: 100,
+            staggerMs: 35,
+          });
+        }
+      },
+      { threshold: 0.4 },
+    );
 
     observer.observe(el);
   }
@@ -175,7 +184,11 @@
     });
   }
 
-  function startScramble(charSpans, onComplete, { startDelay = 150, staggerMs = 12 } = {}) {
+  function startScramble(
+    charSpans,
+    onComplete,
+    { startDelay = 150, staggerMs = 12 } = {},
+  ) {
     const blocks = ['█', '▓', '▒', '░', '▒', '▓'];
     const cycleMs = 40;
     let frame = 0;
@@ -190,15 +203,21 @@
     }, cycleMs);
 
     charSpans.forEach(function ({ outer }, i) {
-      setTimeout(function () {
-        outer.classList.add('resolved');
-      }, startDelay + i * staggerMs);
+      setTimeout(
+        function () {
+          outer.classList.add('resolved');
+        },
+        startDelay + i * staggerMs,
+      );
     });
 
-    setTimeout(function () {
-      clearInterval(timer);
-      onComplete?.();
-    }, startDelay + charSpans.length * staggerMs + 400);
+    setTimeout(
+      function () {
+        clearInterval(timer);
+        onComplete?.();
+      },
+      startDelay + charSpans.length * staggerMs + 400,
+    );
   }
 
   window.splitTextIntoChars = splitTextIntoChars;
@@ -303,8 +322,8 @@ function initLightbox() {
       cloneEl.style.transition = TRANSITION;
       cloneEl.style.top = pad + 'px';
       cloneEl.style.left = pad + 'px';
-      cloneEl.style.width = (window.innerWidth - pad * 2) + 'px';
-      cloneEl.style.height = (window.innerHeight - pad * 2) + 'px';
+      cloneEl.style.width = window.innerWidth - pad * 2 + 'px';
+      cloneEl.style.height = window.innerHeight - pad * 2 + 'px';
       cloneEl.style.borderRadius = '8px';
     });
 
@@ -339,7 +358,12 @@ function initLightbox() {
   });
   document.addEventListener('click', function (e) {
     var item = e.target.closest('.work-case-media-item');
-    if (item && !isOpen && item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') {
+    if (
+      item &&
+      !isOpen &&
+      item.classList.contains('is-active') &&
+      item.getAttribute('aria-hidden') !== 'true'
+    ) {
       open(item);
     }
   });
