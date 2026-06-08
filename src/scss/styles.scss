@@ -2174,6 +2174,35 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   }
 }
 
+.cs-intro--video-top {
+  gap: 32px;
+
+  .cs-hero-img-wrap {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cs-hero-img {
+    display: block;
+    object-fit: cover;
+  }
+
+  .cs-intro-copy {
+    gap: 32px;
+  }
+
+  .cs-hero-img-wrap {
+    animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 80ms both;
+  }
+
+  .cs-hero-title {
+    animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 140ms both;
+  }
+}
+
 .cs-hero-img {
   width: 100%;
   height: 100%;

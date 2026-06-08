@@ -1556,6 +1556,24 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
       height: 400px;
       order: -1; } }
 
+.cs-intro--video-top {
+  gap: 32px; }
+  .cs-intro--video-top .cs-hero-img-wrap {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden; }
+  .cs-intro--video-top .cs-hero-img {
+    display: block;
+    object-fit: cover; }
+  .cs-intro--video-top .cs-intro-copy {
+    gap: 32px; }
+  .cs-intro--video-top .cs-hero-img-wrap {
+    animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 80ms both; }
+  .cs-intro--video-top .cs-hero-title {
+    animation: cs-intro-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 140ms both; }
+
 .cs-hero-img {
   width: 100%;
   height: 100%;
