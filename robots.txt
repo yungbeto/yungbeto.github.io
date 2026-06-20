@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Local-only paths; block if ever accidentally deployed
+Disallow: /private/
+Disallow: /OLD/
