@@ -119,6 +119,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .cv-about { font-size: 14px; color: var(--color-body); line-height: 1.75; text-wrap: pretty; }
+.cv-about a { text-decoration: underline; text-decoration-color: var(--color-faint); text-underline-offset: 2px; transition: text-decoration-color 0.15s; }
+.cv-about a:hover { text-decoration-color: var(--color-body); }
 
 /* ── Items ─────────────────────────────────── */
 

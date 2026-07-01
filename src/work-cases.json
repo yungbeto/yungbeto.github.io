@@ -2,6 +2,7 @@
   {
     "id": "olympus",
     "company": "Olympus",
+    "showJobLink": true,
     "role": "Staff Product Designer",
     "icon": "src/img/companyIcons/companyIcon_olympus.png",
     "caseStudy_url": "/olympus",
@@ -39,6 +40,7 @@
     "id": "good-song-club",
     "company": "Good Song Club",
     "role": "Founder, Designer & Engineer",
+    "visitSiteUrl": "https://goodsong.club",
     "caseStudy_url": "/good-song-club",
     "caseStudyImage": "src/img/CaseStudyImages/GoodSongClubCaseStudy.jpg",
     "title": "A music platform built around one constraint: one song per person per day",
@@ -61,6 +63,7 @@
   {
     "id": "cavnue",
     "company": "Cavnue",
+    "showJobLink": true,
     "role": "Senior Product Designer",
     "caseStudy_url": "/cavnue",
     "icon": "src/img/companyIcons/companyIcon_cavnue.png",
@@ -74,11 +77,8 @@
     "media": [
       {
         "type": "image",
-        "src": "src/img/cav/cav1.png"
-      },
-      {
-        "type": "image",
-        "src": "src/img/cav/cav2.png"
+        "src": "cavnue/img/mvp_03.png",
+        "srcMobile": "cavnue/img/mvp_03_sm.png"
       },
       {
         "type": "video",
@@ -86,17 +86,29 @@
       },
       {
         "type": "image",
-        "src": "src/img/cav/cav5.png"
+        "src": "cavnue/img/mvp_04.png",
+        "srcMobile": "cavnue/img/mvp_04_sm.png"
+      },
+      {
+        "type": "image",
+        "src": "cavnue/img/mvp_02.png",
+        "srcMobile": "cavnue/img/mvp_02_sm.png"
       },
       {
         "type": "video",
         "src": "src/img/cav/mobilevid.mp4"
+      },
+      {
+        "type": "image",
+        "src": "cavnue/img/mvp_01.png",
+        "srcMobile": "cavnue/img/mvp_01_sm.png"
       }
     ]
   },
   {
     "id": "revel",
     "company": "Revel",
+    "showJobLink": true,
     "role": "Senior Product Designer",
     "icon": "src/img/companyIcons/companyIcon_revel.png",
     "caseStudy_url": "/revel",

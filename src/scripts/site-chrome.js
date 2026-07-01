@@ -31,7 +31,7 @@
 
   function renderFooter(root) {
     root.outerHTML = `
-      <footer class="site-footer">
+      <footer class="site-footer" id="footer-rocks">
         <div class="footer-body">
           <p class="footer-name">Roby<br>Saavedra</p>
           <p class="footer-quote">"A pleasant person to work with"</p>
@@ -357,12 +357,15 @@ function initLightbox() {
     if (e.key === 'Escape') close();
   });
   document.addEventListener('click', function (e) {
-    var item = e.target.closest('.work-case-media-item');
+    var item =
+      e.target.closest('.work-case-media-item') ||
+      e.target.closest('.job-gallery-item');
     if (
       item &&
       !isOpen &&
-      item.classList.contains('is-active') &&
-      item.getAttribute('aria-hidden') !== 'true'
+      (!item.classList.contains('work-case-media-item') ||
+        (item.classList.contains('is-active') &&
+          item.getAttribute('aria-hidden') !== 'true'))
     ) {
       open(item);
     }

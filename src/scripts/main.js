@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   initHeroAnimation();
   initRandomCaseStudyLink();
+  initPortfolioWindows();
   Promise.all([
     loadProjectCards(),
     loadWorkCases(),
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function initRandomCaseStudyLink() {
   const link = document.querySelector('.toc-link--random');
   if (!link) return;
-  const cases = ['/olympus', '/revel', '/cavnue'];
+  const cases = ['/olympus', '/revel', '/good-song-club', '/cavnue'];
   link.addEventListener('click', function () {
     this.href = cases[Math.floor(Math.random() * cases.length)];
   });
@@ -170,7 +171,8 @@ async function loadProjectCards() {
     projects.forEach((project) => {
       const media = project.media?.[0];
       if (!media) return;
-      const overlayColor = cardColors[Math.floor(Math.random() * cardColors.length)];
+      const overlayColor =
+        cardColors[Math.floor(Math.random() * cardColors.length)];
 
       let mediaHtml;
       if (media.type === 'video') {
@@ -226,13 +228,17 @@ async function loadProjectCards() {
       const badge = card.querySelector('.projects-card-press-badge');
       if (badge) badge.addEventListener('click', (e) => e.stopPropagation());
 
-      card.querySelector('.projects-card-close').addEventListener('click', () => {
-        card.classList.remove('is-active');
-      });
+      card
+        .querySelector('.projects-card-close')
+        .addEventListener('click', () => {
+          card.classList.remove('is-active');
+        });
 
-      card.querySelector('.projects-card-visit').addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
+      card
+        .querySelector('.projects-card-visit')
+        .addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
 
       grid.appendChild(card);
     });
@@ -241,24 +247,41 @@ async function loadProjectCards() {
     document.body.classList.add('js-ready');
     grid.querySelectorAll('.projects-card').forEach((card, i) => {
       card.style.transitionDuration = '0.5s';
-      card.style.transitionDelay = (i * 90) + 'ms';
-      const obs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          card.classList.add('is-visible');
-          obs.disconnect();
-          // Restore original hover-speed transition once entry completes
-          setTimeout(() => {
-            card.style.transitionDuration = '';
-            card.style.transitionDelay = '';
-          }, 500 + i * 90);
-        }
-      }, { threshold: 0.1 });
+      card.style.transitionDelay = i * 90 + 'ms';
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            card.classList.add('is-visible');
+            obs.disconnect();
+            // Restore original hover-speed transition once entry completes
+            setTimeout(
+              () => {
+                card.style.transitionDuration = '';
+                card.style.transitionDelay = '';
+              },
+              500 + i * 90,
+            );
+          }
+        },
+        { threshold: 0.1 },
+      );
       obs.observe(card);
     });
-
   } catch (err) {
     console.error('Failed to load projects:', err);
   }
+}
+
+function openJobEntry(company) {
+  const list = document.getElementById('jobs-list');
+  if (!list) return;
+  const entry = list.querySelector(`[data-company="${company}"]`);
+  if (!entry) return;
+  list
+    .querySelectorAll('.job-entry')
+    .forEach((e) => e.classList.remove('is-open'));
+  entry.classList.add('is-open');
+  entry.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 async function loadWorkCases() {
@@ -275,12 +298,28 @@ async function loadWorkCases() {
       block.className = 'work-case';
       block.id = c.id;
 
+      const seeMoreHtml = c.showJobLink
+        ? `<button class="work-case-cta work-case-see-more" data-job-company="${c.company.toLowerCase()}" type="button">
+            See more...
+            <i class="ph ph-arrow-down"></i>
+          </button>`
+        : '';
+
+      const visitSiteHtml = c.visitSiteUrl
+        ? `<a class="work-case-cta work-case-visit-site" href="${c.visitSiteUrl}" target="_blank" rel="noopener noreferrer">
+            Visit live site
+            <i class="ph ph-arrow-up-right"></i>
+          </a>`
+        : '';
+
       const ctaHtml = c.caseStudy_url
         ? `<div class="work-case-cta-container">
             <a class="work-case-cta" href="${c.caseStudy_url}">
               View Case Study
               <i class="ph ph-arrow-right"></i>
             </a>
+            ${seeMoreHtml}
+            ${visitSiteHtml}
           </div>`
         : '';
 
@@ -300,20 +339,29 @@ async function loadWorkCases() {
       `;
 
       container.appendChild(block);
+
+      const seeMoreBtn = block.querySelector('.work-case-see-more');
+      if (seeMoreBtn) {
+        seeMoreBtn.addEventListener('click', function () {
+          openJobEntry(this.dataset.jobCompany);
+        });
+      }
     });
 
     // Staggered enter animation — JS adds is-visible, CSS drives the internal stagger
     document.body.classList.add('js-ready');
     container.querySelectorAll('.work-case').forEach((workCase) => {
-      const obs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          workCase.classList.add('is-visible');
-          obs.disconnect();
-        }
-      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            workCase.classList.add('is-visible');
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.05, rootMargin: '0px 0px -40px 0px' },
+      );
       obs.observe(workCase);
     });
-
   } catch (err) {
     console.error('Failed to load work cases:', err);
   }
@@ -516,18 +564,62 @@ function initCarousels() {
   });
 }
 
+function buildJobGalleryHtml(media, company) {
+  if (!media?.length) return '';
+
+  const items = media
+    .map((item) => {
+      if (item.type === 'video') {
+        return `<div class="job-gallery-item" role="button" tabindex="0" aria-label="${company} work sample">
+          <video src="${item.src}" autoplay loop muted playsinline preload="metadata"></video>
+        </div>`;
+      }
+
+      const src = item.srcMobile || item.src;
+      return `<div class="job-gallery-item" role="button" tabindex="0" aria-label="${company} work sample">
+        <img src="${src}" alt="${company} work sample" loading="lazy">
+      </div>`;
+    })
+    .join('');
+
+  return `
+    <div class="job-gallery">
+      <div class="job-gallery-track">${items}</div>
+    </div>
+  `;
+}
+
 async function loadJobs() {
   const list = document.getElementById('jobs-list');
   if (!list) return;
 
   try {
-    const res = await fetch('src/jobs.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const jobs = await res.json();
+    const [jobsRes, casesRes] = await Promise.all([
+      fetch('src/jobs.json'),
+      fetch('src/work-cases.json'),
+    ]);
+    if (!jobsRes.ok) throw new Error(`HTTP ${jobsRes.status}`);
+    const jobs = await jobsRes.json();
+
+    const mediaByCompany = {};
+    if (casesRes.ok) {
+      const cases = await casesRes.json();
+      cases.forEach((workCase) => {
+        if (workCase.media?.length) {
+          mediaByCompany[workCase.company.toLowerCase()] = workCase.media;
+        }
+      });
+    }
 
     jobs.forEach((job) => {
+      const media =
+        job.images ||
+        mediaByCompany[job.Company.replace(/\s*\(.*\)$/, '').toLowerCase()];
+      const galleryHtml = buildJobGalleryHtml(media, job.Company);
+
       const li = document.createElement('li');
       li.className = 'job-entry';
+      li.dataset.company = job.Company.toLowerCase();
       li.innerHTML = `
         <div class="job-head">
           <div class="job-info-box">
@@ -544,7 +636,10 @@ async function loadJobs() {
           </div>
         </div>
         <div class="job-description">
-          <div class="job-description-inner">${job.JobDescription}</div>
+          <div class="job-description-panel">
+            <div class="job-description-inner">${job.JobDescription}</div>
+            ${galleryHtml}
+          </div>
         </div>
       `;
 
@@ -599,4 +694,188 @@ async function loadMarquee() {
   } catch (err) {
     console.error('Failed to load marquee:', err);
   }
+}
+
+function initPortfolioWindows() {
+  if (window.innerWidth <= 768) return;
+
+  const WINDOWS = [
+    {
+      title: 'Cavnue Mobile Dashboard',
+      icon: 'ph-taxi',
+      src: 'src/img/windowImg/Window%20Img%20%2001.png',
+      width: 280,
+      imgHeight: 400,
+      linkUrl: '/cavnue',
+    },
+    {
+      title: 'Logistics Overview Map',
+      icon: 'ph-map-pin-simple',
+      src: 'src/img/windowImg/Window%20Img%20%2002.png',
+      width: 400,
+      imgHeight: 284,
+      linkUrl: 'job:revel',
+    },
+    {
+      title: 'Olympus AI Search',
+      icon: 'ph-sparkle',
+      src: 'src/img/windowImg/Window%20Img%20%2003.png',
+      width: 400,
+      imgHeight: 222,
+      linkUrl: '/olympus',
+    },
+    {
+      title: 'Rideshare Passenger App',
+      icon: 'ph-devices',
+      src: 'src/img/windowImg/Window%20Img%20%2004.png',
+      width: 280,
+      imgHeight: 280,
+      linkUrl: '/revel',
+    },
+    {
+      title: 'Rideshare Driver App',
+      icon: 'ph-map-pin',
+      src: 'src/img/windowImg/Window%20Img%20%2005.png',
+      width: 400,
+      imgHeight: 284,
+      linkUrl: 'job:revel',
+    },
+    {
+      title: 'Automated Playlist Builder',
+      icon: 'ph-music-notes',
+      src: 'src/img/windowImg/Window%20Img%20%2006.mp4',
+      width: 400,
+      imgHeight: 284,
+      linkUrl: 'https://digthis.club',
+    },
+  ];
+
+  // Broad zones covering distinct quadrants — position is fully random within each zone
+  const ZONES = [
+    { x: [0.0, 0.32], y: [0.08, 0.52] }, // left side
+    { x: [0.52, 0.92], y: [0.04, 0.44] }, // top-right
+    { x: [0.04, 0.38], y: [0.46, 0.82] }, // bottom-left
+    { x: [0.5, 0.9], y: [0.4, 0.82] }, // bottom-right
+    { x: [0.2, 0.72], y: [0.08, 0.6] }, // center wildcard
+    { x: [0.3, 0.7], y: [0.3, 0.75] }, // mid-screen
+  ];
+
+  // Shuffle so the window-to-zone pairing changes every page load
+  const shuffledZones = [...ZONES].sort(() => Math.random() - 0.5);
+
+  const stage = document.createElement('div');
+  stage.id = 'portfolio-windows';
+  document.body.appendChild(stage);
+
+  const about = document.querySelector('.about-section');
+  if (about) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        stage.style.opacity = entries[0].isIntersecting ? '' : '0';
+        stage.style.pointerEvents = entries[0].isIntersecting ? '' : 'none';
+      },
+      { threshold: 0.05 },
+    );
+    obs.observe(about);
+  }
+
+  let zTop = 1;
+
+  function spawnWindow(data, zone, delay) {
+    setTimeout(() => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const winW = Math.round(
+        Math.max(200, Math.min(data.width * (vw / 1440), data.width * 1.75)),
+      );
+      const scale = winW / data.width;
+      const FOOTER_H = 28;
+      const winH = 24 + Math.round(data.imgHeight * scale) + FOOTER_H;
+
+      const rx = zone.x[0] + Math.random() * (zone.x[1] - zone.x[0]);
+      const ry = zone.y[0] + Math.random() * (zone.y[1] - zone.y[0]);
+      const left = Math.max(8, Math.min(vw - winW - 8, rx * vw));
+      const top = Math.max(100, Math.min(vh - winH - 8, ry * vh));
+
+      const win = document.createElement('div');
+      win.className = 'portfolio-window';
+      win.style.cssText = `left:${left}px;top:${top}px;width:${winW}px`;
+
+      const isVideo = data.src.endsWith('.mp4');
+      const mediaHtml = isVideo
+        ? `<video class="portfolio-window-img" autoplay muted loop playsinline width="${winW}" height="${winH - 24 - FOOTER_H}"><source src="${data.src}" type="video/mp4"></video>`
+        : `<img class="portfolio-window-img" src="${data.src}" alt="${data.title}" loading="lazy" width="${winW}" height="${winH - 24 - FOOTER_H}">`;
+
+      const isJobLink = data.linkUrl?.startsWith('job:');
+      const jobCompany = isJobLink ? data.linkUrl.slice(4) : null;
+      const linkHtml = isJobLink
+        ? `<button class="portfolio-window-link" type="button">See more... <i class="ph ph-arrow-down"></i></button>`
+        : `<a class="portfolio-window-link" href="${data.linkUrl}" ${data.linkUrl.startsWith('/') ? '' : 'target="_blank" rel="noopener noreferrer"'}>View project <i class="ph ph-arrow-right"></i></a>`;
+
+      win.innerHTML = `
+        <div class="portfolio-window-header">
+          <div class="portfolio-window-title">
+            <i class="ph ${data.icon}"></i>
+            <span>${data.title}</span>
+          </div>
+          <button class="portfolio-window-close" type="button" aria-label="Close">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+        ${mediaHtml}
+        <div class="portfolio-window-footer">
+          ${linkHtml}
+        </div>
+      `;
+
+      win
+        .querySelector('.portfolio-window-close')
+        .addEventListener('click', () => {
+          win.classList.remove('is-visible');
+          setTimeout(() => win.remove(), 400);
+        });
+
+      if (isJobLink) {
+        win.querySelector('.portfolio-window-link').addEventListener('click', () => {
+          openJobEntry(jobCompany);
+        });
+      }
+
+      win.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.portfolio-window-close, .portfolio-window-link, a, button')) return;
+        e.preventDefault();
+        win.style.zIndex = ++zTop;
+        const ox = e.clientX - win.offsetLeft;
+        const oy = e.clientY - win.offsetTop;
+
+        function onMove(e) {
+          win.style.left =
+            Math.max(
+              0,
+              Math.min(window.innerWidth - win.offsetWidth, e.clientX - ox),
+            ) + 'px';
+          win.style.top =
+            Math.max(
+              0,
+              Math.min(window.innerHeight - win.offsetHeight, e.clientY - oy),
+            ) + 'px';
+        }
+        function onUp() {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        }
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+
+      stage.appendChild(win);
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => win.classList.add('is-visible')),
+      );
+    }, delay);
+  }
+
+  WINDOWS.forEach((data, i) =>
+    spawnWindow(data, shuffledZones[i], 2500 + i * 420),
+  );
 }

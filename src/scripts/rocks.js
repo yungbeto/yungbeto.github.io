@@ -2,9 +2,9 @@ var engine, render, homeDiv;
 var popEffects = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-  homeDiv = document.getElementById('hero-rocks');
+  homeDiv = document.getElementById('footer-rocks');
   if (!homeDiv) {
-    console.warn('rocks.js: #hero-rocks container not found');
+    console.warn('rocks.js: #footer-rocks container not found');
     return;
   }
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     engine: engine,
     options: {
       width: homeDiv.clientWidth,
-      height: homeDiv.clientHeight,
+      height: getPhysicsHeight(),
       wireframes: false,
       background: 'transparent',
     },
@@ -138,7 +138,7 @@ function dropBody(x, y) {
     });
   }
 
-  var fills = ['#e4e4e7', '#d4d4d8', '#cacaca', '#f9a8d4'];
+  var fills = ['#525260', '#4a4a58', '#5e5e6e', '#5e3d54'];
   var fill = fills[Math.floor(Math.random() * fills.length)];
 
   var body = Matter.Bodies.fromVertices(
@@ -169,9 +169,18 @@ function dropBody(x, y) {
   return body;
 }
 
+function getPhysicsHeight() {
+  var footerBar = document.querySelector('.footer-bar');
+  if (footerBar && homeDiv) {
+    var barTop = footerBar.getBoundingClientRect().top - homeDiv.getBoundingClientRect().top;
+    if (barTop > 0) return Math.round(barTop);
+  }
+  return homeDiv.clientHeight;
+}
+
 function resizeCanvas() {
   var w = homeDiv.clientWidth;
-  var h = homeDiv.clientHeight;
+  var h = getPhysicsHeight();
   render.canvas.width = w;
   render.canvas.height = h;
   render.options.width = w;
@@ -185,7 +194,7 @@ function createWalls() {
 
   var wallOptions = { isStatic: true, render: { visible: false } };
   var w = homeDiv.clientWidth;
-  var h = homeDiv.clientHeight;
+  var h = getPhysicsHeight();
 
   Matter.World.add(engine.world, [
     // floor
