@@ -1065,7 +1065,6 @@ body.js-ready .projects-card.is-visible {
   .projects-card-press-badge {
     display: none;
   }
-
 }
 
 // ─── Work case studies ──────────────────────────────────────────────────────
@@ -4098,7 +4097,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 10;
   transition: opacity 0.4s ease;
 }
 
@@ -4132,16 +4131,16 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   align-items: center;
   justify-content: space-between;
   height: 24px;
-  padding: 0 6px 0 8px;
-  background: $ink;
-  color: $bg;
-  gap: 6px;
+  padding: 0 8px;
+  background: $surface;
+  border-bottom: 1px solid $ink;
+  gap: 4px;
 }
 
 .portfolio-window-title {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   min-width: 0;
   flex: 1;
 
@@ -4149,30 +4148,32 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
     font-size: 12px;
     flex-shrink: 0;
     line-height: 1;
+    color: #27272a;
   }
 
   span {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Geist Mono', monospace;
+    color: #27272a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1;
-    letter-spacing: 0.02em;
   }
 }
 
 .portfolio-window-close {
   background: none;
   border: none;
-  color: $bg;
+  color: #27272a;
   padding: 2px;
-  cursor: pointer; // overrides the move cursor from the parent header
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0.55;
+  opacity: 0.45;
   font-family: inherit;
 
   i {
@@ -4194,36 +4195,196 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   pointer-events: none;
 }
 
-.portfolio-window-footer {
+.portfolio-window-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
   display: flex;
   align-items: center;
-  height: 28px;
-  padding: 0 8px;
-  border-top: 1px solid $ink;
-}
-
-.portfolio-window-link {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 500;
+  gap: 8px;
+  padding: 8px 16px;
+  background: $surface;
+  border: 1px solid $ink;
+  border-radius: 80px;
+  font-size: 14px;
   font-family: inherit;
-  letter-spacing: 0.02em;
+  font-weight: 400;
   color: $ink;
   text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
   cursor: pointer;
-  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out,
+    background 0.2s ease-in-out;
 
   i {
-    font-size: 11px;
+    font-size: 16px;
+    line-height: 1;
+  }
+  &:hover {
+    background: $bg;
+  }
+}
+
+.portfolio-window:hover .portfolio-window-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+// ─── Windows bulk-action toggle ───────────────────────────────────────────────
+
+.windows-toggle {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 0; // spacing handled per-button via margin
+  padding: 4px;
+  background: $bg;
+  border: 1px solid $ink;
+  border-radius: 80px;
+  box-shadow:
+    0 8px 8px rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.16);
+  pointer-events: all;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  // Tidy collapses horizontally
+  // Base transition used when LEAVING is-closed: expand after relaunch collapses
+  .windows-toggle-tidy {
+    overflow: hidden;
+    transition:
+      background 0.15s ease,
+      width 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s,
+      opacity 0.2s ease 0.18s;
+  }
+
+  // Close-all has left margin to separate from tidy; both collapse together
+  // Base transition used when LEAVING is-closed: expand after relaunch collapses
+  .windows-toggle-close-all {
+    margin-left: 4px;
+    overflow: hidden;
+    transition:
+      background 0.15s ease,
+      width 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s,
+      opacity 0.2s ease 0.18s,
+      margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s;
+  }
+
+  // Relaunch hidden until closed state
+  // Base transition used when LEAVING is-closed: fade out then collapse fast
+  .windows-toggle-relaunch {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      background 0.15s ease,
+      opacity 0.08s ease,
+      width 0.18s ease 0.06s;
+  }
+
+  // Closed state: collapse open buttons, expand relaunch
+  &.is-closed {
+    // Entering is-closed: collapse immediately, no delay
+    .windows-toggle-tidy {
+      width: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        background 0.15s ease,
+        width 0.2s ease,
+        opacity 0.1s ease;
+    }
+
+    // Entering is-closed: collapse immediately, no delay
+    .windows-toggle-close-all {
+      width: 0;
+      margin-left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        background 0.15s ease,
+        width 0.2s ease,
+        opacity 0.1s ease,
+        margin-left 0.2s ease;
+    }
+
+    .windows-toggle-relaunch {
+      width: 32px;
+      opacity: 1;
+      pointer-events: auto;
+      // Entering is-closed: expand width first, then fade in icon
+      transition:
+        background 0.15s ease,
+        width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.2s ease 0.2s;
+    }
+  }
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.windows-toggle-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $ink;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+
+  i {
+    font-size: 16px;
     line-height: 1;
   }
 
   &:hover {
-    opacity: 0.55;
+    background: rgba(63, 63, 70, 0.1);
+  }
+
+  &:active {
+    background: rgba(63, 63, 70, 0.2);
+  }
+
+}
+
+.windows-toggle-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: $surface;
+  background: $ink;
+  border-radius: 4px;
+  padding: 3px 7px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+
+  &.is-visible {
+    opacity: 1;
   }
 }

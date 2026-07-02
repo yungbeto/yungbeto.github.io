@@ -781,7 +781,7 @@ function initPortfolioWindows() {
 
   let zTop = 1;
 
-  function spawnWindow(data, zone, delay) {
+  function spawnWindow(data, zone, delay, onClose) {
     setTimeout(() => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
@@ -789,8 +789,7 @@ function initPortfolioWindows() {
         Math.max(200, Math.min(data.width * (vw / 1440), data.width * 1.75)),
       );
       const scale = winW / data.width;
-      const FOOTER_H = 28;
-      const winH = 24 + Math.round(data.imgHeight * scale) + FOOTER_H;
+      const winH = 24 + Math.round(data.imgHeight * scale);
 
       const rx = zone.x[0] + Math.random() * (zone.x[1] - zone.x[0]);
       const ry = zone.y[0] + Math.random() * (zone.y[1] - zone.y[0]);
@@ -803,14 +802,14 @@ function initPortfolioWindows() {
 
       const isVideo = data.src.endsWith('.mp4');
       const mediaHtml = isVideo
-        ? `<video class="portfolio-window-img" autoplay muted loop playsinline width="${winW}" height="${winH - 24 - FOOTER_H}"><source src="${data.src}" type="video/mp4"></video>`
-        : `<img class="portfolio-window-img" src="${data.src}" alt="${data.title}" loading="lazy" width="${winW}" height="${winH - 24 - FOOTER_H}">`;
+        ? `<video class="portfolio-window-img" autoplay muted loop playsinline width="${winW}" height="${winH - 24}"><source src="${data.src}" type="video/mp4"></video>`
+        : `<img class="portfolio-window-img" src="${data.src}" alt="${data.title}" loading="lazy" width="${winW}" height="${winH - 24}">`;
 
       const isJobLink = data.linkUrl?.startsWith('job:');
       const jobCompany = isJobLink ? data.linkUrl.slice(4) : null;
       const linkHtml = isJobLink
-        ? `<button class="portfolio-window-link" type="button">See more... <i class="ph ph-arrow-down"></i></button>`
-        : `<a class="portfolio-window-link" href="${data.linkUrl}" ${data.linkUrl.startsWith('/') ? '' : 'target="_blank" rel="noopener noreferrer"'}>View project <i class="ph ph-arrow-right"></i></a>`;
+        ? `<button class="portfolio-window-btn" type="button">See more... <i class="ph ph-arrow-down"></i></button>`
+        : `<a class="portfolio-window-btn" href="${data.linkUrl}" ${data.linkUrl.startsWith('/') ? '' : 'target="_blank" rel="noopener noreferrer"'}>View project <i class="ph ph-arrow-right"></i></a>`;
 
       win.innerHTML = `
         <div class="portfolio-window-header">
@@ -823,26 +822,29 @@ function initPortfolioWindows() {
           </button>
         </div>
         ${mediaHtml}
-        <div class="portfolio-window-footer">
-          ${linkHtml}
-        </div>
+        ${linkHtml}
       `;
 
       win
         .querySelector('.portfolio-window-close')
         .addEventListener('click', () => {
           win.classList.remove('is-visible');
-          setTimeout(() => win.remove(), 400);
+          setTimeout(() => {
+            win.remove();
+            onClose?.();
+          }, 400);
         });
 
       if (isJobLink) {
-        win.querySelector('.portfolio-window-link').addEventListener('click', () => {
-          openJobEntry(jobCompany);
-        });
+        win
+          .querySelector('.portfolio-window-btn')
+          .addEventListener('click', () => {
+            openJobEntry(jobCompany);
+          });
       }
 
       win.addEventListener('mousedown', (e) => {
-        if (e.target.closest('.portfolio-window-close, .portfolio-window-link, a, button')) return;
+        if (e.target.closest('a, button')) return;
         e.preventDefault();
         win.style.zIndex = ++zTop;
         const ox = e.clientX - win.offsetLeft;
@@ -875,7 +877,101 @@ function initPortfolioWindows() {
     }, delay);
   }
 
+  // ── Bulk-action toggle (Tidy / Close All / Relaunch) ──────────────────────
+
+  const toggle = document.createElement('div');
+  toggle.id = 'windows-toggle';
+  toggle.className = 'windows-toggle';
+  toggle.innerHTML = `
+    <button class="windows-toggle-btn windows-toggle-tidy" type="button" data-tooltip="Tidy">
+      <i class="ph ph-dots-nine"></i>
+    </button>
+    <button class="windows-toggle-btn windows-toggle-close-all" type="button" data-tooltip="Close all">
+      <i class="ph ph-x"></i>
+    </button>
+    <button class="windows-toggle-btn windows-toggle-relaunch" type="button" data-tooltip="See Windows">
+      <i class="ph ph-squares-four"></i>
+    </button>
+  `;
+  stage.appendChild(toggle);
+  setTimeout(() => toggle.classList.add('is-visible'), 2500);
+
+  const tooltip = document.createElement('div');
+  tooltip.className = 'windows-toggle-tooltip';
+  tooltip.setAttribute('aria-hidden', 'true');
+  toggle.appendChild(tooltip);
+
+  toggle.querySelectorAll('.windows-toggle-btn').forEach((btn) => {
+    btn.addEventListener('mouseenter', () => {
+      const text = btn.dataset.tooltip;
+      if (!text) return;
+      tooltip.textContent = text;
+      const btnRect = btn.getBoundingClientRect();
+      const toggleRect = toggle.getBoundingClientRect();
+      tooltip.style.left =
+        btnRect.left - toggleRect.left + btnRect.width / 2 + 'px';
+      tooltip.classList.add('is-visible');
+    });
+    btn.addEventListener('mouseleave', () =>
+      tooltip.classList.remove('is-visible'),
+    );
+  });
+
+  function checkEmpty() {
+    if (stage.querySelectorAll('.portfolio-window').length === 0) {
+      toggle.classList.add('is-closed');
+    }
+  }
+
+  // Tidy: cascade all open windows from top-left
+  toggle.querySelector('.windows-toggle-tidy').addEventListener('click', () => {
+    const wins = Array.from(stage.querySelectorAll('.portfolio-window'));
+    const easing =
+      'left 0.5s cubic-bezier(0.16,1,0.3,1), top 0.5s cubic-bezier(0.16,1,0.3,1)';
+    wins.forEach((win, i) => {
+      win.style.transition = easing;
+      win.style.left =
+        Math.min(80 + i * 32, window.innerWidth - win.offsetWidth - 16) + 'px';
+      win.style.top =
+        Math.min(80 + i * 32, window.innerHeight - win.offsetHeight - 16) +
+        'px';
+      win.style.zIndex = i + 1;
+      setTimeout(() => {
+        win.style.transition = '';
+      }, 600);
+    });
+    zTop = wins.length + 1;
+  });
+
+  // Close All: staggered CRT-reverse close
+  toggle
+    .querySelector('.windows-toggle-close-all')
+    .addEventListener('click', () => {
+      const wins = Array.from(stage.querySelectorAll('.portfolio-window'));
+      wins.forEach((win, i) => {
+        setTimeout(() => {
+          win.classList.remove('is-visible');
+          setTimeout(() => {
+            win.remove();
+            checkEmpty();
+          }, 400);
+        }, i * 60);
+      });
+    });
+
+  // Relaunch: re-shuffle zones and re-spawn all windows
+  toggle
+    .querySelector('.windows-toggle-relaunch')
+    .addEventListener('click', () => {
+      toggle.classList.remove('is-closed');
+      zTop = 1;
+      const newZones = [...ZONES].sort(() => Math.random() - 0.5);
+      WINDOWS.forEach((data, i) =>
+        spawnWindow(data, newZones[i], i * 380, checkEmpty),
+      );
+    });
+
   WINDOWS.forEach((data, i) =>
-    spawnWindow(data, shuffledZones[i], 2500 + i * 420),
+    spawnWindow(data, shuffledZones[i], 2500 + i * 420, checkEmpty),
   );
 }

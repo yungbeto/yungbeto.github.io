@@ -3039,7 +3039,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 10;
   transition: opacity 0.4s ease; }
 
 .portfolio-window {
@@ -3066,41 +3066,43 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   align-items: center;
   justify-content: space-between;
   height: 24px;
-  padding: 0 6px 0 8px;
-  background: #3f3f46;
-  color: #d4d4d8;
-  gap: 6px; }
+  padding: 0 8px;
+  background: #e4e4e7;
+  border-bottom: 1px solid #3f3f46;
+  gap: 4px; }
 
 .portfolio-window-title {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   min-width: 0;
   flex: 1; }
   .portfolio-window-title i {
     font-size: 12px;
     flex-shrink: 0;
-    line-height: 1; }
+    line-height: 1;
+    color: #27272a; }
   .portfolio-window-title span {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Geist Mono', monospace;
+    color: #27272a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1;
-    letter-spacing: 0.02em; }
+    line-height: 1; }
 
 .portfolio-window-close {
   background: none;
   border: none;
-  color: #d4d4d8;
+  color: #27272a;
   padding: 2px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0.55;
+  opacity: 0.45;
   font-family: inherit; }
   .portfolio-window-close i {
     font-size: 11px;
@@ -3116,30 +3118,125 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   -webkit-user-drag: none;
   pointer-events: none; }
 
-.portfolio-window-footer {
+.portfolio-window-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
   display: flex;
   align-items: center;
-  height: 28px;
-  padding: 0 8px;
-  border-top: 1px solid #3f3f46; }
-
-.portfolio-window-link {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 500;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #e4e4e7;
+  border: 1px solid #3f3f46;
+  border-radius: 80px;
+  font-size: 14px;
   font-family: inherit;
-  letter-spacing: 0.02em;
+  font-weight: 400;
   color: #3f3f46;
   text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
   cursor: pointer;
-  line-height: 1; }
-  .portfolio-window-link i {
-    font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, background 0.2s ease-in-out; }
+  .portfolio-window-btn i {
+    font-size: 16px;
     line-height: 1; }
-  .portfolio-window-link:hover {
-    opacity: 0.55; }
+  .portfolio-window-btn:hover {
+    background: #d4d4d8; }
+
+.portfolio-window:hover .portfolio-window-btn {
+  opacity: 1;
+  pointer-events: auto; }
+
+.windows-toggle {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 0;
+  padding: 4px;
+  background: #d4d4d8;
+  border: 1px solid #3f3f46;
+  border-radius: 80px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.16);
+  pointer-events: all;
+  opacity: 0;
+  transition: opacity 0.4s ease; }
+  .windows-toggle.is-visible {
+    opacity: 1; }
+  .windows-toggle .windows-toggle-tidy {
+    overflow: hidden;
+    transition: background 0.15s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s, opacity 0.2s ease 0.18s; }
+  .windows-toggle .windows-toggle-close-all {
+    margin-left: 4px;
+    overflow: hidden;
+    transition: background 0.15s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s, opacity 0.2s ease 0.18s, margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.18s; }
+  .windows-toggle .windows-toggle-relaunch {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: background 0.15s ease, opacity 0.08s ease, width 0.18s ease 0.06s; }
+  .windows-toggle.is-closed .windows-toggle-tidy {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: background 0.15s ease, width 0.2s ease, opacity 0.1s ease; }
+  .windows-toggle.is-closed .windows-toggle-close-all {
+    width: 0;
+    margin-left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: background 0.15s ease, width 0.2s ease, opacity 0.1s ease, margin-left 0.2s ease; }
+  .windows-toggle.is-closed .windows-toggle-relaunch {
+    width: 32px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: background 0.15s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease 0.2s; }
+  @media (max-width: 768px) {
+    .windows-toggle {
+      display: none; } }
+
+.windows-toggle-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3f3f46;
+  flex-shrink: 0;
+  transition: background 0.15s ease; }
+  .windows-toggle-btn i {
+    font-size: 16px;
+    line-height: 1; }
+  .windows-toggle-btn:hover {
+    background: rgba(63, 63, 70, 0.1); }
+  .windows-toggle-btn:active {
+    background: rgba(63, 63, 70, 0.2); }
+
+.windows-toggle-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: #e4e4e7;
+  background: #3f3f46;
+  border-radius: 4px;
+  padding: 3px 7px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease; }
+  .windows-toggle-tooltip.is-visible {
+    opacity: 1; }
