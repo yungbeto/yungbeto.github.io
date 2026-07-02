@@ -4105,6 +4105,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   position: absolute;
   pointer-events: all;
   border: 1px solid $ink;
+  border-radius: 8px;
+  overflow: hidden;
   background: $surface;
   box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.14);
   opacity: 0;

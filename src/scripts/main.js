@@ -709,7 +709,7 @@ function initPortfolioWindows() {
       linkUrl: '/cavnue',
     },
     {
-      title: 'Logistics Overview Map',
+      title: 'Revel Dispatch App',
       icon: 'ph-map-pin-simple',
       src: 'src/img/windowImg/Window%20Img%20%2002.png',
       width: 400,
@@ -725,7 +725,7 @@ function initPortfolioWindows() {
       linkUrl: '/olympus',
     },
     {
-      title: 'Rideshare Passenger App',
+      title: 'Revel Passenger App',
       icon: 'ph-devices',
       src: 'src/img/windowImg/Window%20Img%20%2004.png',
       width: 280,
@@ -733,7 +733,7 @@ function initPortfolioWindows() {
       linkUrl: '/revel',
     },
     {
-      title: 'Rideshare Driver App',
+      title: 'Revel Driver App',
       icon: 'ph-map-pin',
       src: 'src/img/windowImg/Window%20Img%20%2005.png',
       width: 400,
@@ -741,7 +741,7 @@ function initPortfolioWindows() {
       linkUrl: 'job:revel',
     },
     {
-      title: 'Automated Playlist Builder',
+      title: 'Digthis.club Playlist Builder',
       icon: 'ph-music-notes',
       src: 'src/img/windowImg/Window%20Img%20%2006.mp4',
       width: 400,
