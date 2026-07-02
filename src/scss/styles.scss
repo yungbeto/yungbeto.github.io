@@ -996,6 +996,7 @@ body.js-ready .projects-card.is-visible {
     font-size: 14px;
     line-height: 20px;
     -webkit-line-clamp: 3;
+    margin: 0;
   }
 
   // Smaller visit button
@@ -1064,6 +1065,7 @@ body.js-ready .projects-card.is-visible {
   .projects-card-press-badge {
     display: none;
   }
+
 }
 
 // ─── Work case studies ──────────────────────────────────────────────────────

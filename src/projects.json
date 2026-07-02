@@ -33,7 +33,7 @@
     "url": "https://goodsong.club",
     "year": "2023",
     "skills": "React, Node.js, Firebase, Product Design",
-    "description": "A small social media platform that allows you to share good songs with your friends. Think of it as a social layer on top of YouTube Music or a worldwide shared playlist. 💛 ",
+    "description": "A social platform with one rule: one song per person per day. No algorithm, just good music. 💛",
     "media": [
       {
         "type": "video",
@@ -46,7 +46,7 @@
     "name": "Concrete 95",
     "url": "https://concrete95.net/",
     "year": "2025",
-    "description": "Sound design app inspired by Musique Concrete with a Windows 95 aesthetic. Layer synth pads, melodies, and found sound randomly fetched from freesound.org.",
+    "description": "A Windows 95-style sound design toy. Layer synths, melodies, and found audio fetched randomly from Freesound.",
     "skills": "React, Node.js, Firebase, Agentic Development",
     "media": [
       {
