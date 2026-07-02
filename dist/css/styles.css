@@ -3102,13 +3102,14 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0.45;
-  font-family: inherit; }
+  opacity: 1;
+  font-family: inherit;
+  transition: opacity 0.2s ease; }
   .portfolio-window-close i {
     font-size: 11px;
     line-height: 1; }
   .portfolio-window-close:hover {
-    opacity: 1; }
+    opacity: 0.7; }
 
 .portfolio-window-img {
   display: block;
@@ -3163,7 +3164,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.16);
   pointer-events: all;
   opacity: 0;
-  transition: opacity 0.4s ease; }
+  transition: opacity 0.4s ease;
+  z-index: 11; }
   .windows-toggle.is-visible {
     opacity: 1; }
   .windows-toggle .windows-toggle-tidy {
