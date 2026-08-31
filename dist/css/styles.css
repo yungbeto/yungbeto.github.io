@@ -2744,6 +2744,24 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   .cs-result-header .cs-section-title {
     max-width: 584px; }
 
+.cs-result-demo {
+  padding: 0 32px; }
+  @media (max-width: 768px) {
+    .cs-result-demo {
+      padding: 0 16px; } }
+
+.cs-result-demo-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  background: #e4e4e7; }
+  @media (max-width: 768px) {
+    .cs-result-demo-video {
+      border-radius: 14px; } }
+
 .cs-video-section {
   padding: 32px;
   border-bottom: 1px solid #3f3f46; }

@@ -3702,6 +3702,28 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   }
 }
 
+.cs-result-demo {
+  padding: 0 32px;
+
+  @media (max-width: $tablet) {
+    padding: 0 16px;
+  }
+}
+
+.cs-result-demo-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  background: $surface;
+
+  @media (max-width: $tablet) {
+    border-radius: 14px;
+  }
+}
+
 // ─── Video section ───────────────────────────────────────────────────────────
 
 .cs-video-section {

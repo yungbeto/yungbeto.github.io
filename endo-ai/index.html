@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="bb851ff0-09f5-425f-8b27-fe8e74aac5a7"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endo AI / Case Study · Roby Saavedra</title>
+    <meta name="description"
+        content="A self-directed case study on designing an agentic AI layer for a clinical environment, exploring how to build trust into a system that can never see the patient data it's reasoning about.">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <style>:root { --cta-hover: #93C5FD; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <!-- ─── Intro ─────────────────────────────────────────────────────── -->
+
+            <div class="cs-intro cs-intro--video-top">
+                <div class="cs-label-row">
+                    <i class="ph ph-asterisk cs-asterisk"></i>
+                    <p class="cs-label">Case study / Endo AI</p>
+                </div>
+                <div class="cs-hero-img-wrap">
+                    <video class="cs-hero-img" src="img/endo-ai-demo.mp4" poster="img/hero-endoai.svg" autoplay
+                        loop muted playsinline preload="auto"></video>
+                </div>
+                <div class="cs-intro-copy">
+                    <h1 class="cs-hero-title">Designing an agentic AI layer for a clinical environment that can't see the data it's reasoning about</h1>
+                    <div class="cs-intro-body">
+                        <p class="cs-lead">A self-directed project exploring what an AI agent for clinical
+                            logistics should look like — designed and built end to end, extending a constraint
+                            I ran into on a real traceability tool I led at Olympus.</p>
+                        <div class="cs-hero-kv-list">
+                            <div class="cs-hero-kv-list-header">
+                                <p class="cs-hero-kv-list-header-title">
+                                    <i class="ph ph-info"></i>
+                                    Quick Info
+                                </p>
+                                <i class="ph ph-caret-down caret-icon"></i>
+                            </div>
+                            <div class="cs-hero-kv-list-body">
+                                <div class="cs-hero-kv-list-body-inner">
+                                    <div class="cs-hero-kv">
+                                        <span class="cs-hero-kv-key">My Role</span>
+                                        <span class="cs-hero-kv-val">Concept, Design, and End-to-End Build</span>
+                                    </div>
+                                    <div class="cs-hero-kv">
+                                        <span class="cs-hero-kv-key">TL;DR</span>
+                                        <span class="cs-hero-kv-val">I designed and built a working prototype of
+                                            an AI agent for an endoscopy suite, reasoning through what it means
+                                            to design judgment into a system that must stay useful, honest, and
+                                            provably safe with patient data.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Background ────────────────────────────────────────────────── -->
+
+            <div class="cs-bg">
+                <div class="cs-bg-inner">
+                    <p class="cs-label cs-label--light">Background</p>
+                    <p class="cs-bg-lead">A few things to know before diving in.</p>
+                    <div class="cs-bg-grid">
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">1</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The gap</p>
+                                <p class="cs-bg-block-text">Reprocessing and chain-of-custody data for medical scopes
+                                    is only useful if it can be retrieved instantly, in plain language, by someone
+                                    under time pressure — the exact problem the Olympus traceability tool solved
+                                    for structured queries.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">2</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The constraint left open</p>
+                                <p class="cs-bg-block-text">That project deliberately left AI out of scope for its
+                                    MVP, for real privacy and infrastructure reasons, but was designed to make room
+                                    for a natural-language layer eventually.</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">3</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The premise</p>
+                                <p class="cs-bg-block-text">Endo AI picks up that thread: what does that
+                                    natural-language layer actually need to get right before it can be trusted
+                                    in a clinical setting?</p>
+                            </div>
+                        </div>
+                        <div class="cs-bg-block">
+                            <p class="cs-bg-num">4</p>
+                            <div class="cs-bg-content">
+                                <p class="cs-bg-block-label">The approach</p>
+                                <p class="cs-bg-block-text">Rather than theorize, I designed the interaction model
+                                    and built a working prototype myself — real interface, real database, real
+                                    generated reports — to pressure-test the reasoning against an actual
+                                    implementation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Situation ─────────────────────────────────────────────────── -->
+
+            <div class="cs-situation">
+                <div class="cs-label-row">
+                    <p class="cs-label">The situation</p>
+                </div>
+                <div class="cs-situation-row">
+                    <img src="img/situation-image.svg" alt="Evocative image conveying instant judgment under pressure" class="cs-ruler-img">
+                    <div class="cs-situation-copy">
+                        <div class="cs-situation-copy-top">
+
+                            <p class="cs-section-title">A nurse doesn't think in questions, she thinks in
+                                reassurance</p>
+                            <p class="cs-body-text">The obvious approach was a chatbot bolted onto the app. That
+                                framing didn't hold up. A head nurse managing scopes, rooms, and staff in real time
+                                isn't looking to query a database — she's asking one thing, over and over, in
+                                different forms: am I about to have a problem in the next twenty minutes. Designing
+                                for that meant giving the agent real clinical data to reason with — which
+                                immediately collided with the strictest constraint in the room: patient privacy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Problem statement ────────────────────────────────────────────── -->
+
+            <div class="cs-problem-section">
+                <div class="cs-problem-section-inner">
+                    <div class="cs-problem-section-label-row">
+                        <i class="ph ph-question"></i>
+                        <p class="cs-label">The problem I set out to solve</p>
+                    </div>
+                    <p class="cs-problem-section-text">How might we design an AI agent trustworthy enough for a
+                        clinical environment, when it can never see the patient data it's reasoning about?</p>
+                </div>
+            </div>
+
+            <!-- ─── Task + Constraints ─────────────────────────────────────────── -->
+
+            <div class="cs-task-wrap">
+                <div class="cs-task">
+                    <p class="cs-label">The task</p>
+                    <p class="cs-section-title">Design the interaction model for an agent that's useful everywhere
+                        and trusted immediately</p>
+                    <p class="cs-body-text">The agent needed to be accessible from any screen in the app, aware of
+                        whatever the nurse was already looking at, but never boxed in by it — and it needed to earn
+                        trust on first contact, the same bar the Olympus tool had to clear, with none of the safety
+                        net a structured query wizard has by design.</p>
+                </div>
+                <div class="cs-constraints">
+                    <p class="cs-label">The constraints</p>
+                    <div class="cs-constraint-list">
+                        <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
+                            <p class="cs-constraint-num">1</p>
+                            <p class="cs-constraint-text">The agent's context could never contain patient identifiers
+                                directly — only de-identified references, resolved separately from the model
+                                entirely.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
+                            <p class="cs-constraint-num">2</p>
+                            <p class="cs-constraint-text">Proactive behavior (the agent volunteering information
+                                unprompted) carries real liability and cost implications, and had to be scoped
+                                deliberately narrow rather than open-ended.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
+                            <p class="cs-constraint-num">3</p>
+                            <p class="cs-constraint-text">Real-world reprocessing documentation has genuine gaps —
+                                not every step gets logged in the moment it happens — so the interface had to
+                                represent confidence honestly instead of presenting status as flat fact.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
+                            <p class="cs-constraint-num">4</p>
+                            <p class="cs-constraint-text">Any generated compliance document needed to carry the same
+                                honesty as the live interface — provenance couldn't quietly disappear once
+                                something became a PDF.</p>
+                        </div>
+                        <div class="cs-constraint" style="--cs-constraint-color: #ffbb68;">
+                            <p class="cs-constraint-num">5</p>
+                            <p class="cs-constraint-text">The system had to hold up as a working build, not just a
+                                design spec — every interaction pattern needed to survive actually being implemented
+                                against a real database.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Action ────────────────────────────────────────────────────── -->
+
+            <div class="cs-action">
+                <div class="cs-action-header">
+                    <p class="cs-label cs-label--light">The action</p>
+                    <div class="cs-action-copy">
+                        <p class="cs-action-title">A small set of purpose-built components, each mapped to a
+                            <span class="cs-action-title-highlight">decision</span>, not a data type
+                        </p>
+                        <figure class="cs-action-title-hover-card">
+                            <img class="cs-action-title-hover-img" src="img/action-hover.svg"
+                                alt="Process shot of the Endo AI build">
+                            <figcaption>The Claude Code build session behind the working prototype</figcaption>
+                        </figure>
+                        <div class="cs-copy-pair">
+                            <p class="cs-action-body">The instinct to build one flexible chat surface didn't hold
+                                up. Instead, I designed a small registry of components, each one mapped to a
+                                specific moment of nurse decision-making — a status card for "can I proceed right
+                                now," a trace timeline for "can I prove what happened," an options card for a
+                                scheduling conflict with real tradeoffs. Restraint was the actual design language:
+                                no card tried to do more than one job well.</p>
+                            <p class="cs-action-body">The hardest constraint — keeping patient identity out of the
+                                model's context entirely — required solving it on both sides of the conversation.
+                                The agent only ever receives de-identified references in anything it outputs.
+                                Free-text input needed the same discipline: a typed patient name resolves to an
+                                internal reference before a query ever reaches the model, not after.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <p class="cs-action-carousel-title">Widgets in the system</p>
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)"
+                                        srcset="img/widget-taxonomy-1-mobile.svg"><img
+                                        src="img/widget-taxonomy-1.svg" alt="Status card widget">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)"
+                                        srcset="img/widget-taxonomy-2-mobile.svg"><img
+                                        src="img/widget-taxonomy-2.svg" alt="Trace timeline widget with confidence tiers">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)"
+                                        srcset="img/widget-taxonomy-3-mobile.svg"><img
+                                        src="img/widget-taxonomy-3.svg" alt="Options card widget">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)"
+                                        srcset="img/widget-taxonomy-4-mobile.svg"><img
+                                        src="img/widget-taxonomy-4.svg" alt="Elicitation date-range card widget">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)"
+                                        srcset="img/widget-taxonomy-5-mobile.svg"><img
+                                        src="img/widget-taxonomy-5.svg" alt="Export builder widget">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Breakthrough ──────────────────────────────────────────────── -->
+
+            <div class="cs-testing">
+                <div class="cs-testing-copy">
+                    <p class="cs-label">The breakthrough</p>
+                    <p class="cs-section-title">Reprocessing status isn't binary — it has real, nameable structure</p>
+                    <p class="cs-body-text">The turning point wasn't a UI idea, it was realizing the underlying data
+                        problem had shape. A scope's documentation isn't simply "complete" or "incomplete" — it can
+                        be system-confirmed by a sensor, reasonably implied from a later step, self-reported by a
+                        nurse with no system record at all, or genuinely missing. Once that structure was named, the
+                        interface had an honest way to represent it — a flat checkmark would have been a lie of
+                        omission in a compliance-critical tool. Every card in the system, from a live status view
+                        to a generated PDF, carries that same four-tier distinction through to the end.</p>
+                </div>
+                <div class="cs-flow-zoom">
+                    <img src="img/confidence-tier-diagram.svg" alt="Diagram of the four-tier confidence model"
+                        class="cs-flow-img">
+                    <div class="cs-flow-zoom-hint">
+                        <i class="ph ph-magnifying-glass-plus"></i>
+                        <span>Hover to zoom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Result ────────────────────────────────────────────────────── -->
+
+            <div class="cs-result">
+                <div class="cs-result-header">
+                    <p class="cs-label">The result</p>
+                    <p class="cs-section-title">A working prototype — real interface, real database, real
+                        generated reports</p>
+                    <div class="cs-copy-pair">
+                        <p class="cs-body-text">The system runs on a real backend, not a static mock: a live scope
+                            inventory, an agent built on a fixed set of typed tools rather than freeform generation,
+                            and report generation that produces actual downloadable files with real provenance data
+                            attached.</p>
+                        <p class="cs-body-text">Every interaction pattern in this case study — the confidence
+                            tiers, the PII boundary, the editable elicitation flows — is implemented and running,
+                            not just specified.</p>
+                    </div>
+                </div>
+
+                <div class="cs-result-demo">
+                    <video class="cs-result-demo-video" controls playsinline preload="metadata"
+                        poster="img/endo-ai-demo-poster.svg">
+                        <source src="img/endo-ai-demo.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="work-case-carousel buffer">
+                    <div class="work-case-media-clip">
+                        <div class="work-case-media">
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/result-1-mobile.svg"><img
+                                        src="img/result-1.svg" alt="Asset Care inventory screen">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/result-2-mobile.svg"><img
+                                        src="img/result-2.svg" alt="EndoAI chat exchange with citations">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/result-3-mobile.svg"><img
+                                        src="img/result-3.svg" alt="Trace timeline screen">
+                                </picture>
+                            </div>
+                            <div class="work-case-media-item">
+                                <picture>
+                                    <source media="(max-width: 768px)" srcset="img/result-4-mobile.svg"><img
+                                        src="img/result-4.svg" alt="Export builder finished state">
+                                </picture>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                class="ph ph-caret-left"></i></button>
+                        <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Outcome ───────────────────────────────────────────────────── -->
+
+            <div class="cs-outcome">
+                <div class="cs-outcome-inner">
+                    <p class="cs-label">Outcome</p>
+                    <p class="cs-section-title">This started as a design question and became a working system</p>
+                    <p class="cs-body-text">There's no launch metric here — this wasn't shipped to real users, and
+                        it isn't pretending to be. What's real: every hard constraint got an actual implementation,
+                        not just a diagram. What's still open: a manual reprocessing-logging flow that's designed
+                        but not yet wired into the live build, and a model upgrade from the fast, low-latency model
+                        used for prototyping to something more capable for genuinely ambiguous requests. Both are
+                        honest next steps, not gaps to talk around — they're where an interface like this has to
+                        hold up against real ambiguity rather than a clean demo path.</p>
+                </div>
+            </div>
+
+
+            <!-- ─── Next ──────────────────────────────────────────────────────── -->
+
+            <div class="cs-next">
+                <p class="cs-label">Next</p>
+                <p class="cs-section-title">Read the project this one grew out of</p>
+                <a class="work-case-cta" href="/olympus">
+                    View case study
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- ─── Footer ────────────────────────────────────────────────────── -->
+
+            <div data-site-footer></div>
+
+        </div><!-- /.page-container -->
+    </div><!-- /.page-outer -->
+
+    <script src="../src/scripts/site-chrome.js"></script>
+    <script src="../src/scripts/favicon-spinner.js"></script>
+    <script>
+        initActionTitleHover();
+        initCarousels();
+        initLightbox();
+        initConstraintScrollBackgrounds();
+        initProblemTextAnimation();
+
+        function initProblemTextAnimation() {
+            const el = document.querySelector('.cs-problem-section-text');
+            if (!el || typeof splitTextIntoChars !== 'function') return;
+
+            const text = el.textContent;
+
+            const observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    observer.disconnect();
+                    const charSpans = [];
+                    el.textContent = '';
+                    splitTextIntoChars(text, el, charSpans);
+                    startScramble(charSpans, undefined, { startDelay: 80, staggerMs: 18 });
+                }
+            }, { threshold: 0.3 });
+
+            observer.observe(el);
+        }
+
+        function initActionTitleHover() {
+            const trigger = document.querySelector('.cs-action-title-highlight');
+            const card = document.querySelector('.cs-action-title-hover-card');
+            if (!trigger || !card || trigger.dataset.hoverInit === 'true') return;
+
+            trigger.dataset.hoverInit = 'true';
+            const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+            if (isTouchDevice) {
+                trigger.style.cursor = 'pointer';
+                trigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const rect = trigger.getBoundingClientRect();
+                    card.style.left = (rect.left + rect.width / 2) + 'px';
+                    card.style.top = rect.top + 'px';
+                    card.classList.toggle('visible');
+                });
+                document.addEventListener('click', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+            } else {
+                const OFFSET = 16;
+                const IMG_W = 240;
+                const IMG_H = 300;
+
+                trigger.addEventListener('mouseenter', function () {
+                    card.classList.add('visible');
+                });
+                trigger.addEventListener('mouseleave', function () {
+                    card.classList.remove('visible');
+                });
+                window.addEventListener('scroll', function () {
+                    card.classList.remove('visible');
+                }, { passive: true });
+                document.addEventListener('mousemove', function (e) {
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    const x = e.clientX;
+                    const y = e.clientY;
+
+                    const left = (x + OFFSET + IMG_W > vw) ? x - OFFSET - IMG_W : x + OFFSET;
+                    const top = (y + OFFSET + IMG_H > vh) ? y - OFFSET - IMG_H : y + OFFSET;
+
+                    card.style.left = left + 'px';
+                    card.style.top = top + 'px';
+                });
+            }
+        }
+
+        function initCarousels() {
+            const GAP = 12;
+            document.querySelectorAll('.work-case-carousel').forEach(function (carousel) {
+                const track = carousel.querySelector('.work-case-media');
+                const prevBtn = carousel.querySelector('.carousel-prev');
+                const nextBtn = carousel.querySelector('.carousel-next');
+                const realItems = [...track.querySelectorAll('.work-case-media-item')];
+                const N = realItems.length;
+
+                if (!track || N <= 1) {
+                    prevBtn?.remove(); nextBtn?.remove();
+                    if (N === 1) realItems[0].classList.add('is-active');
+                    return;
+                }
+
+                const headClone = realItems[N - 1].cloneNode(true);
+                const tailClone = realItems[0].cloneNode(true);
+                headClone.setAttribute('aria-hidden', 'true');
+                tailClone.setAttribute('aria-hidden', 'true');
+                track.prepend(headClone);
+                track.appendChild(tailClone);
+
+                const allDomItems = [...track.querySelectorAll('.work-case-media-item')];
+                let current = 0, autoTimer = null, jumping = false;
+
+                function stride() { return (allDomItems[1]?.offsetWidth ?? 0) + GAP; }
+
+                function updateActive() {
+                    allDomItems.forEach(function (item, i) {
+                        const isActive = i === current + 1
+                            || (current === 0 && i === N + 1)
+                            || (current === N - 1 && i === 0);
+                        item.classList.toggle('is-active', isActive);
+                    });
+                }
+
+                function goTo(realIndex) {
+                    current = ((realIndex % N) + N) % N;
+                    let domIdx;
+                    if (realIndex < 0) domIdx = 0;
+                    else if (realIndex >= N) domIdx = N + 1;
+                    else domIdx = current + 1;
+                    track.scrollTo({ left: domIdx * stride(), behavior: 'smooth' });
+                    updateActive();
+                }
+
+                let scrollSettleTimer;
+                track.addEventListener('scroll', function () {
+                    if (jumping) return;
+                    clearTimeout(scrollSettleTimer);
+                    scrollSettleTimer = setTimeout(function () {
+                        const s = stride(); if (!s) return;
+                        const pos = Math.round(track.scrollLeft / s);
+                        if (pos === 0) {
+                            jumping = true;
+                            track.scrollTo({ left: N * s, behavior: 'instant' });
+                            current = N - 1;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else if (pos === N + 1) {
+                            jumping = true;
+                            track.scrollTo({ left: s, behavior: 'instant' });
+                            current = 0;
+                            requestAnimationFrame(function () { jumping = false; });
+                        } else { current = pos - 1; }
+                        updateActive();
+                    }, 80);
+                });
+
+                function startAutoAdvance() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
+                }
+
+                prevBtn?.addEventListener('click', function () { goTo(current - 1); startAutoAdvance(); });
+                nextBtn?.addEventListener('click', function () { goTo(current + 1); startAutoAdvance(); });
+
+                allDomItems.forEach(function (item, i) {
+                    item.addEventListener('click', function (e) {
+                        if (item.classList.contains('is-active') && item.getAttribute('aria-hidden') !== 'true') return;
+                        e.stopPropagation();
+                        if (i <= current) goTo(current - 1); else goTo(current + 1);
+                        startAutoAdvance();
+                    }, true);
+                });
+
+                carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carousel.addEventListener('mouseleave', startAutoAdvance);
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
+
+                requestAnimationFrame(function () {
+                    track.scrollTo({ left: stride(), behavior: 'instant' });
+                    updateActive();
+                    startAutoAdvance();
+                });
+            });
+        }
+
+        function initConstraintScrollBackgrounds() {
+            const cards = [...document.querySelectorAll('.cs-constraint')];
+            if (!cards.length) return;
+
+            const triggerY = 200;
+            const fadeRange = 280;
+            let ticking = false;
+
+            function smoothstep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function update() {
+                cards.forEach(function (card) {
+                    const distance = Math.abs(card.getBoundingClientRect().top - triggerY);
+                    const raw = Math.max(0, 1 - distance / fadeRange);
+                    const progress = smoothstep(raw).toFixed(3);
+                    card.style.setProperty('--cs-constraint-progress', progress);
+                });
+                ticking = false;
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
+        // ── Staggered scroll-entrance ─────────────────────────────────────────
+        (function () {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+            // Background blocks — stagger 0, 80, 160, 240ms
+            document.querySelectorAll('.cs-bg-block').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 80) + 'ms');
+                observer.observe(el);
+            });
+
+            // Constraint cards — stagger 0, 60, 120 … ms
+            document.querySelectorAll('.cs-constraint').forEach(function (el, i) {
+                el.classList.add('cs-fade-in');
+                el.style.setProperty('--cs-stagger-delay', (i * 60) + 'ms');
+                observer.observe(el);
+            });
+        })();
+
+        // ── Confidence tier diagram zoom ───────────────────────────────────────
+        (function () {
+            const wrap = document.querySelector('.cs-flow-zoom');
+            const img = wrap?.querySelector('.cs-flow-img');
+            const hint = wrap?.querySelector('.cs-flow-zoom-hint');
+            const hintText = hint?.querySelector('span');
+            if (!wrap || !img) return;
+
+            const SCALE = 5;
+            let active = false;
+            const isTouchFirst = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+            if (hintText && isTouchFirst) {
+                hintText.textContent = 'Tap + drag to zoom';
+            }
+
+            function zoomIn() {
+                active = true;
+                img.style.transitionDuration = '0.25s';
+                img.style.transform = 'scale(' + SCALE + ')';
+                if (hint) hint.style.opacity = '0';
+            }
+
+            function updateOrigin(e) {
+                if (!active) return;
+                const r = wrap.getBoundingClientRect();
+                const x = ((e.clientX - r.left) / r.width) * 100;
+                const y = ((e.clientY - r.top) / r.height) * 100;
+                img.style.transitionDuration = '0s';
+                img.style.transformOrigin = x + '% ' + y + '%';
+            }
+
+            function zoomOut() {
+                active = false;
+                img.style.transitionDuration = '0.3s';
+                img.style.transform = 'scale(1)';
+                img.style.transformOrigin = '50% 50%';
+                if (hint) hint.style.opacity = '1';
+            }
+
+            wrap.addEventListener('pointerenter', function (e) {
+                if (e.pointerType === 'mouse') zoomIn();
+            });
+
+            wrap.addEventListener('pointerdown', function (e) {
+                zoomIn();
+                updateOrigin(e);
+                wrap.setPointerCapture?.(e.pointerId);
+            });
+
+            wrap.addEventListener('pointermove', updateOrigin);
+
+            wrap.addEventListener('pointerleave', function (e) {
+                if (e.pointerType === 'mouse') zoomOut();
+            });
+
+            wrap.addEventListener('pointerup', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                if (e.pointerType !== 'mouse') zoomOut();
+            });
+
+            wrap.addEventListener('pointercancel', function (e) {
+                wrap.releasePointerCapture?.(e.pointerId);
+                zoomOut();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
