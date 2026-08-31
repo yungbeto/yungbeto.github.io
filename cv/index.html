@@ -8,9 +8,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roby Saavedra — CV</title>
-  <meta name="description" content="CV of Roby Saavedra, Product Designer & Design Engineer.">
+  <meta name="description" content="CV of Roby Saavedra.">
   <meta name="robots" content="noindex">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="screen">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet"
+    media="screen">
   <!-- Apply saved theme before first paint to prevent flash -->
   <script>
     (function () {
@@ -45,10 +46,13 @@
         <button class="cv-theme-toggle" id="themeToggle" aria-label="Toggle theme">
           <svg class="icon-sun" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.1" />
-            <path d="M7 1.25v1.5M7 11.25v1.5M1.25 7h1.5M11.25 7h1.5M3.05 3.05l1.06 1.06M9.89 9.89l1.06 1.06M3.05 10.95l1.06-1.06M9.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+            <path
+              d="M7 1.25v1.5M7 11.25v1.5M1.25 7h1.5M11.25 7h1.5M3.05 3.05l1.06 1.06M9.89 9.89l1.06 1.06M3.05 10.95l1.06-1.06M9.89 4.11l1.06-1.06"
+              stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
           </svg>
           <svg class="icon-moon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M10.25 8.75a4.25 4.25 0 01-5-5 4.5 4.5 0 105 5z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M10.25 8.75a4.25 4.25 0 01-5-5 4.5 4.5 0 105 5z" stroke="currentColor" stroke-width="1.1"
+              stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
         <button class="cv-download" id="cvDownload" type="button" aria-label="Download PDF">
@@ -67,7 +71,7 @@
       <img class="cv-avatar" src="/src/img/cv-pic.jpg" alt="Roby Saavedra" width="64" height="64" decoding="async">
       <div class="cv-header-info">
         <h1 class="cv-name">Roberto "Roby" Saavedra</h1>
-        <p class="cv-title">Product Designer &amp; Design Engineer</p>
+        <p class="cv-title">Product Designer</p>
         <p class="cv-location">Oakland, CA</p>
         <div class="cv-links">
           <a href="mailto:hello@robysaavedra.com" class="cv-link">
@@ -371,11 +375,13 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Noise Table</p>
             <p class="cv-item-company">JavaScript, Web Audio, Product Design</p>
-            <p class="cv-item-desc" style="margin-top:8px">A collection of generative audio tools in a VHS-style launcher. Make the next great ambient album or just vibe out.</p>
+            <p class="cv-item-desc" style="margin-top:8px">A collection of generative audio tools in a VHS-style
+              launcher. Make the next great ambient album or just vibe out.</p>
             <a href="https://noisetable.xyz" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               noisetable.xyz
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </a>
           </div>
@@ -386,11 +392,13 @@
           <div class="cv-item-content">
             <p class="cv-item-title">Windsome</p>
             <p class="cv-item-company">Svelte, Tone.js, Product Design</p>
-            <p class="cv-item-desc" style="margin-top:8px">A browser-based step sequencer inspired by hardware instruments like the Elektron Digitakt.</p>
+            <p class="cv-item-desc" style="margin-top:8px">A browser-based step sequencer inspired by hardware
+              instruments like the Elektron Digitakt.</p>
             <a href="https://windso.me" target="_blank" rel="noopener noreferrer" class="cv-item-link">
               windso.me
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
             </a>
           </div>
@@ -525,10 +533,10 @@
         document.body.classList.add('js-ready');
 
         // Per-section stagger reveal for experience / project items
-        document.querySelectorAll('.cv-section').forEach(function(section) {
-          section.querySelectorAll('.cv-item').forEach(function(item, i) {
+        document.querySelectorAll('.cv-section').forEach(function (section) {
+          section.querySelectorAll('.cv-item').forEach(function (item, i) {
             item.style.transitionDelay = (i * 55) + 'ms';
-            var obs = new IntersectionObserver(function(entries) {
+            var obs = new IntersectionObserver(function (entries) {
               if (entries[0].isIntersecting) {
                 item.classList.add('is-visible');
                 obs.disconnect();
@@ -539,12 +547,12 @@
         });
 
         // Stagger reveal for skill chips
-        document.querySelectorAll('.cv-skill-tags').forEach(function(group) {
+        document.querySelectorAll('.cv-skill-tags').forEach(function (group) {
           var chips = Array.from(group.querySelectorAll('.cv-skill-tag'));
-          chips.forEach(function(chip, i) { chip.style.transitionDelay = (i * 65) + 'ms'; });
-          var obs = new IntersectionObserver(function(entries) {
+          chips.forEach(function (chip, i) { chip.style.transitionDelay = (i * 65) + 'ms'; });
+          var obs = new IntersectionObserver(function (entries) {
             if (entries[0].isIntersecting) {
-              chips.forEach(function(chip) { chip.classList.add('is-visible'); });
+              chips.forEach(function (chip) { chip.classList.add('is-visible'); });
               obs.disconnect();
             }
           }, { threshold: 0.15 });
@@ -552,9 +560,9 @@
         });
 
         // Stagger reveal for press items
-        document.querySelectorAll('.cv-press-item').forEach(function(item, i) {
+        document.querySelectorAll('.cv-press-item').forEach(function (item, i) {
           item.style.transitionDelay = (i * 70) + 'ms';
-          var obs = new IntersectionObserver(function(entries) {
+          var obs = new IntersectionObserver(function (entries) {
             if (entries[0].isIntersecting) {
               item.classList.add('is-visible');
               obs.disconnect();
