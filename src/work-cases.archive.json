@@ -1,0 +1,46 @@
+{
+  "_note": "Entries removed from work-cases.json but kept here in case they need to come back. Not fetched by any page — this file is inert. To restore an entry, copy its object back into the array in work-cases.json.",
+  "removed": [
+    {
+      "removedOn": "2026-08-31",
+      "reason": "Standalone Olympus/TraceLink homepage card hidden — the Endo AI card now points to the same Olympus job entry via showJobLink instead.",
+      "entry": {
+        "id": "olympus",
+        "company": "Olympus",
+        "showJobLink": true,
+        "role": "Staff Product Designer",
+        "icon": "src/img/companyIcons/companyIcon_olympus.png",
+        "caseStudy_url": "/olympus",
+        "caseStudyImage": "src/img/CaseStudyImages/OlympusCaseStudy.jpg",
+        "title": "Designing a natural language search tool for a clinical environment",
+        "blurb": "At Olympus I led design on a traceability search tool that let clinical staff retrieve reprocessing records in seconds, with no SQL knowledge, no training, and no paper ledgers.",
+        "copy": [
+          "I led design for a clinical traceability tool that helped hospital staff retrieve reprocessing records from complex structured data.",
+          "The work explored how to make high-stakes, low-frequency workflows feel understandable on first contact, using a guided query experience that reduced ambiguity and built confidence."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "src": "olympus/img/1.png",
+            "srcMobile": "olympus/img/1sm.png"
+          },
+          {
+            "type": "image",
+            "src": "olympus/img/2.png",
+            "srcMobile": "olympus/img/2sm.png"
+          },
+          {
+            "type": "image",
+            "src": "olympus/img/3.png",
+            "srcMobile": "olympus/img/3sm.png"
+          },
+          {
+            "type": "image",
+            "src": "olympus/img/4.png",
+            "srcMobile": "olympus/img/4sm.png"
+          }
+        ]
+      }
+    }
+  ]
+}

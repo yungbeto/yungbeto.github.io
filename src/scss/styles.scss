@@ -31,7 +31,7 @@ $card-color-05: #ffbb68;
 
 *::selection {
   background: $pink;
-  color: $bg;
+  color: $ink;
 }
 *::-moz-selection {
   background: $ink;
@@ -1190,7 +1190,7 @@ body.js-ready .projects-card.is-visible {
 
   &:hover {
     background: var(--cta-hover, #{$pink});
-    color: $ink;
+    color: var(--cta-hover-color, #{$ink});
   }
 
   &:active {
@@ -1218,6 +1218,10 @@ body.js-ready .projects-card.is-visible {
 }
 
 // Per-case-study CTA hover colors (home page cards)
+#endo-ai {
+  --cta-hover: #0e182a;
+  --cta-hover-color: #cbd5e1;
+}
 #olympus {
   --cta-hover: #93c5fd;
 }
@@ -3204,9 +3208,17 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   display: flex;
   flex-direction: column;
   gap: 48px;
-  max-width: 584px;
+  width: 100%;
   text-align: flex-start;
   align-items: flex-start;
+
+  .cs-section-title {
+    max-width: 584px;
+  }
+
+  > .cs-body-text {
+    max-width: 584px;
+  }
 }
 
 .cs-flow-zoom {
