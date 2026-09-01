@@ -1,5 +1,62 @@
 [
   {
+    "id": "endo-ai",
+    "company": "Olympus",
+    "showJobLink": true,
+    "role": "Product Design",
+    "icon": "src/img/companyIcons/companyIcon_olympus.png",
+    "caseStudy_url": "/endo-ai",
+    "caseStudyImage": "endo-ai/img/OlysenseCover.png",
+    "title": "Designing the agentic layer of a clinical operations platform",
+    "blurb": "Agentic SaaS interface that reduces complexity so a nurse has more time to focus on patient care.",
+    "copy": [
+      "I joined a four-person pod tasked with designing the natural-language layer that would come next, starting from the hardest constraint in the room: the agent could never see the patient data it was reasoning about.",
+      "The work centered on a four-tier confidence model for reprocessing status, a small registry of purpose-built widgets instead of a single chat surface, and a PII boundary that had to hold on both the output and input side of every conversation. It shipped to a real private beta across three partner clinics in Germany and Spain."
+    ],
+    "media": [
+      {
+        "type": "image",
+        "src": "olympus/img/1.png",
+        "srcMobile": "olympus/img/1sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/2.png",
+        "srcMobile": "olympus/img/2sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/3.png",
+        "srcMobile": "olympus/img/3sm.png"
+      },
+      {
+        "type": "image",
+        "src": "olympus/img/4.png",
+        "srcMobile": "olympus/img/4sm.png"
+      },
+      {
+        "type": "image",
+        "src": "endo-ai/img/scope-status.png",
+        "srcMobile": "endo-ai/img/scope-status.png"
+      },
+      {
+        "type": "image",
+        "src": "endo-ai/img/scope-trace.png",
+        "srcMobile": "endo-ai/img/scope-trace.png"
+      },
+      {
+        "type": "image",
+        "src": "endo-ai/img/scope-history.png",
+        "srcMobile": "endo-ai/img/scope-history.png"
+      },
+      {
+        "type": "image",
+        "src": "endo-ai/img/full.png",
+        "srcMobile": "endo-ai/img/full.png"
+      }
+    ]
+  },
+  {
     "id": "olympus",
     "company": "Olympus",
     "showJobLink": true,
@@ -44,10 +101,10 @@
     "caseStudy_url": "/good-song-club",
     "caseStudyImage": "src/img/CaseStudyImages/GoodSongClubCaseStudy.jpg",
     "title": "A music platform built around one constraint: one song per person per day",
-    "blurb": "I designed and built Good Song Club independently — a platform where the only rule is one song per day, no algorithm. Two years in, it has crossed 10,000 posts and found a worldwide community.",
+    "blurb": "I designed and built Good Song Club independently \u2014 a platform where the only rule is one song per day, no algorithm. Two years in, it has crossed 10,000 posts and found a worldwide community.",
     "copy": [
       "Good Song Club started from a personal frustration: there was no good place to share a single, considered music recommendation with friends. Streaming platforms optimise for volume; social media buries a link in noise.",
-      "The platform runs on two deliberate constraints — YouTube links only, one post per day — that define everything about how it feels to use it. I designed and built the entire product alone, from product strategy through front-end and back-end engineering."
+      "The platform runs on two deliberate constraints \u2014 YouTube links only, one post per day \u2014 that define everything about how it feels to use it. I designed and built the entire product alone, from product strategy through front-end and back-end engineering."
     ],
     "media": [
       {
@@ -116,7 +173,7 @@
     "title": "Defining a passenger experience inside an all-electric rideshare fleet",
     "blurb": "At Revel I designed a bespoke tablet interface mounted in the back seat of every Tesla in the company's rideshare fleet, turning an untouched surface into an elevated passenger experience.",
     "copy": [
-      "I joined Revel as their first designer in the Summer of 2019 — a pivotal time in the company's growth. I was tasked with designing a full suite of internal tools that would allow the company to bring all their operations and logistics in-house.",
+      "I joined Revel as their first designer in the Summer of 2019 \u2014 a pivotal time in the company's growth. I was tasked with designing a full suite of internal tools that would allow the company to bring all their operations and logistics in-house.",
       "I worked closely with nearly every department lead in the company to ensure that the tools we built met the needs of all who'd be using it. As a result, once we released the tools, we saw a huge spike in productivity and financial efficiency.",
       "In addition to internal tools I was a key stakeholder on a number of user-facing, high-revenue initiatives. For example I led design for a unique, passenger facing tablet in the run-up to the launch of Revel's rideshare program in an effort to rise above the existing players in the market, flexing our position as a car-service provider that owned the end to end experience.",
       "I also designed the sign-up, purchase funnel, and user dashboard experience for Revel's electric bike rental program."

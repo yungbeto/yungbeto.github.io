@@ -5,7 +5,7 @@
 
 *::selection {
   background: #f9a8d4;
-  color: #d4d4d8; }
+  color: #3f3f46; }
 
 *::-moz-selection {
   background: #3f3f46;
@@ -825,7 +825,7 @@ body.js-ready .projects-card.is-visible {
   background: #e4e4e7; }
   .work-case-cta:hover {
     background: var(--cta-hover, #f9a8d4);
-    color: #3f3f46; }
+    color: var(--cta-hover-color, #3f3f46); }
   .work-case-cta:active {
     transform: scale(0.96); }
   .work-case-cta i {
@@ -840,6 +840,10 @@ body.js-ready .projects-card.is-visible {
   width: 100%; }
   .work-case-see-more:hover i {
     transform: translateY(3px); }
+
+#endo-ai {
+  --cta-hover: #0e182a;
+  --cta-hover-color: #cbd5e1; }
 
 #olympus {
   --cta-hover: #93c5fd; }
@@ -2349,9 +2353,13 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   display: flex;
   flex-direction: column;
   gap: 48px;
-  max-width: 584px;
+  width: 100%;
   text-align: flex-start;
   align-items: flex-start; }
+  .cs-testing-copy .cs-section-title {
+    max-width: 584px; }
+  .cs-testing-copy > .cs-body-text {
+    max-width: 584px; }
 
 .cs-flow-zoom {
   position: relative;
@@ -2743,6 +2751,24 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
       padding: 0 16px; } }
   .cs-result-header .cs-section-title {
     max-width: 584px; }
+
+.cs-result-demo {
+  padding: 0 32px; }
+  @media (max-width: 768px) {
+    .cs-result-demo {
+      padding: 0 16px; } }
+
+.cs-result-demo-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  background: #e4e4e7; }
+  @media (max-width: 768px) {
+    .cs-result-demo-video {
+      border-radius: 14px; } }
 
 .cs-video-section {
   padding: 32px;

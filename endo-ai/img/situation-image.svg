@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#18181b"/>
+  <rect x="8" y="8" width="884" height="1184" fill="none" stroke="#52525b" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="50%" y="47%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#d4d4d8" font-weight="600">PLACEHOLDER</text>
+  <text x="50%" y="56%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="25" fill="#71717a">situation image — instant judgment under pressure</text>
+</svg>

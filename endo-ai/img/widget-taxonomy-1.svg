@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <rect width="1400" height="900" fill="#18181b"/>
+  <rect x="8" y="8" width="1384" height="884" fill="none" stroke="#52525b" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="50%" y="47%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="55" fill="#d4d4d8" font-weight="600">PLACEHOLDER</text>
+  <text x="50%" y="56%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="33" fill="#71717a">widget-taxonomy-1.png</text>
+</svg>

@@ -748,6 +748,14 @@ function initPortfolioWindows() {
       imgHeight: 284,
       linkUrl: 'https://digthis.club',
     },
+    {
+      title: 'Endo AI Assistant',
+      icon: 'ph-robot',
+      src: 'endo-ai/img/endo-ai-demo.webm',
+      width: 400,
+      imgHeight: 225,
+      linkUrl: '/endo-ai',
+    },
   ];
 
   // Broad zones covering distinct quadrants — position is fully random within each zone
@@ -758,6 +766,7 @@ function initPortfolioWindows() {
     { x: [0.5, 0.9], y: [0.4, 0.82] }, // bottom-right
     { x: [0.2, 0.72], y: [0.08, 0.6] }, // center wildcard
     { x: [0.3, 0.7], y: [0.3, 0.75] }, // mid-screen
+    { x: [0.35, 0.65], y: [0.02, 0.28] }, // top-center
   ];
 
   // Shuffle so the window-to-zone pairing changes every page load
@@ -800,9 +809,10 @@ function initPortfolioWindows() {
       win.className = 'portfolio-window';
       win.style.cssText = `left:${left}px;top:${top}px;width:${winW}px`;
 
-      const isVideo = data.src.endsWith('.mp4');
+      const isVideo = /\.(mp4|webm)$/i.test(data.src);
+      const videoType = data.src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
       const mediaHtml = isVideo
-        ? `<video class="portfolio-window-img" autoplay muted loop playsinline width="${winW}" height="${winH - 24}"><source src="${data.src}" type="video/mp4"></video>`
+        ? `<video class="portfolio-window-img" autoplay muted loop playsinline width="${winW}" height="${winH - 24}"><source src="${data.src}" type="${videoType}"></video>`
         : `<img class="portfolio-window-img" src="${data.src}" alt="${data.title}" loading="lazy" width="${winW}" height="${winH - 24}">`;
 
       const isJobLink = data.linkUrl?.startsWith('job:');
