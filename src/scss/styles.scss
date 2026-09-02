@@ -3046,11 +3046,18 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   gap: 48px;
   min-height: 220px;
   text-wrap: pretty;
+  // Scroll progress: bg $surface → $ink (or --cs-constraint-color), text $ink → $surface
   background-color: color-mix(
     in srgb,
-    var(--cs-constraint-color, $surface)
+    var(--cs-constraint-color, $ink)
       calc(var(--cs-constraint-progress, 0) * 100%),
     $surface
+  );
+  color: color-mix(
+    in srgb,
+    var(--cs-constraint-fg, $ink)
+      calc(var(--cs-constraint-progress, 0) * 100%),
+    $ink
   );
   box-shadow: calc(4px * var(--cs-constraint-progress, 0))
     calc(4px * var(--cs-constraint-progress, 0)) 0 0
@@ -3060,20 +3067,20 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 .cs-constraint-num {
   font-size: 20px;
   line-height: 1.2;
-  color: $ink;
+  color: inherit;
   margin: 0;
 }
 
 .cs-constraint-text {
   font-size: 24px;
   line-height: 1.33;
-  color: $ink;
+  color: inherit;
   margin: 0;
   text-wrap: pretty;
   max-width: 75%;
 
   span {
-    color: $ink;
+    color: inherit;
   }
 }
 

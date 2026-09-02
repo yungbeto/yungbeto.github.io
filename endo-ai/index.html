@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Endo AI / Case Study · Roby Saavedra</title>
+    <title>Endo AI · Roby Saavedra</title>
     <meta name="description"
         content="A case study on designing the agentic layer of a clinical operations platform, building trust into an AI assistant that can never see the patient data it's reasoning about, from a cross-functional pod to a real beta launch.">
 
@@ -50,7 +50,7 @@
                         <p class="cs-lead">At Olympus I led design and built the prototype for <strong>Endo AI</strong>,
                             an embedded AI
                             assistant for a
-                            clinical SaaS platform, built with a cross-functional pod to cut the time nurses
+                            clinical SaaS platform, aimed at reducing the time nurses
                             spend hunting for information.</p>
                         <div class="cs-hero-kv-list">
                             <div class="cs-hero-kv-list-header">
@@ -83,7 +83,7 @@
 
             <!-- ─── Background ────────────────────────────────────────────────── -->
 
-            <div class="cs-bg">
+            <!-- <div class="cs-bg">
                 <div class="cs-bg-inner">
                     <p class="cs-label cs-label--light">Background</p>
                     <p class="cs-bg-lead">A few things to know before diving in.</p>
@@ -112,9 +112,7 @@
                             <p class="cs-bg-num">3</p>
                             <div class="cs-bg-content">
                                 <p class="cs-bg-block-label">The premise</p>
-                                <p class="cs-bg-block-text">A few weeks from wide release, our product director
-                                    pulled together a four-person pod (design, research, PM, engineering) to
-                                    figure out how that layer took shape.</p>
+                                <p class="cs-bg-block-text">Observing healthcare workers in the field, how they </p>
                             </div>
                         </div>
                         <div class="cs-bg-block">
@@ -128,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- ─── Situation ─────────────────────────────────────────────────── -->
 
@@ -180,29 +178,26 @@
                         three-day offsite with legal and our privacy lead reshaped the architecture before a
                         single component got designed.</p> -->
                 </div>
-                <div class="cs-constraints">
+                <div class="cs-constraints" style="--cs-constraint-color: #3f3f46; --cs-constraint-fg: #e4e4e7;">
                     <p class="cs-label">The constraints</p>
                     <div class="cs-constraint-list">
-                        <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">1 - Privacy</p>
                             <p class="cs-constraint-text">The agent's context could never contain patient identifiers
                                 directly, only de-identified references resolved by the client's own permissions
                                 layer, never by the model.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">2 - Proactive behavior</p>
-                            <p class="cs-constraint-text">Proactive behavior (the agent volunteering information
-                                unprompted) is a bigger liability than answering on demand, and means
-                                running checks continuously instead of once per question. It had to be
-                                allowlisted to a short, pre-approved set of conditions.</p>
+                            <p class="cs-constraint-text">The agent proactively volunteering information
+                                unprompted is a potential liability.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">3 - Imperfect data</p>
                             <p class="cs-constraint-text">Real-world reprocessing documentation has genuine gaps,
-                                so status needed a real confidence model (system-confirmed, implied,
-                                self-reported, missing), not a flat checkmark.</p>
+                                so status needed a nuanced validation system.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">4 - Flexibility</p>
                             <p class="cs-constraint-text">The agent had to be able to handle a wide range of questions,
                                 from simple status checks to complex chain-of-custody queries.</p>
@@ -227,19 +222,16 @@
                             <figcaption>The Claude Code build session behind the working prototype</figcaption>
                         </figure>
                         <div class="cs-copy-pair">
-                            <p class="cs-action-body">One flexible chat surface didn't hold up. Instead, I
-                                designed a small registry of components, each mapped to a specific moment of
+                            <p class="cs-action-body">I
+                                designed a small collection of components, each mapped to a specific moment of
                                 nurse decision-making: a status card for "can I proceed now," a trace timeline
                                 for "can I prove what happened," an options card for a scheduling conflict.
-                                Restraint was the design language: no card tried to do more than one job.</p>
-                            <p class="cs-action-body">Keeping patient identity out of the model took two passes.
-                                The output side was designed in from the offsite: the agent's context never
-                                receives patient identifiers. The input side surfaced later, during dogfooding,
-                                when a nurse typed a real patient's name straight into the chat box, treated as a
-                                real incident, not a minor bug. The fix: typed patient references resolve to an
-                                internal reference before a request leaves the client, with a visible chip
-                                confirming what was sent. Our privacy lead still opens every review by asking if
-                                we checked the free-text path.</p>
+                            </p>
+                            <p class="cs-action-body">Keeping patient identity out of the model was paramount.
+                                PII gets swapped for a token by a local redaction layer before it ever reaches the model
+                                and matched against the hospital's own patient roster first.
+                                The model only ever sees the token, never the name which ensures patient privacy is
+                                safe.</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +275,9 @@
                     <p class="cs-section-title">An assets status has real, nameable structure</p>
                     <div class="cs-copy-pair">
                         <p class="cs-body-text">Using a partner clinic's data, we found that 12% of scope
-                            location fields were stale by the time a nurse checked them. This led us to design a
+                            location fields were stale by the time a nurse checked them. Additionally there were many
+                            cases where scope events were essentially implied rather than actually captured. This led us
+                            to design a
                             four-tier system for reprocessing status: system-confirmed, reasonably implied,
                             self-reported, or genuinely missing.</p>
                         <p></p>
