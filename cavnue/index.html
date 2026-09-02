@@ -173,33 +173,33 @@
                         uptime, ML engineers validating sensor output, and vehicle OEMs evaluating corridor
                         readiness, all in one place.</p>
                 </div>
-                <div class="cs-constraints">
+                <div class="cs-constraints" style="--cs-constraint-color: #3f3f46; --cs-constraint-fg: #e4e4e7;">
                     <p class="cs-label">The constraints</p>
                     <div class="cs-constraint-list">
-                        <div class="cs-constraint" style="--cs-constraint-color: #b3b7ff;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">1</p>
                             <p class="cs-constraint-text">The hardware schema was actively evolving. The design had to
                                 accommodate a moving target without breaking every time a new component was introduced
                                 or renamed.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #DB98FF;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">2</p>
                             <p class="cs-constraint-text">Three distinct user types with meaningfully different needs:
                                 road operators, ML engineers, and vehicle OEMs, each with a different layer of
                                 the hardware stack to care about.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #d0f583;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">3</p>
                             <p class="cs-constraint-text">Status had to read instantly. Downtime in the field had direct
                                 operational consequences. The interface couldn't require parsing or interpretation
                                 under pressure.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #ff99ff;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">4</p>
                             <p class="cs-constraint-text">The MVP needed to serve internal users first, then scale to
                                 external beta partners at real-world test sites without a full redesign.</p>
                         </div>
-                        <div class="cs-constraint" style="--cs-constraint-color: #ffbb68;">
+                        <div class="cs-constraint">
                             <p class="cs-constraint-num">5</p>
                             <p class="cs-constraint-text">No existing tool solved this problem. Available traffic
                                 monitoring software was decades behind and not built for component-level hardware
