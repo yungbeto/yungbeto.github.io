@@ -39,6 +39,14 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+a {
+  color: #3f3f46;
+  text-decoration: underline;
+}
+a:hover {
+  color: rgb(199.2580645161, 13.7419354839, 114.5161290323);
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -2727,27 +2735,28 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   gap: 48px;
   min-height: 220px;
   text-wrap: pretty;
-  background-color: color-mix(in srgb, var(--cs-constraint-color, #e4e4e7) calc(var(--cs-constraint-progress, 0) * 100%), #e4e4e7);
+  background-color: color-mix(in srgb, var(--cs-constraint-color, #3f3f46) calc(var(--cs-constraint-progress, 0) * 100%), #e4e4e7);
+  color: color-mix(in srgb, var(--cs-constraint-fg, #3f3f46) calc(var(--cs-constraint-progress, 0) * 100%), #3f3f46);
   box-shadow: calc(4px * var(--cs-constraint-progress, 0)) calc(4px * var(--cs-constraint-progress, 0)) 0 0 rgba(156, 163, 175, var(--cs-constraint-progress, 0));
 }
 
 .cs-constraint-num {
   font-size: 20px;
   line-height: 1.2;
-  color: #3f3f46;
+  color: inherit;
   margin: 0;
 }
 
 .cs-constraint-text {
   font-size: 24px;
   line-height: 1.33;
-  color: #3f3f46;
+  color: inherit;
   margin: 0;
   text-wrap: pretty;
   max-width: 75%;
 }
 .cs-constraint-text span {
-  color: #3f3f46;
+  color: inherit;
 }
 
 .cs-action {
@@ -3206,7 +3215,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 }
 
 .crm-pink-marker {
-  background: #f9a8d4;
+  background: rgb(190.7894736842, 190.7894736842, 197.2105263158);
+  border: 1px solid #3f3f46;
   left: 89%;
   top: 64%;
   opacity: 0;
@@ -3241,9 +3251,9 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   border-color: #3f3f46;
 }
 .crm-marker-label--pink {
-  background: #f9a8d4;
+  background: rgb(190.7894736842, 190.7894736842, 197.2105263158);
   color: #3f3f46;
-  border-color: #f9a8d4;
+  border-color: #3f3f46;
 }
 
 .crm-reveal {
@@ -3253,7 +3263,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   max-width: 320px;
   z-index: 3;
   padding: 16px 20px;
-  background: rgb(250.6451612903, 191.8548387097, 223.7903225806);
+  background: #3f3f46;
+  color: #e4e4e7;
   border-radius: 12px;
   border: 1px solid rgba(63, 63, 70, 0.35);
   opacity: 0;
@@ -3288,7 +3299,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 .crm-reveal p {
   font-size: 14px;
   line-height: 1.6;
-  color: #3f3f46;
+  color: #e4e4e7;
   margin: 0;
 }
 
