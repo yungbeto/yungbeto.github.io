@@ -58,6 +58,14 @@ body {
   }
 }
 
+a {
+  color: $ink;
+  text-decoration: underline;
+  &:hover {
+    color: darken($pink, 40%);
+  }
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -3055,8 +3063,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   );
   color: color-mix(
     in srgb,
-    var(--cs-constraint-fg, $ink)
-      calc(var(--cs-constraint-progress, 0) * 100%),
+    var(--cs-constraint-fg, $ink) calc(var(--cs-constraint-progress, 0) * 100%),
     $ink
   );
   box-shadow: calc(4px * var(--cs-constraint-progress, 0))
@@ -3553,7 +3560,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 }
 
 .crm-pink-marker {
-  background: $pink;
+  background: lighten($ink, 50%);
+  border: 1px solid $ink;
   left: 89%;
   top: 64%;
   opacity: 0;
@@ -3592,9 +3600,9 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
     border-color: $ink;
   }
   &--pink {
-    background: $pink;
+    background: lighten($ink, 50%);
     color: $ink;
-    border-color: $pink;
+    border-color: $ink;
   }
 }
 
@@ -3605,7 +3613,8 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   max-width: 320px;
   z-index: 3;
   padding: 16px 20px;
-  background: lighten($pink, 5%);
+  background: $ink;
+  color: $surface;
   border-radius: 12px;
   border: 1px solid rgba($ink, 0.35);
   opacity: 0;
@@ -3646,7 +3655,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   p {
     font-size: 14px;
     line-height: 1.6;
-    color: $ink;
+    color: $surface;
     margin: 0;
   }
 }
