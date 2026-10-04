@@ -238,15 +238,71 @@
   text-wrap: pretty;
 }
 
+.ill-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: calc(100vh - 112px);
+  padding: 16px;
+  color: #3f3f46;
+  animation: ill-loading-in 0.3s ease 0.25s backwards;
+}
+
+.ill-loading-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.ill-loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.ill-loader::before, .ill-loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(0, 0, 0, 0), currentColor 1deg 18deg, rgba(0, 0, 0, 0) 20deg 36deg);
+  -webkit-mask: repeating-radial-gradient(farthest-side, #000 0 10%, rgba(0, 0, 0, 0) 0 20%);
+  mask: repeating-radial-gradient(farthest-side, #000 0 10%, rgba(0, 0, 0, 0) 0 20%);
+  animation: ill-loader-spin 4s infinite linear;
+}
+.ill-loader::after {
+  -webkit-mask: repeating-radial-gradient(farthest-side, rgba(0, 0, 0, 0) 0 10%, #000 0 20%);
+  mask: repeating-radial-gradient(farthest-side, rgba(0, 0, 0, 0) 0 10%, #000 0 20%);
+  animation-direction: reverse;
+}
+
+@keyframes ill-loader-spin {
+  100% {
+    transform: rotate(0.5turn);
+  }
+}
+@keyframes ill-loading-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ill-loader::before,
+  .ill-loader::after {
+    animation-duration: 16s;
+  }
+}
+.ill-loading[hidden],
 .ill-empty[hidden],
 .ill-grid[hidden] {
   display: none;
 }
 
 .ill-grid {
-  padding: 12px;
+  padding: 16px;
   column-count: 2;
-  column-gap: 12px;
+  column-gap: 8px;
 }
 @media (min-width: 720px) {
   .ill-grid {
@@ -263,7 +319,7 @@
   position: relative;
   display: block;
   width: 100%;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   background: #e4e4e7;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
@@ -276,6 +332,17 @@
   height: auto;
   outline: 1px solid rgba(0, 0, 0, 0.1);
   outline-offset: -1px;
+  opacity: 0;
+  filter: blur(4px);
+  transform: scale(1.02);
+  transition-property: opacity, filter, transform;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.ill-item img.is-loaded {
+  opacity: 1;
+  filter: none;
+  transform: none;
 }
 .ill-item:has(.ill-item-actions) .ill-item-name {
   padding-right: 84px;
@@ -732,6 +799,12 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .ill-item img {
+    filter: none;
+    transform: none;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+  }
   .ill-add,
   .ill-iconbtn,
   .ill-drop,

@@ -34,6 +34,8 @@ const THUMB_QUALITY = 0.82;
 const LIGHTBOX_EASE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 const LIGHTBOX_MS = 420;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const REVEAL_STAGGER_MS = 60;
+const REVEAL_MAX_DELAY_MS = 360;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -80,6 +82,7 @@ const confirmHeading = document.getElementById('ill-confirm-heading');
 const confirmMessage = document.getElementById('ill-confirm-message');
 const confirmOk = document.getElementById('ill-confirm-ok');
 const main = document.getElementById('ill');
+const loadingEl = document.getElementById('ill-loading');
 
 let items = [];
 let viewerIndex = -1;
@@ -92,6 +95,10 @@ let editorQueue = [];
 let editorShown = 0;
 let editorTotal = 0;
 let thumbsRunning = false;
+let loaded = false;
+// Images already revealed once; render() rebuilds the grid on every edit and these shouldn't replay.
+const revealedSrcs = new Set();
+let nextRevealAt = 0;
 let viewerAnims = [];
 let viewerClosing = false;
 
@@ -313,6 +320,12 @@ async function loadDrawings() {
 function render() {
   const n = items.length;
   syncThumbsButton();
+  // Auth can resolve before the drawings do; don't flash "No drawings yet." under the loader.
+  if (!loaded) {
+    empty.hidden = true;
+    grid.hidden = true;
+    return;
+  }
   empty.textContent = isAuthed()
     ? 'Drop or paste a drawing, or add one above.'
     : n
@@ -342,13 +355,21 @@ function render() {
     openBtn.setAttribute('aria-label', title);
 
     const img = document.createElement('img');
-    img.src = item.thumbUrl || item.url;
-    img.alt = title;
-    img.decoding = 'async';
+    const src = item.thumbUrl || item.url;
+    // loading must be set before src, or the browser may start fetching eagerly.
     img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = title;
     img.draggable = false;
     if (item.width) img.width = item.width;
     if (item.height) img.height = item.height;
+    if (revealedSrcs.has(src)) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => revealImage(img, src), { once: true });
+      img.addEventListener('error', () => img.classList.add('is-loaded'), { once: true });
+    }
+    img.src = src;
 
     const overlay = document.createElement('span');
     overlay.className = 'ill-item-overlay';
@@ -397,6 +418,26 @@ function render() {
 
     grid.appendChild(card);
   });
+}
+
+// Fades each image in once it has loaded and decoded. Images that land together are
+// staggered so a screenful arrives as a ripple rather than all at once.
+function revealImage(img, src) {
+  img
+    .decode()
+    .catch(() => {})
+    .then(() => {
+      revealedSrcs.add(src);
+      const now = performance.now();
+      nextRevealAt = Math.max(nextRevealAt, now);
+      const delay = Math.min(nextRevealAt - now, REVEAL_MAX_DELAY_MS);
+      nextRevealAt += REVEAL_STAGGER_MS;
+      if (delay) img.style.transitionDelay = delay + 'ms';
+      img.addEventListener('transitionend', () => img.style.removeProperty('transition-delay'), {
+        once: true,
+      });
+      requestAnimationFrame(() => img.classList.add('is-loaded'));
+    });
 }
 
 function showViewer(index) {
@@ -1136,6 +1177,8 @@ onAuthStateChanged(auth, (user) => {
 
 loadDrawings()
   .then(() => {
+    loaded = true;
+    loadingEl.hidden = true;
     render();
     main.removeAttribute('aria-busy');
     const openId = new URLSearchParams(location.search).get('d');
@@ -1143,6 +1186,8 @@ loadDrawings()
   })
   .catch((err) => {
     console.error(err);
+    loaded = true;
+    loadingEl.hidden = true;
     main.removeAttribute('aria-busy');
     empty.hidden = false;
     empty.textContent = 'Couldn’t load drawings.';

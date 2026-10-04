@@ -1,4 +1,5 @@
-@import 'variables';
+@use 'sass:color';
+@use 'variables' as *;
 
 // Reset
 *,
@@ -40,7 +41,7 @@ a {
   color: $ink;
   text-decoration: underline;
   &:hover {
-    color: darken($pink, 40%);
+    color: color.adjust($pink, $lightness: -40%);
   }
 }
 
@@ -389,7 +390,7 @@ ul {
 
   &:hover {
     opacity: 0.5;
-    color: darken($pink, 40%);
+    color: color.adjust($pink, $lightness: -40%);
     .toc-link-text {
       transform: translateX(4px);
     }
@@ -2113,7 +2114,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
   width: 100%;
   overflow: hidden;
 
-  background: darken($surface, 8%);
+  background: color.adjust($surface, $lightness: -8%);
 }
 
 .cs-hero-kv-list-header {
@@ -2131,7 +2132,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
     transform 0.1s cubic-bezier(0.2, 0, 0, 1);
 
   &:hover {
-    background: darken($surface, 10%);
+    background: color.adjust($surface, $lightness: -10%);
   }
 
   i {
@@ -3538,7 +3539,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 }
 
 .crm-pink-marker {
-  background: lighten($ink, 50%);
+  background: color.adjust($ink, $lightness: 50%);
   border: 1px solid $ink;
   left: 89%;
   top: 64%;
@@ -3578,7 +3579,7 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
     border-color: $ink;
   }
   &--pink {
-    background: lighten($ink, 50%);
+    background: color.adjust($ink, $lightness: 50%);
     color: $ink;
     border-color: $ink;
   }

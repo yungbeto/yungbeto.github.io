@@ -1,4 +1,4 @@
-// Design tokens — shared across stylesheets via @import 'variables';
+// Design tokens — shared across stylesheets via @use 'variables' as *;
 
 $bg: #d4d4d8;
 $surface: #e4e4e7;
