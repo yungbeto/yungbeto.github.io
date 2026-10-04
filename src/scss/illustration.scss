@@ -23,6 +23,9 @@
   font-weight: 400;
   line-height: 24px;
   text-wrap: balance;
+  @media (max-width: $tablet) {
+    margin: 0;
+  }
 }
 
 .ill-actions {
@@ -298,8 +301,22 @@
     padding-right: 44px;
   }
 
-  &:hover,
-  &:focus-within {
+  // Hover only where hover is real (touch taps leave a sticky :hover), and keyboard focus
+  // only (:focus-within would also match the focus restored to the card after the viewer closes).
+  @media (hover: hover) {
+    &:hover {
+      .ill-item-overlay {
+        opacity: 1;
+      }
+
+      .ill-item-actions {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &:has(:focus-visible) {
     .ill-item-overlay {
       opacity: 1;
     }
@@ -412,17 +429,6 @@
   &:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 2px;
-  }
-}
-
-@media (hover: none) {
-  .ill-item-overlay {
-    opacity: 1;
-  }
-
-  .ill-item-actions {
-    opacity: 1;
-    pointer-events: auto;
   }
 }
 

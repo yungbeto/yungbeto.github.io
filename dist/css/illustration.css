@@ -22,6 +22,11 @@
   line-height: 24px;
   text-wrap: balance;
 }
+@media (max-width: 768px) {
+  .ill-title {
+    margin: 0;
+  }
+}
 
 .ill-actions {
   margin-left: auto;
@@ -278,10 +283,19 @@
 .ill-item:has(.ill-item-actions .ill-item-action:only-child) .ill-item-name {
   padding-right: 44px;
 }
-.ill-item:hover .ill-item-overlay, .ill-item:focus-within .ill-item-overlay {
+@media (hover: hover) {
+  .ill-item:hover .ill-item-overlay {
+    opacity: 1;
+  }
+  .ill-item:hover .ill-item-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.ill-item:has(:focus-visible) .ill-item-overlay {
   opacity: 1;
 }
-.ill-item:hover .ill-item-actions, .ill-item:focus-within .ill-item-actions {
+.ill-item:has(:focus-visible) .ill-item-actions {
   opacity: 1;
   pointer-events: auto;
 }
@@ -377,15 +391,6 @@
   outline-offset: 2px;
 }
 
-@media (hover: none) {
-  .ill-item-overlay {
-    opacity: 1;
-  }
-  .ill-item-actions {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
 .ill-drop {
   position: fixed;
   inset: 0;
