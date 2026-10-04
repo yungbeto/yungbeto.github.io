@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "build-css": "node-sass-chokidar src/scss/styles.scss -o dist/css",
-    "watch-css": "node-sass-chokidar src/scss/styles.scss -o dist/css --watch --recursive",
+    "build-css": "sass --no-source-map src/scss/styles.scss:dist/css/styles.css src/scss/illustration.scss:dist/css/illustration.css",
+    "watch-css": "sass --watch --no-source-map src/scss/styles.scss:dist/css/styles.css src/scss/illustration.scss:dist/css/illustration.css",
     "dev": "concurrently \"npm run watch-css\" \"live-server . --port=3000\""
   },
   "keywords": [],
@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
-    "node-sass": "^9.0.0",
-    "node-sass-chokidar": "^2.0.0"
+    "sass": "^1.105.1"
   }
 }

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="bb851ff0-09f5-425f-8b27-fe8e74aac5a7"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Illustration · Roby Saavedra</title>
+    <meta name="description" content="Drawings by Roby Saavedra.">
+    <meta name="robots" content="noindex">
+
+    <link id="favicon" rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11.4375 3L4.25 4.51515L3 10.5758L9.875 13L13 7.24242L11.4375 3Z' stroke='%233f3f46'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="/dist/css/styles.css">
+    <link rel="stylesheet" href="/dist/css/illustration.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+
+    <div class="page-outer">
+        <div class="page-container">
+
+            <div data-site-navbar></div>
+
+            <main class="ill" id="ill" aria-busy="true">
+                <header class="ill-header">
+                    <div class="ill-header-row">
+                        <h1 class="ill-title">Illustration</h1>
+                        <div class="ill-actions">
+                            <button type="button" class="ill-add" id="ill-signin" hidden>Sign in</button>
+                            <button type="button" class="ill-quiet" id="ill-thumbs" hidden>Make thumbnails</button>
+                            <button type="button" class="ill-quiet" id="ill-signout" hidden>Sign out</button>
+                            <button type="button" class="ill-add" id="ill-add" hidden>
+                                <i class="ph ph-plus" aria-hidden="true"></i>
+                                Add drawing
+                            </button>
+                            <input id="ill-file" type="file" accept="image/*" multiple hidden>
+                        </div>
+                    </div>
+                    <p class="ill-status" id="ill-status" role="status"></p>
+                </header>
+
+                <p class="ill-empty" id="ill-empty" hidden>Drop drawings here, or add one above.</p>
+                <div class="ill-grid" id="ill-grid" role="group" hidden aria-label="Drawings"></div>
+            </main>
+
+            <div data-site-footer></div>
+
+        </div>
+    </div>
+
+    <div class="ill-drop" id="ill-drop" aria-hidden="true">Drop drawings</div>
+
+    <dialog class="ill-viewer" id="ill-viewer" aria-label="Drawing">
+        <div class="ill-viewer-stage">
+            <img class="ill-viewer-img" id="ill-viewer-img" alt="">
+            <p class="ill-viewer-title" id="ill-viewer-title"></p>
+            <p class="ill-viewer-details" id="ill-viewer-details"></p>
+        </div>
+        <div class="ill-viewer-tools">
+            <button type="button" class="ill-item-action" id="ill-viewer-edit" hidden aria-label="Edit drawing">
+                <i class="ph ph-pencil-simple" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="ill-item-action" id="ill-viewer-remove" hidden aria-label="Delete drawing">
+                <i class="ph ph-trash" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="ill-iconbtn" id="ill-viewer-close" aria-label="Close">
+                <i class="ph-bold ph-x" aria-hidden="true"></i>
+            </button>
+        </div>
+        <button type="button" class="ill-iconbtn ill-viewer-prev" id="ill-viewer-prev" aria-label="Previous drawing">
+            <i class="ph ph-caret-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="ill-iconbtn ill-viewer-next" id="ill-viewer-next" aria-label="Next drawing">
+            <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </button>
+    </dialog>
+
+    <dialog class="ill-editor" id="ill-editor" aria-labelledby="ill-editor-heading">
+        <form class="ill-editor-body" id="ill-editor-form">
+            <div class="ill-editor-media">
+                <img id="ill-editor-img" alt="">
+            </div>
+            <div class="ill-editor-fields">
+                <div class="ill-editor-top">
+                    <div>
+                        <h2 class="ill-editor-heading" id="ill-editor-heading">Add drawing</h2>
+                        <p class="ill-editor-step" id="ill-editor-step" hidden></p>
+                    </div>
+                    <button type="button" class="ill-iconbtn ill-editor-close" id="ill-editor-close" aria-label="Close">
+                        <i class="ph-bold ph-x" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="ill-field">
+                    <label for="ill-editor-name">Name</label>
+                    <input id="ill-editor-name" name="name" type="text" autocomplete="off">
+                </div>
+                <div class="ill-field">
+                    <label for="ill-editor-details">Details</label>
+                    <textarea id="ill-editor-details" name="details" rows="5"></textarea>
+                </div>
+                <p class="ill-editor-error" id="ill-editor-error" role="status"></p>
+                <div class="ill-editor-actions">
+                    <button type="submit" class="ill-add ill-add--text" id="ill-editor-save">Add drawing</button>
+                    <button type="button" class="ill-quiet" id="ill-editor-skip">Don't add</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="ill-login" id="ill-login" aria-labelledby="ill-login-heading">
+        <form class="ill-login-body" id="ill-login-form">
+            <div class="ill-login-top">
+                <h2 class="ill-login-heading" id="ill-login-heading">Sign in</h2>
+                <button type="button" class="ill-iconbtn ill-login-close" id="ill-login-close" aria-label="Close">
+                    <i class="ph-bold ph-x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="ill-field">
+                <label for="ill-email">Email</label>
+                <input id="ill-email" name="email" type="email" autocomplete="username" spellcheck="false" required>
+            </div>
+            <div class="ill-field">
+                <label for="ill-password">Password</label>
+                <input id="ill-password" name="password" type="password" autocomplete="current-password"
+                    spellcheck="false" required>
+            </div>
+            <p class="ill-login-error" id="ill-login-error" role="status"></p>
+            <div class="ill-login-actions">
+                <button type="submit" class="ill-add ill-add--text" id="ill-login-submit">Sign in</button>
+                <button type="button" class="ill-quiet" id="ill-login-cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="ill-confirm" id="ill-confirm" aria-labelledby="ill-confirm-heading">
+        <form class="ill-confirm-body" id="ill-confirm-form" method="dialog">
+            <div class="ill-confirm-top">
+                <h2 class="ill-confirm-heading" id="ill-confirm-heading">Remove drawing?</h2>
+                <button type="submit" class="ill-iconbtn" id="ill-confirm-close" value="cancel" aria-label="Close">
+                    <i class="ph-bold ph-x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="ill-confirm-message" id="ill-confirm-message"></p>
+            <div class="ill-confirm-actions">
+                <button type="submit" class="ill-add ill-add--text" id="ill-confirm-ok" value="confirm">Remove</button>
+                <button type="submit" class="ill-quiet" id="ill-confirm-cancel" value="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="/src/scripts/site-chrome.js"></script>
+    <script src="/src/scripts/favicon-spinner.js"></script>
+    <script type="module" src="/illustration/illustration.js"></script>
+</body>
+
+</html>

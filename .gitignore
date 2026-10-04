@@ -5,5 +5,10 @@ node_modules/
 private/
 OLD/
 
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
 # macOS
 .DS_Store

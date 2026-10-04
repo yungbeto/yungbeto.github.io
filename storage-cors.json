@@ -1,0 +1,12 @@
+[
+  {
+    "origin": [
+      "https://www.robysaavedra.com",
+      "https://robysaavedra.com",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000"
+    ],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
