@@ -29,7 +29,60 @@
     }
   }
 
+  const REPO = 'yungbeto/yungbeto.github.io';
+
+  function formatUpdated(iso) {
+    const hasTime = iso.includes('T');
+    const date = new Date(hasTime ? iso : iso + 'T00:00:00Z');
+    if (Number.isNaN(date.getTime())) return '';
+
+    const options = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC',
+    };
+
+    if (hasTime) {
+      options.hour = 'numeric';
+      options.minute = 'numeric';
+      options.second = 'numeric';
+      options.hour12 = false;
+      options.timeZoneName = 'short';
+    }
+
+    return date.toLocaleString('en-US', options);
+  }
+
+  function loadDeployedAt() {
+    const time = document.querySelector('.footer-updated time');
+    if (!time) return;
+
+    fetch('https://api.github.com/repos/' + REPO, {
+      headers: { Accept: 'application/vnd.github+json' },
+    })
+      .then(function (response) {
+        if (!response.ok) throw new Error(String(response.status));
+        return response.json();
+      })
+      .then(function (repo) {
+        const iso = repo.pushed_at;
+        const label = iso ? formatUpdated(iso) : '';
+        if (!label) return;
+        time.dateTime = iso;
+        time.textContent = label;
+      })
+      .catch(function () {});
+  }
+
   function renderFooter(root) {
+    const updated = root.dataset.lastUpdated;
+    const updatedLabel = updated ? formatUpdated(updated) : '';
+    const updatedMarkup =
+      updated && updatedLabel
+        ? `<span class="footer-updated">Last updated <time datetime="${updated}">${updatedLabel}</time></span>`
+        : '';
+
     root.outerHTML = `
       <footer class="site-footer" id="footer-rocks">
         <div class="footer-body">
@@ -46,11 +99,14 @@
             </button>
           </div>
           <div class="footer-secondary">
+            <div class="footer-secondary-inner">
             <a href="https://www.linkedin.com/in/roberto-saavedra/" target="_blank" rel="noopener noreferrer" class="footer-secondary-link">LinkedIn</a>
             <a href="https://github.com/yungbeto/" target="_blank" rel="noopener noreferrer" class="footer-secondary-link">GitHub</a>
             <a href="/cv" class="footer-secondary-link">CV</a>
-            
             <span>© <span id="footer-year"></span></span>
+            </div>
+
+            ${updatedMarkup}
           </div>
         </div>
       </footer>
@@ -63,6 +119,7 @@
     const label = document.getElementById('footer-email');
 
     if (year) year.textContent = new Date().getFullYear();
+    loadDeployedAt();
     if (!copyBtn || !label) return;
 
     copyBtn.addEventListener('click', function () {

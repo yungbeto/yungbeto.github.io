@@ -1609,8 +1609,24 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 
 .footer-secondary {
   display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 25px;
+  row-gap: 8px;
+  max-width: 100%;
+  font-size: 14px;
+  color: #a1a1aa;
+}
+
+.footer-secondary-inner {
+  display: flex;
   align-items: center;
-  gap: 25px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 25px;
+  row-gap: 8px;
+  max-width: 100%;
   font-size: 14px;
   color: #a1a1aa;
 }
@@ -1622,6 +1638,17 @@ body.js-ready .work-case.is-visible .work-case-cta-container {
 }
 .footer-secondary-link:hover {
   color: #d4d4d8;
+}
+
+.footer-updated {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: 0.75;
+}
+@media (max-width: 480px) {
+  .footer-updated {
+    flex-basis: 100%;
+  }
 }
 
 .copy-btn {
